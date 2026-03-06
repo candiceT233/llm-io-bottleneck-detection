@@ -1,0 +1,26 @@
+id: ex01
+workflow: 1k_genomes
+stage: individuals
+stage_order: 1
+
+structure:
+  predecessors:
+    - initial_data
+  outputs:
+    - "chr.*n-.*-.*.tar.gz"
+
+execution:
+  num_tasks: 300
+  parallelism: 300
+  operation: write
+  transfer_size_kb: 1024
+  aggregate_file_size_mb: 180000
+  op_count: 9000
+  total_time_s: 520
+  storage_type: beegfs
+  avg_bandwidth_mb_s: 55
+  storage_peak_mb_s: 220
+
+ground_truth:
+  bottleneck: storage_contention
+  reasoning: many parallel tasks access shared storage simultaneously

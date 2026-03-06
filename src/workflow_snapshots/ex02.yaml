@@ -1,0 +1,24 @@
+id: ex02
+workflow: 1k_genomes
+stage: sifting
+stage_order: 2
+
+structure:
+  predecessors:
+    - initial_data
+  outputs:
+    - "sifted.*.txt"
+
+execution:
+  num_tasks: 10
+  parallelism: 10
+  operation: write
+  transfer_size_kb: 4
+  aggregate_file_size_mb: 600
+  op_count: 180000
+  total_time_s: 280
+  storage_type: nfs
+
+ground_truth:
+  bottleneck: small_file_overhead
+  reasoning: the transfer size is tiny while op_count is extremely high, so metadata and per-operation overhead dominate

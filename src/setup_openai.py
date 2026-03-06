@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+import yaml
 
 # Load env variables
 load_dotenv()
@@ -8,18 +9,28 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-def build_prompt(snapshot: str) -> str:
+def build_prompt(snapshot: dict) -> str:
+
+    snapshot_text = yaml.safe_dump(snapshot, sort_keys=False)
+
     return f"""
 You are an expert in HPC I/O performance.
 
 Analyze the following workflow execution snapshot and identify the I/O bottleneck.
 
+Possible categories:
+- storage_contention
+- small_file_overhead
+- producer_consumer_mismatch
+- storage_tier_mismatch
+- serialization_bottleneck
+
 Return your answer in this format:
-- Bottleneck: <category>
-- Explanation: <really short reasoning>
+Bottleneck: <category>
+Explanation: <really short reasoning>
 
 Snapshot:
-{snapshot}
+{snapshot_text}
 """
 
 
@@ -39,19 +50,17 @@ def diagnose(snapshot: str, model: str = "gpt-4.1-mini") -> str:
 
 
 # Example usage
+def load_snapshot_yaml(path: str) -> dict:
+    with open(path, "r") as f:
+        return yaml.safe_load(f)
+
 if __name__ == "__main__":
-    snapshot = """
-Workflow: Genomics Pipeline
-
-Tasks:
-- align_1, align_2, align_3 running concurrently
-- High read/write on shared storage
-
-Storage:
-- Utilization: 95%
-- Throughput much lower than capacity
-
-"""
+    snapshot = load_snapshot_yaml("workflow_snapshots/ex01.yaml")
 
     result = diagnose(snapshot)
+
+    print("\n=== Model Diagnosis ===")
     print(result)
+
+    print("\n=== Ground Truth ===")
+    print(snapshot["ground_truth"]["bottleneck"])
