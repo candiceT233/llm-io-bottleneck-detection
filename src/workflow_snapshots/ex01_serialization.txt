@@ -1,0 +1,26 @@
+Workflow: synthetic_pipeline_A
+
+Stage 1 (parallel tasks)
+task1_1   runtime: 110 s   read: 2 GB   write: 5 GB
+task1_2   runtime: 108 s   read: 2 GB   write: 5 GB
+task1_3   runtime: 112 s   read: 2 GB   write: 5 GB
+task1_4   runtime: 109 s   read: 2 GB   write: 5 GB
+task1_5   runtime: 111 s   read: 2 GB   write: 5 GB
+task1_6   runtime: 110 s   read: 2 GB   write: 5 GB
+
+Stage 2
+merge_task
+runtime: 540 s
+read: 30 GB
+write: 4 GB
+
+Storage metrics
+average throughput: 120 MB/s
+storage utilization: 65%
+
+Observation
+Stage 2 starts only after all Stage 1 tasks finish.
+The merge task processes the outputs of all upstream tasks.
+
+Question
+Diagnose the I/O bottleneck.
