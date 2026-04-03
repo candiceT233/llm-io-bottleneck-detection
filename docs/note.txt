@@ -1,0 +1,16 @@
+
+// 300 tasks for 30 nodes, each node handle roughly 10 tasks concurrently
+
+// num_stages = 5: The whole workflow has 5 sequential stages. Each stage performs a different operation in the genomics pipeline
+
+// order = 1: This is stage 1, the first stage to run after the initial setup
+
+// Transfer_size_kb = 1024, The size of each I/O operation is 1 MB, each write task writes 1 MB at a time to storage.
+// Aggregate_size_mb = 50400. The total volume of data written by all tasks in the stage, here 50,400 MB ≈ 50 GB.
+// 50,400 MB ÷ 1 MB per I/O = 50,400 individual write operations, Matches op_count = 50,400, i.e., number of write operations executed.
+
+// sequential_ratio = 0.95: Indicates 95% of I/O is sequential 
+
+// Storage Configuration: BeeGFS, a parallel distributed filesystem with Stripe count = 8
+// Each file is split into 8 stripes, distributed across 8 storage targets,This allows multiple disks to write data in parallel.
+//Shared = true, Storage is shared across all nodes; all nodes can read/write to the same filesystem.

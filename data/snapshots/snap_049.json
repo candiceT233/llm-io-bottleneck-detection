@@ -1,0 +1,27 @@
+{
+  "id": "snap_049",
+  "workflow": {"name": "bwa_alignment_pipeline", "type": "genomics", "num_stages": 4},
+  "stage": {"name": "sequence_alignment", "order": 2, "predecessors": ["read_trimming"], "operation": "read"},
+  "execution": {
+    "num_nodes": 12, "num_tasks": 48, "parallelism": 48,
+    "total_time_s": 3000, "io_time_s": 540, "compute_time_s": 2460,
+    "io_time_ratio": 0.18,
+    "transfer_size_kb": 512, "aggregate_size_mb": 48600, "op_count": 97200
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 90, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.23,
+    "iops": 180, "avg_io_size_kb": 512, "sequential_ratio": 0.70
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 82, "memory_util_pct": 58,
+    "network_bw_mb_s": 18, "network_peak_bw_mb_s": 5000, "network_util_ratio": 0.004
+  },
+  "storage": {"type": "beegfs", "stripe_count": 2, "shared": true},
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "medium",
+    "explanation": "CPU utilization of 82% reflects compute-intensive BWA alignment (seed extension, Smith-Waterman). io_time_ratio of 0.18 shows I/O accounts for only 18% of stage time. BeeGFS utilization is 0.23, well below saturation. While index lookups generate some random I/O, the primary bottleneck is alignment computation, not data loading.",
+    "key_signals": ["cpu_util_pct: 82", "io_time_ratio: 0.18", "bw_utilization_ratio: 0.23", "compute_time_s: 2460"]
+  }
+}

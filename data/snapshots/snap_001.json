@@ -1,0 +1,27 @@
+{
+  "id": "snap_001",
+  "workflow": {"name": "1000_genomes", "type": "genomics", "num_stages": 5},
+  "stage": {"name": "individuals", "order": 1, "predecessors": ["initial_data"], "operation": "write"},
+  "execution": {
+    "num_nodes": 30, "num_tasks": 300, "parallelism": 300,
+    "total_time_s": 275, "io_time_s": 240, "compute_time_s": 35,
+    "io_time_ratio": 0.87,
+    "transfer_size_kb": 1024, "aggregate_size_mb": 50400, "op_count": 50400
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 210,
+    "peak_storage_bw_mb_s": 220, "bw_utilization_ratio": 0.95,
+    "iops": 210, "avg_io_size_kb": 1024, "sequential_ratio": 0.95
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 14, "memory_util_pct": 42,
+    "network_bw_mb_s": 215, "network_peak_bw_mb_s": 5000, "network_util_ratio": 0.04
+  },
+  "storage": {"type": "beegfs", "stripe_count": 8, "shared": true},
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 210 MB/s reaches 95% of the BeeGFS storage peak (220 MB/s), saturating the filesystem. CPU utilization of only 14% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.87 further shows that I/O dominates the stage duration.",
+    "key_signals": ["bw_utilization_ratio: 0.95", "cpu_util_pct: 14", "io_time_ratio: 0.87", "avg_io_size_kb: 1024"]
+  }
+}

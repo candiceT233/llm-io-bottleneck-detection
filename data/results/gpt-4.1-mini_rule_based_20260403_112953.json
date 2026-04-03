@@ -1,0 +1,1149 @@
+{
+  "model": "gpt-4.1-mini",
+  "strategy": "rule_based",
+  "results": [
+    {
+      "id": "snap_001",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 14",
+        "io_time_ratio: 0.87",
+        "avg_io_size_kb: 1024"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.87",
+        "cpu_util_pct: 14",
+        "bw_utilization_ratio: 0.95",
+        "network_util_ratio: 0.04",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_002",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 18",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 4096"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.82",
+        "cpu_util_pct: 18",
+        "bw_utilization_ratio: 0.95",
+        "network_util_ratio: 0.04",
+        "avg_io_size_kb: 4096"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_003",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 22",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 2048"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.82",
+        "cpu_util_pct: 22",
+        "bw_utilization_ratio: 0.95",
+        "network_util_ratio: 0.04",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_004",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.96",
+        "cpu_util_pct: 12",
+        "io_time_ratio: 0.84",
+        "avg_io_size_kb: 2048"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 12",
+        "bw_utilization_ratio: 0.96",
+        "network_util_ratio: 0.02",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_005",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.96",
+        "cpu_util_pct: 20",
+        "io_time_ratio: 0.85",
+        "avg_io_size_kb: 512"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 20",
+        "bw_utilization_ratio: 0.96",
+        "network_util_ratio: 0.05",
+        "avg_io_size_kb: 512"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_006",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 10",
+        "io_time_ratio: 0.83",
+        "avg_io_size_kb: 8192"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.83",
+        "cpu_util_pct: 10",
+        "bw_utilization_ratio: 0.95",
+        "network_util_ratio: 0.04",
+        "avg_io_size_kb: 8192"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_007",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 25",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 1024"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.82",
+        "cpu_util_pct: 25",
+        "bw_utilization_ratio: 0.95",
+        "network_util_ratio: 0.01",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_008",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 4",
+        "iops: 538",
+        "bw_utilization_ratio: 0.01",
+        "sequential_ratio: 0.20"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.86",
+        "cpu_util_pct: 8",
+        "bw_utilization_ratio: 0.01",
+        "network_util_ratio: 0.003",
+        "avg_io_size_kb: 4"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_009",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "avg_io_size_kb: 8",
+        "iops: 384",
+        "bw_utilization_ratio: 0.015",
+        "sequential_ratio: 0.25"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 12",
+        "bw_utilization_ratio: 0.015",
+        "network_util_ratio: 0.004",
+        "avg_io_size_kb: 8"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_010",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 2",
+        "iops: 921",
+        "bw_utilization_ratio: 0.009",
+        "sequential_ratio: 0.15"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 10",
+        "bw_utilization_ratio: 0.009",
+        "network_util_ratio: 0.002",
+        "avg_io_size_kb: 2"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_011",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 32",
+        "iops: 1440",
+        "bw_utilization_ratio: 0.11",
+        "sequential_ratio: 0.30"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 20",
+        "bw_utilization_ratio: 0.11",
+        "network_util_ratio: 0.01",
+        "avg_io_size_kb: 32"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_012",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 4",
+        "iops: 740",
+        "bw_utilization_ratio: 0.015",
+        "sequential_ratio: 0.20"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 15",
+        "bw_utilization_ratio: 0.015",
+        "network_util_ratio: 0.003",
+        "avg_io_size_kb: 4"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_013",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "medium",
+      "predicted": "metadata_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 16",
+        "iops: 768",
+        "bw_utilization_ratio: 0.04",
+        "sequential_ratio: 0.35"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.81",
+        "cpu_util_pct: 18",
+        "bw_utilization_ratio: 0.04",
+        "network_util_ratio: 0.002",
+        "avg_io_size_kb: 16"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_014",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 1",
+        "iops: 615",
+        "bw_utilization_ratio: 0.003",
+        "sequential_ratio: 0.10"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.86",
+        "cpu_util_pct: 5",
+        "bw_utilization_ratio: 0.003",
+        "network_util_ratio: 0.001",
+        "avg_io_size_kb: 1"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_015",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 1",
+        "writers_per_shared_file: 200",
+        "bw_utilization_ratio: 0.21",
+        "io_time_ratio: 0.85"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 18",
+        "bw_utilization_ratio: 0.21",
+        "network_util_ratio: 0.02",
+        "avg_io_size_kb: 512"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_016",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 2",
+        "writers_per_shared_file: 64",
+        "bw_utilization_ratio: 0.22",
+        "io_time_ratio: 0.84"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 20",
+        "bw_utilization_ratio: 0.22",
+        "network_util_ratio: 0.01",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_017",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 1",
+        "writers_per_shared_file: 300",
+        "bw_utilization_ratio: 0.19",
+        "io_time_ratio: 0.85"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 15",
+        "bw_utilization_ratio: 0.19",
+        "network_util_ratio: 0.04",
+        "avg_io_size_kb: 256"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_018",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 1",
+        "writers_per_shared_file: 64",
+        "bw_utilization_ratio: 0.21",
+        "io_time_ratio: 0.82"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.82",
+        "cpu_util_pct: 22",
+        "bw_utilization_ratio: 0.21",
+        "network_util_ratio: 0.01",
+        "avg_io_size_kb: 512"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_019",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "medium",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 4",
+        "writers_per_shared_file: 64",
+        "bw_utilization_ratio: 0.22",
+        "io_time_ratio: 0.84"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 16",
+        "bw_utilization_ratio: 0.22",
+        "network_util_ratio: 0.007",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_020",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 2",
+        "writers_per_shared_file: 200",
+        "bw_utilization_ratio: 0.21",
+        "io_time_ratio: 0.86"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.86",
+        "cpu_util_pct: 12",
+        "bw_utilization_ratio: 0.21",
+        "network_util_ratio: 0.04",
+        "avg_io_size_kb: 128"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_021",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 3",
+        "writers_per_shared_file: 167",
+        "bw_utilization_ratio: 0.22",
+        "io_time_ratio: 0.84"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 10",
+        "bw_utilization_ratio: 0.22",
+        "network_util_ratio: 0.02",
+        "avg_io_size_kb: 256"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_022",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.10",
+        "storage: s3",
+        "io_time_ratio: 0.85"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 25",
+        "bw_utilization_ratio: 0.1",
+        "network_util_ratio: 0.95",
+        "avg_io_size_kb: 512"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_023",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.10",
+        "network_bw_mb_s: 190",
+        "network_peak_bw_mb_s: 200"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 20",
+        "bw_utilization_ratio: 0.1",
+        "network_util_ratio: 0.95",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_024",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.09",
+        "storage: s3",
+        "network_bw_mb_s \u2248 network_peak_bw_mb_s"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.83",
+        "cpu_util_pct: 28",
+        "bw_utilization_ratio: 0.09",
+        "network_util_ratio: 0.95",
+        "avg_io_size_kb: 256"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_025",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.94",
+        "bw_utilization_ratio: 0.09",
+        "network_bw_mb_s: 47",
+        "network_peak_bw_mb_s: 50"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 15",
+        "bw_utilization_ratio: 0.09",
+        "network_util_ratio: 0.94",
+        "avg_io_size_kb: 4096"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_026",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.94",
+        "bw_utilization_ratio: 0.09",
+        "storage: s3",
+        "network_bw_mb_s \u2248 network_peak_bw_mb_s"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.82",
+        "cpu_util_pct: 30",
+        "bw_utilization_ratio: 0.09",
+        "network_util_ratio: 0.94",
+        "avg_io_size_kb: 512"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_027",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.10",
+        "network_bw_mb_s: 285",
+        "network_peak_bw_mb_s: 300"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 22",
+        "bw_utilization_ratio: 0.1",
+        "network_util_ratio: 0.95",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_028",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.09",
+        "network_bw_mb_s \u2248 network_peak_bw_mb_s",
+        "io_time_ratio: 0.86"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.86",
+        "cpu_util_pct: 18",
+        "bw_utilization_ratio: 0.09",
+        "network_util_ratio: 0.95",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_029",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.12",
+        "cpu_util_pct: 8",
+        "num_tasks: 100 vs io_workers: 1"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.87",
+        "cpu_util_pct: 8",
+        "bw_utilization_ratio: 0.12",
+        "network_util_ratio: 0.01",
+        "avg_io_size_kb: 512"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_030",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.18",
+        "num_tasks: 50 vs io_workers: 1",
+        "cpu_util_pct: 12"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 12",
+        "bw_utilization_ratio: 0.18",
+        "network_util_ratio: 0.04",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_031",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.12",
+        "num_tasks: 32 vs io_workers: 1",
+        "cpu_util_pct: 10"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 10",
+        "bw_utilization_ratio: 0.12",
+        "network_util_ratio: 0.006",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_032",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.09",
+        "num_tasks: 256 vs io_workers: 1",
+        "cpu_util_pct: 6"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.87",
+        "cpu_util_pct: 6",
+        "bw_utilization_ratio: 0.09",
+        "network_util_ratio: 0.002",
+        "avg_io_size_kb: 512"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_033",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.15",
+        "num_tasks: 128 vs io_workers: 1",
+        "cpu_util_pct: 15"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 15",
+        "bw_utilization_ratio: 0.15",
+        "network_util_ratio: 0.01",
+        "avg_io_size_kb: 4096"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_034",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.14",
+        "num_tasks: 200 vs io_workers: 1",
+        "cpu_util_pct: 7"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.86",
+        "cpu_util_pct: 7",
+        "bw_utilization_ratio: 0.14",
+        "network_util_ratio: 0.005",
+        "avg_io_size_kb: 256"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_035",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.12",
+        "num_tasks: 64 vs io_workers: 1",
+        "cpu_util_pct: 9"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 9",
+        "bw_utilization_ratio: 0.12",
+        "network_util_ratio: 0.005",
+        "avg_io_size_kb: 4096"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_036",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 300",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 12",
+        "io_time_ratio: 0.54"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.54",
+        "cpu_util_pct: 10",
+        "bw_utilization_ratio: 0.12",
+        "network_util_ratio: 0.004",
+        "avg_io_size_kb: 4096"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_037",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 600",
+        "checkpoint_size_mb: 15000",
+        "num_checkpoints: 15",
+        "io_time_ratio: 0.58"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.58",
+        "cpu_util_pct: 8",
+        "bw_utilization_ratio: 0.12",
+        "network_util_ratio: 0.005",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_038",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 300",
+        "checkpoint_size_mb: 30000",
+        "num_checkpoints: 6",
+        "io_time_ratio: 0.50"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.5",
+        "cpu_util_pct: 12",
+        "bw_utilization_ratio: 0.29",
+        "network_util_ratio: 0.02",
+        "avg_io_size_kb: 8192"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_039",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "medium",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 120",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 30",
+        "io_time_ratio: 0.44"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.44",
+        "cpu_util_pct: 15",
+        "bw_utilization_ratio: 0.38",
+        "network_util_ratio: 0.01",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_040",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 300",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 12",
+        "io_time_ratio: 0.53"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.53",
+        "cpu_util_pct: 8",
+        "bw_utilization_ratio: 0.25",
+        "network_util_ratio: 0.05",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_041",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "medium",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 900",
+        "checkpoint_size_mb: 100000",
+        "num_checkpoints: 8",
+        "io_time_ratio: 0.40"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.4",
+        "cpu_util_pct: 14",
+        "bw_utilization_ratio: 0.47",
+        "network_util_ratio: 0.02",
+        "avg_io_size_kb: 8192"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_042",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "medium",
+      "correct": false,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 180",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 20",
+        "io_time_ratio: 0.75"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.75",
+        "cpu_util_pct: 18",
+        "bw_utilization_ratio: 0.15",
+        "network_util_ratio: 0.01",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_043",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 92",
+        "io_time_ratio: 0.09",
+        "bw_utilization_ratio: 0.16",
+        "compute_time_s: 1820"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.09",
+        "cpu_util_pct: 92",
+        "bw_utilization_ratio: 0.16",
+        "network_util_ratio: 0.001",
+        "avg_io_size_kb: 4096"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_044",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 88",
+        "io_time_ratio: 0.12",
+        "bw_utilization_ratio: 0.20",
+        "compute_time_s: 3520"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.12",
+        "cpu_util_pct: 88",
+        "bw_utilization_ratio: 0.2",
+        "network_util_ratio: 0.002",
+        "avg_io_size_kb: 512"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_045",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 85",
+        "io_time_ratio: 0.10",
+        "bw_utilization_ratio: 0.13",
+        "compute_time_s: 3240"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.1",
+        "cpu_util_pct: 85",
+        "bw_utilization_ratio: 0.13",
+        "network_util_ratio: 0.004",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_046",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 94",
+        "io_time_ratio: 0.06",
+        "bw_utilization_ratio: 0.08",
+        "compute_time_s: 1880"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.06",
+        "cpu_util_pct: 94",
+        "bw_utilization_ratio: 0.08",
+        "network_util_ratio: 0.001",
+        "avg_io_size_kb: 256"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_047",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 96",
+        "io_time_ratio: 0.04",
+        "bw_utilization_ratio: 0.13",
+        "compute_time_s: 1920"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.04",
+        "cpu_util_pct: 96",
+        "bw_utilization_ratio: 0.13",
+        "network_util_ratio: 0.005",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_048",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 90",
+        "io_time_ratio: 0.09",
+        "bw_utilization_ratio: 0.15",
+        "compute_time_s: 3280"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.09",
+        "cpu_util_pct: 90",
+        "bw_utilization_ratio: 0.15",
+        "network_util_ratio: 0.002",
+        "avg_io_size_kb: 2048"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_049",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "medium",
+      "predicted": "compute_bound",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 82",
+        "io_time_ratio: 0.18",
+        "bw_utilization_ratio: 0.23",
+        "compute_time_s: 2460"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.18",
+        "cpu_util_pct: 82",
+        "bw_utilization_ratio: 0.23",
+        "network_util_ratio: 0.004",
+        "avg_io_size_kb: 512"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    },
+    {
+      "id": "snap_050",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "medium",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 87",
+        "io_time_ratio: 0.11",
+        "bw_utilization_ratio: 0.22",
+        "compute_time_s: 3200"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.11",
+        "cpu_util_pct: 87",
+        "bw_utilization_ratio: 0.22",
+        "network_util_ratio: 0.01",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Rule-based classification using metric thresholds."
+    }
+  ],
+  "summary": {
+    "total": 50,
+    "correct": 35,
+    "accuracy": 0.7,
+    "macro_f1": 0.604,
+    "per_class": {
+      "storage_bandwidth_saturation": {
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.667
+      },
+      "metadata_contention": {
+        "precision": 1.0,
+        "recall": 0.857,
+        "f1": 0.923
+      },
+      "lock_contention": {
+        "precision": 0.467,
+        "recall": 1.0,
+        "f1": 0.636
+      },
+      "network_io_bottleneck": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "serialized_io": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "checkpointing_overhead": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "compute_bound": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    }
+  }
+}

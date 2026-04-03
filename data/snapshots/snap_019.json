@@ -1,0 +1,31 @@
+{
+  "id": "snap_019",
+  "workflow": {"name": "seismic_processing", "type": "hpc_simulation", "num_stages": 4},
+  "stage": {"name": "gather_write", "order": 3, "predecessors": ["migration"], "operation": "write"},
+  "execution": {
+    "num_nodes": 32, "num_tasks": 256, "parallelism": 256,
+    "total_time_s": 900, "io_time_s": 760, "compute_time_s": 140,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 2048, "aggregate_size_mb": 133000, "op_count": 66500
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 175,
+    "peak_storage_bw_mb_s": 800, "bw_utilization_ratio": 0.22,
+    "iops": 88, "avg_io_size_kb": 2048, "sequential_ratio": 0.93
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 16, "memory_util_pct": 48,
+    "network_bw_mb_s": 180, "network_peak_bw_mb_s": 25000, "network_util_ratio": 0.007
+  },
+  "storage": {"type": "lustre", "stripe_count": 8, "shared": true},
+  "additional_context": {
+    "shared_output_files": 4,
+    "writers_per_shared_file": 64
+  },
+  "annotation": {
+    "bottleneck": "lock_contention",
+    "confidence": "medium",
+    "explanation": "256 tasks write seismic gather data to 4 shared output files (64 writers each), resulting in heavy lock contention. Achieved bandwidth is 175 MB/s, only 22% of the 800 MB/s Lustre peak. Per-file lock serialization reduces effective parallelism. io_time_ratio of 0.84 with low bandwidth utilization confirms lock wait dominates the stage.",
+    "key_signals": ["shared_output_files: 4", "writers_per_shared_file: 64", "bw_utilization_ratio: 0.22", "io_time_ratio: 0.84"]
+  }
+}

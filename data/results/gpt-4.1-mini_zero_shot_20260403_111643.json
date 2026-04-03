@@ -1,0 +1,1182 @@
+{
+  "model": "gpt-4.1-mini",
+  "strategy": "zero_shot",
+  "results": [
+    {
+      "id": "snap_001",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 14",
+        "io_time_ratio: 0.87",
+        "avg_io_size_kb: 1024"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "write_bw_mb_s: 210",
+        "peak_storage_bw_mb_s: 220",
+        "io_time_ratio: 0.87",
+        "cpu_util_pct: 14",
+        "network_util_ratio: 0.04"
+      ],
+      "explanation": "The storage bandwidth utilization is very high at 95%, with write bandwidth close to peak capacity, indicating the storage device is saturated. The high I/O time ratio and low CPU utilization confirm that I/O is the bottleneck, not compute. Network utilization is low, ruling out network bottlenecks."
+    },
+    {
+      "id": "snap_002",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 18",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 4096"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "write_bw_mb_s: 476",
+        "peak_storage_bw_mb_s: 500",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 4096",
+        "iops: 119"
+      ],
+      "explanation": "The storage bandwidth utilization is very high at 95%, with write bandwidth close to the peak storage bandwidth, indicating the storage device is saturated. The large average I/O size and low IOPS suggest efficient large sequential writes, consistent with bandwidth saturation rather than metadata or lock contention. Network utilization is low, and CPU is not heavily used, confirming storage bandwidth is the primary bottleneck."
+    },
+    {
+      "id": "snap_003",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 22",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 2048"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "read_bw_mb_s: 380",
+        "peak_storage_bw_mb_s: 400",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 2048",
+        "iops: 190",
+        "network_util_ratio: 0.04"
+      ],
+      "explanation": "The storage bandwidth utilization is very high at 95%, with read bandwidth close to the peak storage bandwidth, indicating the storage device is nearly saturated. The I/O time ratio is also very high, showing the workflow is I/O bound. Network utilization is low, and the average I/O size is large, ruling out metadata contention or network bottlenecks."
+    },
+    {
+      "id": "snap_004",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.96",
+        "cpu_util_pct: 12",
+        "io_time_ratio: 0.84",
+        "avg_io_size_kb: 2048"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.96",
+        "write_bw_mb_s: 192",
+        "peak_storage_bw_mb_s: 200",
+        "io_time_ratio: 0.84",
+        "avg_io_size_kb: 2048",
+        "iops: 96",
+        "network_util_ratio: 0.02",
+        "cpu_util_pct: 12"
+      ],
+      "explanation": "The storage bandwidth utilization is very high at 96% of peak capacity, indicating the storage device is nearly saturated. The workload issues large sequential writes with a high average IO size and moderate IOPS, consistent with bandwidth-bound behavior. Low CPU and network utilization further confirm that storage bandwidth is the primary bottleneck limiting I/O performance."
+    },
+    {
+      "id": "snap_005",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.96",
+        "cpu_util_pct: 20",
+        "io_time_ratio: 0.85",
+        "avg_io_size_kb: 512"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.96",
+        "read_bw_mb_s: 268",
+        "peak_storage_bw_mb_s: 280",
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 20",
+        "network_util_ratio: 0.05"
+      ],
+      "explanation": "The storage bandwidth utilization is very high at 96%, close to the peak device bandwidth, indicating the storage system is saturated. The I/O time dominates the stage execution (85%), while CPU and network utilization are low, ruling out compute or network bottlenecks. The workload issues large sequential reads, which aligns with bandwidth saturation rather than metadata or lock contention."
+    },
+    {
+      "id": "snap_006",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 10",
+        "io_time_ratio: 0.83",
+        "avg_io_size_kb: 8192"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "write_bw_mb_s: 950",
+        "peak_storage_bw_mb_s: 1000",
+        "io_time_ratio: 0.83",
+        "cpu_util_pct: 10"
+      ],
+      "explanation": "The storage bandwidth utilization is very high at 95%, indicating the storage device is nearly saturated. The workload is heavily I/O bound with 83% of time spent on I/O and low CPU utilization, confirming that storage bandwidth limits performance. Large sequential writes with high average IO size further support that the bottleneck is storage bandwidth saturation."
+    },
+    {
+      "id": "snap_007",
+      "ground_truth": "storage_bandwidth_saturation",
+      "gt_confidence": "high",
+      "predicted": "storage_bandwidth_saturation",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "cpu_util_pct: 25",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 1024"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.95",
+        "write_bw_mb_s: 143",
+        "peak_storage_bw_mb_s: 150",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 1024",
+        "iops: 143"
+      ],
+      "explanation": "The storage bandwidth utilization is very high at 95%, with write bandwidth close to the peak storage bandwidth, indicating the storage device is nearly saturated. The high IO time ratio and large average IO size suggest heavy sustained writes rather than metadata or lock contention. Network utilization is very low, so the bottleneck is at the storage bandwidth level."
+    },
+    {
+      "id": "snap_008",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 4",
+        "iops: 538",
+        "bw_utilization_ratio: 0.01",
+        "sequential_ratio: 0.20"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.86",
+        "bw_utilization_ratio: 0.01",
+        "iops: 538",
+        "avg_io_size_kb: 4",
+        "parallelism: 10",
+        "cpu_util_pct: 8"
+      ],
+      "explanation": "The workflow spends most of its time in I/O but achieves very low bandwidth utilization with many small (4 KB) I/O operations and moderate IOPS, indicating overhead from metadata operations. The low CPU and network utilization exclude compute or network bottlenecks, and the shared NFS with a single stripe suggests metadata server contention due to many small writes."
+    },
+    {
+      "id": "snap_009",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 8",
+        "iops: 384",
+        "bw_utilization_ratio: 0.015",
+        "sequential_ratio: 0.25"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.84",
+        "bw_utilization_ratio: 0.015",
+        "iops: 384",
+        "avg_io_size_kb: 8",
+        "sequential_ratio: 0.25",
+        "cpu_util_pct: 12"
+      ],
+      "explanation": "The workflow spends most of its time in I/O (84%) but the bandwidth utilization is very low (1.5%), indicating bandwidth is not the bottleneck. The I/O pattern shows many small (8 KB) operations with moderate IOPS and low sequential access, typical of metadata-heavy workloads. Low CPU utilization and network usage further support that the bottleneck is due to metadata server contention from many small file operations."
+    },
+    {
+      "id": "snap_010",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 2",
+        "iops: 921",
+        "bw_utilization_ratio: 0.009",
+        "sequential_ratio: 0.15"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.009",
+        "iops: 921",
+        "avg_io_size_kb: 2",
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 10",
+        "network_util_ratio: 0.002"
+      ],
+      "explanation": "The very low bandwidth utilization despite high I/O time and a large number of small (2 KB) read operations indicates the system is overwhelmed by metadata operations rather than data transfer. The high IOPS with tiny average I/O size and low CPU and network utilization further support that metadata contention on the shared NFS storage is the primary bottleneck."
+    },
+    {
+      "id": "snap_011",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 32",
+        "iops: 1440",
+        "bw_utilization_ratio: 0.11",
+        "sequential_ratio: 0.30"
+      ],
+      "llm_key_signals": [
+        "iops: 1440",
+        "avg_io_size_kb: 32",
+        "bw_utilization_ratio: 0.11",
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 20"
+      ],
+      "explanation": "The workflow spends a large portion of time in I/O (io_time_ratio 0.84) despite low bandwidth utilization (0.11) and low CPU usage, indicating I/O is the bottleneck but not due to bandwidth saturation. The high number of small I/O operations (iops 1440 with avg_io_size 32 KB) suggests many small file reads causing metadata server contention, typical in shared file systems like BeeGFS with many small operations."
+    },
+    {
+      "id": "snap_012",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 4",
+        "iops: 740",
+        "bw_utilization_ratio: 0.015",
+        "sequential_ratio: 0.20"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.015",
+        "iops: 740",
+        "avg_io_size_kb: 4",
+        "io_time_ratio: 0.85",
+        "cpu_util_pct: 15",
+        "network_util_ratio: 0.003"
+      ],
+      "explanation": "The workflow spends most of its time in I/O (85%) but the bandwidth utilization is very low (1.5%), indicating bandwidth is not saturated. The high IOPS combined with very small average I/O size (4 KB) and low CPU and network utilization suggest many small metadata operations are overwhelming the metadata server. This pattern is typical of metadata contention in shared NFS storage with many small reads."
+    },
+    {
+      "id": "snap_013",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "medium",
+      "predicted": "metadata_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 16",
+        "iops: 768",
+        "bw_utilization_ratio: 0.04",
+        "sequential_ratio: 0.35"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.04",
+        "iops: 768",
+        "avg_io_size_kb: 16",
+        "io_time_ratio: 0.81",
+        "cpu_util_pct: 18"
+      ],
+      "explanation": "The very low bandwidth utilization despite high I/O time and a large number of small I/O operations (16 KB) indicates the system is overwhelmed by metadata operations rather than data transfer. The high IOPS with tiny average I/O size and low CPU utilization further support that the bottleneck is metadata contention from many small writes to shared files."
+    },
+    {
+      "id": "snap_014",
+      "ground_truth": "metadata_contention",
+      "gt_confidence": "high",
+      "predicted": "metadata_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "avg_io_size_kb: 1",
+        "iops: 615",
+        "bw_utilization_ratio: 0.003",
+        "sequential_ratio: 0.10"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.86",
+        "bw_utilization_ratio: 0.003",
+        "iops: 615",
+        "avg_io_size_kb: 1",
+        "write_bw_mb_s: 0.6",
+        "num_tasks: 200",
+        "shared: true"
+      ],
+      "explanation": "The workflow exhibits very high I/O time ratio but extremely low bandwidth utilization, combined with many small (1 KB) write operations and moderate IOPS. This pattern indicates that the metadata server is overwhelmed by numerous small file operations, causing contention and preventing effective bandwidth usage. The shared NFS storage and many parallel writers exacerbate metadata overhead, confirming metadata contention as the primary bottleneck."
+    },
+    {
+      "id": "snap_015",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 1",
+        "writers_per_shared_file: 200",
+        "bw_utilization_ratio: 0.21",
+        "io_time_ratio: 0.85"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.21",
+        "write_bw_mb_s: 85",
+        "num_tasks: 200",
+        "writers_per_shared_file: 200",
+        "io_time_ratio: 0.85",
+        "avg_io_size_kb: 512",
+        "shared_output_files: 1"
+      ],
+      "explanation": "Despite high I/O time ratio and many parallel tasks, the write bandwidth utilization is low relative to peak storage bandwidth, indicating inefficient I/O. The presence of a single shared output file with 200 concurrent writers suggests heavy lock contention limiting effective write throughput. This contention on write locks prevents parallel I/O performance scaling."
+    },
+    {
+      "id": "snap_016",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 2",
+        "writers_per_shared_file: 64",
+        "bw_utilization_ratio: 0.22",
+        "io_time_ratio: 0.84"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.22",
+        "write_bw_mb_s: 110",
+        "num_tasks: 128",
+        "writers_per_shared_file: 64",
+        "shared_output_files: 2",
+        "io_time_ratio: 0.84",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "Despite many tasks writing in parallel (128 tasks, 64 writers per shared file), the bandwidth utilization is low (0.22) and write bandwidth is modest (110 MB/s) compared to peak storage bandwidth (500 MB/s). The presence of only 2 shared output files with many concurrent writers suggests heavy lock contention on these files, limiting effective parallel I/O throughput and causing the high I/O time ratio."
+    },
+    {
+      "id": "snap_017",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 1",
+        "writers_per_shared_file: 300",
+        "bw_utilization_ratio: 0.19",
+        "io_time_ratio: 0.85"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.19",
+        "write_bw_mb_s: 38",
+        "num_tasks: 300",
+        "writers_per_shared_file: 300",
+        "io_time_ratio: 0.85",
+        "avg_io_size_kb: 256",
+        "shared_output_files: 1"
+      ],
+      "explanation": "Despite high parallelism with 300 tasks writing to a single shared file, the write bandwidth is low and bandwidth utilization is only 19%, indicating contention. The large number of writers per shared file causes lock contention on the shared NFS output, limiting effective I/O throughput. This explains the high I/O time ratio and low CPU utilization."
+    },
+    {
+      "id": "snap_018",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 1",
+        "writers_per_shared_file: 64",
+        "bw_utilization_ratio: 0.21",
+        "io_time_ratio: 0.82"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.21",
+        "writers_per_shared_file: 64",
+        "io_time_ratio: 0.82",
+        "avg_io_size_kb: 512",
+        "parallelism: 64"
+      ],
+      "explanation": "Despite high parallelism and many writers (64) targeting a single shared output file, the write bandwidth utilization is low (21%) and I/O time dominates execution (82%). This indicates multiple tasks are contending for write locks on the shared file, limiting effective bandwidth and causing serialization at the lock level rather than at the I/O or network level."
+    },
+    {
+      "id": "snap_019",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "medium",
+      "predicted": "lock_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 4",
+        "writers_per_shared_file: 64",
+        "bw_utilization_ratio: 0.22",
+        "io_time_ratio: 0.84"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.22",
+        "writers_per_shared_file: 64",
+        "io_time_ratio: 0.84",
+        "avg_io_size_kb: 2048",
+        "num_tasks: 256",
+        "shared_output_files: 4"
+      ],
+      "explanation": "Despite many tasks writing in parallel with large IO sizes and low storage bandwidth utilization, the write bandwidth is low relative to peak capacity. The presence of 64 writers per shared file and only 4 shared output files indicates heavy contention for write locks, causing serialization and low effective bandwidth. High IO time ratio confirms I/O is the bottleneck, but bandwidth saturation and metadata contention are ruled out by low bw utilization and low IOPS with large IO sizes."
+    },
+    {
+      "id": "snap_020",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 2",
+        "writers_per_shared_file: 200",
+        "bw_utilization_ratio: 0.21",
+        "io_time_ratio: 0.86"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.21",
+        "write_bw_mb_s: 42",
+        "num_tasks: 400",
+        "writers_per_shared_file: 200",
+        "shared_output_files: 2",
+        "io_time_ratio: 0.86",
+        "cpu_util_pct: 12"
+      ],
+      "explanation": "Despite high I/O time ratio and many parallel tasks, the write bandwidth is low relative to peak storage bandwidth, indicating inefficient I/O. The presence of only two shared output files with 200 writers each suggests heavy contention for write locks, limiting effective parallelism and throughput. Low CPU utilization further supports that the bottleneck is in I/O coordination rather than compute."
+    },
+    {
+      "id": "snap_021",
+      "ground_truth": "lock_contention",
+      "gt_confidence": "high",
+      "predicted": "lock_contention",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "shared_output_files: 3",
+        "writers_per_shared_file: 167",
+        "bw_utilization_ratio: 0.22",
+        "io_time_ratio: 0.84"
+      ],
+      "llm_key_signals": [
+        "bw_utilization_ratio: 0.22",
+        "writers_per_shared_file: 167",
+        "io_time_ratio: 0.84",
+        "avg_io_size_kb: 256",
+        "cpu_util_pct: 10"
+      ],
+      "explanation": "Despite many writers (167) per shared file, the bandwidth utilization is low (0.22) and CPU utilization is minimal, indicating that I/O is active but not efficient. The high number of concurrent writers on only 3 shared files suggests heavy write lock contention, limiting parallel write throughput and causing the observed low bandwidth despite high I/O time."
+    },
+    {
+      "id": "snap_022",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.10",
+        "storage: s3",
+        "io_time_ratio: 0.85"
+      ],
+      "llm_key_signals": [
+        "network_util_ratio: 0.95",
+        "read_bw_mb_s: 95",
+        "peak_storage_bw_mb_s: 1000",
+        "bw_utilization_ratio: 0.1",
+        "io_time_ratio: 0.85"
+      ],
+      "explanation": "The storage bandwidth utilization is very low (0.1), indicating the storage device is not saturated. However, the network utilization ratio is very high (0.95), showing the network is nearly fully utilized. Since the workflow reads from S3 (remote object storage), the network is the limiting factor in data transfer, causing the high I/O time ratio despite low storage bandwidth usage."
+    },
+    {
+      "id": "snap_023",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.10",
+        "network_bw_mb_s: 190",
+        "network_peak_bw_mb_s: 200"
+      ],
+      "llm_key_signals": [
+        "network_util_ratio: 0.95",
+        "network_bw_mb_s: 190",
+        "read_bw_mb_s: 190",
+        "bw_utilization_ratio: 0.1",
+        "cpu_util_pct: 20",
+        "avg_io_size_kb: 1024"
+      ],
+      "explanation": "The storage bandwidth utilization is very low (0.1) while the network utilization is very high (0.95), indicating the network is the limiting factor for I/O performance. The workload is read-heavy with large IO sizes and moderate CPU usage, so the bottleneck is the network transfer of data from the NFS storage rather than the storage device itself."
+    },
+    {
+      "id": "snap_024",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.09",
+        "storage: s3",
+        "network_bw_mb_s \u2248 network_peak_bw_mb_s"
+      ],
+      "llm_key_signals": [
+        "network_util_ratio: 0.95",
+        "network_bw_mb_s: 855",
+        "read_bw_mb_s: 855",
+        "bw_utilization_ratio: 0.09",
+        "cpu_util_pct: 28"
+      ],
+      "explanation": "The storage bandwidth utilization is very low (0.09) while the network utilization is very high (0.95), indicating that data transfer over the network is the limiting factor. The workload reads from an S3 object store, which relies heavily on network throughput. CPU utilization is moderate, and I/O bandwidth is not saturated, confirming the network as the primary bottleneck."
+    },
+    {
+      "id": "snap_025",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.94",
+        "bw_utilization_ratio: 0.09",
+        "network_bw_mb_s: 47",
+        "network_peak_bw_mb_s: 50"
+      ],
+      "llm_key_signals": [
+        "network_util_ratio: 0.94",
+        "read_bw_mb_s: 47",
+        "peak_storage_bw_mb_s: 500",
+        "bw_utilization_ratio: 0.09",
+        "io_time_ratio: 0.85"
+      ],
+      "explanation": "The storage bandwidth utilization is very low (0.09) compared to the network utilization ratio (0.94), indicating the network is the limiting factor. The workflow reads from an S3 object store, which relies heavily on network transfer. High I/O time ratio and low CPU utilization further support that data movement over the network is the primary bottleneck."
+    },
+    {
+      "id": "snap_026",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.94",
+        "bw_utilization_ratio: 0.09",
+        "storage: s3",
+        "network_bw_mb_s \u2248 network_peak_bw_mb_s"
+      ],
+      "llm_key_signals": [
+        "network_util_ratio: 0.94",
+        "network_bw_mb_s: 755",
+        "peak_storage_bw_mb_s: 8000",
+        "bw_utilization_ratio: 0.09",
+        "io_time_ratio: 0.82"
+      ],
+      "explanation": "The storage bandwidth utilization is very low (0.09) compared to the high network utilization (0.94), indicating the network is the limiting factor. The workflow uses S3 object storage, which relies heavily on network transfers. High I/O time ratio with low storage bandwidth usage and near-saturated network bandwidth confirms a network I/O bottleneck."
+    },
+    {
+      "id": "snap_027",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.10",
+        "network_bw_mb_s: 285",
+        "network_peak_bw_mb_s: 300"
+      ],
+      "llm_key_signals": [
+        "network_util_ratio: 0.95",
+        "network_bw_mb_s: 285",
+        "peak_storage_bw_mb_s: 3000",
+        "bw_utilization_ratio: 0.1",
+        "io_time_ratio: 0.84"
+      ],
+      "explanation": "The storage bandwidth utilization is very low (0.1) compared to the network utilization which is very high (0.95), indicating the network is the limiting factor in data movement. The I/O time ratio is high, showing I/O is the bottleneck, but storage is underutilized, pointing to network saturation as the primary bottleneck."
+    },
+    {
+      "id": "snap_028",
+      "ground_truth": "network_io_bottleneck",
+      "gt_confidence": "high",
+      "predicted": "network_io_bottleneck",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "network_util_ratio: 0.95",
+        "bw_utilization_ratio: 0.09",
+        "network_bw_mb_s \u2248 network_peak_bw_mb_s",
+        "io_time_ratio: 0.86"
+      ],
+      "llm_key_signals": [
+        "network_util_ratio: 0.95",
+        "read_bw_mb_s: 142",
+        "peak_storage_bw_mb_s: 1500",
+        "bw_utilization_ratio: 0.09",
+        "io_time_ratio: 0.86"
+      ],
+      "explanation": "The storage bandwidth utilization is very low (0.09) compared to the network utilization ratio (0.95), indicating the network is the limiting factor. The workflow reads from remote S3 storage, and the high network utilization with relatively low storage bandwidth usage suggests data transfer over the network is the primary bottleneck. High I/O time ratio confirms I/O dominates execution time, but storage is underutilized due to network constraints."
+    },
+    {
+      "id": "snap_029",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "serialized_io",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.12",
+        "cpu_util_pct: 8",
+        "num_tasks: 100 vs io_workers: 1"
+      ],
+      "llm_key_signals": [
+        "io_parallelism: 1",
+        "io_workers: 1",
+        "bw_utilization_ratio: 0.12",
+        "io_time_ratio: 0.87",
+        "cpu_util_pct: 8"
+      ],
+      "explanation": "Despite high I/O time ratio and many tasks, the I/O parallelism is limited to a single writer/worker, severely restricting throughput and causing low bandwidth utilization. The low CPU utilization and network usage further indicate that the bottleneck is due to serialization of I/O rather than compute, network, or storage saturation."
+    },
+    {
+      "id": "snap_030",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "serialized_io",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.18",
+        "num_tasks: 50 vs io_workers: 1",
+        "cpu_util_pct: 12"
+      ],
+      "llm_key_signals": [
+        "io_parallelism=1",
+        "io_workers=1",
+        "bw_utilization_ratio=0.18",
+        "io_time_ratio=0.85",
+        "cpu_util_pct=12"
+      ],
+      "explanation": "The I/O is forced through a single writer/reader as indicated by io_parallelism=1 and io_workers=1, which severely limits bandwidth utilization despite a low storage bandwidth saturation (0.18). The high io_time_ratio and low CPU utilization confirm the workflow is I/O bound but unable to leverage parallel I/O, causing serialization to be the primary bottleneck."
+    },
+    {
+      "id": "snap_031",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "serialized_io",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.12",
+        "num_tasks: 32 vs io_workers: 1",
+        "cpu_util_pct: 10"
+      ],
+      "llm_key_signals": [
+        "io_parallelism=1",
+        "io_workers=1",
+        "bw_utilization_ratio=0.12",
+        "io_time_ratio=0.84",
+        "cpu_util_pct=10"
+      ],
+      "explanation": "The I/O is highly serialized with only one parallel I/O worker and io_parallelism=1, severely limiting bandwidth utilization despite low CPU usage and ample storage/network capacity. This serialization prevents the workflow from leveraging available parallelism, causing the long I/O time and low bandwidth utilization."
+    },
+    {
+      "id": "snap_032",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "serialized_io",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.09",
+        "num_tasks: 256 vs io_workers: 1",
+        "cpu_util_pct: 6"
+      ],
+      "llm_key_signals": [
+        "io_parallelism: 1",
+        "io_workers: 1",
+        "bw_utilization_ratio: 0.09",
+        "io_time_ratio: 0.87",
+        "cpu_util_pct: 6"
+      ],
+      "explanation": "The I/O is highly serialized with only one I/O worker and io_parallelism of 1, severely limiting throughput despite low storage bandwidth utilization. The high io_time_ratio and low CPU utilization indicate the workflow is waiting on I/O that cannot be parallelized. This serialization prevents effective use of available storage bandwidth and compute resources."
+    },
+    {
+      "id": "snap_033",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "serialized_io",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.15",
+        "num_tasks: 128 vs io_workers: 1",
+        "cpu_util_pct: 15"
+      ],
+      "llm_key_signals": [
+        "io_parallelism: 1",
+        "io_workers: 1",
+        "bw_utilization_ratio: 0.15",
+        "io_time_ratio: 0.85",
+        "write_bw_mb_s: 60",
+        "num_tasks: 128",
+        "aggregate_size_mb: 72000"
+      ],
+      "explanation": "Despite many tasks and high I/O time ratio, the bandwidth utilization is very low and io_parallelism is 1, indicating all I/O is serialized through a single writer. This serialization prevents the workflow from leveraging available storage bandwidth and parallelism, causing a bottleneck."
+    },
+    {
+      "id": "snap_034",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "serialized_io",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.14",
+        "num_tasks: 200 vs io_workers: 1",
+        "cpu_util_pct: 7"
+      ],
+      "llm_key_signals": [
+        "io_parallelism: 1",
+        "io_workers: 1",
+        "bw_utilization_ratio: 0.14",
+        "io_time_ratio: 0.86",
+        "cpu_util_pct: 7"
+      ],
+      "explanation": "Despite high I/O time ratio and many tasks, the I/O parallelism is limited to 1 with only one I/O worker, causing serialization of all writes. This prevents the workflow from utilizing available storage bandwidth and network capacity, resulting in low bandwidth utilization and a bottleneck in I/O throughput."
+    },
+    {
+      "id": "snap_035",
+      "ground_truth": "serialized_io",
+      "gt_confidence": "high",
+      "predicted": "serialized_io",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "io_parallelism: 1",
+        "bw_utilization_ratio: 0.12",
+        "num_tasks: 64 vs io_workers: 1",
+        "cpu_util_pct: 9"
+      ],
+      "llm_key_signals": [
+        "io_parallelism: 1",
+        "io_workers: 1",
+        "bw_utilization_ratio: 0.12",
+        "io_time_ratio: 0.84",
+        "cpu_util_pct: 9"
+      ],
+      "explanation": "The I/O parallelism is limited to a single worker, which serializes all I/O operations despite many tasks running. This prevents the workflow from utilizing available storage bandwidth, resulting in low bandwidth utilization and high I/O time ratio. The low CPU utilization further supports that the bottleneck is in serialized I/O rather than compute or network."
+    },
+    {
+      "id": "snap_036",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "checkpointing_overhead",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 300",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 12",
+        "io_time_ratio: 0.54"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.54",
+        "checkpoint_interval_s: 300",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 12",
+        "total_checkpoint_io_mb: 96000",
+        "write_bw_mb_s: 48",
+        "bw_utilization_ratio: 0.12",
+        "cpu_util_pct: 10"
+      ],
+      "explanation": "The workflow spends over half its time in I/O, dominated by frequent large checkpoints (8 GB every 5 minutes, 12 times total). Despite low storage bandwidth utilization (0.12) and low CPU usage, the large and frequent checkpoint writes cause significant overhead. This pattern matches checkpointing overhead rather than bandwidth saturation or other bottlenecks."
+    },
+    {
+      "id": "snap_037",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "checkpointing_overhead",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 600",
+        "checkpoint_size_mb: 15000",
+        "num_checkpoints: 15",
+        "io_time_ratio: 0.58"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.58",
+        "checkpoint_size_mb: 15000",
+        "num_checkpoints: 15",
+        "total_checkpoint_io_mb: 225000",
+        "bw_utilization_ratio: 0.12",
+        "cpu_util_pct: 8"
+      ],
+      "explanation": "The workflow spends a large portion of time on I/O (58%) dominated by frequent, large checkpoint writes (15 checkpoints of 15 GB each). Despite low storage bandwidth utilization and low CPU usage, the periodic checkpointing overhead significantly impacts overall runtime, indicating checkpointing is the primary bottleneck."
+    },
+    {
+      "id": "snap_038",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "checkpointing_overhead",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 300",
+        "checkpoint_size_mb: 30000",
+        "num_checkpoints: 6",
+        "io_time_ratio: 0.50"
+      ],
+      "llm_key_signals": [
+        "checkpoint_interval_s: 300",
+        "checkpoint_size_mb: 30000",
+        "num_checkpoints: 6",
+        "total_checkpoint_io_mb: 180000",
+        "io_time_ratio: 0.5",
+        "write_bw_mb_s: 200",
+        "bw_utilization_ratio: 0.29",
+        "cpu_util_pct: 12"
+      ],
+      "explanation": "The workflow spends half its time in I/O dominated by large, frequent checkpoint writes totaling 180 GB over 6 intervals, each 30 GB in size. Despite moderate bandwidth utilization (29%) and low CPU usage, the periodic large checkpointing operations cause significant I/O overhead, limiting overall progress. Other bottlenecks like storage saturation or network limits are not indicated by the metrics."
+    },
+    {
+      "id": "snap_039",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "medium",
+      "predicted": "checkpointing_overhead",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 120",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 30",
+        "io_time_ratio: 0.44"
+      ],
+      "llm_key_signals": [
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 30",
+        "total_checkpoint_io_mb: 240000",
+        "io_time_s: 1600",
+        "io_time_ratio: 0.44",
+        "bw_utilization_ratio: 0.38",
+        "cpu_util_pct: 15"
+      ],
+      "explanation": "The workflow spends a significant portion of time (44%) on I/O dominated by large, frequent checkpoint writes totaling 240,000 MB over 30 intervals. The bandwidth utilization is moderate, indicating the storage is not saturated, and CPU utilization is low, ruling out compute bottlenecks. This pattern strongly suggests that periodic checkpointing overhead is the primary bottleneck."
+    },
+    {
+      "id": "snap_040",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "serialized_io",
+      "llm_confidence": "high",
+      "correct": false,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 300",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 12",
+        "io_time_ratio: 0.53"
+      ],
+      "llm_key_signals": [
+        "parallelism: 48",
+        "stripe_count: 1",
+        "bw_utilization_ratio: 0.25",
+        "write_bw_mb_s: 50",
+        "peak_storage_bw_mb_s: 200",
+        "io_time_ratio: 0.53",
+        "cpu_util_pct: 8"
+      ],
+      "explanation": "Despite high parallelism (48 tasks), the storage stripe count is 1, indicating a single storage target. This limits I/O parallelism and caps bandwidth at 25% utilization. Low CPU utilization and moderate I/O time ratio confirm the bottleneck is due to serialized I/O through a single writer path rather than compute or bandwidth saturation."
+    },
+    {
+      "id": "snap_041",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "medium",
+      "predicted": "checkpointing_overhead",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 900",
+        "checkpoint_size_mb: 100000",
+        "num_checkpoints: 8",
+        "io_time_ratio: 0.40"
+      ],
+      "llm_key_signals": [
+        "checkpoint_interval_s: 900",
+        "checkpoint_size_mb: 100000",
+        "num_checkpoints: 8",
+        "total_checkpoint_io_mb: 800000",
+        "io_time_ratio: 0.4",
+        "write_bw_mb_s: 280",
+        "bw_utilization_ratio: 0.47"
+      ],
+      "explanation": "The workflow spends a significant portion of time on I/O (40%) with large, frequent checkpoints (100 GB every 900 seconds, 8 times total). The bandwidth utilization is moderate, indicating the storage is not saturated, but the large checkpoint size and frequency dominate the I/O time. CPU utilization is low, and network is underutilized, ruling out compute or network bottlenecks."
+    },
+    {
+      "id": "snap_042",
+      "ground_truth": "checkpointing_overhead",
+      "gt_confidence": "high",
+      "predicted": "checkpointing_overhead",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "checkpoint_interval_s: 180",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 20",
+        "io_time_ratio: 0.75"
+      ],
+      "llm_key_signals": [
+        "io_time_ratio: 0.75",
+        "checkpoint_size_mb: 8000",
+        "num_checkpoints: 20",
+        "total_checkpoint_io_mb: 160000",
+        "bw_utilization_ratio: 0.15",
+        "cpu_util_pct: 18"
+      ],
+      "explanation": "The workflow spends 75% of its time on I/O dominated by frequent large checkpoint writes (8 GB every 180 seconds, 20 times total). Despite low storage bandwidth utilization (0.15) and low CPU usage (18%), the high checkpointing overhead causes significant I/O time, indicating that periodic checkpointing is the primary bottleneck rather than bandwidth saturation or compute limits."
+    },
+    {
+      "id": "snap_043",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 92",
+        "io_time_ratio: 0.09",
+        "bw_utilization_ratio: 0.16",
+        "compute_time_s: 1820"
+      ],
+      "llm_key_signals": [
+        "cpu_util_pct: 92",
+        "io_time_ratio: 0.09",
+        "bw_utilization_ratio: 0.16",
+        "network_util_ratio: 0.001"
+      ],
+      "explanation": "The CPU utilization is very high at 92%, while I/O time is only 9% of total time and storage bandwidth utilization is low at 16%. Network usage is negligible, and I/O operations are relatively large and sequential, indicating no metadata or lock contention. This shows the workflow is primarily limited by compute rather than I/O."
+    },
+    {
+      "id": "snap_044",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 88",
+        "io_time_ratio: 0.12",
+        "bw_utilization_ratio: 0.20",
+        "compute_time_s: 3520"
+      ],
+      "llm_key_signals": [
+        "cpu_util_pct: 88",
+        "io_time_ratio: 0.12",
+        "bw_utilization_ratio: 0.2",
+        "network_util_ratio: 0.002"
+      ],
+      "explanation": "The CPU utilization is very high at 88%, while I/O time ratio is low at 12%, indicating that the workload is primarily limited by computation rather than I/O. Storage bandwidth utilization is low (20%) and network usage is minimal, so neither storage nor network are bottlenecks. The data access pattern is efficient with large IO sizes and high sequential ratio, further supporting that compute is the main bottleneck."
+    },
+    {
+      "id": "snap_045",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 85",
+        "io_time_ratio: 0.10",
+        "bw_utilization_ratio: 0.13",
+        "compute_time_s: 3240"
+      ],
+      "llm_key_signals": [
+        "cpu_util_pct: 85",
+        "io_time_ratio: 0.1",
+        "bw_utilization_ratio: 0.13",
+        "network_util_ratio: 0.004"
+      ],
+      "explanation": "The CPU utilization is very high at 85%, while I/O time is only 10% of total time and storage bandwidth utilization is low at 13%. Network usage is minimal, indicating no network bottleneck. This suggests the workflow is primarily limited by compute rather than I/O or storage."
+    },
+    {
+      "id": "snap_046",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 94",
+        "io_time_ratio: 0.06",
+        "bw_utilization_ratio: 0.08",
+        "compute_time_s: 1880"
+      ],
+      "llm_key_signals": [
+        "cpu_util_pct: 94",
+        "io_time_ratio: 0.06",
+        "bw_utilization_ratio: 0.08",
+        "network_util_ratio: 0.001"
+      ],
+      "explanation": "The CPU utilization is very high at 94%, while I/O time is only 6% of total time and storage bandwidth utilization is very low at 8%. Network usage is negligible. This indicates that the workflow is limited by computation rather than I/O or network resources."
+    },
+    {
+      "id": "snap_047",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 96",
+        "io_time_ratio: 0.04",
+        "bw_utilization_ratio: 0.13",
+        "compute_time_s: 1920"
+      ],
+      "llm_key_signals": [
+        "cpu_util_pct: 96",
+        "io_time_ratio: 0.04",
+        "bw_utilization_ratio: 0.13",
+        "network_util_ratio: 0.005"
+      ],
+      "explanation": "The CPU utilization is very high at 96%, while I/O time is only 4% of total time, indicating that computation dominates the runtime. Storage bandwidth and network utilization are low, so I/O is not limiting performance. This points to a compute-bound bottleneck."
+    },
+    {
+      "id": "snap_048",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 90",
+        "io_time_ratio: 0.09",
+        "bw_utilization_ratio: 0.15",
+        "compute_time_s: 3280"
+      ],
+      "llm_key_signals": [
+        "cpu_util_pct: 90",
+        "io_time_ratio: 0.09",
+        "bw_utilization_ratio: 0.15",
+        "network_util_ratio: 0.002"
+      ],
+      "explanation": "The CPU utilization is very high at 90%, while I/O time is only 9% of total time and storage bandwidth utilization is low at 15%. Network utilization is negligible, indicating that neither storage nor network I/O is limiting performance. This strongly suggests the workflow is compute bound."
+    },
+    {
+      "id": "snap_049",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "medium",
+      "predicted": "compute_bound",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 82",
+        "io_time_ratio: 0.18",
+        "bw_utilization_ratio: 0.23",
+        "compute_time_s: 2460"
+      ],
+      "llm_key_signals": [
+        "cpu_util_pct: 82",
+        "io_time_ratio: 0.18",
+        "bw_utilization_ratio: 0.23",
+        "network_util_ratio: 0.004"
+      ],
+      "explanation": "The CPU utilization is high at 82%, while I/O time ratio is low at 18%, indicating that the workflow spends most time computing rather than waiting on I/O. Storage bandwidth utilization is low (23%) and network usage is minimal, so neither storage nor network are bottlenecks. This points to compute as the primary bottleneck."
+    },
+    {
+      "id": "snap_050",
+      "ground_truth": "compute_bound",
+      "gt_confidence": "high",
+      "predicted": "compute_bound",
+      "llm_confidence": "high",
+      "correct": true,
+      "gt_key_signals": [
+        "cpu_util_pct: 87",
+        "io_time_ratio: 0.11",
+        "bw_utilization_ratio: 0.22",
+        "compute_time_s: 3200"
+      ],
+      "llm_key_signals": [
+        "cpu_util_pct: 87",
+        "io_time_ratio: 0.11",
+        "bw_utilization_ratio: 0.22",
+        "network_util_ratio: 0.01"
+      ],
+      "explanation": "The CPU utilization is very high at 87%, while I/O time ratio is low at 11%, indicating that the workflow spends most time computing rather than waiting on I/O. Storage bandwidth utilization is low (22%) and network utilization is minimal (1%), so neither storage nor network are bottlenecks. This points to compute as the primary bottleneck."
+    }
+  ],
+  "summary": {
+    "total": 50,
+    "correct": 49,
+    "accuracy": 0.98,
+    "macro_f1": 0.979,
+    "per_class": {
+      "storage_bandwidth_saturation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "metadata_contention": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "lock_contention": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "network_io_bottleneck": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "serialized_io": {
+        "precision": 0.875,
+        "recall": 1.0,
+        "f1": 0.933
+      },
+      "checkpointing_overhead": {
+        "precision": 1.0,
+        "recall": 0.857,
+        "f1": 0.923
+      },
+      "compute_bound": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    }
+  }
+}

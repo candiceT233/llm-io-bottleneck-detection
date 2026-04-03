@@ -1,0 +1,27 @@
+{
+  "id": "snap_026",
+  "workflow": {"name": "distributed_training", "type": "ml_training", "num_stages": 5},
+  "stage": {"name": "parameter_server_sync", "order": 3, "predecessors": ["gradient_compute"], "operation": "mixed"},
+  "execution": {
+    "num_nodes": 32, "num_tasks": 128, "parallelism": 128,
+    "total_time_s": 680, "io_time_s": 560, "compute_time_s": 120,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 512, "aggregate_size_mb": 422800, "op_count": 845600
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 380, "write_bw_mb_s": 375,
+    "peak_storage_bw_mb_s": 8000, "bw_utilization_ratio": 0.09,
+    "iops": 1510, "avg_io_size_kb": 512, "sequential_ratio": 0.60
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 30, "memory_util_pct": 60,
+    "network_bw_mb_s": 755, "network_peak_bw_mb_s": 800, "network_util_ratio": 0.94
+  },
+  "storage": {"type": "s3", "stripe_count": 0, "shared": true},
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Total I/O bandwidth of 755 MB/s (read 380 + write 375) saturates 94% of the 800 MB/s inter-node network for gradient synchronization via a remote parameter server. The remote storage system supports 8 GB/s, so bw_utilization_ratio is only 0.09. The bottleneck is entirely in the network links connecting compute workers to the parameter server.",
+    "key_signals": ["network_util_ratio: 0.94", "bw_utilization_ratio: 0.09", "storage: s3", "network_bw_mb_s ≈ network_peak_bw_mb_s"]
+  }
+}

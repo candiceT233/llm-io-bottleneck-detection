@@ -1,0 +1,27 @@
+{
+  "id": "snap_050",
+  "workflow": {"name": "cfd_solver", "type": "hpc_simulation", "num_stages": 4},
+  "stage": {"name": "navier_stokes_solve", "order": 2, "predecessors": ["mesh_partition"], "operation": "mixed"},
+  "execution": {
+    "num_nodes": 24, "num_tasks": 96, "parallelism": 96,
+    "total_time_s": 3600, "io_time_s": 400, "compute_time_s": 3200,
+    "io_time_ratio": 0.11,
+    "transfer_size_kb": 1024, "aggregate_size_mb": 52000, "op_count": 52000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 70, "write_bw_mb_s": 60,
+    "peak_storage_bw_mb_s": 600, "bw_utilization_ratio": 0.22,
+    "iops": 130, "avg_io_size_kb": 1024, "sequential_ratio": 0.75
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 87, "memory_util_pct": 65,
+    "network_bw_mb_s": 140, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.01
+  },
+  "storage": {"type": "lustre", "stripe_count": 4, "shared": true},
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 87% across 96 MPI ranks indicates that solving the Navier-Stokes equations is compute-dominated. io_time_ratio of 0.11 shows I/O (boundary exchange and field output) is only 11% of stage time. Lustre bandwidth utilization of 0.22 confirms ample storage capacity remains. The iterative linear solver is the primary bottleneck.",
+    "key_signals": ["cpu_util_pct: 87", "io_time_ratio: 0.11", "bw_utilization_ratio: 0.22", "compute_time_s: 3200"]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "snap_032",
+  "workflow": {"name": "hpc_output_collection", "type": "hpc_simulation", "num_stages": 3},
+  "stage": {"name": "output_coordinator", "order": 2, "predecessors": ["compute_phase"], "operation": "write"},
+  "execution": {
+    "num_nodes": 32, "num_tasks": 256, "parallelism": 256,
+    "total_time_s": 2750, "io_time_s": 2400, "compute_time_s": 350,
+    "io_time_ratio": 0.87,
+    "transfer_size_kb": 512, "aggregate_size_mb": 132000, "op_count": 264000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 55,
+    "peak_storage_bw_mb_s": 600, "bw_utilization_ratio": 0.09,
+    "iops": 110, "avg_io_size_kb": 512, "sequential_ratio": 0.94
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 6, "memory_util_pct": 30,
+    "network_bw_mb_s": 58, "network_peak_bw_mb_s": 25000, "network_util_ratio": 0.002
+  },
+  "storage": {"type": "lustre", "stripe_count": 4, "shared": true},
+  "additional_context": {
+    "io_parallelism": 1,
+    "io_workers": 1
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "256 MPI ranks complete computation but funnel all output through a single I/O coordinator process. Lustre supports 600 MB/s, but the single writer achieves only 55 MB/s (9% utilization). CPU utilization of 6% reflects 255 ranks idle while the coordinator drains the output queue serially. This is a classic single-writer bottleneck in collective I/O.",
+    "key_signals": ["io_parallelism: 1", "bw_utilization_ratio: 0.09", "num_tasks: 256 vs io_workers: 1", "cpu_util_pct: 6"]
+  }
+}

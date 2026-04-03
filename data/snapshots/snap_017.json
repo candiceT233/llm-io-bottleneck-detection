@@ -1,0 +1,31 @@
+{
+  "id": "snap_017",
+  "workflow": {"name": "variant_calling_pipeline", "type": "genomics", "num_stages": 6},
+  "stage": {"name": "merge_vcf", "order": 5, "predecessors": ["haplotype_calling"], "operation": "write"},
+  "execution": {
+    "num_nodes": 30, "num_tasks": 300, "parallelism": 300,
+    "total_time_s": 1080, "io_time_s": 920, "compute_time_s": 160,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 256, "aggregate_size_mb": 34960, "op_count": 140000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 38,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.19,
+    "iops": 152, "avg_io_size_kb": 256, "sequential_ratio": 0.88
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 15, "memory_util_pct": 40,
+    "network_bw_mb_s": 40, "network_peak_bw_mb_s": 1000, "network_util_ratio": 0.04
+  },
+  "storage": {"type": "nfs", "stripe_count": 1, "shared": true},
+  "additional_context": {
+    "shared_output_files": 1,
+    "writers_per_shared_file": 300
+  },
+  "annotation": {
+    "bottleneck": "lock_contention",
+    "confidence": "high",
+    "explanation": "All 300 tasks write variant records to a single merged VCF file, creating extreme lock contention. Bandwidth of 38 MB/s is only 19% of NFS capacity, while io_time_ratio is 0.85, indicating long lock-wait periods. With 300 writers competing for a single file lock, the vast majority of I/O time is spent waiting rather than transferring data.",
+    "key_signals": ["shared_output_files: 1", "writers_per_shared_file: 300", "bw_utilization_ratio: 0.19", "io_time_ratio: 0.85"]
+  }
+}

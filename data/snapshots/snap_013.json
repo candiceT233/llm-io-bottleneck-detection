@@ -1,0 +1,27 @@
+{
+  "id": "snap_013",
+  "workflow": {"name": "namd_simulation", "type": "molecular_dynamics", "num_stages": 3},
+  "stage": {"name": "frame_output", "order": 2, "predecessors": ["energy_minimization"], "operation": "write"},
+  "execution": {
+    "num_nodes": 4, "num_tasks": 32, "parallelism": 32,
+    "total_time_s": 420, "io_time_s": 340, "compute_time_s": 80,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 16, "aggregate_size_mb": 4080, "op_count": 261000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 12,
+    "peak_storage_bw_mb_s": 300, "bw_utilization_ratio": 0.04,
+    "iops": 768, "avg_io_size_kb": 16, "sequential_ratio": 0.35
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 18, "memory_util_pct": 40,
+    "network_bw_mb_s": 14, "network_peak_bw_mb_s": 8000, "network_util_ratio": 0.002
+  },
+  "storage": {"type": "pvfs", "stripe_count": 2, "shared": true},
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "medium",
+    "explanation": "Write bandwidth of 12 MB/s is only 4% of PVFS capacity (300 MB/s), yet 261K operations at 16 KB are driving 768 IOPS. The MD simulation writes per-atom trajectory data as many small records per frame, resulting in a high-IOPS, low-throughput pattern that saturates the parallel filesystem metadata layer. The moderate sequential ratio (0.35) reflects mixed access to trajectory and log files.",
+    "key_signals": ["avg_io_size_kb: 16", "iops: 768", "bw_utilization_ratio: 0.04", "sequential_ratio: 0.35"]
+  }
+}

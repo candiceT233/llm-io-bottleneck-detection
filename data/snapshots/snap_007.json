@@ -1,0 +1,27 @@
+{
+  "id": "snap_007",
+  "workflow": {"name": "climate_reanalysis", "type": "climate", "num_stages": 6},
+  "stage": {"name": "data_output", "order": 5, "predecessors": ["model_run"], "operation": "write"},
+  "execution": {
+    "num_nodes": 12, "num_tasks": 48, "parallelism": 48,
+    "total_time_s": 1200, "io_time_s": 980, "compute_time_s": 220,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 1024, "aggregate_size_mb": 140140, "op_count": 140140
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 143,
+    "peak_storage_bw_mb_s": 150, "bw_utilization_ratio": 0.95,
+    "iops": 143, "avg_io_size_kb": 1024, "sequential_ratio": 0.96
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 25, "memory_util_pct": 50,
+    "network_bw_mb_s": 148, "network_peak_bw_mb_s": 10000, "network_util_ratio": 0.01
+  },
+  "storage": {"type": "gpfs", "stripe_count": 4, "shared": true},
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 143 MB/s reaches 95% of the GPFS system capacity (150 MB/s). CPU utilization at 25% is low, indicating processes are frequently stalled on I/O. The high io_time_ratio (0.82) and large sequential writes (1 MB, sequential_ratio 0.96) are consistent with a bandwidth-saturated NetCDF output stage.",
+    "key_signals": ["bw_utilization_ratio: 0.95", "cpu_util_pct: 25", "io_time_ratio: 0.82", "avg_io_size_kb: 1024"]
+  }
+}

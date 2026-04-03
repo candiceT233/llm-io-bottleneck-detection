@@ -1,0 +1,27 @@
+{
+  "id": "snap_025",
+  "workflow": {"name": "climate_reanalysis_cloud", "type": "climate", "num_stages": 3},
+  "stage": {"name": "era5_download", "order": 1, "predecessors": [], "operation": "read"},
+  "execution": {
+    "num_nodes": 4, "num_tasks": 8, "parallelism": 8,
+    "total_time_s": 4000, "io_time_s": 3400, "compute_time_s": 600,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 4096, "aggregate_size_mb": 159800, "op_count": 40000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 47, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500, "bw_utilization_ratio": 0.09,
+    "iops": 12, "avg_io_size_kb": 4096, "sequential_ratio": 0.90
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 15, "memory_util_pct": 40,
+    "network_bw_mb_s": 47, "network_peak_bw_mb_s": 50, "network_util_ratio": 0.94
+  },
+  "storage": {"type": "s3", "stripe_count": 0, "shared": true},
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "ERA5 climate data is fetched from a remote S3 archive at 47 MB/s, representing 94% of the available 50 MB/s WAN connection. S3 can serve up to 500 MB/s but the inter-datacenter bandwidth caps delivery at 47 MB/s. With io_time_ratio of 0.85, the download phase completely dominates the stage, entirely due to the constrained network link.",
+    "key_signals": ["network_util_ratio: 0.94", "bw_utilization_ratio: 0.09", "network_bw_mb_s: 47", "network_peak_bw_mb_s: 50"]
+  }
+}

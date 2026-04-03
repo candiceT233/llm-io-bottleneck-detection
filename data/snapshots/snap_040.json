@@ -1,0 +1,33 @@
+{
+  "id": "snap_040",
+  "workflow": {"name": "financial_montecarlo", "type": "hpc_simulation", "num_stages": 3},
+  "stage": {"name": "state_checkpoint", "order": 2, "predecessors": ["initialization"], "operation": "write"},
+  "execution": {
+    "num_nodes": 12, "num_tasks": 48, "parallelism": 48,
+    "total_time_s": 3600, "io_time_s": 1920, "compute_time_s": 1680,
+    "io_time_ratio": 0.53,
+    "transfer_size_kb": 1024, "aggregate_size_mb": 96000, "op_count": 96000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 50,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.25,
+    "iops": 50, "avg_io_size_kb": 1024, "sequential_ratio": 0.95
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 8, "memory_util_pct": 42,
+    "network_bw_mb_s": 52, "network_peak_bw_mb_s": 1000, "network_util_ratio": 0.05
+  },
+  "storage": {"type": "nfs", "stripe_count": 1, "shared": false},
+  "additional_context": {
+    "checkpoint_interval_s": 300,
+    "checkpoint_size_mb": 8000,
+    "num_checkpoints": 12,
+    "total_checkpoint_io_mb": 96000
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Monte Carlo simulation saves state every 300 seconds, writing an 8 GB checkpoint to NFS at 50 MB/s (160 seconds per write, exceeding 50% of the checkpoint interval). 12 checkpoint events consume 1920 seconds total (io_time_ratio 0.53). NFS bandwidth utilization is 0.25, indicating the bottleneck is checkpoint volume relative to write rate, not NFS saturation.",
+    "key_signals": ["checkpoint_interval_s: 300", "checkpoint_size_mb: 8000", "num_checkpoints: 12", "io_time_ratio: 0.53"]
+  }
+}

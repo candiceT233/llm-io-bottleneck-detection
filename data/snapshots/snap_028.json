@@ -1,0 +1,27 @@
+{
+  "id": "snap_028",
+  "workflow": {"name": "data_pipeline", "type": "data_analytics", "num_stages": 4},
+  "stage": {"name": "remote_staging", "order": 1, "predecessors": [], "operation": "read"},
+  "execution": {
+    "num_nodes": 12, "num_tasks": 48, "parallelism": 48,
+    "total_time_s": 1600, "io_time_s": 1380, "compute_time_s": 220,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 1024, "aggregate_size_mb": 196000, "op_count": 196000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 142, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 1500, "bw_utilization_ratio": 0.09,
+    "iops": 142, "avg_io_size_kb": 1024, "sequential_ratio": 0.72
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 18, "memory_util_pct": 42,
+    "network_bw_mb_s": 142, "network_peak_bw_mb_s": 150, "network_util_ratio": 0.95
+  },
+  "storage": {"type": "s3", "stripe_count": 0, "shared": true},
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Data staging from a remote S3 archive is limited to 142 MB/s by the 150 MB/s available network bandwidth (95% utilized). S3 has 1.5 GB/s capacity, leaving bw_utilization_ratio at only 0.09. The io_time_ratio of 0.86 shows the entire stage is dominated by waiting for data delivery over the saturated network link.",
+    "key_signals": ["network_util_ratio: 0.95", "bw_utilization_ratio: 0.09", "network_bw_mb_s ≈ network_peak_bw_mb_s", "io_time_ratio: 0.86"]
+  }
+}

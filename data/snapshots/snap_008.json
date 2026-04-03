@@ -1,0 +1,27 @@
+{
+  "id": "snap_008",
+  "workflow": {"name": "1000_genomes", "type": "genomics", "num_stages": 5},
+  "stage": {"name": "sifting", "order": 2, "predecessors": ["individuals"], "operation": "write"},
+  "execution": {
+    "num_nodes": 2, "num_tasks": 10, "parallelism": 10,
+    "total_time_s": 280, "io_time_s": 240, "compute_time_s": 40,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 4, "aggregate_size_mb": 504, "op_count": 129024
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 2.1,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.01,
+    "iops": 538, "avg_io_size_kb": 4, "sequential_ratio": 0.20
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 8, "memory_util_pct": 25,
+    "network_bw_mb_s": 3, "network_peak_bw_mb_s": 1000, "network_util_ratio": 0.003
+  },
+  "storage": {"type": "nfs", "stripe_count": 1, "shared": true},
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "Despite an NFS peak of 200 MB/s, write bandwidth is only 2.1 MB/s (1% utilization), while iops of 538 and avg_io_size of 4 KB reveal that the workload consists entirely of tiny random writes. With 129K operations at sub-4KB granularity, the NFS metadata server is overwhelmed by per-operation overhead rather than data throughput. CPU utilization is only 8%, confirming the bottleneck is in the storage metadata path.",
+    "key_signals": ["avg_io_size_kb: 4", "iops: 538", "bw_utilization_ratio: 0.01", "sequential_ratio: 0.20"]
+  }
+}

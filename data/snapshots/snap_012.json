@@ -1,0 +1,27 @@
+{
+  "id": "snap_012",
+  "workflow": {"name": "bwa_alignment", "type": "genomics", "num_stages": 4},
+  "stage": {"name": "index_lookup", "order": 2, "predecessors": ["read_trimming"], "operation": "read"},
+  "execution": {
+    "num_nodes": 8, "num_tasks": 80, "parallelism": 80,
+    "total_time_s": 530, "io_time_s": 450, "compute_time_s": 80,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 4, "aggregate_size_mb": 1305, "op_count": 333000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 2.9, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.015,
+    "iops": 740, "avg_io_size_kb": 4, "sequential_ratio": 0.20
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 15, "memory_util_pct": 40,
+    "network_bw_mb_s": 3, "network_peak_bw_mb_s": 1000, "network_util_ratio": 0.003
+  },
+  "storage": {"type": "nfs", "stripe_count": 1, "shared": true},
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 2.9 MB/s is only 1.5% of NFS capacity. The 333K operations at 4 KB average and 740 IOPS indicate fine-grained random index lookups. BWT-based aligners like BWA access genome index structures in a highly random pattern, resulting in many small read syscalls that overwhelm the NFS metadata server even at low total data volume.",
+    "key_signals": ["avg_io_size_kb: 4", "iops: 740", "bw_utilization_ratio: 0.015", "sequential_ratio: 0.20"]
+  }
+}

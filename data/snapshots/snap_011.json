@@ -1,0 +1,27 @@
+{
+  "id": "snap_011",
+  "workflow": {"name": "image_classification", "type": "ml_training", "num_stages": 4},
+  "stage": {"name": "preprocessing", "order": 1, "predecessors": ["data_download"], "operation": "read"},
+  "execution": {
+    "num_nodes": 10, "num_tasks": 100, "parallelism": 100,
+    "total_time_s": 740, "io_time_s": 620, "compute_time_s": 120,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 32, "aggregate_size_mb": 27900, "op_count": 893000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 45, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.11,
+    "iops": 1440, "avg_io_size_kb": 32, "sequential_ratio": 0.30
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 20, "memory_util_pct": 45,
+    "network_bw_mb_s": 48, "network_peak_bw_mb_s": 5000, "network_util_ratio": 0.01
+  },
+  "storage": {"type": "beegfs", "stripe_count": 2, "shared": true},
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "Although BeeGFS can handle 400 MB/s, read bandwidth is only 45 MB/s (11% utilization), while 893K operations at 32 KB and 1440 IOPS reveal that the workload opens and reads hundreds of thousands of small image files. The IOPS rate overwhelms the metadata service, causing high latency per operation. Low sequential ratio (0.30) confirms random per-file access across a large image dataset.",
+    "key_signals": ["avg_io_size_kb: 32", "iops: 1440", "bw_utilization_ratio: 0.11", "sequential_ratio: 0.30"]
+  }
+}

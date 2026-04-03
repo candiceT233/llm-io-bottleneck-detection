@@ -1,0 +1,27 @@
+{
+  "id": "snap_044",
+  "workflow": {"name": "resnet_training", "type": "ml_training", "num_stages": 4},
+  "stage": {"name": "forward_backward_pass", "order": 2, "predecessors": ["data_prefetch"], "operation": "read"},
+  "execution": {
+    "num_nodes": 8, "num_tasks": 32, "parallelism": 32,
+    "total_time_s": 4000, "io_time_s": 480, "compute_time_s": 3520,
+    "io_time_ratio": 0.12,
+    "transfer_size_kb": 512, "aggregate_size_mb": 57600, "op_count": 115200
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 120, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 600, "bw_utilization_ratio": 0.20,
+    "iops": 240, "avg_io_size_kb": 512, "sequential_ratio": 0.82
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 88, "memory_util_pct": 65,
+    "network_bw_mb_s": 25, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.002
+  },
+  "storage": {"type": "gpfs", "stripe_count": 4, "shared": true},
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 88% indicates near-saturation of compute resources throughout training. io_time_ratio of 0.12 shows I/O (data loading) is only 12% of stage time, with training computation taking the remaining 88%. GPFS bandwidth utilization of 0.20 leaves ample storage headroom. Gradient computations and backpropagation dominate execution time.",
+    "key_signals": ["cpu_util_pct: 88", "io_time_ratio: 0.12", "bw_utilization_ratio: 0.20", "compute_time_s: 3520"]
+  }
+}

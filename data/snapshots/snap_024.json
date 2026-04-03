@@ -1,0 +1,27 @@
+{
+  "id": "snap_024",
+  "workflow": {"name": "image_classification_cloud", "type": "ml_training", "num_stages": 4},
+  "stage": {"name": "cloud_dataset_load", "order": 1, "predecessors": [], "operation": "read"},
+  "execution": {
+    "num_nodes": 16, "num_tasks": 64, "parallelism": 64,
+    "total_time_s": 820, "io_time_s": 680, "compute_time_s": 140,
+    "io_time_ratio": 0.83,
+    "transfer_size_kb": 256, "aggregate_size_mb": 581400, "op_count": 2326400
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 855, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 10000, "bw_utilization_ratio": 0.09,
+    "iops": 3420, "avg_io_size_kb": 256, "sequential_ratio": 0.65
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 28, "memory_util_pct": 55,
+    "network_bw_mb_s": 855, "network_peak_bw_mb_s": 900, "network_util_ratio": 0.95
+  },
+  "storage": {"type": "s3", "stripe_count": 0, "shared": true},
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "S3 offers essentially unlimited throughput, but the cluster's 900 MB/s network interface is 95% saturated. The bw_utilization_ratio of 0.09 against S3's theoretical peak confirms the storage system is not the bottleneck. The network uplink is the sole limiting factor, capping throughput at 855 MB/s regardless of S3 capacity.",
+    "key_signals": ["network_util_ratio: 0.95", "bw_utilization_ratio: 0.09", "storage: s3", "network_bw_mb_s ≈ network_peak_bw_mb_s"]
+  }
+}

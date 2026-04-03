@@ -1,0 +1,27 @@
+{
+  "id": "snap_048",
+  "workflow": {"name": "cryo_em_pipeline", "type": "imaging", "num_stages": 6},
+  "stage": {"name": "iterative_refinement", "order": 5, "predecessors": ["initial_reconstruction"], "operation": "mixed"},
+  "execution": {
+    "num_nodes": 16, "num_tasks": 128, "parallelism": 128,
+    "total_time_s": 3600, "io_time_s": 320, "compute_time_s": 3280,
+    "io_time_ratio": 0.09,
+    "transfer_size_kb": 2048, "aggregate_size_mb": 28800, "op_count": 14400
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 60, "write_bw_mb_s": 30,
+    "peak_storage_bw_mb_s": 600, "bw_utilization_ratio": 0.15,
+    "iops": 45, "avg_io_size_kb": 2048, "sequential_ratio": 0.80
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 90, "memory_util_pct": 72,
+    "network_bw_mb_s": 20, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.002
+  },
+  "storage": {"type": "gpfs", "stripe_count": 4, "shared": true},
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 90% indicates intensive computation from iterative Fourier transforms and alignment algorithms. io_time_ratio of 0.09 shows I/O is a minor factor. GPFS bandwidth utilization of 0.15 leaves ample storage capacity. The iterative refinement loop is dominated by floating-point computation, not data movement.",
+    "key_signals": ["cpu_util_pct: 90", "io_time_ratio: 0.09", "bw_utilization_ratio: 0.15", "compute_time_s: 3280"]
+  }
+}

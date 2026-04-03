@@ -1,0 +1,31 @@
+{
+  "id": "snap_033",
+  "workflow": {"name": "database_pipeline", "type": "data_analytics", "num_stages": 4},
+  "stage": {"name": "sequential_dump", "order": 3, "predecessors": ["query_stage"], "operation": "write"},
+  "execution": {
+    "num_nodes": 16, "num_tasks": 128, "parallelism": 128,
+    "total_time_s": 1420, "io_time_s": 1200, "compute_time_s": 220,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 4096, "aggregate_size_mb": 72000, "op_count": 18000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 60,
+    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.15,
+    "iops": 15, "avg_io_size_kb": 4096, "sequential_ratio": 0.98
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 15, "memory_util_pct": 50,
+    "network_bw_mb_s": 63, "network_peak_bw_mb_s": 5000, "network_util_ratio": 0.01
+  },
+  "storage": {"type": "beegfs", "stripe_count": 2, "shared": true},
+  "additional_context": {
+    "io_parallelism": 1,
+    "io_workers": 1
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "Database dump serializes 128 parallel query workers through a single dump writer. BeeGFS can sustain 400 MB/s, but the single writer achieves only 60 MB/s (15% utilization). With large 4 MB sequential writes and a single active writer, the storage system is significantly underutilized. cpu_util_pct of 15% (primarily the active writer overhead) confirms most tasks are idle.",
+    "key_signals": ["io_parallelism: 1", "bw_utilization_ratio: 0.15", "num_tasks: 128 vs io_workers: 1", "cpu_util_pct: 15"]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "snap_015",
+  "workflow": {"name": "genome_assembly", "type": "genomics", "num_stages": 6},
+  "stage": {"name": "merge_results", "order": 5, "predecessors": ["contig_assembly"], "operation": "write"},
+  "execution": {
+    "num_nodes": 20, "num_tasks": 200, "parallelism": 200,
+    "total_time_s": 800, "io_time_s": 680, "compute_time_s": 120,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 512, "aggregate_size_mb": 57800, "op_count": 115600
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 85,
+    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.21,
+    "iops": 170, "avg_io_size_kb": 512, "sequential_ratio": 0.92
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 18, "memory_util_pct": 45,
+    "network_bw_mb_s": 88, "network_peak_bw_mb_s": 5000, "network_util_ratio": 0.02
+  },
+  "storage": {"type": "beegfs", "stripe_count": 4, "shared": true},
+  "additional_context": {
+    "shared_output_files": 1,
+    "writers_per_shared_file": 200
+  },
+  "annotation": {
+    "bottleneck": "lock_contention",
+    "confidence": "high",
+    "explanation": "200 tasks concurrently write to a single shared output file, but only 21% of BeeGFS bandwidth (85/400 MB/s) is achieved, far below what 200 parallel writers could theoretically deliver. The storage system must serialize writes through file locking, reducing effective throughput. High io_time_ratio (0.85) with low bandwidth utilization confirms that lock wait time, not storage capacity, is the limiting factor.",
+    "key_signals": ["shared_output_files: 1", "writers_per_shared_file: 200", "bw_utilization_ratio: 0.21", "io_time_ratio: 0.85"]
+  }
+}

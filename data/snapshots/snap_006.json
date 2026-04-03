@@ -1,0 +1,27 @@
+{
+  "id": "snap_006",
+  "workflow": {"name": "seismic_imaging", "type": "hpc_simulation", "num_stages": 5},
+  "stage": {"name": "migration_write", "order": 4, "predecessors": ["reverse_time_migration"], "operation": "write"},
+  "execution": {
+    "num_nodes": 64, "num_tasks": 512, "parallelism": 512,
+    "total_time_s": 7500, "io_time_s": 6200, "compute_time_s": 1300,
+    "io_time_ratio": 0.83,
+    "transfer_size_kb": 8192, "aggregate_size_mb": 5890000, "op_count": 735000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 950,
+    "peak_storage_bw_mb_s": 1000, "bw_utilization_ratio": 0.95,
+    "iops": 119, "avg_io_size_kb": 8192, "sequential_ratio": 0.99
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 10, "memory_util_pct": 38,
+    "network_bw_mb_s": 960, "network_peak_bw_mb_s": 25000, "network_util_ratio": 0.04
+  },
+  "storage": {"type": "lustre", "stripe_count": 32, "shared": true},
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 950 MB/s saturates 95% of the high-bandwidth Lustre system (1 GB/s peak), even with 32 stripes. CPU utilization is only 10%, with all 512 MPI ranks blocked on I/O. The 8 MB transfer size and sequential ratio of 0.99 are consistent with a pure bulk-write bottleneck from large seismic migration output.",
+    "key_signals": ["bw_utilization_ratio: 0.95", "cpu_util_pct: 10", "io_time_ratio: 0.83", "avg_io_size_kb: 8192"]
+  }
+}

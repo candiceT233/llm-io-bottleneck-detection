@@ -1,0 +1,31 @@
+{
+  "id": "snap_034",
+  "workflow": {"name": "video_encoding", "type": "data_analytics", "num_stages": 3},
+  "stage": {"name": "frame_writer", "order": 2, "predecessors": ["frame_encode"], "operation": "write"},
+  "execution": {
+    "num_nodes": 20, "num_tasks": 200, "parallelism": 200,
+    "total_time_s": 1950, "io_time_s": 1680, "compute_time_s": 270,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 256, "aggregate_size_mb": 70560, "op_count": 282000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 42,
+    "peak_storage_bw_mb_s": 300, "bw_utilization_ratio": 0.14,
+    "iops": 168, "avg_io_size_kb": 256, "sequential_ratio": 0.90
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 7, "memory_util_pct": 28,
+    "network_bw_mb_s": 44, "network_peak_bw_mb_s": 8000, "network_util_ratio": 0.005
+  },
+  "storage": {"type": "pvfs", "stripe_count": 2, "shared": true},
+  "additional_context": {
+    "io_parallelism": 1,
+    "io_workers": 1
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "200 parallel encoders produce frames but a single I/O worker writes them sequentially to PVFS. Only 14% of PVFS bandwidth (42/300 MB/s) is used. With cpu_util_pct of 7%, nearly all workers are idle waiting for the single writer to flush the frame queue. The io_time_ratio of 0.86 shows that most stage time is consumed by this serialized write queue.",
+    "key_signals": ["io_parallelism: 1", "bw_utilization_ratio: 0.14", "num_tasks: 200 vs io_workers: 1", "cpu_util_pct: 7"]
+  }
+}

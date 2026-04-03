@@ -1,0 +1,33 @@
+{
+  "id": "snap_037",
+  "workflow": {"name": "deep_learning_training", "type": "ml_training", "num_stages": 4},
+  "stage": {"name": "model_checkpoint", "order": 2, "predecessors": ["data_load"], "operation": "write"},
+  "execution": {
+    "num_nodes": 8, "num_tasks": 32, "parallelism": 32,
+    "total_time_s": 6200, "io_time_s": 3600, "compute_time_s": 2600,
+    "io_time_ratio": 0.58,
+    "transfer_size_kb": 2048, "aggregate_size_mb": 223200, "op_count": 111600
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 62,
+    "peak_storage_bw_mb_s": 500, "bw_utilization_ratio": 0.12,
+    "iops": 31, "avg_io_size_kb": 2048, "sequential_ratio": 0.98
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 8, "memory_util_pct": 42,
+    "network_bw_mb_s": 65, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.005
+  },
+  "storage": {"type": "gpfs", "stripe_count": 2, "shared": false},
+  "additional_context": {
+    "checkpoint_interval_s": 600,
+    "checkpoint_size_mb": 15000,
+    "num_checkpoints": 15,
+    "total_checkpoint_io_mb": 225000
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Training checkpoints every 600 seconds writing a 15 GB model snapshot. At 62 MB/s write rate, each checkpoint takes ~242s (40% of the interval), causing 15 checkpoint events to consume 3600s of total stage time (io_time_ratio 0.58). GPFS capacity utilization is only 12%, confirming the bottleneck is checkpoint frequency and size, not storage bandwidth.",
+    "key_signals": ["checkpoint_interval_s: 600", "checkpoint_size_mb: 15000", "num_checkpoints: 15", "io_time_ratio: 0.58"]
+  }
+}

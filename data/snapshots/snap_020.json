@@ -1,0 +1,31 @@
+{
+  "id": "snap_020",
+  "workflow": {"name": "financial_simulation", "type": "hpc_simulation", "num_stages": 4},
+  "stage": {"name": "result_aggregation", "order": 3, "predecessors": ["monte_carlo_run"], "operation": "write"},
+  "execution": {
+    "num_nodes": 40, "num_tasks": 400, "parallelism": 400,
+    "total_time_s": 980, "io_time_s": 840, "compute_time_s": 140,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 128, "aggregate_size_mb": 35280, "op_count": 282000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 42,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.21,
+    "iops": 336, "avg_io_size_kb": 128, "sequential_ratio": 0.85
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 12, "memory_util_pct": 35,
+    "network_bw_mb_s": 45, "network_peak_bw_mb_s": 1000, "network_util_ratio": 0.04
+  },
+  "storage": {"type": "nfs", "stripe_count": 1, "shared": true},
+  "additional_context": {
+    "shared_output_files": 2,
+    "writers_per_shared_file": 200
+  },
+  "annotation": {
+    "bottleneck": "lock_contention",
+    "confidence": "high",
+    "explanation": "400 simulation workers append results to 2 shared output files (200 writers each), causing severe NFS lock contention. Bandwidth of 42 MB/s is only 21% of NFS capacity. Lock serialization forces writers to queue, explaining the high io_time_ratio (0.86) despite available storage bandwidth. NFS locking is especially costly for this many concurrent appenders.",
+    "key_signals": ["shared_output_files: 2", "writers_per_shared_file: 200", "bw_utilization_ratio: 0.21", "io_time_ratio: 0.86"]
+  }
+}

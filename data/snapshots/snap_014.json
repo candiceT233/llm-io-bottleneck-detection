@@ -1,0 +1,27 @@
+{
+  "id": "snap_014",
+  "workflow": {"name": "log_processing_pipeline", "type": "data_analytics", "num_stages": 4},
+  "stage": {"name": "record_write", "order": 3, "predecessors": ["parse_stage"], "operation": "write"},
+  "execution": {
+    "num_nodes": 20, "num_tasks": 200, "parallelism": 200,
+    "total_time_s": 560, "io_time_s": 480, "compute_time_s": 80,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 1, "aggregate_size_mb": 288, "op_count": 295000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 0.6,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.003,
+    "iops": 615, "avg_io_size_kb": 1, "sequential_ratio": 0.10
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 5, "memory_util_pct": 20,
+    "network_bw_mb_s": 1, "network_peak_bw_mb_s": 1000, "network_util_ratio": 0.001
+  },
+  "storage": {"type": "nfs", "stripe_count": 1, "shared": true},
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 0.6 MB/s is 0.3% of NFS capacity, while 295K sub-1KB operations drive 615 IOPS. Each log record requires a separate write syscall, creating massive metadata pressure on the NFS server. CPU at 5% and memory at 20% confirm the application is almost entirely blocked on metadata operations. Near-zero sequential ratio (0.10) reflects fully random write patterns across many individual log files.",
+    "key_signals": ["avg_io_size_kb: 1", "iops: 615", "bw_utilization_ratio: 0.003", "sequential_ratio: 0.10"]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "snap_002",
+  "workflow": {"name": "wrf_simulation", "type": "climate", "num_stages": 4},
+  "stage": {"name": "output_dump", "order": 3, "predecessors": ["integration_step"], "operation": "write"},
+  "execution": {
+    "num_nodes": 64, "num_tasks": 64, "parallelism": 64,
+    "total_time_s": 3550, "io_time_s": 2900, "compute_time_s": 650,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 4096, "aggregate_size_mb": 1380400, "op_count": 345100
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 476,
+    "peak_storage_bw_mb_s": 500, "bw_utilization_ratio": 0.95,
+    "iops": 119, "avg_io_size_kb": 4096, "sequential_ratio": 0.98
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 18, "memory_util_pct": 55,
+    "network_bw_mb_s": 480, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.04
+  },
+  "storage": {"type": "lustre", "stripe_count": 16, "shared": true},
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 476 MB/s reaches 95% of the Lustre system peak (500 MB/s). CPU utilization at 18% confirms the cluster is stalled on I/O, not compute. The large transfer size (4 MB) and near-unit sequential ratio (0.98) indicate a bulk sequential write workload that has exhausted available storage bandwidth.",
+    "key_signals": ["bw_utilization_ratio: 0.95", "cpu_util_pct: 18", "io_time_ratio: 0.82", "avg_io_size_kb: 4096"]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "snap_004",
+  "workflow": {"name": "n_body_simulation", "type": "hpc_simulation", "num_stages": 3},
+  "stage": {"name": "particle_dump", "order": 2, "predecessors": ["time_integration"], "operation": "write"},
+  "execution": {
+    "num_nodes": 32, "num_tasks": 256, "parallelism": 256,
+    "total_time_s": 2380, "io_time_s": 2000, "compute_time_s": 380,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 2048, "aggregate_size_mb": 384000, "op_count": 192000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 192,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.96,
+    "iops": 96, "avg_io_size_kb": 2048, "sequential_ratio": 0.94
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 12, "memory_util_pct": 45,
+    "network_bw_mb_s": 195, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.02
+  },
+  "storage": {"type": "lustre", "stripe_count": 4, "shared": true},
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 192 MB/s represents 96% of the Lustre peak capacity (200 MB/s), saturating the storage subsystem. With CPU utilization at only 12%, all 256 MPI ranks are stalled waiting for I/O. The 2 MB sequential writes confirm a bandwidth-dominated bulk output pattern.",
+    "key_signals": ["bw_utilization_ratio: 0.96", "cpu_util_pct: 12", "io_time_ratio: 0.84", "avg_io_size_kb: 2048"]
+  }
+}

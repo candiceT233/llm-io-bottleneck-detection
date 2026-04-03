@@ -1,0 +1,33 @@
+{
+  "id": "snap_036",
+  "workflow": {"name": "lammps_simulation", "type": "molecular_dynamics", "num_stages": 3},
+  "stage": {"name": "md_run", "order": 2, "predecessors": ["initialization"], "operation": "write"},
+  "execution": {
+    "num_nodes": 16, "num_tasks": 64, "parallelism": 64,
+    "total_time_s": 3600, "io_time_s": 1960, "compute_time_s": 1640,
+    "io_time_ratio": 0.54,
+    "transfer_size_kb": 4096, "aggregate_size_mb": 94080, "op_count": 23520
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 48,
+    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.12,
+    "iops": 12, "avg_io_size_kb": 4096, "sequential_ratio": 0.99
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 10, "memory_util_pct": 48,
+    "network_bw_mb_s": 50, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.004
+  },
+  "storage": {"type": "lustre", "stripe_count": 4, "shared": true},
+  "additional_context": {
+    "checkpoint_interval_s": 300,
+    "checkpoint_size_mb": 8000,
+    "num_checkpoints": 12,
+    "total_checkpoint_io_mb": 96000
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "The MD simulation checkpoints every 300 seconds, writing an 8 GB snapshot to Lustre at 48 MB/s (taking ~167s per checkpoint). With 12 checkpoints, total checkpoint I/O consumes 1960s of the 3600s stage (io_time_ratio 0.54). Lustre bandwidth utilization is moderate (0.12) rather than saturated, confirming the overhead is due to frequent large checkpoint volume, not storage saturation.",
+    "key_signals": ["checkpoint_interval_s: 300", "checkpoint_size_mb: 8000", "num_checkpoints: 12", "io_time_ratio: 0.54"]
+  }
+}

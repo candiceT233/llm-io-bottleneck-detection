@@ -18,3 +18,8 @@ The weekly progress slides are maintained in Google Slides for collaborative edi
 
 ### Week 6
 🔗 [Weekly Update Slides](https://docs.google.com/presentation/d/1OqnJmNqQHiuaODTfQj3l5xPpHpP4HIn_65a8ju9pDb8)
+
+### Week 7
+🔗 [Weekly Update Slides](https://docs.google.com/presentation/d/1Qs4V6TV4F7NSFI2MW2PQix6r_JlNQee-Url8OoCN-WI/edit?usp=sharing)
+
+

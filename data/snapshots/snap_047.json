@@ -1,0 +1,27 @@
+{
+  "id": "snap_047",
+  "workflow": {"name": "rendering_pipeline", "type": "imaging", "num_stages": 4},
+  "stage": {"name": "raytracing", "order": 2, "predecessors": ["scene_load"], "operation": "read"},
+  "execution": {
+    "num_nodes": 8, "num_tasks": 64, "parallelism": 64,
+    "total_time_s": 2000, "io_time_s": 80, "compute_time_s": 1920,
+    "io_time_ratio": 0.04,
+    "transfer_size_kb": 1024, "aggregate_size_mb": 2000, "op_count": 2000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 25, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.13,
+    "iops": 25, "avg_io_size_kb": 1024, "sequential_ratio": 0.90
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 96, "memory_util_pct": 70,
+    "network_bw_mb_s": 5, "network_peak_bw_mb_s": 1000, "network_util_ratio": 0.005
+  },
+  "storage": {"type": "nfs", "stripe_count": 1, "shared": false},
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 96% is at near-maximum, reflecting the massively compute-intensive nature of ray tracing. io_time_ratio of 0.04 (only 4%) shows I/O (scene loading) is negligible compared to rendering computation. NFS bandwidth utilization is only 0.13, confirming storage is not a factor. Ray-triangle intersection calculations dominate the stage.",
+    "key_signals": ["cpu_util_pct: 96", "io_time_ratio: 0.04", "bw_utilization_ratio: 0.13", "compute_time_s: 1920"]
+  }
+}

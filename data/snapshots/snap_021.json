@@ -1,0 +1,31 @@
+{
+  "id": "snap_021",
+  "workflow": {"name": "log_aggregation", "type": "data_analytics", "num_stages": 3},
+  "stage": {"name": "centralized_write", "order": 2, "predecessors": ["log_parse"], "operation": "write"},
+  "execution": {
+    "num_nodes": 50, "num_tasks": 500, "parallelism": 500,
+    "total_time_s": 740, "io_time_s": 620, "compute_time_s": 120,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 256, "aggregate_size_mb": 54560, "op_count": 218000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 88,
+    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.22,
+    "iops": 352, "avg_io_size_kb": 256, "sequential_ratio": 0.89
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 10, "memory_util_pct": 30,
+    "network_bw_mb_s": 92, "network_peak_bw_mb_s": 5000, "network_util_ratio": 0.02
+  },
+  "storage": {"type": "beegfs", "stripe_count": 2, "shared": true},
+  "additional_context": {
+    "shared_output_files": 3,
+    "writers_per_shared_file": 167
+  },
+  "annotation": {
+    "bottleneck": "lock_contention",
+    "confidence": "high",
+    "explanation": "500 log-processing workers write to 3 centralized log files (~167 writers per file), creating significant lock contention. BeeGFS bandwidth of 88 MB/s is only 22% of its 400 MB/s capability, indicating that lock serialization is the performance limiter. The io_time_ratio of 0.84 with low bandwidth utilization is the signature of a write-lock-dominated stage.",
+    "key_signals": ["shared_output_files: 3", "writers_per_shared_file: 167", "bw_utilization_ratio: 0.22", "io_time_ratio: 0.84"]
+  }
+}

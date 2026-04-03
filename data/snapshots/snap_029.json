@@ -1,0 +1,31 @@
+{
+  "id": "snap_029",
+  "workflow": {"name": "legacy_hpc_pipeline", "type": "hpc_simulation", "num_stages": 4},
+  "stage": {"name": "sequential_write", "order": 3, "predecessors": ["compute_stage"], "operation": "write"},
+  "execution": {
+    "num_nodes": 10, "num_tasks": 100, "parallelism": 100,
+    "total_time_s": 1800, "io_time_s": 1560, "compute_time_s": 240,
+    "io_time_ratio": 0.87,
+    "transfer_size_kb": 512, "aggregate_size_mb": 74880, "op_count": 150000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 48,
+    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.12,
+    "iops": 96, "avg_io_size_kb": 512, "sequential_ratio": 0.95
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 8, "memory_util_pct": 35,
+    "network_bw_mb_s": 50, "network_peak_bw_mb_s": 5000, "network_util_ratio": 0.01
+  },
+  "storage": {"type": "beegfs", "stripe_count": 4, "shared": true},
+  "additional_context": {
+    "io_parallelism": 1,
+    "io_workers": 1
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "Despite 100 parallel compute tasks and BeeGFS capable of 400 MB/s, only 1 I/O worker serializes all output writes, achieving just 48 MB/s (12% of peak). The legacy pipeline design uses a single I/O coordinator, so all tasks must queue their write requests sequentially. CPU utilization of 8% confirms 99 workers are idle waiting for the single I/O worker to finish.",
+    "key_signals": ["io_parallelism: 1", "bw_utilization_ratio: 0.12", "cpu_util_pct: 8", "num_tasks: 100 vs io_workers: 1"]
+  }
+}

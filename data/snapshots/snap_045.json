@@ -1,0 +1,27 @@
+{
+  "id": "snap_045",
+  "workflow": {"name": "cesm_simulation", "type": "climate", "num_stages": 5},
+  "stage": {"name": "integration_step", "order": 2, "predecessors": ["initialization"], "operation": "mixed"},
+  "execution": {
+    "num_nodes": 32, "num_tasks": 128, "parallelism": 128,
+    "total_time_s": 3600, "io_time_s": 360, "compute_time_s": 3240,
+    "io_time_ratio": 0.10,
+    "transfer_size_kb": 2048, "aggregate_size_mb": 32400, "op_count": 16200
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 50, "write_bw_mb_s": 40,
+    "peak_storage_bw_mb_s": 700, "bw_utilization_ratio": 0.13,
+    "iops": 45, "avg_io_size_kb": 2048, "sequential_ratio": 0.75
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 85, "memory_util_pct": 60,
+    "network_bw_mb_s": 95, "network_peak_bw_mb_s": 25000, "network_util_ratio": 0.004
+  },
+  "storage": {"type": "lustre", "stripe_count": 8, "shared": true},
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 85% across 128 MPI ranks indicates compute-intensive time integration of climate equations is the bottleneck. io_time_ratio of 0.10 shows I/O is only 10% of stage time. Lustre bandwidth utilization of 0.13 is well below capacity, confirming scientific computation rather than data movement limits performance.",
+    "key_signals": ["cpu_util_pct: 85", "io_time_ratio: 0.10", "bw_utilization_ratio: 0.13", "compute_time_s: 3240"]
+  }
+}

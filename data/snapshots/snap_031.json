@@ -1,0 +1,31 @@
+{
+  "id": "snap_031",
+  "workflow": {"name": "ml_inference_pipeline", "type": "ml_training", "num_stages": 3},
+  "stage": {"name": "model_save", "order": 3, "predecessors": ["evaluation"], "operation": "write"},
+  "execution": {
+    "num_nodes": 8, "num_tasks": 32, "parallelism": 32,
+    "total_time_s": 760, "io_time_s": 640, "compute_time_s": 120,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 2048, "aggregate_size_mb": 46080, "op_count": 23040
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 72,
+    "peak_storage_bw_mb_s": 600, "bw_utilization_ratio": 0.12,
+    "iops": 36, "avg_io_size_kb": 2048, "sequential_ratio": 0.97
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 10, "memory_util_pct": 45,
+    "network_bw_mb_s": 75, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.006
+  },
+  "storage": {"type": "gpfs", "stripe_count": 2, "shared": false},
+  "additional_context": {
+    "io_parallelism": 1,
+    "io_workers": 1
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "32 distributed training workers each produce model shard outputs, but a single I/O worker serializes model saving to GPFS. Achieved bandwidth of 72 MB/s is only 12% of GPFS capacity (600 MB/s). With only 1 writer and 31 workers idle waiting, CPU utilization is only 10%. The single-writer design artificially caps throughput far below storage capability.",
+    "key_signals": ["io_parallelism: 1", "bw_utilization_ratio: 0.12", "num_tasks: 32 vs io_workers: 1", "cpu_util_pct: 10"]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "snap_009",
+  "workflow": {"name": "gatk_pipeline", "type": "genomics", "num_stages": 7},
+  "stage": {"name": "variant_calling", "order": 5, "predecessors": ["base_recalibration"], "operation": "mixed"},
+  "execution": {
+    "num_nodes": 10, "num_tasks": 50, "parallelism": 50,
+    "total_time_s": 450, "io_time_s": 380, "compute_time_s": 70,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 8, "aggregate_size_mb": 1140, "op_count": 146000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 1.8, "write_bw_mb_s": 1.2,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.015,
+    "iops": 384, "avg_io_size_kb": 8, "sequential_ratio": 0.25
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 12, "memory_util_pct": 30,
+    "network_bw_mb_s": 4, "network_peak_bw_mb_s": 1000, "network_util_ratio": 0.004
+  },
+  "storage": {"type": "nfs", "stripe_count": 1, "shared": true},
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "Total bandwidth of 3 MB/s is only 1.5% of NFS capacity (200 MB/s), yet 146K operations at 8 KB average are being issued, driving 384 IOPS. The small transfer size and low sequential ratio (0.25) point to a random small-file access pattern that saturates the NFS metadata server. The stage spends 380 of 450 seconds on I/O despite minimal data throughput.",
+    "key_signals": ["avg_io_size_kb: 8", "iops: 384", "bw_utilization_ratio: 0.015", "sequential_ratio: 0.25"]
+  }
+}

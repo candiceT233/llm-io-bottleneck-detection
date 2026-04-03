@@ -1,0 +1,33 @@
+{
+  "id": "snap_041",
+  "workflow": {"name": "cfd_simulation", "type": "hpc_simulation", "num_stages": 4},
+  "stage": {"name": "restart_files", "order": 2, "predecessors": ["mesh_init"], "operation": "write"},
+  "execution": {
+    "num_nodes": 24, "num_tasks": 96, "parallelism": 96,
+    "total_time_s": 7200, "io_time_s": 2900, "compute_time_s": 4300,
+    "io_time_ratio": 0.40,
+    "transfer_size_kb": 8192, "aggregate_size_mb": 812000, "op_count": 101500
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 280,
+    "peak_storage_bw_mb_s": 600, "bw_utilization_ratio": 0.47,
+    "iops": 35, "avg_io_size_kb": 8192, "sequential_ratio": 0.99
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 14, "memory_util_pct": 52,
+    "network_bw_mb_s": 285, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.02
+  },
+  "storage": {"type": "lustre", "stripe_count": 8, "shared": true},
+  "additional_context": {
+    "checkpoint_interval_s": 900,
+    "checkpoint_size_mb": 100000,
+    "num_checkpoints": 8,
+    "total_checkpoint_io_mb": 800000
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "medium",
+    "explanation": "CFD simulation writes 100 GB restart files every 900 seconds. At 280 MB/s, each restart write takes ~357 seconds (40% of the checkpoint interval). 8 restart events consume 2900 seconds total (io_time_ratio 0.40). Lustre bandwidth utilization of 0.47 is moderate — the bottleneck is the large restart file size combined with available bandwidth, not peak throughput saturation.",
+    "key_signals": ["checkpoint_interval_s: 900", "checkpoint_size_mb: 100000", "num_checkpoints: 8", "io_time_ratio: 0.40"]
+  }
+}

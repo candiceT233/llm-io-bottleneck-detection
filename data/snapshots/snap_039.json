@@ -1,0 +1,33 @@
+{
+  "id": "snap_039",
+  "workflow": {"name": "n_body_simulation", "type": "hpc_simulation", "num_stages": 3},
+  "stage": {"name": "state_dump", "order": 2, "predecessors": ["initialization"], "operation": "write"},
+  "execution": {
+    "num_nodes": 32, "num_tasks": 256, "parallelism": 256,
+    "total_time_s": 3600, "io_time_s": 1600, "compute_time_s": 2000,
+    "io_time_ratio": 0.44,
+    "transfer_size_kb": 2048, "aggregate_size_mb": 240000, "op_count": 120000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 150,
+    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.38,
+    "iops": 75, "avg_io_size_kb": 2048, "sequential_ratio": 0.97
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 15, "memory_util_pct": 50,
+    "network_bw_mb_s": 155, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.01
+  },
+  "storage": {"type": "beegfs", "stripe_count": 4, "shared": true},
+  "additional_context": {
+    "checkpoint_interval_s": 120,
+    "checkpoint_size_mb": 8000,
+    "num_checkpoints": 30,
+    "total_checkpoint_io_mb": 240000
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "medium",
+    "explanation": "The N-body simulation checkpoints every 120 seconds with 8 GB snapshots. At 150 MB/s, each checkpoint write takes ~53 seconds (44% of the interval). Over 30 checkpoint events, 1600 seconds of I/O time accumulates (io_time_ratio 0.44). BeeGFS utilization of 0.38 shows the filesystem has capacity headroom; the high checkpoint frequency is the root cause of I/O dominance.",
+    "key_signals": ["checkpoint_interval_s: 120", "checkpoint_size_mb: 8000", "num_checkpoints: 30", "io_time_ratio: 0.44"]
+  }
+}

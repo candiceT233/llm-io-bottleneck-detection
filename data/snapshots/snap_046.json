@@ -1,0 +1,27 @@
+{
+  "id": "snap_046",
+  "workflow": {"name": "monte_carlo_transport", "type": "hpc_simulation", "num_stages": 3},
+  "stage": {"name": "particle_transport", "order": 2, "predecessors": ["geometry_setup"], "operation": "read"},
+  "execution": {
+    "num_nodes": 32, "num_tasks": 256, "parallelism": 256,
+    "total_time_s": 2000, "io_time_s": 120, "compute_time_s": 1880,
+    "io_time_ratio": 0.06,
+    "transfer_size_kb": 256, "aggregate_size_mb": 3600, "op_count": 14400
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 30, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.08,
+    "iops": 120, "avg_io_size_kb": 256, "sequential_ratio": 0.65
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 94, "memory_util_pct": 55,
+    "network_bw_mb_s": 8, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.001
+  },
+  "storage": {"type": "beegfs", "stripe_count": 2, "shared": true},
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 94% is near maximum, indicating the Monte Carlo transport simulation is entirely compute-limited. io_time_ratio of 0.06 shows I/O is negligible (only 6% of stage time). Geometry and cross-section data are loaded once at startup; subsequent computation involves no significant I/O. BeeGFS bandwidth utilization of 0.08 confirms storage is essentially idle during transport.",
+    "key_signals": ["cpu_util_pct: 94", "io_time_ratio: 0.06", "bw_utilization_ratio: 0.08", "compute_time_s: 1880"]
+  }
+}

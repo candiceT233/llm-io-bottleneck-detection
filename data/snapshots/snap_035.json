@@ -1,0 +1,31 @@
+{
+  "id": "snap_035",
+  "workflow": {"name": "hpc_restart_workflow", "type": "hpc_simulation", "num_stages": 3},
+  "stage": {"name": "checkpoint_restore", "order": 1, "predecessors": [], "operation": "read"},
+  "execution": {
+    "num_nodes": 8, "num_tasks": 64, "parallelism": 64,
+    "total_time_s": 1020, "io_time_s": 860, "compute_time_s": 160,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 4096, "aggregate_size_mb": 49880, "op_count": 12500
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 58, "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500, "bw_utilization_ratio": 0.12,
+    "iops": 15, "avg_io_size_kb": 4096, "sequential_ratio": 0.97
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 9, "memory_util_pct": 38,
+    "network_bw_mb_s": 61, "network_peak_bw_mb_s": 12000, "network_util_ratio": 0.005
+  },
+  "storage": {"type": "lustre", "stripe_count": 2, "shared": true},
+  "additional_context": {
+    "io_parallelism": 1,
+    "io_workers": 1
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "64 MPI ranks wait for a single rank to read and broadcast the checkpoint file. Lustre supports 500 MB/s but only 58 MB/s (12%) is achieved because only 1 reader fetches the checkpoint. The remaining 63 ranks are idle during the restore phase, confirmed by cpu_util_pct of 9%. Parallelizing checkpoint reads across all ranks would reduce io_time by nearly 64x.",
+    "key_signals": ["io_parallelism: 1", "bw_utilization_ratio: 0.12", "num_tasks: 64 vs io_workers: 1", "cpu_util_pct: 9"]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "snap_030",
+  "workflow": {"name": "genomics_merge", "type": "genomics", "num_stages": 5},
+  "stage": {"name": "merge_bam", "order": 4, "predecessors": ["sort_bam"], "operation": "write"},
+  "execution": {
+    "num_nodes": 5, "num_tasks": 50, "parallelism": 50,
+    "total_time_s": 960, "io_time_s": 820, "compute_time_s": 140,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 1024, "aggregate_size_mb": 28700, "op_count": 28700
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0, "write_bw_mb_s": 35,
+    "peak_storage_bw_mb_s": 200, "bw_utilization_ratio": 0.18,
+    "iops": 35, "avg_io_size_kb": 1024, "sequential_ratio": 0.96
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 12, "memory_util_pct": 40,
+    "network_bw_mb_s": 37, "network_peak_bw_mb_s": 1000, "network_util_ratio": 0.04
+  },
+  "storage": {"type": "nfs", "stripe_count": 1, "shared": false},
+  "additional_context": {
+    "io_parallelism": 1,
+    "io_workers": 1
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "BAM merging uses a single writer to combine output from 50 parallel sort workers. NFS is capable of 200 MB/s but only 35 MB/s (18%) is utilized because only one process performs writes. The 50 sorted-BAM producers must wait serially for the single merge writer, explaining the io_time_ratio of 0.85 and CPU utilization of only 12%.",
+    "key_signals": ["io_parallelism: 1", "bw_utilization_ratio: 0.18", "num_tasks: 50 vs io_workers: 1", "cpu_util_pct: 12"]
+  }
+}
