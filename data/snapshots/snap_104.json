@@ -1,0 +1,62 @@
+{
+  "id": "snap_104",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "dump_state",
+    "order": 5,
+    "predecessors": [
+      "data_ingestion"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 4,
+    "num_tasks": 36,
+    "parallelism": 36,
+    "total_time_s": 768,
+    "io_time_s": 584,
+    "compute_time_s": 184,
+    "io_time_ratio": 0.76,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 8695,
+    "op_count": 4348,
+    "competing_jobs": 7
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 93.1,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.31,
+    "iops": 47,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.51
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 16,
+    "memory_util_pct": 49,
+    "network_bw_mb_s": 85.7,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.017
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 300 MB/s, the workflow only observes 93.1 MB/s (31% apparent utilization) due to 7 competing jobs concurrently saturating the shared PVFS2 filesystem. CPU utilization of 16% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 7",
+      "bw_utilization_ratio: 0.31",
+      "observed_bw_mb_s: 93.1",
+      "peak_storage_bw_mb_s: 300",
+      "cpu_util_pct: 16"
+    ]
+  }
+}

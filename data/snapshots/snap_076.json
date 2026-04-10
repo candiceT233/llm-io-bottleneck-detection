@@ -1,0 +1,61 @@
+{
+  "id": "snap_076",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "load_data",
+    "order": 2,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 35,
+    "num_tasks": 490,
+    "parallelism": 490,
+    "total_time_s": 273,
+    "io_time_s": 229,
+    "compute_time_s": 44,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 245,
+    "op_count": 490
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 279.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.93,
+    "iops": 558,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.76
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 7,
+    "memory_util_pct": 38,
+    "network_bw_mb_s": 228.8,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.023
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 279.0 MB/s reaches 93% of the LUSTRE storage peak (300 MB/s), saturating the filesystem on the read path. CPU utilization of only 7% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.84 confirms that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.93",
+      "read_bw_mb_s: 279.0",
+      "peak_storage_bw_mb_s: 300",
+      "cpu_util_pct: 7",
+      "io_time_ratio: 0.84"
+    ]
+  }
+}

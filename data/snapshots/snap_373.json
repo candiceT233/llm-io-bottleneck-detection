@@ -1,0 +1,63 @@
+{
+  "id": "snap_373",
+  "workflow": {
+    "name": "blast",
+    "type": "genomics",
+    "num_stages": 3
+  },
+  "stage": {
+    "name": "write_checkpoint",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 67,
+    "num_tasks": 2077,
+    "parallelism": 2077,
+    "total_time_s": 1975,
+    "io_time_s": 1797,
+    "compute_time_s": 178,
+    "io_time_ratio": 0.91,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 13096,
+    "op_count": 52384,
+    "num_shared_files": 5
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 38.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.19,
+    "iops": 152,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.63
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 20,
+    "memory_util_pct": 23,
+    "network_bw_mb_s": 36.5,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.004
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "lock_contention",
+    "confidence": "high",
+    "explanation": "2077 tasks compete for write locks on 5 shared file(s) on the shared GPFS filesystem. Lock acquisition serializes access, resulting in only 38.0 MB/s effective bandwidth (19% of the 200 MB/s peak) despite full task parallelism. CPU utilization of 20% confirms tasks are stalled waiting for lock release rather than performing computation.",
+    "key_signals": [
+      "num_shared_files: 5",
+      "num_tasks: 2077",
+      "bw_utilization_ratio: 0.19",
+      "cpu_util_pct: 20",
+      "io_time_ratio: 0.91",
+      "storage.shared: true"
+    ]
+  }
+}

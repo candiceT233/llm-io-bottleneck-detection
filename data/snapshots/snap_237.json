@@ -1,0 +1,62 @@
+{
+  "id": "snap_237",
+  "workflow": {
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
+  },
+  "stage": {
+    "name": "commit_results",
+    "order": 5,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 22,
+    "num_tasks": 198,
+    "parallelism": 198,
+    "total_time_s": 1149,
+    "io_time_s": 965,
+    "compute_time_s": 184,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 39152,
+    "op_count": 19576
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 504.0,
+    "peak_storage_bw_mb_s": 800,
+    "bw_utilization_ratio": 0.63,
+    "iops": 252,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.87
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 11,
+    "memory_util_pct": 40,
+    "network_bw_mb_s": 950.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.95
+  },
+  "storage": {
+    "type": "hdfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 950.0 MB/s reaches 95% of the network peak (1000 MB/s), making the interconnect the primary bottleneck. Data is accessed from HDFS, requiring all transfers to traverse the network. CPU utilization of 11% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "key_signals": [
+      "network_util_ratio: 0.95",
+      "network_bw_mb_s: 950.0",
+      "network_peak_bw_mb_s: 1000",
+      "cpu_util_pct: 11",
+      "io_time_ratio: 0.84",
+      "storage_type: hdfs"
+    ]
+  }
+}

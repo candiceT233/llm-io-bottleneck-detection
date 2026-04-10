@@ -1,0 +1,61 @@
+{
+  "id": "snap_295",
+  "workflow": {
+    "name": "wrf",
+    "type": "climate",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "preprocess",
+    "order": 4,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 105,
+    "num_tasks": 3360,
+    "parallelism": 3360,
+    "total_time_s": 1370,
+    "io_time_s": 1110,
+    "compute_time_s": 260,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 4,
+    "aggregate_size_mb": 206,
+    "op_count": 6394971
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 152.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.38,
+    "iops": 52851,
+    "avg_io_size_kb": 4,
+    "sequential_ratio": 0.14
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 19,
+    "memory_util_pct": 43,
+    "network_bw_mb_s": 120.1,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.012
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "The stage issues 52851 IOPS with an average I/O size of only 4 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count, bandwidth utilization is only 38% (152.0 MB/s of 400 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.81 confirms I/O dominates stage time.",
+    "key_signals": [
+      "iops: 52851",
+      "avg_io_size_kb: 4",
+      "bw_utilization_ratio: 0.38",
+      "io_time_ratio: 0.81",
+      "op_count: 6394971"
+    ]
+  }
+}

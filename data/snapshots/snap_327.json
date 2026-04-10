@@ -1,0 +1,61 @@
+{
+  "id": "snap_327",
+  "workflow": {
+    "name": "1000_genomes",
+    "type": "genomics",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "store_results",
+    "order": 3,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 52,
+    "num_tasks": 520,
+    "parallelism": 1,
+    "total_time_s": 436,
+    "io_time_s": 410,
+    "compute_time_s": 26,
+    "io_time_ratio": 0.94,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 22455,
+    "op_count": 22455
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 120.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.2,
+    "iops": 120,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 1.0
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 17,
+    "memory_util_pct": 36,
+    "network_bw_mb_s": 123.6,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.025
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single writer operates at a time despite 520 tasks available. This limits effective bandwidth to 120.0 MB/s (20% of the 600 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 519 tasks wait idle while serialized I/O completes.",
+    "key_signals": [
+      "parallelism: 1",
+      "num_tasks: 520",
+      "bw_utilization_ratio: 0.2",
+      "io_time_ratio: 0.94",
+      "write_bw_mb_s: 120.0"
+    ]
+  }
+}

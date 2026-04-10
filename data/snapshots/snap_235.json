@@ -1,0 +1,59 @@
+{
+  "id": "snap_235",
+  "workflow": {
+    "name": "spark_etl",
+    "type": "etl",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "scan_catalog",
+    "order": 5,
+    "predecessors": [
+      "preprocess"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 123,
+    "num_tasks": 492,
+    "parallelism": 492,
+    "total_time_s": 854,
+    "io_time_s": 102,
+    "compute_time_s": 752,
+    "io_time_ratio": 0.12,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 2521,
+    "op_count": 5042
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 48.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.08,
+    "iops": 96,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.79
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 97,
+    "memory_util_pct": 56,
+    "network_bw_mb_s": 37.4,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.007
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 97% confirms that computation is the dominant bottleneck. The io_time_ratio of 0.12 shows that I/O accounts for a small fraction of the total stage time. Bandwidth utilization of 8% leaves significant I/O headroom unused, indicating the system is not I/O-limited.",
+    "key_signals": [
+      "cpu_util_pct: 97",
+      "io_time_ratio: 0.12",
+      "bw_utilization_ratio: 0.08"
+    ]
+  }
+}

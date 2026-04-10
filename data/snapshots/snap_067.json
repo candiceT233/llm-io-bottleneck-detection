@@ -1,0 +1,61 @@
+{
+  "id": "snap_067",
+  "workflow": {
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
+  },
+  "stage": {
+    "name": "data_ingestion",
+    "order": 6,
+    "predecessors": [
+      "load_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 44,
+    "num_tasks": 308,
+    "parallelism": 308,
+    "total_time_s": 457,
+    "io_time_s": 366,
+    "compute_time_s": 91,
+    "io_time_ratio": 0.8,
+    "transfer_size_kb": 4096,
+    "aggregate_size_mb": 1232,
+    "op_count": 308
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 94.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 100,
+    "bw_utilization_ratio": 0.94,
+    "iops": 24,
+    "avg_io_size_kb": 4096,
+    "sequential_ratio": 0.96
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 7,
+    "memory_util_pct": 35,
+    "network_bw_mb_s": 81.8,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.008
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 94.0 MB/s reaches 94% of the PVFS2 storage peak (100 MB/s), saturating the filesystem on the read path. CPU utilization of only 7% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.8 confirms that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.94",
+      "read_bw_mb_s: 94.0",
+      "peak_storage_bw_mb_s: 100",
+      "cpu_util_pct: 7",
+      "io_time_ratio: 0.8"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "snap_173",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "scan_catalog",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 27,
+    "num_tasks": 162,
+    "parallelism": 162,
+    "total_time_s": 586,
+    "io_time_s": 510,
+    "compute_time_s": 76,
+    "io_time_ratio": 0.87,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 52311,
+    "op_count": 104622,
+    "data_staged": false,
+    "intended_staging_tier": "burst_buffer",
+    "remote_access_latency_ms": 340
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 176.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.44,
+    "iops": 352,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.64
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 10,
+    "memory_util_pct": 36,
+    "network_bw_mb_s": 183.0,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.018
+  },
+  "storage": {
+    "type": "s3",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (burst_buffer) before execution began. Tasks access S3 directly, which carries a remote latency of 340 ms, yielding only 176.0 MB/s effective bandwidth (44% of the 400 MB/s peak). CPU utilization of 10% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 340",
+      "bw_utilization_ratio: 0.44",
+      "storage_type: s3",
+      "cpu_util_pct: 10",
+      "io_time_ratio: 0.87"
+    ]
+  }
+}

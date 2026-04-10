@@ -1,0 +1,62 @@
+{
+  "id": "snap_097",
+  "workflow": {
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
+  },
+  "stage": {
+    "name": "load_data",
+    "order": 4,
+    "predecessors": [
+      "restore_state"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 16,
+    "num_tasks": 160,
+    "parallelism": 160,
+    "total_time_s": 152,
+    "io_time_s": 128,
+    "compute_time_s": 24,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 17362,
+    "op_count": 8681,
+    "competing_jobs": 3
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 125.4,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.25,
+    "iops": 63,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.57
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 27,
+    "memory_util_pct": 54,
+    "network_bw_mb_s": 114.1,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.023
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 500 MB/s, the workflow only observes 125.4 MB/s (25% apparent utilization) due to 3 competing jobs concurrently saturating the shared WEKAFS filesystem. CPU utilization of 27% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 3",
+      "bw_utilization_ratio: 0.25",
+      "observed_bw_mb_s: 125.4",
+      "peak_storage_bw_mb_s: 500",
+      "cpu_util_pct: 27"
+    ]
+  }
+}

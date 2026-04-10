@@ -1,0 +1,61 @@
+{
+  "id": "snap_292",
+  "workflow": {
+    "name": "namd",
+    "type": "molecular_dynamics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "archive_data",
+    "order": 2,
+    "predecessors": [
+      "data_ingestion"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 29,
+    "num_tasks": 319,
+    "parallelism": 319,
+    "total_time_s": 1308,
+    "io_time_s": 1138,
+    "compute_time_s": 170,
+    "io_time_ratio": 0.87,
+    "transfer_size_kb": 1,
+    "aggregate_size_mb": 68,
+    "op_count": 3548274
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 66.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.11,
+    "iops": 69574,
+    "avg_io_size_kb": 1,
+    "sequential_ratio": 0.17
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 16,
+    "memory_util_pct": 52,
+    "network_bw_mb_s": 56.1,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.011
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 3,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "The stage issues 69574 IOPS with an average I/O size of only 1 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count, bandwidth utilization is only 11% (66.0 MB/s of 600 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.87 confirms I/O dominates stage time.",
+    "key_signals": [
+      "iops: 69574",
+      "avg_io_size_kb: 1",
+      "bw_utilization_ratio: 0.11",
+      "io_time_ratio: 0.87",
+      "op_count: 3548274"
+    ]
+  }
+}

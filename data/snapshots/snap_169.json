@@ -1,0 +1,63 @@
+{
+  "id": "snap_169",
+  "workflow": {
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "commit_results",
+    "order": 6,
+    "predecessors": [
+      "restore_state"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 85,
+    "num_tasks": 425,
+    "parallelism": 425,
+    "total_time_s": 509,
+    "io_time_s": 341,
+    "compute_time_s": 168,
+    "io_time_ratio": 0.67,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 16167,
+    "op_count": 64668,
+    "io_imbalance_ratio": 6.7,
+    "hot_node_count": 2
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 106.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.53,
+    "iops": 424,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.51
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 15,
+    "memory_util_pct": 43,
+    "network_bw_mb_s": 99.6,
+    "network_peak_bw_mb_s": 25000,
+    "network_util_ratio": 0.004
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "data_skew",
+    "confidence": "high",
+    "explanation": "I/O load is highly skewed: 2 of 85 nodes (2.4% of the cluster) handle a disproportionate share of I/O, with an imbalance ratio of 6.7x. These hot nodes saturate their local I/O paths while the rest sit largely idle, pulling aggregate bandwidth (106.0 MB/s) well below the system peak (200 MB/s). The bottleneck is structural: data partitioning assigns unequal volumes across nodes.",
+    "key_signals": [
+      "io_imbalance_ratio: 6.7",
+      "hot_node_count: 2",
+      "hot_node_pct: 2.4%",
+      "bw_utilization_ratio: 0.53",
+      "io_time_ratio: 0.67"
+    ]
+  }
+}

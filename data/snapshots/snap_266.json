@@ -1,0 +1,61 @@
+{
+  "id": "snap_266",
+  "workflow": {
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "output_results",
+    "order": 6,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 11,
+    "num_tasks": 99,
+    "parallelism": 99,
+    "total_time_s": 745,
+    "io_time_s": 633,
+    "compute_time_s": 112,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 58429,
+    "op_count": 29214
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 188.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.94,
+    "iops": 94,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.91
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 11,
+    "memory_util_pct": 43,
+    "network_bw_mb_s": 159.8,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.032
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 188.0 MB/s reaches 94% of the BEEGFS storage peak (200 MB/s), saturating the filesystem. CPU utilization of only 11% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.85 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.94",
+      "write_bw_mb_s: 188.0",
+      "peak_storage_bw_mb_s: 200",
+      "cpu_util_pct: 11",
+      "io_time_ratio: 0.85"
+    ]
+  }
+}

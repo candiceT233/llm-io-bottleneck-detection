@@ -1,0 +1,63 @@
+{
+  "id": "snap_385",
+  "workflow": {
+    "name": "1000_genomes",
+    "type": "genomics",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "write_checkpoint",
+    "order": 3,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 94,
+    "num_tasks": 2068,
+    "parallelism": 2068,
+    "total_time_s": 1594,
+    "io_time_s": 1371,
+    "compute_time_s": 223,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 15499,
+    "op_count": 61996,
+    "num_shared_files": 10
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 30.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.15,
+    "iops": 120,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.8
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 16,
+    "memory_util_pct": 28,
+    "network_bw_mb_s": 27.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.027
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "lock_contention",
+    "confidence": "high",
+    "explanation": "2068 tasks compete for write locks on 10 shared file(s) on the shared BEEGFS filesystem. Lock acquisition serializes access, resulting in only 30.0 MB/s effective bandwidth (15% of the 200 MB/s peak) despite full task parallelism. CPU utilization of 16% confirms tasks are stalled waiting for lock release rather than performing computation.",
+    "key_signals": [
+      "num_shared_files: 10",
+      "num_tasks: 2068",
+      "bw_utilization_ratio: 0.15",
+      "cpu_util_pct: 16",
+      "io_time_ratio: 0.86",
+      "storage.shared: true"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "snap_210",
+  "workflow": {
+    "name": "blast",
+    "type": "genomics",
+    "num_stages": 3
+  },
+  "stage": {
+    "name": "data_ingestion",
+    "order": 3,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 19,
+    "num_tasks": 76,
+    "parallelism": 76,
+    "total_time_s": 1946,
+    "io_time_s": 1576,
+    "compute_time_s": 370,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 14415,
+    "op_count": 57660,
+    "data_staged": false,
+    "intended_staging_tier": "burst_buffer",
+    "remote_access_latency_ms": 487
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 156.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.39,
+    "iops": 624,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.77
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 12,
+    "memory_util_pct": 23,
+    "network_bw_mb_s": 134.2,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.134
+  },
+  "storage": {
+    "type": "ceph",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (burst_buffer) before execution began. Tasks access CEPH directly, which carries a remote latency of 487 ms, yielding only 156.0 MB/s effective bandwidth (39% of the 400 MB/s peak). CPU utilization of 12% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 487",
+      "bw_utilization_ratio: 0.39",
+      "storage_type: ceph",
+      "cpu_util_pct: 12",
+      "io_time_ratio: 0.81"
+    ]
+  }
+}

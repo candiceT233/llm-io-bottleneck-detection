@@ -1,0 +1,61 @@
+{
+  "id": "snap_282",
+  "workflow": {
+    "name": "spark_etl",
+    "type": "etl",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "scan_catalog",
+    "order": 3,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 62,
+    "num_tasks": 372,
+    "parallelism": 372,
+    "total_time_s": 107,
+    "io_time_s": 83,
+    "compute_time_s": 24,
+    "io_time_ratio": 0.78,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 29775,
+    "op_count": 14888
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 190.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.95,
+    "iops": 95,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.77
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 14,
+    "memory_util_pct": 46,
+    "network_bw_mb_s": 180.5,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.18
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 190.0 MB/s reaches 95% of the PVFS2 storage peak (200 MB/s), saturating the filesystem. CPU utilization of only 14% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.78 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.95",
+      "read_bw_mb_s: 190.0",
+      "peak_storage_bw_mb_s: 200",
+      "cpu_util_pct: 14",
+      "io_time_ratio: 0.78"
+    ]
+  }
+}

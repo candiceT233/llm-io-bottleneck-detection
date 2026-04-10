@@ -1,0 +1,61 @@
+{
+  "id": "snap_264",
+  "workflow": {
+    "name": "wrf",
+    "type": "climate",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "fetch_input",
+    "order": 5,
+    "predecessors": [
+      "load_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 41,
+    "num_tasks": 615,
+    "parallelism": 615,
+    "total_time_s": 767,
+    "io_time_s": 637,
+    "compute_time_s": 130,
+    "io_time_ratio": 0.83,
+    "transfer_size_kb": 4096,
+    "aggregate_size_mb": 10747,
+    "op_count": 2687
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 388.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.97,
+    "iops": 97,
+    "avg_io_size_kb": 4096,
+    "sequential_ratio": 0.8
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 8,
+    "memory_util_pct": 40,
+    "network_bw_mb_s": 337.6,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.034
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 388.0 MB/s reaches 97% of the BEEGFS storage peak (400 MB/s), saturating the filesystem. CPU utilization of only 8% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.83 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.97",
+      "read_bw_mb_s: 388.0",
+      "peak_storage_bw_mb_s: 400",
+      "cpu_util_pct: 8",
+      "io_time_ratio: 0.83"
+    ]
+  }
+}

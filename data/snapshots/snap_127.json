@@ -1,0 +1,62 @@
+{
+  "id": "snap_127",
+  "workflow": {
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
+  },
+  "stage": {
+    "name": "preprocess",
+    "order": 3,
+    "predecessors": [
+      "restore_state"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 31,
+    "num_tasks": 93,
+    "parallelism": 93,
+    "total_time_s": 489,
+    "io_time_s": 337,
+    "compute_time_s": 152,
+    "io_time_ratio": 0.69,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 5554,
+    "op_count": 2777,
+    "competing_jobs": 11
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 97.5,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.49,
+    "iops": 49,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.69
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 24,
+    "memory_util_pct": 27,
+    "network_bw_mb_s": 92.6,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.019
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 200 MB/s, the workflow only observes 97.5 MB/s (49% apparent utilization) due to 11 competing jobs concurrently saturating the shared LUSTRE filesystem. CPU utilization of 24% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 11",
+      "bw_utilization_ratio: 0.49",
+      "observed_bw_mb_s: 97.5",
+      "peak_storage_bw_mb_s: 200",
+      "cpu_util_pct: 24"
+    ]
+  }
+}

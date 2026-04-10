@@ -1,0 +1,62 @@
+{
+  "id": "snap_114",
+  "workflow": {
+    "name": "blast",
+    "type": "genomics",
+    "num_stages": 3
+  },
+  "stage": {
+    "name": "scan_catalog",
+    "order": 3,
+    "predecessors": [
+      "data_ingestion"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 23,
+    "num_tasks": 184,
+    "parallelism": 184,
+    "total_time_s": 997,
+    "io_time_s": 847,
+    "compute_time_s": 150,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 15296,
+    "op_count": 7648,
+    "competing_jobs": 4
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 103.2,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.52,
+    "iops": 52,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.83
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 20,
+    "memory_util_pct": 54,
+    "network_bw_mb_s": 99.1,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.02
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 200 MB/s, the workflow only observes 103.2 MB/s (52% apparent utilization) due to 4 competing jobs concurrently saturating the shared BEEGFS filesystem. CPU utilization of 20% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 4",
+      "bw_utilization_ratio: 0.52",
+      "observed_bw_mb_s: 103.2",
+      "peak_storage_bw_mb_s: 200",
+      "cpu_util_pct: 20"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "snap_311",
+  "workflow": {
+    "name": "wrf",
+    "type": "climate",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "store_results",
+    "order": 6,
+    "predecessors": [
+      "restore_state"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 56,
+    "num_tasks": 840,
+    "parallelism": 1,
+    "total_time_s": 575,
+    "io_time_s": 483,
+    "compute_time_s": 92,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 13378,
+    "op_count": 6689
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 92.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.23,
+    "iops": 46,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.91
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 13,
+    "memory_util_pct": 16,
+    "network_bw_mb_s": 95.7,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.019
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single writer operates at a time despite 840 tasks available. This limits effective bandwidth to 92.0 MB/s (23% of the 400 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 839 tasks wait idle while serialized I/O completes.",
+    "key_signals": [
+      "parallelism: 1",
+      "num_tasks: 840",
+      "bw_utilization_ratio: 0.23",
+      "io_time_ratio: 0.84",
+      "write_bw_mb_s: 92.0"
+    ]
+  }
+}

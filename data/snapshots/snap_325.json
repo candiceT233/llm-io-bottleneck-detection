@@ -1,0 +1,61 @@
+{
+  "id": "snap_325",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "dump_state",
+    "order": 6,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 120,
+    "num_tasks": 1320,
+    "parallelism": 1,
+    "total_time_s": 1814,
+    "io_time_s": 1433,
+    "compute_time_s": 381,
+    "io_time_ratio": 0.79,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 28943,
+    "op_count": 14472
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 44.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.22,
+    "iops": 22,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.89
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 6,
+    "memory_util_pct": 22,
+    "network_bw_mb_s": 48.0,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.005
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single writer operates at a time despite 1320 tasks available. This limits effective bandwidth to 44.0 MB/s (22% of the 200 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 1319 tasks wait idle while serialized I/O completes.",
+    "key_signals": [
+      "parallelism: 1",
+      "num_tasks: 1320",
+      "bw_utilization_ratio: 0.22",
+      "io_time_ratio: 0.79",
+      "write_bw_mb_s: 44.0"
+    ]
+  }
+}

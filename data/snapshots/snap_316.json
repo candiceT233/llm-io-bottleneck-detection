@@ -1,0 +1,61 @@
+{
+  "id": "snap_316",
+  "workflow": {
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "write_checkpoint",
+    "order": 2,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 109,
+    "num_tasks": 654,
+    "parallelism": 1,
+    "total_time_s": 773,
+    "io_time_s": 618,
+    "compute_time_s": 155,
+    "io_time_ratio": 0.8,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 4182,
+    "op_count": 2091
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 40.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.1,
+    "iops": 20,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.95
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 17,
+    "memory_util_pct": 21,
+    "network_bw_mb_s": 40.4,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.04
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single writer operates at a time despite 654 tasks available. This limits effective bandwidth to 40.0 MB/s (10% of the 400 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 653 tasks wait idle while serialized I/O completes.",
+    "key_signals": [
+      "parallelism: 1",
+      "num_tasks: 654",
+      "bw_utilization_ratio: 0.1",
+      "io_time_ratio: 0.8",
+      "write_bw_mb_s: 40.0"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "snap_279",
+  "workflow": {
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
+  },
+  "stage": {
+    "name": "preprocess",
+    "order": 5,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 46,
+    "num_tasks": 874,
+    "parallelism": 874,
+    "total_time_s": 286,
+    "io_time_s": 263,
+    "compute_time_s": 23,
+    "io_time_ratio": 0.92,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 81368,
+    "op_count": 81368
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 270.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.9,
+    "iops": 270,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.84
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 14,
+    "memory_util_pct": 51,
+    "network_bw_mb_s": 243.0,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.024
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 32,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 270.0 MB/s reaches 90% of the GPFS storage peak (300 MB/s), saturating the filesystem. CPU utilization of only 14% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.92 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.9",
+      "read_bw_mb_s: 270.0",
+      "peak_storage_bw_mb_s: 300",
+      "cpu_util_pct: 14",
+      "io_time_ratio: 0.92"
+    ]
+  }
+}

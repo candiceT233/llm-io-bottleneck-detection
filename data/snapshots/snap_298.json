@@ -1,0 +1,61 @@
+{
+  "id": "snap_298",
+  "workflow": {
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
+  },
+  "stage": {
+    "name": "save_output",
+    "order": 3,
+    "predecessors": [
+      "restore_state"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 93,
+    "num_tasks": 1302,
+    "parallelism": 1302,
+    "total_time_s": 927,
+    "io_time_s": 816,
+    "compute_time_s": 111,
+    "io_time_ratio": 0.88,
+    "transfer_size_kb": 16,
+    "aggregate_size_mb": 1181,
+    "op_count": 22672200
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 76.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.38,
+    "iops": 75574,
+    "avg_io_size_kb": 16,
+    "sequential_ratio": 0.36
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 25,
+    "memory_util_pct": 46,
+    "network_bw_mb_s": 67.6,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.007
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "The stage issues 75574 IOPS with an average I/O size of only 16 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count, bandwidth utilization is only 38% (76.0 MB/s of 200 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.88 confirms I/O dominates stage time.",
+    "key_signals": [
+      "iops: 75574",
+      "avg_io_size_kb: 16",
+      "bw_utilization_ratio: 0.38",
+      "io_time_ratio: 0.88",
+      "op_count: 22672200"
+    ]
+  }
+}

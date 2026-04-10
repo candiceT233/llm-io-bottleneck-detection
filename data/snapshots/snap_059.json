@@ -1,0 +1,61 @@
+{
+  "id": "snap_059",
+  "workflow": {
+    "name": "cybershake",
+    "type": "seismology",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "preprocess",
+    "order": 5,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 31,
+    "num_tasks": 403,
+    "parallelism": 403,
+    "total_time_s": 187,
+    "io_time_s": 170,
+    "compute_time_s": 17,
+    "io_time_ratio": 0.91,
+    "transfer_size_kb": 4096,
+    "aggregate_size_mb": 1612,
+    "op_count": 403
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 133.5,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 150,
+    "bw_utilization_ratio": 0.89,
+    "iops": 33,
+    "avg_io_size_kb": 4096,
+    "sequential_ratio": 0.96
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 20,
+    "memory_util_pct": 24,
+    "network_bw_mb_s": 110.8,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.022
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 133.5 MB/s reaches 89% of the PVFS2 storage peak (150 MB/s), saturating the filesystem on the read path. CPU utilization of only 20% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.91 confirms that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.89",
+      "read_bw_mb_s: 133.5",
+      "peak_storage_bw_mb_s: 150",
+      "cpu_util_pct: 20",
+      "io_time_ratio: 0.91"
+    ]
+  }
+}

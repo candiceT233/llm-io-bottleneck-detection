@@ -1,0 +1,63 @@
+{
+  "id": "snap_170",
+  "workflow": {
+    "name": "cybershake",
+    "type": "seismology",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "flush_buffer",
+    "order": 4,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 84,
+    "num_tasks": 1428,
+    "parallelism": 1428,
+    "total_time_s": 1273,
+    "io_time_s": 1095,
+    "compute_time_s": 178,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 8013,
+    "op_count": 32052,
+    "io_imbalance_ratio": 3.1,
+    "hot_node_count": 5
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 186.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.31,
+    "iops": 744,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.84
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 19,
+    "memory_util_pct": 45,
+    "network_bw_mb_s": 184.1,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.037
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "data_skew",
+    "confidence": "high",
+    "explanation": "I/O load is highly skewed: 5 of 84 nodes (6.0% of the cluster) handle a disproportionate share of I/O, with an imbalance ratio of 3.1x. These hot nodes saturate their local I/O paths while the rest sit largely idle, pulling aggregate bandwidth (186.0 MB/s) well below the system peak (600 MB/s). The bottleneck is structural: data partitioning assigns unequal volumes across nodes.",
+    "key_signals": [
+      "io_imbalance_ratio: 3.1",
+      "hot_node_count: 5",
+      "hot_node_pct: 6.0%",
+      "bw_utilization_ratio: 0.31",
+      "io_time_ratio: 0.86"
+    ]
+  }
+}

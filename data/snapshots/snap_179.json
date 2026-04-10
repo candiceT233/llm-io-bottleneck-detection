@@ -1,0 +1,65 @@
+{
+  "id": "snap_179",
+  "workflow": {
+    "name": "spark_etl",
+    "type": "etl",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "load_reference",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 25,
+    "num_tasks": 400,
+    "parallelism": 400,
+    "total_time_s": 668,
+    "io_time_s": 615,
+    "compute_time_s": 53,
+    "io_time_ratio": 0.92,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 79624,
+    "op_count": 318496,
+    "data_staged": false,
+    "intended_staging_tier": "local_nvme",
+    "remote_access_latency_ms": 236
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 106.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.53,
+    "iops": 424,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.67
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 25,
+    "memory_util_pct": 20,
+    "network_bw_mb_s": 99.6,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.01
+  },
+  "storage": {
+    "type": "ceph",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (local_nvme) before execution began. Tasks access CEPH directly, which carries a remote latency of 236 ms, yielding only 106.0 MB/s effective bandwidth (53% of the 200 MB/s peak). CPU utilization of 25% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 236",
+      "bw_utilization_ratio: 0.53",
+      "storage_type: ceph",
+      "cpu_util_pct: 25",
+      "io_time_ratio: 0.92"
+    ]
+  }
+}

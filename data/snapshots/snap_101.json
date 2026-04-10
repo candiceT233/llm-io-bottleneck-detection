@@ -1,0 +1,62 @@
+{
+  "id": "snap_101",
+  "workflow": {
+    "name": "namd",
+    "type": "molecular_dynamics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "archive_data",
+    "order": 3,
+    "predecessors": [
+      "scan_catalog"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 25,
+    "num_tasks": 100,
+    "parallelism": 100,
+    "total_time_s": 1085,
+    "io_time_s": 727,
+    "compute_time_s": 358,
+    "io_time_ratio": 0.67,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 14927,
+    "op_count": 59708,
+    "competing_jobs": 10
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 63.9,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.32,
+    "iops": 256,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.73
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 10,
+    "memory_util_pct": 34,
+    "network_bw_mb_s": 65.8,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.013
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 200 MB/s, the workflow only observes 63.9 MB/s (32% apparent utilization) due to 10 competing jobs concurrently saturating the shared LUSTRE filesystem. CPU utilization of 10% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 10",
+      "bw_utilization_ratio: 0.32",
+      "observed_bw_mb_s: 63.9",
+      "peak_storage_bw_mb_s: 200",
+      "cpu_util_pct: 10"
+    ]
+  }
+}

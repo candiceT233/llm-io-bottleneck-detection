@@ -1,0 +1,61 @@
+{
+  "id": "snap_066",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "load_data",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 34,
+    "num_tasks": 680,
+    "parallelism": 680,
+    "total_time_s": 421,
+    "io_time_s": 362,
+    "compute_time_s": 59,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 340,
+    "op_count": 680
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 196.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.98,
+    "iops": 392,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.86
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 12,
+    "memory_util_pct": 36,
+    "network_bw_mb_s": 162.7,
+    "network_peak_bw_mb_s": 25000,
+    "network_util_ratio": 0.007
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 32,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 196.0 MB/s reaches 98% of the GPFS storage peak (200 MB/s), saturating the filesystem on the read path. CPU utilization of only 12% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.86 confirms that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.98",
+      "read_bw_mb_s: 196.0",
+      "peak_storage_bw_mb_s: 200",
+      "cpu_util_pct: 12",
+      "io_time_ratio: 0.86"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "snap_271",
+  "workflow": {
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "commit_results",
+    "order": 6,
+    "predecessors": [
+      "scan_catalog"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 17,
+    "num_tasks": 255,
+    "parallelism": 255,
+    "total_time_s": 326,
+    "io_time_s": 267,
+    "compute_time_s": 59,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 46053,
+    "op_count": 92106
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 198.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.99,
+    "iops": 396,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.86
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 16,
+    "memory_util_pct": 53,
+    "network_bw_mb_s": 186.1,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.019
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 198.0 MB/s reaches 99% of the GPFS storage peak (200 MB/s), saturating the filesystem. CPU utilization of only 16% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.82 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.99",
+      "write_bw_mb_s: 198.0",
+      "peak_storage_bw_mb_s: 200",
+      "cpu_util_pct: 16",
+      "io_time_ratio: 0.82"
+    ]
+  }
+}

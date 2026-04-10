@@ -1,0 +1,61 @@
+{
+  "id": "snap_310",
+  "workflow": {
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "read_checkpoint",
+    "order": 2,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 104,
+    "num_tasks": 2392,
+    "parallelism": 2392,
+    "total_time_s": 522,
+    "io_time_s": 386,
+    "compute_time_s": 136,
+    "io_time_ratio": 0.74,
+    "transfer_size_kb": 32,
+    "aggregate_size_mb": 791,
+    "op_count": 6252805
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 152.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.38,
+    "iops": 25315,
+    "avg_io_size_kb": 32,
+    "sequential_ratio": 0.25
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 30,
+    "memory_util_pct": 27,
+    "network_bw_mb_s": 144.4,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.014
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 3,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "The stage issues 25315 IOPS with an average I/O size of only 32 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count, bandwidth utilization is only 38% (152.0 MB/s of 400 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.74 confirms I/O dominates stage time.",
+    "key_signals": [
+      "iops: 25315",
+      "avg_io_size_kb: 32",
+      "bw_utilization_ratio: 0.38",
+      "io_time_ratio: 0.74",
+      "op_count: 6252805"
+    ]
+  }
+}

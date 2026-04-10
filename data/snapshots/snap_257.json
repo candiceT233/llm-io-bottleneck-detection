@@ -1,0 +1,62 @@
+{
+  "id": "snap_257",
+  "workflow": {
+    "name": "1000_genomes",
+    "type": "genomics",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "load_data",
+    "order": 5,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 49,
+    "num_tasks": 294,
+    "parallelism": 294,
+    "total_time_s": 1368,
+    "io_time_s": 1122,
+    "compute_time_s": 246,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 78699,
+    "op_count": 39350
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 600.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 1000,
+    "bw_utilization_ratio": 0.6,
+    "iops": 300,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.71
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 21,
+    "memory_util_pct": 46,
+    "network_bw_mb_s": 4650.0,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.93
+  },
+  "storage": {
+    "type": "nfs",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 4650.0 MB/s reaches 93% of the network peak (5000 MB/s), making the interconnect the primary bottleneck. Data is accessed from NFS, requiring all transfers to traverse the network. CPU utilization of 21% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "key_signals": [
+      "network_util_ratio: 0.93",
+      "network_bw_mb_s: 4650.0",
+      "network_peak_bw_mb_s: 5000",
+      "cpu_util_pct: 21",
+      "io_time_ratio: 0.82",
+      "storage_type: nfs"
+    ]
+  }
+}

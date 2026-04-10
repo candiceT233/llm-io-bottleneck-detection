@@ -1,0 +1,65 @@
+{
+  "id": "snap_183",
+  "workflow": {
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "archive_data",
+    "order": 2,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 59,
+    "num_tasks": 885,
+    "parallelism": 885,
+    "total_time_s": 1430,
+    "io_time_s": 1173,
+    "compute_time_s": 257,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 33970,
+    "op_count": 135880,
+    "data_staged": false,
+    "intended_staging_tier": "burst_buffer",
+    "remote_access_latency_ms": 61
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 172.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.43,
+    "iops": 688,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.56
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 13,
+    "memory_util_pct": 30,
+    "network_bw_mb_s": 161.7,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.016
+  },
+  "storage": {
+    "type": "hdfs",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (burst_buffer) before execution began. Tasks access HDFS directly, which carries a remote latency of 61 ms, yielding only 172.0 MB/s effective bandwidth (43% of the 400 MB/s peak). CPU utilization of 13% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 61",
+      "bw_utilization_ratio: 0.43",
+      "storage_type: hdfs",
+      "cpu_util_pct: 13",
+      "io_time_ratio: 0.82"
+    ]
+  }
+}

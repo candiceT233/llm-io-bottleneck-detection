@@ -1,0 +1,61 @@
+{
+  "id": "snap_284",
+  "workflow": {
+    "name": "epigenomics",
+    "type": "genomics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "write_checkpoint",
+    "order": 4,
+    "predecessors": [
+      "load_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 44,
+    "num_tasks": 660,
+    "parallelism": 660,
+    "total_time_s": 265,
+    "io_time_s": 228,
+    "compute_time_s": 37,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 35116,
+    "op_count": 70232
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 460.0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.92,
+    "iops": 920,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.94
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 6,
+    "memory_util_pct": 36,
+    "network_bw_mb_s": 427.8,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.043
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 460.0 MB/s reaches 92% of the GPFS storage peak (500 MB/s), saturating the filesystem. CPU utilization of only 6% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.86 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.92",
+      "write_bw_mb_s: 460.0",
+      "peak_storage_bw_mb_s: 500",
+      "cpu_util_pct: 6",
+      "io_time_ratio: 0.86"
+    ]
+  }
+}

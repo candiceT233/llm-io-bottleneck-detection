@@ -1,0 +1,61 @@
+{
+  "id": "snap_083",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "read_checkpoint",
+    "order": 2,
+    "predecessors": [
+      "load_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 32,
+    "num_tasks": 384,
+    "parallelism": 384,
+    "total_time_s": 652,
+    "io_time_s": 541,
+    "compute_time_s": 111,
+    "io_time_ratio": 0.83,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 96,
+    "op_count": 384
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 273.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.91,
+    "iops": 1092,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.8
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 6,
+    "memory_util_pct": 42,
+    "network_bw_mb_s": 262.1,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.052
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 273.0 MB/s reaches 91% of the BEEGFS storage peak (300 MB/s), saturating the filesystem on the read path. CPU utilization of only 6% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.83 confirms that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.91",
+      "read_bw_mb_s: 273.0",
+      "peak_storage_bw_mb_s: 300",
+      "cpu_util_pct: 6",
+      "io_time_ratio: 0.83"
+    ]
+  }
+}

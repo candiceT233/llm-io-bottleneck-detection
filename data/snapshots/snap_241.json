@@ -1,0 +1,62 @@
+{
+  "id": "snap_241",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "output_results",
+    "order": 2,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 27,
+    "num_tasks": 162,
+    "parallelism": 162,
+    "total_time_s": 474,
+    "io_time_s": 427,
+    "compute_time_s": 47,
+    "io_time_ratio": 0.9,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 61841,
+    "op_count": 30920
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 624.0,
+    "peak_storage_bw_mb_s": 800,
+    "bw_utilization_ratio": 0.78,
+    "iops": 312,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.67
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 18,
+    "memory_util_pct": 53,
+    "network_bw_mb_s": 970.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.97
+  },
+  "storage": {
+    "type": "ceph",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 970.0 MB/s reaches 97% of the network peak (1000 MB/s), making the interconnect the primary bottleneck. Data is accessed from CEPH, requiring all transfers to traverse the network. CPU utilization of 18% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "key_signals": [
+      "network_util_ratio: 0.97",
+      "network_bw_mb_s: 970.0",
+      "network_peak_bw_mb_s: 1000",
+      "cpu_util_pct: 18",
+      "io_time_ratio: 0.9",
+      "storage_type: ceph"
+    ]
+  }
+}

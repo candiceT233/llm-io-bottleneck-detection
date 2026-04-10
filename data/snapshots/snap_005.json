@@ -1,27 +1,60 @@
 {
   "id": "snap_005",
-  "workflow": {"name": "bert_finetuning", "type": "ml_training", "num_stages": 4},
-  "stage": {"name": "dataset_load", "order": 1, "predecessors": ["data_download"], "operation": "read"},
+  "workflow": {
+    "name": "bert_finetuning",
+    "type": "ml_training",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "dataset_load",
+    "order": 1,
+    "predecessors": [
+      "data_download"
+    ],
+    "operation": "read"
+  },
   "execution": {
-    "num_nodes": 8, "num_tasks": 32, "parallelism": 32,
-    "total_time_s": 920, "io_time_s": 780, "compute_time_s": 140,
+    "num_nodes": 8,
+    "num_tasks": 32,
+    "parallelism": 32,
+    "total_time_s": 920,
+    "io_time_s": 780,
+    "compute_time_s": 140,
     "io_time_ratio": 0.85,
-    "transfer_size_kb": 512, "aggregate_size_mb": 209040, "op_count": 418080
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 209040,
+    "op_count": 418080
   },
   "io_metrics": {
-    "read_bw_mb_s": 268, "write_bw_mb_s": 0,
-    "peak_storage_bw_mb_s": 280, "bw_utilization_ratio": 0.96,
-    "iops": 536, "avg_io_size_kb": 512, "sequential_ratio": 0.88
+    "read_bw_mb_s": 268,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 280,
+    "bw_utilization_ratio": 0.96,
+    "iops": 536,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.88
   },
   "resource_utilization": {
-    "cpu_util_pct": 20, "memory_util_pct": 55,
-    "network_bw_mb_s": 272, "network_peak_bw_mb_s": 5000, "network_util_ratio": 0.05
+    "cpu_util_pct": 20,
+    "memory_util_pct": 55,
+    "network_bw_mb_s": 272,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.05
   },
-  "storage": {"type": "beegfs", "stripe_count": 4, "shared": true},
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 4,
+    "shared": true
+  },
   "annotation": {
-    "bottleneck": "storage_bandwidth_saturation",
+    "bottleneck": "read_bandwidth_saturation",
     "confidence": "high",
     "explanation": "Read bandwidth of 268 MB/s hits 96% of the BeeGFS peak (280 MB/s), saturating available storage bandwidth during dataset loading. CPU at 20% is largely idle waiting for data, while the io_time_ratio of 0.85 confirms the stage is I/O bound. Training dataloaders stall because the storage system cannot feed data fast enough.",
-    "key_signals": ["bw_utilization_ratio: 0.96", "cpu_util_pct: 20", "io_time_ratio: 0.85", "avg_io_size_kb: 512"]
+    "key_signals": [
+      "bw_utilization_ratio: 0.96",
+      "cpu_util_pct: 20",
+      "io_time_ratio: 0.85",
+      "avg_io_size_kb: 512"
+    ]
   }
 }

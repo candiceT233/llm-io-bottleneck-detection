@@ -1,0 +1,64 @@
+{
+  "id": "snap_336",
+  "workflow": {
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
+  },
+  "stage": {
+    "name": "archive_data",
+    "order": 6,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 117,
+    "num_tasks": 936,
+    "parallelism": 936,
+    "total_time_s": 1082,
+    "io_time_s": 876,
+    "compute_time_s": 206,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 315800,
+    "op_count": 315800,
+    "checkpoint_size_mb": 39475,
+    "checkpoint_interval_s": 532,
+    "num_checkpoints": 8
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 552.0,
+    "peak_storage_bw_mb_s": 800,
+    "bw_utilization_ratio": 0.69,
+    "iops": 552,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.91
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 24,
+    "memory_util_pct": 63,
+    "network_bw_mb_s": 546.5,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.109
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "The stage performs 8 checkpoint writes of 39475 MB each at 532s intervals, contributing 315800 MB of total checkpoint I/O. These periodic bursts saturate the storage at 552.0 MB/s (69% of peak), dominating the stage I/O budget. The io_time_ratio of 0.81 reflects cumulative time flushing checkpoints rather than performing productive computation.",
+    "key_signals": [
+      "checkpoint_size_mb: 39475",
+      "checkpoint_interval_s: 532",
+      "num_checkpoints: 8",
+      "aggregate_size_mb: 315800",
+      "io_time_ratio: 0.81"
+    ]
+  }
+}

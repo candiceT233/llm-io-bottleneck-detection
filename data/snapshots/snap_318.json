@@ -1,0 +1,61 @@
+{
+  "id": "snap_318",
+  "workflow": {
+    "name": "spark_etl",
+    "type": "etl",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "dump_state",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 68,
+    "num_tasks": 1156,
+    "parallelism": 1,
+    "total_time_s": 1868,
+    "io_time_s": 1532,
+    "compute_time_s": 336,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 18879,
+    "op_count": 9440
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 84.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.14,
+    "iops": 42,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.92
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 13,
+    "memory_util_pct": 26,
+    "network_bw_mb_s": 83.2,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.017
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single writer operates at a time despite 1156 tasks available. This limits effective bandwidth to 84.0 MB/s (14% of the 600 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 1155 tasks wait idle while serialized I/O completes.",
+    "key_signals": [
+      "parallelism: 1",
+      "num_tasks: 1156",
+      "bw_utilization_ratio: 0.14",
+      "io_time_ratio: 0.82",
+      "write_bw_mb_s: 84.0"
+    ]
+  }
+}

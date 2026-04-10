@@ -1,0 +1,61 @@
+{
+  "id": "snap_333",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "archive_data",
+    "order": 2,
+    "predecessors": [
+      "load_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 61,
+    "num_tasks": 366,
+    "parallelism": 1,
+    "total_time_s": 1758,
+    "io_time_s": 1547,
+    "compute_time_s": 211,
+    "io_time_ratio": 0.88,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 28726,
+    "op_count": 14363
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 144.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.24,
+    "iops": 72,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.95
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 16,
+    "memory_util_pct": 20,
+    "network_bw_mb_s": 144.0,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.029
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single writer operates at a time despite 366 tasks available. This limits effective bandwidth to 144.0 MB/s (24% of the 600 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 365 tasks wait idle while serialized I/O completes.",
+    "key_signals": [
+      "parallelism: 1",
+      "num_tasks: 366",
+      "bw_utilization_ratio: 0.24",
+      "io_time_ratio: 0.88",
+      "write_bw_mb_s: 144.0"
+    ]
+  }
+}

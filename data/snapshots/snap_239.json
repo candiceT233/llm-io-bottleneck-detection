@@ -1,0 +1,62 @@
+{
+  "id": "snap_239",
+  "workflow": {
+    "name": "blast",
+    "type": "genomics",
+    "num_stages": 3
+  },
+  "stage": {
+    "name": "restore_state",
+    "order": 4,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 19,
+    "num_tasks": 171,
+    "parallelism": 171,
+    "total_time_s": 380,
+    "io_time_s": 334,
+    "compute_time_s": 46,
+    "io_time_ratio": 0.88,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 69169,
+    "op_count": 69169
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 464.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 800,
+    "bw_utilization_ratio": 0.58,
+    "iops": 464,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.71
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 12,
+    "memory_util_pct": 44,
+    "network_bw_mb_s": 4300.0,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.86
+  },
+  "storage": {
+    "type": "ceph",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 4300.0 MB/s reaches 86% of the network peak (5000 MB/s), making the interconnect the primary bottleneck. Data is accessed from CEPH, requiring all transfers to traverse the network. CPU utilization of 12% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "key_signals": [
+      "network_util_ratio: 0.86",
+      "network_bw_mb_s: 4300.0",
+      "network_peak_bw_mb_s: 5000",
+      "cpu_util_pct: 12",
+      "io_time_ratio: 0.88",
+      "storage_type: ceph"
+    ]
+  }
+}

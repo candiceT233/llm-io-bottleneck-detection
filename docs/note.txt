@@ -14,3 +14,17 @@
 // Storage Configuration: BeeGFS, a parallel distributed filesystem with Stripe count = 8
 // Each file is split into 8 stripes, distributed across 8 storage targets,This allows multiple disks to write data in parallel.
 //Shared = true, Storage is shared across all nodes; all nodes can read/write to the same filesystem.
+
+The classify_only strategy is working exactly as designed. The problem is what it reveals.
+
+Look at which classes score F1=0.00: metadata_contention, lock_contention, io_interference, staging_inefficiency. These are the four classes whose names contain zero signal about their distinguishing metrics. The LLM cannot know that io_interference means "competing jobs degrading bandwidth" or that staging_inefficiency means "data_staged=false on a remote filesystem" — those concepts are invisible in the name. So it falls back to the classes it does understand from general training knowledge and floods predictions into serialized_io and storage_bandwidth_saturation.
+
+The rule-based classifier wins because its rules are explicitly wired to the exact fields that distinguish these classes (competing_jobs, data_staged, io_imbalance_ratio). It has no ambiguity. The LLM with no descriptions has maximum ambiguity.
+
+This is actually a strong experimental result, not a flaw to fix. It directly answers one of your research questions: how much does prompt structure matter? The answer is quantified:
+
+Strategy	Accuracy	What it proves
+Rule-based	91.2%	Hard-coded field logic works well when fields exist
+Classify-only	45.7%	Class name alone is insufficient for novel HPC concepts
+Zero-shot	95.3%	Descriptions close the gap and exceed rule-based
+The gap between classify_only and zero_shot (45.7% → 95.3%) is your headline finding. It quantifies exactly how much value the descriptions add. If you "fixed" classify_only by adding descriptions, you'd collapse the comparison and lose the finding.

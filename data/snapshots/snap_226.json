@@ -1,0 +1,59 @@
+{
+  "id": "snap_226",
+  "workflow": {
+    "name": "blast",
+    "type": "genomics",
+    "num_stages": 3
+  },
+  "stage": {
+    "name": "flush_buffer",
+    "order": 5,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 30,
+    "num_tasks": 180,
+    "parallelism": 180,
+    "total_time_s": 458,
+    "io_time_s": 87,
+    "compute_time_s": 371,
+    "io_time_ratio": 0.19,
+    "transfer_size_kb": 128,
+    "aggregate_size_mb": 1311,
+    "op_count": 10488
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 26.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.13,
+    "iops": 208,
+    "avg_io_size_kb": 128,
+    "sequential_ratio": 0.84
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 84,
+    "memory_util_pct": 78,
+    "network_bw_mb_s": 18.7,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.004
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 4,
+    "shared": false
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 84% confirms that computation is the dominant bottleneck. The io_time_ratio of 0.19 shows that I/O accounts for a small fraction of the total stage time. Bandwidth utilization of 13% leaves significant I/O headroom unused, indicating the system is not I/O-limited.",
+    "key_signals": [
+      "cpu_util_pct: 84",
+      "io_time_ratio: 0.19",
+      "bw_utilization_ratio: 0.13"
+    ]
+  }
+}

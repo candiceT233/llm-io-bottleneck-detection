@@ -1,0 +1,62 @@
+{
+  "id": "snap_236",
+  "workflow": {
+    "name": "spark_etl",
+    "type": "etl",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "flush_buffer",
+    "order": 3,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 51,
+    "num_tasks": 612,
+    "parallelism": 612,
+    "total_time_s": 570,
+    "io_time_s": 513,
+    "compute_time_s": 57,
+    "io_time_ratio": 0.9,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 91194,
+    "op_count": 91194
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 610.0,
+    "peak_storage_bw_mb_s": 1000,
+    "bw_utilization_ratio": 0.61,
+    "iops": 610,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.8
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 17,
+    "memory_util_pct": 28,
+    "network_bw_mb_s": 4800.0,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.96
+  },
+  "storage": {
+    "type": "ceph",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 4800.0 MB/s reaches 96% of the network peak (5000 MB/s), making the interconnect the primary bottleneck. Data is accessed from CEPH, requiring all transfers to traverse the network. CPU utilization of 17% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "key_signals": [
+      "network_util_ratio: 0.96",
+      "network_bw_mb_s: 4800.0",
+      "network_peak_bw_mb_s: 5000",
+      "cpu_util_pct: 17",
+      "io_time_ratio: 0.9",
+      "storage_type: ceph"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "snap_193",
+  "workflow": {
+    "name": "epigenomics",
+    "type": "genomics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "save_output",
+    "order": 6,
+    "predecessors": [
+      "data_ingestion"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 39,
+    "num_tasks": 624,
+    "parallelism": 624,
+    "total_time_s": 623,
+    "io_time_s": 461,
+    "compute_time_s": 162,
+    "io_time_ratio": 0.74,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 4134,
+    "op_count": 4134,
+    "data_staged": false,
+    "intended_staging_tier": "burst_buffer",
+    "remote_access_latency_ms": 399
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 44.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.22,
+    "iops": 44,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.75
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 22,
+    "memory_util_pct": 34,
+    "network_bw_mb_s": 46.2,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.046
+  },
+  "storage": {
+    "type": "nfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (burst_buffer) before execution began. Tasks access NFS directly, which carries a remote latency of 399 ms, yielding only 44.0 MB/s effective bandwidth (22% of the 200 MB/s peak). CPU utilization of 22% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 399",
+      "bw_utilization_ratio: 0.22",
+      "storage_type: nfs",
+      "cpu_util_pct: 22",
+      "io_time_ratio: 0.74"
+    ]
+  }
+}

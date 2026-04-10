@@ -1,0 +1,61 @@
+{
+  "id": "snap_322",
+  "workflow": {
+    "name": "blast",
+    "type": "genomics",
+    "num_stages": 3
+  },
+  "stage": {
+    "name": "read_checkpoint",
+    "order": 3,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 21,
+    "num_tasks": 294,
+    "parallelism": 1,
+    "total_time_s": 403,
+    "io_time_s": 330,
+    "compute_time_s": 73,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 23864,
+    "op_count": 11932
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 114.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.19,
+    "iops": 57,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.83
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 17,
+    "memory_util_pct": 29,
+    "network_bw_mb_s": 116.3,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.012
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single reader operates at a time despite 294 tasks available. This limits effective bandwidth to 114.0 MB/s (19% of the 600 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 293 tasks wait idle while serialized I/O completes.",
+    "key_signals": [
+      "parallelism: 1",
+      "num_tasks: 294",
+      "bw_utilization_ratio: 0.19",
+      "io_time_ratio: 0.82",
+      "read_bw_mb_s: 114.0"
+    ]
+  }
+}

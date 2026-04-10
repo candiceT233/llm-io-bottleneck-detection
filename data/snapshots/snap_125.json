@@ -1,0 +1,62 @@
+{
+  "id": "snap_125",
+  "workflow": {
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "save_output",
+    "order": 6,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 14,
+    "num_tasks": 28,
+    "parallelism": 28,
+    "total_time_s": 457,
+    "io_time_s": 375,
+    "compute_time_s": 82,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 8757,
+    "op_count": 8757,
+    "competing_jobs": 15
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 92.2,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.23,
+    "iops": 92,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.71
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 20,
+    "memory_util_pct": 30,
+    "network_bw_mb_s": 92.2,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.009
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 400 MB/s, the workflow only observes 92.2 MB/s (23% apparent utilization) due to 15 competing jobs concurrently saturating the shared GPFS filesystem. CPU utilization of 20% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 15",
+      "bw_utilization_ratio: 0.23",
+      "observed_bw_mb_s: 92.2",
+      "peak_storage_bw_mb_s: 400",
+      "cpu_util_pct: 20"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "snap_086",
+  "workflow": {
+    "name": "namd",
+    "type": "molecular_dynamics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "scan_catalog",
+    "order": 4,
+    "predecessors": [
+      "data_ingestion"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 60,
+    "num_tasks": 1140,
+    "parallelism": 1140,
+    "total_time_s": 570,
+    "io_time_s": 490,
+    "compute_time_s": 80,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 1140,
+    "op_count": 1140
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 93.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 100,
+    "bw_utilization_ratio": 0.93,
+    "iops": 93,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.95
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 9,
+    "memory_util_pct": 47,
+    "network_bw_mb_s": 91.1,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.018
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 32,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 93.0 MB/s reaches 93% of the GPFS storage peak (100 MB/s), saturating the filesystem on the read path. CPU utilization of only 9% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.86 confirms that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.93",
+      "read_bw_mb_s: 93.0",
+      "peak_storage_bw_mb_s: 100",
+      "cpu_util_pct: 9",
+      "io_time_ratio: 0.86"
+    ]
+  }
+}

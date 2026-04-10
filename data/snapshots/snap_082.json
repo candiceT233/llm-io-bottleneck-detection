@@ -1,0 +1,61 @@
+{
+  "id": "snap_082",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "scan_catalog",
+    "order": 4,
+    "predecessors": [
+      "scan_catalog"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 16,
+    "num_tasks": 64,
+    "parallelism": 64,
+    "total_time_s": 538,
+    "io_time_s": 409,
+    "compute_time_s": 129,
+    "io_time_ratio": 0.76,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 16,
+    "op_count": 64
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 285.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.95,
+    "iops": 1140,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.93
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 9,
+    "memory_util_pct": 49,
+    "network_bw_mb_s": 230.9,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.046
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 285.0 MB/s reaches 95% of the PVFS2 storage peak (300 MB/s), saturating the filesystem on the read path. CPU utilization of only 9% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.76 confirms that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.95",
+      "read_bw_mb_s: 285.0",
+      "peak_storage_bw_mb_s: 300",
+      "cpu_util_pct: 9",
+      "io_time_ratio: 0.76"
+    ]
+  }
+}

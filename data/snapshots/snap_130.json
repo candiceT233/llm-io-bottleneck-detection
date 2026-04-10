@@ -1,0 +1,62 @@
+{
+  "id": "snap_130",
+  "workflow": {
+    "name": "cybershake",
+    "type": "seismology",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "archive_data",
+    "order": 2,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 6,
+    "num_tasks": 42,
+    "parallelism": 42,
+    "total_time_s": 1117,
+    "io_time_s": 737,
+    "compute_time_s": 380,
+    "io_time_ratio": 0.66,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 5008,
+    "op_count": 10016,
+    "competing_jobs": 6
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 59.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.29,
+    "iops": 118,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.54
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 14,
+    "memory_util_pct": 55,
+    "network_bw_mb_s": 58.4,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.012
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 200 MB/s, the workflow only observes 59.0 MB/s (29% apparent utilization) due to 6 competing jobs concurrently saturating the shared BEEGFS filesystem. CPU utilization of 14% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 6",
+      "bw_utilization_ratio: 0.29",
+      "observed_bw_mb_s: 59.0",
+      "peak_storage_bw_mb_s: 200",
+      "cpu_util_pct: 14"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "snap_192",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "read_checkpoint",
+    "order": 3,
+    "predecessors": [
+      "scan_catalog"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 28,
+    "num_tasks": 364,
+    "parallelism": 364,
+    "total_time_s": 1929,
+    "io_time_s": 1717,
+    "compute_time_s": 212,
+    "io_time_ratio": 0.89,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 48952,
+    "op_count": 48952,
+    "data_staged": false,
+    "intended_staging_tier": "local_nvme",
+    "remote_access_latency_ms": 494
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 138.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.23,
+    "iops": 138,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.63
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 25,
+    "memory_util_pct": 32,
+    "network_bw_mb_s": 143.5,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.143
+  },
+  "storage": {
+    "type": "hdfs",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (local_nvme) before execution began. Tasks access HDFS directly, which carries a remote latency of 494 ms, yielding only 138.0 MB/s effective bandwidth (23% of the 600 MB/s peak). CPU utilization of 25% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 494",
+      "bw_utilization_ratio: 0.23",
+      "storage_type: hdfs",
+      "cpu_util_pct: 25",
+      "io_time_ratio: 0.89"
+    ]
+  }
+}

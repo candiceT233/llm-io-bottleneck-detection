@@ -1,0 +1,64 @@
+{
+  "id": "snap_338",
+  "workflow": {
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "save_output",
+    "order": 2,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 113,
+    "num_tasks": 452,
+    "parallelism": 452,
+    "total_time_s": 710,
+    "io_time_s": 589,
+    "compute_time_s": 121,
+    "io_time_ratio": 0.83,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 170786,
+    "op_count": 170786,
+    "checkpoint_size_mb": 24398,
+    "checkpoint_interval_s": 403,
+    "num_checkpoints": 7
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 352.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.88,
+    "iops": 352,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.99
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 23,
+    "memory_util_pct": 54,
+    "network_bw_mb_s": 352.0,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.035
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "The stage performs 7 checkpoint writes of 24398 MB each at 403s intervals, contributing 170786 MB of total checkpoint I/O. These periodic bursts saturate the storage at 352.0 MB/s (88% of peak), dominating the stage I/O budget. The io_time_ratio of 0.83 reflects cumulative time flushing checkpoints rather than performing productive computation.",
+    "key_signals": [
+      "checkpoint_size_mb: 24398",
+      "checkpoint_interval_s: 403",
+      "num_checkpoints: 7",
+      "aggregate_size_mb: 170786",
+      "io_time_ratio: 0.83"
+    ]
+  }
+}

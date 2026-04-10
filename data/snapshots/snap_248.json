@@ -1,0 +1,62 @@
+{
+  "id": "snap_248",
+  "workflow": {
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
+  },
+  "stage": {
+    "name": "read_checkpoint",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 59,
+    "num_tasks": 354,
+    "parallelism": 354,
+    "total_time_s": 1188,
+    "io_time_s": 1069,
+    "compute_time_s": 119,
+    "io_time_ratio": 0.9,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 59529,
+    "op_count": 119058
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 520.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 1000,
+    "bw_utilization_ratio": 0.52,
+    "iops": 1040,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.74
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 22,
+    "memory_util_pct": 30,
+    "network_bw_mb_s": 870.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.87
+  },
+  "storage": {
+    "type": "ceph",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 870.0 MB/s reaches 87% of the network peak (1000 MB/s), making the interconnect the primary bottleneck. Data is accessed from CEPH, requiring all transfers to traverse the network. CPU utilization of 22% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "key_signals": [
+      "network_util_ratio: 0.87",
+      "network_bw_mb_s: 870.0",
+      "network_peak_bw_mb_s: 1000",
+      "cpu_util_pct: 22",
+      "io_time_ratio: 0.9",
+      "storage_type: ceph"
+    ]
+  }
+}

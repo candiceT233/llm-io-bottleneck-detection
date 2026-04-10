@@ -1,27 +1,60 @@
 {
   "id": "snap_003",
-  "workflow": {"name": "cryo_em_pipeline", "type": "imaging", "num_stages": 6},
-  "stage": {"name": "reconstruction", "order": 4, "predecessors": ["particle_picking"], "operation": "read"},
+  "workflow": {
+    "name": "cryo_em_pipeline",
+    "type": "imaging",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "reconstruction",
+    "order": 4,
+    "predecessors": [
+      "particle_picking"
+    ],
+    "operation": "read"
+  },
   "execution": {
-    "num_nodes": 16, "num_tasks": 128, "parallelism": 128,
-    "total_time_s": 1820, "io_time_s": 1500, "compute_time_s": 320,
+    "num_nodes": 16,
+    "num_tasks": 128,
+    "parallelism": 128,
+    "total_time_s": 1820,
+    "io_time_s": 1500,
+    "compute_time_s": 320,
     "io_time_ratio": 0.82,
-    "transfer_size_kb": 2048, "aggregate_size_mb": 570000, "op_count": 285000
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 570000,
+    "op_count": 285000
   },
   "io_metrics": {
-    "read_bw_mb_s": 380, "write_bw_mb_s": 0,
-    "peak_storage_bw_mb_s": 400, "bw_utilization_ratio": 0.95,
-    "iops": 190, "avg_io_size_kb": 2048, "sequential_ratio": 0.92
+    "read_bw_mb_s": 380,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.95,
+    "iops": 190,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.92
   },
   "resource_utilization": {
-    "cpu_util_pct": 22, "memory_util_pct": 60,
-    "network_bw_mb_s": 385, "network_peak_bw_mb_s": 10000, "network_util_ratio": 0.04
+    "cpu_util_pct": 22,
+    "memory_util_pct": 60,
+    "network_bw_mb_s": 385,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.04
   },
-  "storage": {"type": "gpfs", "stripe_count": 8, "shared": true},
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 8,
+    "shared": true
+  },
   "annotation": {
-    "bottleneck": "storage_bandwidth_saturation",
+    "bottleneck": "read_bandwidth_saturation",
     "confidence": "high",
     "explanation": "Read bandwidth of 380 MB/s is 95% of the GPFS peak (400 MB/s), saturating the storage system during reconstruction. CPU utilization of 22% indicates processors are underutilized, blocked on data loading. Large 2 MB reads with a high sequential ratio (0.92) are typical of a throughput-limited imaging workload.",
-    "key_signals": ["bw_utilization_ratio: 0.95", "cpu_util_pct: 22", "io_time_ratio: 0.82", "avg_io_size_kb: 2048"]
+    "key_signals": [
+      "bw_utilization_ratio: 0.95",
+      "cpu_util_pct: 22",
+      "io_time_ratio: 0.82",
+      "avg_io_size_kb: 2048"
+    ]
   }
 }

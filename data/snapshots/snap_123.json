@@ -1,0 +1,62 @@
+{
+  "id": "snap_123",
+  "workflow": {
+    "name": "1000_genomes",
+    "type": "genomics",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "flush_buffer",
+    "order": 4,
+    "predecessors": [
+      "preprocess"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 15,
+    "num_tasks": 150,
+    "parallelism": 150,
+    "total_time_s": 334,
+    "io_time_s": 267,
+    "compute_time_s": 67,
+    "io_time_ratio": 0.8,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 3014,
+    "op_count": 3014,
+    "competing_jobs": 4
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 130.6,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.33,
+    "iops": 131,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.71
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 29,
+    "memory_util_pct": 57,
+    "network_bw_mb_s": 126.7,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.025
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 400 MB/s, the workflow only observes 130.6 MB/s (33% apparent utilization) due to 4 competing jobs concurrently saturating the shared WEKAFS filesystem. CPU utilization of 29% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 4",
+      "bw_utilization_ratio: 0.33",
+      "observed_bw_mb_s: 130.6",
+      "peak_storage_bw_mb_s: 400",
+      "cpu_util_pct: 29"
+    ]
+  }
+}

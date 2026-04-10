@@ -1,0 +1,62 @@
+{
+  "id": "snap_108",
+  "workflow": {
+    "name": "cybershake",
+    "type": "seismology",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "fetch_input",
+    "order": 6,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 27,
+    "num_tasks": 162,
+    "parallelism": 162,
+    "total_time_s": 821,
+    "io_time_s": 542,
+    "compute_time_s": 279,
+    "io_time_ratio": 0.66,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 15949,
+    "op_count": 31898,
+    "competing_jobs": 12
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 277.3,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.55,
+    "iops": 555,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.55
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 29,
+    "memory_util_pct": 39,
+    "network_bw_mb_s": 252.3,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.025
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 500 MB/s, the workflow only observes 277.3 MB/s (55% apparent utilization) due to 12 competing jobs concurrently saturating the shared PVFS2 filesystem. CPU utilization of 29% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 12",
+      "bw_utilization_ratio: 0.55",
+      "observed_bw_mb_s: 277.3",
+      "peak_storage_bw_mb_s: 500",
+      "cpu_util_pct: 29"
+    ]
+  }
+}

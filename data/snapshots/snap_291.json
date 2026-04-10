@@ -1,0 +1,61 @@
+{
+  "id": "snap_291",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "scan_catalog",
+    "order": 2,
+    "predecessors": [
+      "preprocess"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 38,
+    "num_tasks": 874,
+    "parallelism": 874,
+    "total_time_s": 574,
+    "io_time_s": 476,
+    "compute_time_s": 98,
+    "io_time_ratio": 0.83,
+    "transfer_size_kb": 4,
+    "aggregate_size_mb": 201,
+    "op_count": 14271964
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 76.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.38,
+    "iops": 51338,
+    "avg_io_size_kb": 4,
+    "sequential_ratio": 0.15
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 21,
+    "memory_util_pct": 40,
+    "network_bw_mb_s": 59.3,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.006
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "The stage issues 51338 IOPS with an average I/O size of only 4 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count, bandwidth utilization is only 38% (76.0 MB/s of 200 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.83 confirms I/O dominates stage time.",
+    "key_signals": [
+      "iops: 51338",
+      "avg_io_size_kb: 4",
+      "bw_utilization_ratio: 0.38",
+      "io_time_ratio: 0.83",
+      "op_count: 14271964"
+    ]
+  }
+}

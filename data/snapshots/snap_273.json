@@ -1,0 +1,61 @@
+{
+  "id": "snap_273",
+  "workflow": {
+    "name": "blast",
+    "type": "genomics",
+    "num_stages": 3
+  },
+  "stage": {
+    "name": "preprocess",
+    "order": 3,
+    "predecessors": [
+      "load_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 21,
+    "num_tasks": 105,
+    "parallelism": 105,
+    "total_time_s": 703,
+    "io_time_s": 598,
+    "compute_time_s": 105,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 52948,
+    "op_count": 52948
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 364.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.91,
+    "iops": 364,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.95
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 16,
+    "memory_util_pct": 57,
+    "network_bw_mb_s": 320.3,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.064
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 364.0 MB/s reaches 91% of the WEKAFS storage peak (400 MB/s), saturating the filesystem. CPU utilization of only 16% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.85 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.91",
+      "read_bw_mb_s: 364.0",
+      "peak_storage_bw_mb_s: 400",
+      "cpu_util_pct: 16",
+      "io_time_ratio: 0.85"
+    ]
+  }
+}

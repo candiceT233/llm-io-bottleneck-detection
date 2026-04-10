@@ -1,0 +1,62 @@
+{
+  "id": "snap_258",
+  "workflow": {
+    "name": "namd",
+    "type": "molecular_dynamics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "store_results",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 11,
+    "num_tasks": 154,
+    "parallelism": 154,
+    "total_time_s": 804,
+    "io_time_s": 691,
+    "compute_time_s": 113,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 13130,
+    "op_count": 13130
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 400.0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.8,
+    "iops": 400,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.82
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 14,
+    "memory_util_pct": 49,
+    "network_bw_mb_s": 880.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.88
+  },
+  "storage": {
+    "type": "hdfs",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 880.0 MB/s reaches 88% of the network peak (1000 MB/s), making the interconnect the primary bottleneck. Data is accessed from HDFS, requiring all transfers to traverse the network. CPU utilization of 14% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "key_signals": [
+      "network_util_ratio: 0.88",
+      "network_bw_mb_s: 880.0",
+      "network_peak_bw_mb_s: 1000",
+      "cpu_util_pct: 14",
+      "io_time_ratio: 0.86",
+      "storage_type: hdfs"
+    ]
+  }
+}

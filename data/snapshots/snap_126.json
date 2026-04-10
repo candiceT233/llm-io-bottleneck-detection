@@ -1,0 +1,62 @@
+{
+  "id": "snap_126",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "read_checkpoint",
+    "order": 2,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 6,
+    "num_tasks": 36,
+    "parallelism": 36,
+    "total_time_s": 187,
+    "io_time_s": 144,
+    "compute_time_s": 43,
+    "io_time_ratio": 0.77,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 14374,
+    "op_count": 57496,
+    "competing_jobs": 11
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 206.7,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.41,
+    "iops": 827,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.53
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 21,
+    "memory_util_pct": 44,
+    "network_bw_mb_s": 215.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.215
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 500 MB/s, the workflow only observes 206.7 MB/s (41% apparent utilization) due to 11 competing jobs concurrently saturating the shared GPFS filesystem. CPU utilization of 21% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 11",
+      "bw_utilization_ratio: 0.41",
+      "observed_bw_mb_s: 206.7",
+      "peak_storage_bw_mb_s: 500",
+      "cpu_util_pct: 21"
+    ]
+  }
+}

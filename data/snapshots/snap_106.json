@@ -1,0 +1,62 @@
+{
+  "id": "snap_106",
+  "workflow": {
+    "name": "wrf",
+    "type": "climate",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "data_ingestion",
+    "order": 3,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 24,
+    "num_tasks": 48,
+    "parallelism": 48,
+    "total_time_s": 1000,
+    "io_time_s": 730,
+    "compute_time_s": 270,
+    "io_time_ratio": 0.73,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 10170,
+    "op_count": 40680,
+    "competing_jobs": 7
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 122.5,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.24,
+    "iops": 490,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.82
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 15,
+    "memory_util_pct": 37,
+    "network_bw_mb_s": 125.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.125
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 500 MB/s, the workflow only observes 122.5 MB/s (24% apparent utilization) due to 7 competing jobs concurrently saturating the shared GPFS filesystem. CPU utilization of 15% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 7",
+      "bw_utilization_ratio: 0.24",
+      "observed_bw_mb_s: 122.5",
+      "peak_storage_bw_mb_s: 500",
+      "cpu_util_pct: 15"
+    ]
+  }
+}

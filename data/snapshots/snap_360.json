@@ -1,0 +1,64 @@
+{
+  "id": "snap_360",
+  "workflow": {
+    "name": "1000_genomes",
+    "type": "genomics",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "commit_results",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 157,
+    "num_tasks": 1727,
+    "parallelism": 1727,
+    "total_time_s": 1469,
+    "io_time_s": 1146,
+    "compute_time_s": 323,
+    "io_time_ratio": 0.78,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 524250,
+    "op_count": 524250,
+    "checkpoint_size_mb": 52425,
+    "checkpoint_interval_s": 423,
+    "num_checkpoints": 10
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 296.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.74,
+    "iops": 296,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.96
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 26,
+    "memory_util_pct": 52,
+    "network_bw_mb_s": 307.8,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.031
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "The stage performs 10 checkpoint writes of 52425 MB each at 423s intervals, contributing 524250 MB of total checkpoint I/O. These periodic bursts saturate the storage at 296.0 MB/s (74% of peak), dominating the stage I/O budget. The io_time_ratio of 0.78 reflects cumulative time flushing checkpoints rather than performing productive computation.",
+    "key_signals": [
+      "checkpoint_size_mb: 52425",
+      "checkpoint_interval_s: 423",
+      "num_checkpoints: 10",
+      "aggregate_size_mb: 524250",
+      "io_time_ratio: 0.78"
+    ]
+  }
+}

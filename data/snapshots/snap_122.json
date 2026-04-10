@@ -1,0 +1,62 @@
+{
+  "id": "snap_122",
+  "workflow": {
+    "name": "namd",
+    "type": "molecular_dynamics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "data_ingestion",
+    "order": 4,
+    "predecessors": [
+      "data_ingestion"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 12,
+    "num_tasks": 60,
+    "parallelism": 60,
+    "total_time_s": 1069,
+    "io_time_s": 877,
+    "compute_time_s": 192,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 15702,
+    "op_count": 7851,
+    "competing_jobs": 5
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 147.1,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.49,
+    "iops": 74,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.71
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 28,
+    "memory_util_pct": 45,
+    "network_bw_mb_s": 139.7,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.014
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 300 MB/s, the workflow only observes 147.1 MB/s (49% apparent utilization) due to 5 competing jobs concurrently saturating the shared PVFS2 filesystem. CPU utilization of 28% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 5",
+      "bw_utilization_ratio: 0.49",
+      "observed_bw_mb_s: 147.1",
+      "peak_storage_bw_mb_s: 300",
+      "cpu_util_pct: 28"
+    ]
+  }
+}

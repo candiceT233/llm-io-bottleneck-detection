@@ -1,0 +1,14 @@
+Loading snapshots...
+Loaded 385 snapshots.
+
+Log file: /home/alistair/school/iit/Spring26/CS546Parallel/llm-io-bottleneck-detection/data/results/run_20260410_114214.log
+
+=======================================================
+Strategy: gpt-4.1-mini / few_shot
+=======================================================
+  (few_shot: excluding 5 example snapshots from evaluation)
+[ 1/380] snap_001 ... correct
+[ 2/380] snap_002 ... correct
+[ 3/380] snap_004 ... correct
+[ 4/380] snap_005 ... correct
+[ 5/380] snap_006 ... 

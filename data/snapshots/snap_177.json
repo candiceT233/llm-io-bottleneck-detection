@@ -1,0 +1,65 @@
+{
+  "id": "snap_177",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "save_output",
+    "order": 4,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 27,
+    "num_tasks": 216,
+    "parallelism": 216,
+    "total_time_s": 1902,
+    "io_time_s": 1484,
+    "compute_time_s": 418,
+    "io_time_ratio": 0.78,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 57194,
+    "op_count": 114388,
+    "data_staged": false,
+    "intended_staging_tier": "node_local_ssd",
+    "remote_access_latency_ms": 124
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 52.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.26,
+    "iops": 104,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.52
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 10,
+    "memory_util_pct": 31,
+    "network_bw_mb_s": 54.1,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.011
+  },
+  "storage": {
+    "type": "ceph",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (node_local_ssd) before execution began. Tasks access CEPH directly, which carries a remote latency of 124 ms, yielding only 52.0 MB/s effective bandwidth (26% of the 200 MB/s peak). CPU utilization of 10% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 124",
+      "bw_utilization_ratio: 0.26",
+      "storage_type: ceph",
+      "cpu_util_pct: 10",
+      "io_time_ratio: 0.78"
+    ]
+  }
+}

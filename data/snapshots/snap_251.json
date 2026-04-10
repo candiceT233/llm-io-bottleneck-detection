@@ -1,0 +1,62 @@
+{
+  "id": "snap_251",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "restore_state",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 25,
+    "num_tasks": 100,
+    "parallelism": 100,
+    "total_time_s": 1373,
+    "io_time_s": 1112,
+    "compute_time_s": 261,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 65174,
+    "op_count": 130348
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 610.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 1000,
+    "bw_utilization_ratio": 0.61,
+    "iops": 1220,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.82
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 22,
+    "memory_util_pct": 27,
+    "network_bw_mb_s": 4400.0,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.88
+  },
+  "storage": {
+    "type": "ceph",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 4400.0 MB/s reaches 88% of the network peak (5000 MB/s), making the interconnect the primary bottleneck. Data is accessed from CEPH, requiring all transfers to traverse the network. CPU utilization of 22% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "key_signals": [
+      "network_util_ratio: 0.88",
+      "network_bw_mb_s: 4400.0",
+      "network_peak_bw_mb_s: 5000",
+      "cpu_util_pct: 22",
+      "io_time_ratio: 0.81",
+      "storage_type: ceph"
+    ]
+  }
+}

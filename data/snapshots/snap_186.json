@@ -1,0 +1,65 @@
+{
+  "id": "snap_186",
+  "workflow": {
+    "name": "namd",
+    "type": "molecular_dynamics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "read_checkpoint",
+    "order": 3,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 27,
+    "num_tasks": 135,
+    "parallelism": 135,
+    "total_time_s": 1477,
+    "io_time_s": 1241,
+    "compute_time_s": 236,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 56819,
+    "op_count": 56819,
+    "data_staged": false,
+    "intended_staging_tier": "node_local_ssd",
+    "remote_access_latency_ms": 241
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 150.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.25,
+    "iops": 150,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.53
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 20,
+    "memory_util_pct": 33,
+    "network_bw_mb_s": 142.5,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.142
+  },
+  "storage": {
+    "type": "s3",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (node_local_ssd) before execution began. Tasks access S3 directly, which carries a remote latency of 241 ms, yielding only 150.0 MB/s effective bandwidth (25% of the 600 MB/s peak). CPU utilization of 20% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 241",
+      "bw_utilization_ratio: 0.25",
+      "storage_type: s3",
+      "cpu_util_pct: 20",
+      "io_time_ratio: 0.84"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "snap_274",
+  "workflow": {
+    "name": "1000_genomes",
+    "type": "genomics",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "store_results",
+    "order": 2,
+    "predecessors": [
+      "restore_state"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 59,
+    "num_tasks": 531,
+    "parallelism": 531,
+    "total_time_s": 775,
+    "io_time_s": 728,
+    "compute_time_s": 47,
+    "io_time_ratio": 0.94,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 79233,
+    "op_count": 79233
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 360.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.9,
+    "iops": 360,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.76
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 18,
+    "memory_util_pct": 60,
+    "network_bw_mb_s": 360.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.36
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 360.0 MB/s reaches 90% of the PVFS2 storage peak (400 MB/s), saturating the filesystem. CPU utilization of only 18% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.94 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.9",
+      "write_bw_mb_s: 360.0",
+      "peak_storage_bw_mb_s: 400",
+      "cpu_util_pct: 18",
+      "io_time_ratio: 0.94"
+    ]
+  }
+}

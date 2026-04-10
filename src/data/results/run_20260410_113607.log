@@ -1,0 +1,52 @@
+Loading snapshots...
+Loaded 0 snapshots.
+
+Log file: data/results/run_20260410_113607.log
+
+=======================================================
+Strategy: gpt-4.1-mini / chain_of_thought
+=======================================================
+
+=== Summary ===
+Accuracy : 0.0%  (0/0)
+Macro F1 : 0.000
+
+Per-class F1:
+  storage_bandwidth_saturation        P=0.00  R=0.00  F1=0.00
+  metadata_contention                 P=0.00  R=0.00  F1=0.00
+  lock_contention                     P=0.00  R=0.00  F1=0.00
+  network_io_bottleneck               P=0.00  R=0.00  F1=0.00
+  serialized_io                       P=0.00  R=0.00  F1=0.00
+  checkpointing_overhead              P=0.00  R=0.00  F1=0.00
+  compute_bound                       P=0.00  R=0.00  F1=0.00
+  read_bandwidth_saturation           P=0.00  R=0.00  F1=0.00
+  io_interference                     P=0.00  R=0.00  F1=0.00
+  data_skew                           P=0.00  R=0.00  F1=0.00
+  staging_inefficiency                P=0.00  R=0.00  F1=0.00
+
+Results saved to: data/results/gpt-4.1-mini_chain_of_thought_20260410_113607.json
+
+=======================================================
+Strategy: gpt-4.1-mini / few_shot
+=======================================================
+  (few_shot: excluding 0 example snapshots from evaluation)
+
+=== Summary ===
+Accuracy : 0.0%  (0/0)
+Macro F1 : 0.000
+
+Per-class F1:
+  storage_bandwidth_saturation        P=0.00  R=0.00  F1=0.00
+  metadata_contention                 P=0.00  R=0.00  F1=0.00
+  lock_contention                     P=0.00  R=0.00  F1=0.00
+  network_io_bottleneck               P=0.00  R=0.00  F1=0.00
+  serialized_io                       P=0.00  R=0.00  F1=0.00
+  checkpointing_overhead              P=0.00  R=0.00  F1=0.00
+  compute_bound                       P=0.00  R=0.00  F1=0.00
+  read_bandwidth_saturation           P=0.00  R=0.00  F1=0.00
+  io_interference                     P=0.00  R=0.00  F1=0.00
+  data_skew                           P=0.00  R=0.00  F1=0.00
+  staging_inefficiency                P=0.00  R=0.00  F1=0.00
+
+Results saved to: data/results/gpt-4.1-mini_few_shot_20260410_113607.json
+

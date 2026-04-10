@@ -1,0 +1,62 @@
+{
+  "id": "snap_242",
+  "workflow": {
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
+  },
+  "stage": {
+    "name": "load_data",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 54,
+    "num_tasks": 324,
+    "parallelism": 324,
+    "total_time_s": 276,
+    "io_time_s": 235,
+    "compute_time_s": 41,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 98206,
+    "op_count": 49103
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 650.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 1000,
+    "bw_utilization_ratio": 0.65,
+    "iops": 325,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.8
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 20,
+    "memory_util_pct": 53,
+    "network_bw_mb_s": 950.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.95
+  },
+  "storage": {
+    "type": "nfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 950.0 MB/s reaches 95% of the network peak (1000 MB/s), making the interconnect the primary bottleneck. Data is accessed from NFS, requiring all transfers to traverse the network. CPU utilization of 20% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "key_signals": [
+      "network_util_ratio: 0.95",
+      "network_bw_mb_s: 950.0",
+      "network_peak_bw_mb_s: 1000",
+      "cpu_util_pct: 20",
+      "io_time_ratio: 0.85",
+      "storage_type: nfs"
+    ]
+  }
+}

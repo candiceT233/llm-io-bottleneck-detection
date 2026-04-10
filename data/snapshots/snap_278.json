@@ -1,0 +1,61 @@
+{
+  "id": "snap_278",
+  "workflow": {
+    "name": "spark_etl",
+    "type": "etl",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "write_checkpoint",
+    "order": 6,
+    "predecessors": [
+      "data_ingestion"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 16,
+    "num_tasks": 144,
+    "parallelism": 144,
+    "total_time_s": 284,
+    "io_time_s": 230,
+    "compute_time_s": 54,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 12328,
+    "op_count": 12328
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 142.5,
+    "peak_storage_bw_mb_s": 150,
+    "bw_utilization_ratio": 0.95,
+    "iops": 142,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.8
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 13,
+    "memory_util_pct": 60,
+    "network_bw_mb_s": 138.2,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.028
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 142.5 MB/s reaches 95% of the WEKAFS storage peak (150 MB/s), saturating the filesystem. CPU utilization of only 13% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.81 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.95",
+      "write_bw_mb_s: 142.5",
+      "peak_storage_bw_mb_s: 150",
+      "cpu_util_pct: 13",
+      "io_time_ratio: 0.81"
+    ]
+  }
+}

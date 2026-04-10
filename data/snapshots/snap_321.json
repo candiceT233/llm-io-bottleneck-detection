@@ -1,0 +1,61 @@
+{
+  "id": "snap_321",
+  "workflow": {
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "load_data",
+    "order": 6,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 119,
+    "num_tasks": 1904,
+    "parallelism": 1,
+    "total_time_s": 1153,
+    "io_time_s": 1061,
+    "compute_time_s": 92,
+    "io_time_ratio": 0.92,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 29829,
+    "op_count": 29829
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 48.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.24,
+    "iops": 48,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.86
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 8,
+    "memory_util_pct": 39,
+    "network_bw_mb_s": 50.4,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.05
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single reader operates at a time despite 1904 tasks available. This limits effective bandwidth to 48.0 MB/s (24% of the 200 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 1903 tasks wait idle while serialized I/O completes.",
+    "key_signals": [
+      "parallelism: 1",
+      "num_tasks: 1904",
+      "bw_utilization_ratio: 0.24",
+      "io_time_ratio: 0.92",
+      "read_bw_mb_s: 48.0"
+    ]
+  }
+}

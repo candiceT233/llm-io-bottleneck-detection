@@ -1,0 +1,63 @@
+{
+  "id": "snap_378",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "save_output",
+    "order": 2,
+    "predecessors": [
+      "load_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 94,
+    "num_tasks": 1410,
+    "parallelism": 1410,
+    "total_time_s": 1811,
+    "io_time_s": 1594,
+    "compute_time_s": 217,
+    "io_time_ratio": 0.88,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 11554,
+    "op_count": 23108,
+    "num_shared_files": 3
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 50.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.25,
+    "iops": 100,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.62
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 17,
+    "memory_util_pct": 30,
+    "network_bw_mb_s": 54.5,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.054
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "lock_contention",
+    "confidence": "high",
+    "explanation": "1410 tasks compete for write locks on 3 shared file(s) on the shared WEKAFS filesystem. Lock acquisition serializes access, resulting in only 50.0 MB/s effective bandwidth (25% of the 200 MB/s peak) despite full task parallelism. CPU utilization of 17% confirms tasks are stalled waiting for lock release rather than performing computation.",
+    "key_signals": [
+      "num_shared_files: 3",
+      "num_tasks: 1410",
+      "bw_utilization_ratio: 0.25",
+      "cpu_util_pct: 17",
+      "io_time_ratio: 0.88",
+      "storage.shared: true"
+    ]
+  }
+}

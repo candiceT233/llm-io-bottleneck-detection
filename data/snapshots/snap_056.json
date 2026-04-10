@@ -1,0 +1,61 @@
+{
+  "id": "snap_056",
+  "workflow": {
+    "name": "montage",
+    "type": "astronomy",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "fetch_input",
+    "order": 1,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 33,
+    "num_tasks": 594,
+    "parallelism": 594,
+    "total_time_s": 651,
+    "io_time_s": 573,
+    "compute_time_s": 78,
+    "io_time_ratio": 0.88,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 297,
+    "op_count": 594
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 136.5,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 150,
+    "bw_utilization_ratio": 0.91,
+    "iops": 273,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.79
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 13,
+    "memory_util_pct": 47,
+    "network_bw_mb_s": 121.5,
+    "network_peak_bw_mb_s": 25000,
+    "network_util_ratio": 0.005
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 32,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 136.5 MB/s reaches 91% of the LUSTRE storage peak (150 MB/s), saturating the filesystem on the read path. CPU utilization of only 13% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.88 confirms that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.91",
+      "read_bw_mb_s: 136.5",
+      "peak_storage_bw_mb_s: 150",
+      "cpu_util_pct: 13",
+      "io_time_ratio: 0.88"
+    ]
+  }
+}

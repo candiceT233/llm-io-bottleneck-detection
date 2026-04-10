@@ -1,0 +1,65 @@
+{
+  "id": "snap_185",
+  "workflow": {
+    "name": "montage",
+    "type": "astronomy",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "flush_buffer",
+    "order": 6,
+    "predecessors": [
+      "read_checkpoint"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 39,
+    "num_tasks": 468,
+    "parallelism": 468,
+    "total_time_s": 1237,
+    "io_time_s": 977,
+    "compute_time_s": 260,
+    "io_time_ratio": 0.79,
+    "transfer_size_kb": 128,
+    "aggregate_size_mb": 47603,
+    "op_count": 380824,
+    "data_staged": false,
+    "intended_staging_tier": "node_local_ssd",
+    "remote_access_latency_ms": 355
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 164.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.41,
+    "iops": 1312,
+    "avg_io_size_kb": 128,
+    "sequential_ratio": 0.45
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 13,
+    "memory_util_pct": 46,
+    "network_bw_mb_s": 162.4,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.016
+  },
+  "storage": {
+    "type": "nfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (node_local_ssd) before execution began. Tasks access NFS directly, which carries a remote latency of 355 ms, yielding only 164.0 MB/s effective bandwidth (41% of the 400 MB/s peak). CPU utilization of 13% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 355",
+      "bw_utilization_ratio: 0.41",
+      "storage_type: nfs",
+      "cpu_util_pct: 13",
+      "io_time_ratio: 0.79"
+    ]
+  }
+}

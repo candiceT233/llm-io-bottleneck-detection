@@ -1,0 +1,59 @@
+{
+  "id": "snap_231",
+  "workflow": {
+    "name": "namd",
+    "type": "molecular_dynamics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "flush_buffer",
+    "order": 2,
+    "predecessors": [
+      "restore_state"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 12,
+    "num_tasks": 132,
+    "parallelism": 132,
+    "total_time_s": 1643,
+    "io_time_s": 345,
+    "compute_time_s": 1298,
+    "io_time_ratio": 0.21,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 1114,
+    "op_count": 2228
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 20.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.1,
+    "iops": 40,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.64
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 79,
+    "memory_util_pct": 83,
+    "network_bw_mb_s": 13.4,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.013
+  },
+  "storage": {
+    "type": "nfs",
+    "stripe_count": 16,
+    "shared": false
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 79% confirms that computation is the dominant bottleneck. The io_time_ratio of 0.21 shows that I/O accounts for a small fraction of the total stage time. Bandwidth utilization of 10% leaves significant I/O headroom unused, indicating the system is not I/O-limited.",
+    "key_signals": [
+      "cpu_util_pct: 79",
+      "io_time_ratio: 0.21",
+      "bw_utilization_ratio: 0.1"
+    ]
+  }
+}

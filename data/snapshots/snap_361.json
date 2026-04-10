@@ -1,0 +1,63 @@
+{
+  "id": "snap_361",
+  "workflow": {
+    "name": "namd",
+    "type": "molecular_dynamics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "dump_state",
+    "order": 6,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 30,
+    "num_tasks": 780,
+    "parallelism": 780,
+    "total_time_s": 1378,
+    "io_time_s": 1199,
+    "compute_time_s": 179,
+    "io_time_ratio": 0.87,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 5155,
+    "op_count": 20620,
+    "num_shared_files": 4
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 116.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.29,
+    "iops": 464,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.71
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 13,
+    "memory_util_pct": 34,
+    "network_bw_mb_s": 95.1,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.01
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "lock_contention",
+    "confidence": "high",
+    "explanation": "780 tasks compete for write locks on 4 shared file(s) on the shared WEKAFS filesystem. Lock acquisition serializes access, resulting in only 116.0 MB/s effective bandwidth (29% of the 400 MB/s peak) despite full task parallelism. CPU utilization of 13% confirms tasks are stalled waiting for lock release rather than performing computation.",
+    "key_signals": [
+      "num_shared_files: 4",
+      "num_tasks: 780",
+      "bw_utilization_ratio: 0.29",
+      "cpu_util_pct: 13",
+      "io_time_ratio: 0.87",
+      "storage.shared: true"
+    ]
+  }
+}

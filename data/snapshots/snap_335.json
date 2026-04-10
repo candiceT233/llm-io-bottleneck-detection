@@ -1,0 +1,61 @@
+{
+  "id": "snap_335",
+  "workflow": {
+    "name": "blast",
+    "type": "genomics",
+    "num_stages": 3
+  },
+  "stage": {
+    "name": "store_results",
+    "order": 5,
+    "predecessors": [
+      "load_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 66,
+    "num_tasks": 1320,
+    "parallelism": 1,
+    "total_time_s": 1993,
+    "io_time_s": 1714,
+    "compute_time_s": 279,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 4582,
+    "op_count": 2291
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 156.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.26,
+    "iops": 78,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.86
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 6,
+    "memory_util_pct": 22,
+    "network_bw_mb_s": 157.6,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.016
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single writer operates at a time despite 1320 tasks available. This limits effective bandwidth to 156.0 MB/s (26% of the 600 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 1319 tasks wait idle while serialized I/O completes.",
+    "key_signals": [
+      "parallelism: 1",
+      "num_tasks: 1320",
+      "bw_utilization_ratio: 0.26",
+      "io_time_ratio: 0.86",
+      "write_bw_mb_s: 156.0"
+    ]
+  }
+}
