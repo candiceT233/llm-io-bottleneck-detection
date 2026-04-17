@@ -1,0 +1,287 @@
+=======================================================
+Strategy: rule_based (no LLM)
+=======================================================
+
+=== Summary ===
+Accuracy : 91.2%  (351/385)
+Macro F1 : 0.903
+
+Per-class F1:
+  storage_bandwidth_saturation        P=0.57  R=0.57  F1=0.57
+  metadata_contention                 P=1.00  R=0.97  F1=0.98
+  lock_contention                     P=0.80  R=1.00  F1=0.89
+  network_io_bottleneck               P=1.00  R=1.00  F1=1.00
+  serialized_io                       P=1.00  R=0.78  F1=0.88
+  checkpointing_overhead              P=1.00  R=0.59  F1=0.74
+  compute_bound                       P=1.00  R=1.00  F1=1.00
+  read_bandwidth_saturation           P=0.76  R=1.00  F1=0.87
+  io_interference                     P=1.00  R=1.00  F1=1.00
+  data_skew                           P=1.00  R=1.00  F1=1.00
+  staging_inefficiency                P=1.00  R=1.00  F1=1.00
+
+=== Timing ===
+  Wall-clock duration  : 0.0 s
+  Total API time       : 0.0 s
+  Start                : 2026-04-17T12:00:17.651678
+  End                  : 2026-04-17T12:00:17.675201
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 0
+  Total completion tokens  : 0
+  Total tokens             : 0
+  Avg prompt / snapshot    : 0.0
+  Avg completion / snapshot: 0.0
+  Avg total / snapshot     : 0.0
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  storage_bandwidth_saturation          30        0.0         0.0        0.0       0.000s
+  metadata_contention                   32        0.0         0.0        0.0       0.000s
+  lock_contention                       32        0.0         0.0        0.0       0.000s
+  network_io_bottleneck                 32        0.0         0.0        0.0       0.000s
+  serialized_io                         32        0.0         0.0        0.0       0.000s
+  checkpointing_overhead                32        0.0         0.0        0.0       0.000s
+  compute_bound                         33        0.0         0.0        0.0       0.000s
+  read_bandwidth_saturation             42        0.0         0.0        0.0       0.000s
+  io_interference                       40        0.0         0.0        0.0       0.000s
+  data_skew                             40        0.0         0.0        0.0       0.000s
+  staging_inefficiency                  40        0.0         0.0        0.0       0.000s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 83.4 %
+  Memory start (RSS)       : 63.7 MB
+  Memory end   (RSS)       : 64.2 MB
+  Memory peak  (RSS)       : 64.2 MB
+
+
+
+=======================================================
+Strategy: gpt-4.1-mini / classify_only
+=======================================================
+
+=== Summary ===
+Accuracy : 44.4%  (171/385)
+Macro F1 : 0.390
+
+Per-class F1:
+  storage_bandwidth_saturation        P=0.40  R=0.97  F1=0.57
+  metadata_contention                 P=0.00  R=0.00  F1=0.00
+  lock_contention                     P=1.00  R=0.03  F1=0.06
+  network_io_bottleneck               P=1.00  R=0.69  F1=0.81
+  serialized_io                       P=0.18  R=0.91  F1=0.30
+  checkpointing_overhead              P=0.58  R=0.78  F1=0.67
+  compute_bound                       P=0.83  R=0.73  F1=0.77
+  read_bandwidth_saturation           P=0.36  R=0.10  F1=0.15
+  io_interference                     P=0.00  R=0.00  F1=0.00
+  data_skew                           P=1.00  R=0.93  F1=0.96
+  staging_inefficiency                P=0.00  R=0.00  F1=0.00
+
+=== Timing ===
+  Wall-clock duration  : 1170.5 s
+  Total API time       : 1170.3 s
+  Start                : 2026-04-17T12:00:17.740415
+  End                  : 2026-04-17T12:19:48.243979
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 214,034
+  Total completion tokens  : 67,558
+  Total tokens             : 281,592
+  Avg prompt / snapshot    : 555.9
+  Avg completion / snapshot: 175.5
+  Avg total / snapshot     : 731.4
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  staging_inefficiency                  40      776.4       577.0      199.5       3.661s
+  checkpointing_overhead                32      756.4       580.2      176.2       3.186s
+  lock_contention                       32      740.9       558.4      182.5       2.862s
+  io_interference                       40      738.6       554.5      184.2       3.308s
+  metadata_contention                   32      735.9       546.0      189.9       3.014s
+  data_skew                             40      727.9       567.5      160.3       2.696s
+  network_io_bottleneck                 32      722.0       544.2      177.7       3.209s
+  serialized_io                         32      720.9       550.3      170.6       2.597s
+  storage_bandwidth_saturation          30      712.8       545.2      167.6       2.470s
+  read_bandwidth_saturation             42      708.4       542.8      165.6       3.264s
+  compute_bound                         33      700.1       545.2      154.9       2.932s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 0.2 %
+  Memory start (RSS)       : 64.3 MB
+  Memory end   (RSS)       : 71.2 MB
+  Memory peak  (RSS)       : 74.4 MB
+
+
+
+=======================================================
+Strategy: gpt-4.1-mini / zero_shot
+=======================================================
+
+=== Summary ===
+Accuracy : 96.1%  (370/385)
+Macro F1 : 0.958
+
+Per-class F1:
+  storage_bandwidth_saturation        P=1.00  R=0.57  F1=0.72
+  metadata_contention                 P=1.00  R=1.00  F1=1.00
+  lock_contention                     P=1.00  R=1.00  F1=1.00
+  network_io_bottleneck               P=1.00  R=0.97  F1=0.98
+  serialized_io                       P=1.00  R=1.00  F1=1.00
+  checkpointing_overhead              P=1.00  R=1.00  F1=1.00
+  compute_bound                       P=1.00  R=0.97  F1=0.98
+  read_bandwidth_saturation           P=0.76  R=1.00  F1=0.87
+  io_interference                     P=1.00  R=1.00  F1=1.00
+  data_skew                           P=1.00  R=1.00  F1=1.00
+  staging_inefficiency                P=0.95  R=1.00  F1=0.98
+
+=== Timing ===
+  Wall-clock duration  : 975.4 s
+  Total API time       : 975.2 s
+  Start                : 2026-04-17T12:19:48.329959
+  End                  : 2026-04-17T12:36:03.761665
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 338,774
+  Total completion tokens  : 66,537
+  Total tokens             : 405,311
+  Avg prompt / snapshot    : 879.9
+  Avg completion / snapshot: 172.8
+  Avg total / snapshot     : 1052.8
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  staging_inefficiency                  40     1086.3       901.0      185.4       2.527s
+  checkpointing_overhead                32     1077.0       904.2      172.8       2.507s
+  data_skew                             40     1061.8       891.5      170.2       2.588s
+  read_bandwidth_saturation             42     1050.1       866.8      183.4       2.719s
+  io_interference                       40     1048.3       878.5      169.8       2.726s
+  lock_contention                       32     1047.4       882.4      165.0       2.226s
+  network_io_bottleneck                 32     1046.8       868.2      178.5       2.633s
+  storage_bandwidth_saturation          30     1044.3       869.2      175.1       2.545s
+  metadata_contention                   32     1043.3       870.0      173.3       2.671s
+  compute_bound                         33     1034.5       869.2      165.4       2.230s
+  serialized_io                         32     1031.7       874.3      157.3       2.384s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 0.2 %
+  Memory start (RSS)       : 71.4 MB
+  Memory end   (RSS)       : 71.9 MB
+  Memory peak  (RSS)       : 74.4 MB
+
+
+
+=======================================================
+Strategy: gpt-4.1-mini / few_shot
+=======================================================
+
+=== Summary ===
+Accuracy : 93.7%  (356/380)
+Macro F1 : 0.932
+
+Per-class F1:
+  storage_bandwidth_saturation        P=0.80  R=0.53  F1=0.64
+  metadata_contention                 P=1.00  R=0.97  F1=0.98
+  lock_contention                     P=1.00  R=0.94  F1=0.97
+  network_io_bottleneck               P=1.00  R=1.00  F1=1.00
+  serialized_io                       P=1.00  R=1.00  F1=1.00
+  checkpointing_overhead              P=0.80  R=0.88  F1=0.84
+  compute_bound                       P=1.00  R=1.00  F1=1.00
+  read_bandwidth_saturation           P=0.76  R=1.00  F1=0.86
+  io_interference                     P=1.00  R=1.00  F1=1.00
+  data_skew                           P=1.00  R=1.00  F1=1.00
+  staging_inefficiency                P=1.00  R=0.92  F1=0.96
+
+=== Timing ===
+  Wall-clock duration  : 984.2 s
+  Total API time       : 983.6 s
+  Start                : 2026-04-17T12:36:03.850440
+  End                  : 2026-04-17T12:52:28.084101
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 1,329,966
+  Total completion tokens  : 65,411
+  Total tokens             : 1,395,377
+  Avg prompt / snapshot    : 3499.9
+  Avg completion / snapshot: 172.1
+  Avg total / snapshot     : 3672.0
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  checkpointing_overhead                32     3700.8      3524.2      176.6       2.753s
+  staging_inefficiency                  39     3696.4      3521.0      175.4       2.635s
+  data_skew                             40     3688.9      3511.6      177.4       2.476s
+  network_io_bottleneck                 32     3672.8      3488.2      184.6       2.782s
+  io_interference                       39     3672.3      3498.4      173.9       2.706s
+  lock_contention                       31     3671.3      3502.0      169.3       2.672s
+  storage_bandwidth_saturation          30     3665.3      3489.2      176.1       2.614s
+  metadata_contention                   31     3662.6      3490.2      172.5       2.512s
+  read_bandwidth_saturation             41     3658.5      3486.7      171.8       2.345s
+  serialized_io                         32     3655.3      3494.3      161.0       2.461s
+  compute_bound                         33     3642.6      3489.2      153.5       2.580s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 0.3 %
+  Memory start (RSS)       : 71.9 MB
+  Memory end   (RSS)       : 72.7 MB
+  Memory peak  (RSS)       : 74.4 MB
+
+
+
+=======================================================
+Strategy: gpt-4.1-mini / chain_of_thought
+=======================================================
+
+=== Summary ===
+Accuracy : 96.1%  (370/385)
+Macro F1 : 0.958
+
+Per-class F1:
+  storage_bandwidth_saturation        P=1.00  R=0.57  F1=0.72
+  metadata_contention                 P=1.00  R=1.00  F1=1.00
+  lock_contention                     P=1.00  R=0.97  F1=0.98
+  network_io_bottleneck               P=1.00  R=0.97  F1=0.98
+  serialized_io                       P=1.00  R=1.00  F1=1.00
+  checkpointing_overhead              P=0.97  R=1.00  F1=0.98
+  compute_bound                       P=1.00  R=1.00  F1=1.00
+  read_bandwidth_saturation           P=0.75  R=1.00  F1=0.86
+  io_interference                     P=1.00  R=1.00  F1=1.00
+  data_skew                           P=1.00  R=1.00  F1=1.00
+  staging_inefficiency                P=1.00  R=1.00  F1=1.00
+
+=== Timing ===
+  Wall-clock duration  : 1161.3 s
+  Total API time       : 1161.0 s
+  Start                : 2026-04-17T12:52:28.166195
+  End                  : 2026-04-17T13:11:49.422609
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 443,109
+  Total completion tokens  : 80,905
+  Total tokens             : 524,014
+  Avg prompt / snapshot    : 1150.9
+  Avg completion / snapshot: 210.1
+  Avg total / snapshot     : 1361.1
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  data_skew                             40     1419.0      1162.5      256.5       3.377s
+  checkpointing_overhead                32     1398.3      1175.2      223.1       2.928s
+  staging_inefficiency                  40     1389.8      1172.0      217.8       3.399s
+  io_interference                       40     1367.2      1149.5      217.7       2.985s
+  metadata_contention                   32     1353.8      1141.0      212.8       3.399s
+  network_io_bottleneck                 32     1351.9      1139.2      212.7       2.813s
+  storage_bandwidth_saturation          30     1348.7      1140.2      208.5       2.867s
+  read_bandwidth_saturation             42     1346.2      1137.8      208.4       2.828s
+  lock_contention                       32     1332.9      1153.4      179.6       2.878s
+  compute_bound                         33     1324.5      1140.2      184.4       2.871s
+  serialized_io                         32     1321.4      1145.3      176.1       2.703s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 0.2 %
+  Memory start (RSS)       : 72.7 MB
+  Memory end   (RSS)       : 72.8 MB
+  Memory peak  (RSS)       : 74.4 MB

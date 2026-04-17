@@ -1,0 +1,2216 @@
+Loading snapshots...
+Loaded 385 snapshots.
+
+Log file: /home/alistair/school/iit/Spring26/CS546Parallel/llm-io-bottleneck-detection/data/results/run_20260417_120017.log
+
+=======================================================
+Strategy: rule_based (no LLM)
+=======================================================
+[ 1/385] snap_001 ... correct
+[ 2/385] snap_002 ... correct
+[ 3/385] snap_003 ... correct
+[ 4/385] snap_004 ... correct
+[ 5/385] snap_005 ... correct
+[ 6/385] snap_006 ... correct
+[ 7/385] snap_007 ... correct
+[ 8/385] snap_008 ... correct
+[ 9/385] snap_009 ... WRONG (predicted: lock_contention)
+[10/385] snap_010 ... correct
+[11/385] snap_011 ... correct
+[12/385] snap_012 ... correct
+[13/385] snap_013 ... correct
+[14/385] snap_014 ... correct
+[15/385] snap_015 ... correct
+[16/385] snap_016 ... correct
+[17/385] snap_017 ... correct
+[18/385] snap_018 ... correct
+[19/385] snap_019 ... correct
+[20/385] snap_020 ... correct
+[21/385] snap_021 ... correct
+[22/385] snap_022 ... correct
+[23/385] snap_023 ... correct
+[24/385] snap_024 ... correct
+[25/385] snap_025 ... correct
+[26/385] snap_026 ... correct
+[27/385] snap_027 ... correct
+[28/385] snap_028 ... correct
+[29/385] snap_029 ... WRONG (predicted: lock_contention)
+[30/385] snap_030 ... WRONG (predicted: storage_bandwidth_saturation)
+[31/385] snap_031 ... WRONG (predicted: storage_bandwidth_saturation)
+[32/385] snap_032 ... WRONG (predicted: lock_contention)
+[33/385] snap_033 ... WRONG (predicted: lock_contention)
+[34/385] snap_034 ... WRONG (predicted: lock_contention)
+[35/385] snap_035 ... WRONG (predicted: lock_contention)
+[36/385] snap_036 ... WRONG (predicted: lock_contention)
+[37/385] snap_037 ... WRONG (predicted: storage_bandwidth_saturation)
+[38/385] snap_038 ... WRONG (predicted: storage_bandwidth_saturation)
+[39/385] snap_039 ... WRONG (predicted: storage_bandwidth_saturation)
+[40/385] snap_040 ... WRONG (predicted: storage_bandwidth_saturation)
+[41/385] snap_041 ... WRONG (predicted: storage_bandwidth_saturation)
+[42/385] snap_042 ... WRONG (predicted: lock_contention)
+[43/385] snap_043 ... correct
+[44/385] snap_044 ... correct
+[45/385] snap_045 ... correct
+[46/385] snap_046 ... correct
+[47/385] snap_047 ... correct
+[48/385] snap_048 ... correct
+[49/385] snap_049 ... correct
+[50/385] snap_050 ... correct
+[51/385] snap_051 ... correct
+[52/385] snap_052 ... correct
+[53/385] snap_053 ... correct
+[54/385] snap_054 ... correct
+[55/385] snap_055 ... correct
+[56/385] snap_056 ... correct
+[57/385] snap_057 ... correct
+[58/385] snap_058 ... correct
+[59/385] snap_059 ... correct
+[60/385] snap_060 ... correct
+[61/385] snap_061 ... correct
+[62/385] snap_062 ... correct
+[63/385] snap_063 ... correct
+[64/385] snap_064 ... correct
+[65/385] snap_065 ... correct
+[66/385] snap_066 ... correct
+[67/385] snap_067 ... correct
+[68/385] snap_068 ... correct
+[69/385] snap_069 ... correct
+[70/385] snap_070 ... correct
+[71/385] snap_071 ... correct
+[72/385] snap_072 ... correct
+[73/385] snap_073 ... correct
+[74/385] snap_074 ... correct
+[75/385] snap_075 ... correct
+[76/385] snap_076 ... correct
+[77/385] snap_077 ... correct
+[78/385] snap_078 ... correct
+[79/385] snap_079 ... correct
+[80/385] snap_080 ... correct
+[81/385] snap_081 ... correct
+[82/385] snap_082 ... correct
+[83/385] snap_083 ... correct
+[84/385] snap_084 ... correct
+[85/385] snap_085 ... correct
+[86/385] snap_086 ... correct
+[87/385] snap_087 ... correct
+[88/385] snap_088 ... correct
+[89/385] snap_089 ... correct
+[90/385] snap_090 ... correct
+[91/385] snap_091 ... correct
+[92/385] snap_092 ... correct
+[93/385] snap_093 ... correct
+[94/385] snap_094 ... correct
+[95/385] snap_095 ... correct
+[96/385] snap_096 ... correct
+[97/385] snap_097 ... correct
+[98/385] snap_098 ... correct
+[99/385] snap_099 ... correct
+[100/385] snap_100 ... correct
+[101/385] snap_101 ... correct
+[102/385] snap_102 ... correct
+[103/385] snap_103 ... correct
+[104/385] snap_104 ... correct
+[105/385] snap_105 ... correct
+[106/385] snap_106 ... correct
+[107/385] snap_107 ... correct
+[108/385] snap_108 ... correct
+[109/385] snap_109 ... correct
+[110/385] snap_110 ... correct
+[111/385] snap_111 ... correct
+[112/385] snap_112 ... correct
+[113/385] snap_113 ... correct
+[114/385] snap_114 ... correct
+[115/385] snap_115 ... correct
+[116/385] snap_116 ... correct
+[117/385] snap_117 ... correct
+[118/385] snap_118 ... correct
+[119/385] snap_119 ... correct
+[120/385] snap_120 ... correct
+[121/385] snap_121 ... correct
+[122/385] snap_122 ... correct
+[123/385] snap_123 ... correct
+[124/385] snap_124 ... correct
+[125/385] snap_125 ... correct
+[126/385] snap_126 ... correct
+[127/385] snap_127 ... correct
+[128/385] snap_128 ... correct
+[129/385] snap_129 ... correct
+[130/385] snap_130 ... correct
+[131/385] snap_131 ... correct
+[132/385] snap_132 ... correct
+[133/385] snap_133 ... correct
+[134/385] snap_134 ... correct
+[135/385] snap_135 ... correct
+[136/385] snap_136 ... correct
+[137/385] snap_137 ... correct
+[138/385] snap_138 ... correct
+[139/385] snap_139 ... correct
+[140/385] snap_140 ... correct
+[141/385] snap_141 ... correct
+[142/385] snap_142 ... correct
+[143/385] snap_143 ... correct
+[144/385] snap_144 ... correct
+[145/385] snap_145 ... correct
+[146/385] snap_146 ... correct
+[147/385] snap_147 ... correct
+[148/385] snap_148 ... correct
+[149/385] snap_149 ... correct
+[150/385] snap_150 ... correct
+[151/385] snap_151 ... correct
+[152/385] snap_152 ... correct
+[153/385] snap_153 ... correct
+[154/385] snap_154 ... correct
+[155/385] snap_155 ... correct
+[156/385] snap_156 ... correct
+[157/385] snap_157 ... correct
+[158/385] snap_158 ... correct
+[159/385] snap_159 ... correct
+[160/385] snap_160 ... correct
+[161/385] snap_161 ... correct
+[162/385] snap_162 ... correct
+[163/385] snap_163 ... correct
+[164/385] snap_164 ... correct
+[165/385] snap_165 ... correct
+[166/385] snap_166 ... correct
+[167/385] snap_167 ... correct
+[168/385] snap_168 ... correct
+[169/385] snap_169 ... correct
+[170/385] snap_170 ... correct
+[171/385] snap_171 ... correct
+[172/385] snap_172 ... correct
+[173/385] snap_173 ... correct
+[174/385] snap_174 ... correct
+[175/385] snap_175 ... correct
+[176/385] snap_176 ... correct
+[177/385] snap_177 ... correct
+[178/385] snap_178 ... correct
+[179/385] snap_179 ... correct
+[180/385] snap_180 ... correct
+[181/385] snap_181 ... correct
+[182/385] snap_182 ... correct
+[183/385] snap_183 ... correct
+[184/385] snap_184 ... correct
+[185/385] snap_185 ... correct
+[186/385] snap_186 ... correct
+[187/385] snap_187 ... correct
+[188/385] snap_188 ... correct
+[189/385] snap_189 ... correct
+[190/385] snap_190 ... correct
+[191/385] snap_191 ... correct
+[192/385] snap_192 ... correct
+[193/385] snap_193 ... correct
+[194/385] snap_194 ... correct
+[195/385] snap_195 ... correct
+[196/385] snap_196 ... correct
+[197/385] snap_197 ... correct
+[198/385] snap_198 ... correct
+[199/385] snap_199 ... correct
+[200/385] snap_200 ... correct
+[201/385] snap_201 ... correct
+[202/385] snap_202 ... correct
+[203/385] snap_203 ... correct
+[204/385] snap_204 ... correct
+[205/385] snap_205 ... correct
+[206/385] snap_206 ... correct
+[207/385] snap_207 ... correct
+[208/385] snap_208 ... correct
+[209/385] snap_209 ... correct
+[210/385] snap_210 ... correct
+[211/385] snap_211 ... correct
+[212/385] snap_212 ... correct
+[213/385] snap_213 ... correct
+[214/385] snap_214 ... correct
+[215/385] snap_215 ... correct
+[216/385] snap_216 ... correct
+[217/385] snap_217 ... correct
+[218/385] snap_218 ... correct
+[219/385] snap_219 ... correct
+[220/385] snap_220 ... correct
+[221/385] snap_221 ... correct
+[222/385] snap_222 ... correct
+[223/385] snap_223 ... correct
+[224/385] snap_224 ... correct
+[225/385] snap_225 ... correct
+[226/385] snap_226 ... correct
+[227/385] snap_227 ... correct
+[228/385] snap_228 ... correct
+[229/385] snap_229 ... correct
+[230/385] snap_230 ... correct
+[231/385] snap_231 ... correct
+[232/385] snap_232 ... correct
+[233/385] snap_233 ... correct
+[234/385] snap_234 ... correct
+[235/385] snap_235 ... correct
+[236/385] snap_236 ... correct
+[237/385] snap_237 ... correct
+[238/385] snap_238 ... correct
+[239/385] snap_239 ... correct
+[240/385] snap_240 ... correct
+[241/385] snap_241 ... correct
+[242/385] snap_242 ... correct
+[243/385] snap_243 ... correct
+[244/385] snap_244 ... correct
+[245/385] snap_245 ... correct
+[246/385] snap_246 ... correct
+[247/385] snap_247 ... correct
+[248/385] snap_248 ... correct
+[249/385] snap_249 ... correct
+[250/385] snap_250 ... correct
+[251/385] snap_251 ... correct
+[252/385] snap_252 ... correct
+[253/385] snap_253 ... correct
+[254/385] snap_254 ... correct
+[255/385] snap_255 ... correct
+[256/385] snap_256 ... correct
+[257/385] snap_257 ... correct
+[258/385] snap_258 ... correct
+[259/385] snap_259 ... correct
+[260/385] snap_260 ... correct
+[261/385] snap_261 ... WRONG (predicted: read_bandwidth_saturation)
+[262/385] snap_262 ... correct
+[263/385] snap_263 ... WRONG (predicted: read_bandwidth_saturation)
+[264/385] snap_264 ... WRONG (predicted: read_bandwidth_saturation)
+[265/385] snap_265 ... correct
+[266/385] snap_266 ... correct
+[267/385] snap_267 ... WRONG (predicted: read_bandwidth_saturation)
+[268/385] snap_268 ... WRONG (predicted: read_bandwidth_saturation)
+[269/385] snap_269 ... correct
+[270/385] snap_270 ... WRONG (predicted: read_bandwidth_saturation)
+[271/385] snap_271 ... correct
+[272/385] snap_272 ... correct
+[273/385] snap_273 ... WRONG (predicted: read_bandwidth_saturation)
+[274/385] snap_274 ... correct
+[275/385] snap_275 ... WRONG (predicted: read_bandwidth_saturation)
+[276/385] snap_276 ... correct
+[277/385] snap_277 ... WRONG (predicted: read_bandwidth_saturation)
+[278/385] snap_278 ... correct
+[279/385] snap_279 ... WRONG (predicted: read_bandwidth_saturation)
+[280/385] snap_280 ... WRONG (predicted: read_bandwidth_saturation)
+[281/385] snap_281 ... correct
+[282/385] snap_282 ... WRONG (predicted: read_bandwidth_saturation)
+[283/385] snap_283 ... WRONG (predicted: read_bandwidth_saturation)
+[284/385] snap_284 ... correct
+[285/385] snap_285 ... correct
+[286/385] snap_286 ... correct
+[287/385] snap_287 ... correct
+[288/385] snap_288 ... correct
+[289/385] snap_289 ... correct
+[290/385] snap_290 ... correct
+[291/385] snap_291 ... correct
+[292/385] snap_292 ... correct
+[293/385] snap_293 ... correct
+[294/385] snap_294 ... correct
+[295/385] snap_295 ... correct
+[296/385] snap_296 ... correct
+[297/385] snap_297 ... correct
+[298/385] snap_298 ... correct
+[299/385] snap_299 ... correct
+[300/385] snap_300 ... correct
+[301/385] snap_301 ... correct
+[302/385] snap_302 ... correct
+[303/385] snap_303 ... correct
+[304/385] snap_304 ... correct
+[305/385] snap_305 ... correct
+[306/385] snap_306 ... correct
+[307/385] snap_307 ... correct
+[308/385] snap_308 ... correct
+[309/385] snap_309 ... correct
+[310/385] snap_310 ... correct
+[311/385] snap_311 ... correct
+[312/385] snap_312 ... correct
+[313/385] snap_313 ... correct
+[314/385] snap_314 ... correct
+[315/385] snap_315 ... correct
+[316/385] snap_316 ... correct
+[317/385] snap_317 ... correct
+[318/385] snap_318 ... correct
+[319/385] snap_319 ... correct
+[320/385] snap_320 ... correct
+[321/385] snap_321 ... correct
+[322/385] snap_322 ... correct
+[323/385] snap_323 ... correct
+[324/385] snap_324 ... correct
+[325/385] snap_325 ... correct
+[326/385] snap_326 ... correct
+[327/385] snap_327 ... correct
+[328/385] snap_328 ... correct
+[329/385] snap_329 ... correct
+[330/385] snap_330 ... correct
+[331/385] snap_331 ... correct
+[332/385] snap_332 ... correct
+[333/385] snap_333 ... correct
+[334/385] snap_334 ... correct
+[335/385] snap_335 ... correct
+[336/385] snap_336 ... correct
+[337/385] snap_337 ... correct
+[338/385] snap_338 ... WRONG (predicted: storage_bandwidth_saturation)
+[339/385] snap_339 ... WRONG (predicted: storage_bandwidth_saturation)
+[340/385] snap_340 ... correct
+[341/385] snap_341 ... WRONG (predicted: storage_bandwidth_saturation)
+[342/385] snap_342 ... correct
+[343/385] snap_343 ... correct
+[344/385] snap_344 ... correct
+[345/385] snap_345 ... WRONG (predicted: storage_bandwidth_saturation)
+[346/385] snap_346 ... correct
+[347/385] snap_347 ... correct
+[348/385] snap_348 ... correct
+[349/385] snap_349 ... correct
+[350/385] snap_350 ... correct
+[351/385] snap_351 ... correct
+[352/385] snap_352 ... correct
+[353/385] snap_353 ... correct
+[354/385] snap_354 ... WRONG (predicted: storage_bandwidth_saturation)
+[355/385] snap_355 ... correct
+[356/385] snap_356 ... correct
+[357/385] snap_357 ... WRONG (predicted: storage_bandwidth_saturation)
+[358/385] snap_358 ... correct
+[359/385] snap_359 ... correct
+[360/385] snap_360 ... correct
+[361/385] snap_361 ... correct
+[362/385] snap_362 ... correct
+[363/385] snap_363 ... correct
+[364/385] snap_364 ... correct
+[365/385] snap_365 ... correct
+[366/385] snap_366 ... correct
+[367/385] snap_367 ... correct
+[368/385] snap_368 ... correct
+[369/385] snap_369 ... correct
+[370/385] snap_370 ... correct
+[371/385] snap_371 ... correct
+[372/385] snap_372 ... correct
+[373/385] snap_373 ... correct
+[374/385] snap_374 ... correct
+[375/385] snap_375 ... correct
+[376/385] snap_376 ... correct
+[377/385] snap_377 ... correct
+[378/385] snap_378 ... correct
+[379/385] snap_379 ... correct
+[380/385] snap_380 ... correct
+[381/385] snap_381 ... correct
+[382/385] snap_382 ... correct
+[383/385] snap_383 ... correct
+[384/385] snap_384 ... correct
+[385/385] snap_385 ... correct
+
+=== Summary ===
+Accuracy : 91.2%  (351/385)
+Macro F1 : 0.903
+
+Per-class F1:
+  storage_bandwidth_saturation        P=0.57  R=0.57  F1=0.57
+  metadata_contention                 P=1.00  R=0.97  F1=0.98
+  lock_contention                     P=0.80  R=1.00  F1=0.89
+  network_io_bottleneck               P=1.00  R=1.00  F1=1.00
+  serialized_io                       P=1.00  R=0.78  F1=0.88
+  checkpointing_overhead              P=1.00  R=0.59  F1=0.74
+  compute_bound                       P=1.00  R=1.00  F1=1.00
+  read_bandwidth_saturation           P=0.76  R=1.00  F1=0.87
+  io_interference                     P=1.00  R=1.00  F1=1.00
+  data_skew                           P=1.00  R=1.00  F1=1.00
+  staging_inefficiency                P=1.00  R=1.00  F1=1.00
+
+=== Timing ===
+  Wall-clock duration  : 0.0 s
+  Total API time       : 0.0 s
+  Start                : 2026-04-17T12:00:17.651678
+  End                  : 2026-04-17T12:00:17.675201
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 0
+  Total completion tokens  : 0
+  Total tokens             : 0
+  Avg prompt / snapshot    : 0.0
+  Avg completion / snapshot: 0.0
+  Avg total / snapshot     : 0.0
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  storage_bandwidth_saturation          30        0.0         0.0        0.0       0.000s
+  metadata_contention                   32        0.0         0.0        0.0       0.000s
+  lock_contention                       32        0.0         0.0        0.0       0.000s
+  network_io_bottleneck                 32        0.0         0.0        0.0       0.000s
+  serialized_io                         32        0.0         0.0        0.0       0.000s
+  checkpointing_overhead                32        0.0         0.0        0.0       0.000s
+  compute_bound                         33        0.0         0.0        0.0       0.000s
+  read_bandwidth_saturation             42        0.0         0.0        0.0       0.000s
+  io_interference                       40        0.0         0.0        0.0       0.000s
+  data_skew                             40        0.0         0.0        0.0       0.000s
+  staging_inefficiency                  40        0.0         0.0        0.0       0.000s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 83.4 %
+  Memory start (RSS)       : 63.7 MB
+  Memory end   (RSS)       : 64.2 MB
+  Memory peak  (RSS)       : 64.2 MB
+
+Results saved to: /home/alistair/school/iit/Spring26/CS546Parallel/llm-io-bottleneck-detection/data/results/gpt-4.1-mini_rule_based_20260417_120017.json
+
+=======================================================
+Strategy: gpt-4.1-mini / classify_only
+=======================================================
+[ 1/385] snap_001 ... correct
+[ 2/385] snap_002 ... correct
+[ 3/385] snap_003 ... WRONG (predicted: storage_bandwidth_saturation)
+[ 4/385] snap_004 ... correct
+[ 5/385] snap_005 ... correct
+[ 6/385] snap_006 ... correct
+[ 7/385] snap_007 ... correct
+[ 8/385] snap_008 ... WRONG (predicted: serialized_io)
+[ 9/385] snap_009 ... WRONG (predicted: serialized_io)
+[10/385] snap_010 ... WRONG (predicted: serialized_io)
+[11/385] snap_011 ... WRONG (predicted: serialized_io)
+[12/385] snap_012 ... WRONG (predicted: serialized_io)
+[13/385] snap_013 ... WRONG (predicted: serialized_io)
+[14/385] snap_014 ... WRONG (predicted: serialized_io)
+[15/385] snap_015 ... WRONG (predicted: metadata_contention)
+[16/385] snap_016 ... WRONG (predicted: metadata_contention)
+[17/385] snap_017 ... WRONG (predicted: metadata_contention)
+[18/385] snap_018 ... WRONG (predicted: metadata_contention)
+[19/385] snap_019 ... WRONG (predicted: metadata_contention)
+[20/385] snap_020 ... WRONG (predicted: metadata_contention)
+[21/385] snap_021 ... correct
+[22/385] snap_022 ... correct
+[23/385] snap_023 ... correct
+[24/385] snap_024 ... correct
+[25/385] snap_025 ... correct
+[26/385] snap_026 ... correct
+[27/385] snap_027 ... correct
+[28/385] snap_028 ... correct
+[29/385] snap_029 ... correct
+[30/385] snap_030 ... correct
+[31/385] snap_031 ... correct
+[32/385] snap_032 ... correct
+[33/385] snap_033 ... correct
+[34/385] snap_034 ... correct
+[35/385] snap_035 ... correct
+[36/385] snap_036 ... WRONG (predicted: serialized_io)
+[37/385] snap_037 ... correct
+[38/385] snap_038 ... correct
+[39/385] snap_039 ... correct
+[40/385] snap_040 ... correct
+[41/385] snap_041 ... correct
+[42/385] snap_042 ... correct
+[43/385] snap_043 ... correct
+[44/385] snap_044 ... correct
+[45/385] snap_045 ... correct
+[46/385] snap_046 ... correct
+[47/385] snap_047 ... correct
+[48/385] snap_048 ... correct
+[49/385] snap_049 ... WRONG (predicted: serialized_io)
+[50/385] snap_050 ... correct
+[51/385] snap_051 ... WRONG (predicted: storage_bandwidth_saturation)
+[52/385] snap_052 ... WRONG (predicted: storage_bandwidth_saturation)
+[53/385] snap_053 ... WRONG (predicted: storage_bandwidth_saturation)
+[54/385] snap_054 ... WRONG (predicted: storage_bandwidth_saturation)
+[55/385] snap_055 ... WRONG (predicted: storage_bandwidth_saturation)
+[56/385] snap_056 ... WRONG (predicted: storage_bandwidth_saturation)
+[57/385] snap_057 ... WRONG (predicted: storage_bandwidth_saturation)
+[58/385] snap_058 ... WRONG (predicted: storage_bandwidth_saturation)
+[59/385] snap_059 ... WRONG (predicted: storage_bandwidth_saturation)
+[60/385] snap_060 ... WRONG (predicted: storage_bandwidth_saturation)
+[61/385] snap_061 ... correct
+[62/385] snap_062 ... WRONG (predicted: storage_bandwidth_saturation)
+[63/385] snap_063 ... WRONG (predicted: storage_bandwidth_saturation)
+[64/385] snap_064 ... WRONG (predicted: storage_bandwidth_saturation)
+[65/385] snap_065 ... WRONG (predicted: storage_bandwidth_saturation)
+[66/385] snap_066 ... WRONG (predicted: storage_bandwidth_saturation)
+[67/385] snap_067 ... WRONG (predicted: storage_bandwidth_saturation)
+[68/385] snap_068 ... WRONG (predicted: storage_bandwidth_saturation)
+[69/385] snap_069 ... WRONG (predicted: storage_bandwidth_saturation)
+[70/385] snap_070 ... WRONG (predicted: storage_bandwidth_saturation)
+[71/385] snap_071 ... correct
+[72/385] snap_072 ... WRONG (predicted: storage_bandwidth_saturation)
+[73/385] snap_073 ... WRONG (predicted: storage_bandwidth_saturation)
+[74/385] snap_074 ... WRONG (predicted: storage_bandwidth_saturation)
+[75/385] snap_075 ... WRONG (predicted: storage_bandwidth_saturation)
+[76/385] snap_076 ... WRONG (predicted: storage_bandwidth_saturation)
+[77/385] snap_077 ... WRONG (predicted: storage_bandwidth_saturation)
+[78/385] snap_078 ... WRONG (predicted: storage_bandwidth_saturation)
+[79/385] snap_079 ... WRONG (predicted: storage_bandwidth_saturation)
+[80/385] snap_080 ... WRONG (predicted: storage_bandwidth_saturation)
+[81/385] snap_081 ... WRONG (predicted: storage_bandwidth_saturation)
+[82/385] snap_082 ... WRONG (predicted: storage_bandwidth_saturation)
+[83/385] snap_083 ... WRONG (predicted: storage_bandwidth_saturation)
+[84/385] snap_084 ... WRONG (predicted: storage_bandwidth_saturation)
+[85/385] snap_085 ... WRONG (predicted: storage_bandwidth_saturation)
+[86/385] snap_086 ... WRONG (predicted: storage_bandwidth_saturation)
+[87/385] snap_087 ... WRONG (predicted: storage_bandwidth_saturation)
+[88/385] snap_088 ... WRONG (predicted: storage_bandwidth_saturation)
+[89/385] snap_089 ... correct
+[90/385] snap_090 ... WRONG (predicted: storage_bandwidth_saturation)
+[91/385] snap_091 ... WRONG (predicted: serialized_io)
+[92/385] snap_092 ... WRONG (predicted: serialized_io)
+[93/385] snap_093 ... WRONG (predicted: serialized_io)
+[94/385] snap_094 ... WRONG (predicted: serialized_io)
+[95/385] snap_095 ... WRONG (predicted: checkpointing_overhead)
+[96/385] snap_096 ... WRONG (predicted: checkpointing_overhead)
+[97/385] snap_097 ... WRONG (predicted: serialized_io)
+[98/385] snap_098 ... WRONG (predicted: serialized_io)
+[99/385] snap_099 ... WRONG (predicted: serialized_io)
+[100/385] snap_100 ... WRONG (predicted: serialized_io)
+[101/385] snap_101 ... WRONG (predicted: serialized_io)
+[102/385] snap_102 ... WRONG (predicted: checkpointing_overhead)
+[103/385] snap_103 ... WRONG (predicted: serialized_io)
+[104/385] snap_104 ... WRONG (predicted: serialized_io)
+[105/385] snap_105 ... WRONG (predicted: serialized_io)
+[106/385] snap_106 ... WRONG (predicted: serialized_io)
+[107/385] snap_107 ... WRONG (predicted: serialized_io)
+[108/385] snap_108 ... WRONG (predicted: serialized_io)
+[109/385] snap_109 ... WRONG (predicted: serialized_io)
+[110/385] snap_110 ... WRONG (predicted: checkpointing_overhead)
+[111/385] snap_111 ... WRONG (predicted: serialized_io)
+[112/385] snap_112 ... WRONG (predicted: serialized_io)
+[113/385] snap_113 ... WRONG (predicted: serialized_io)
+[114/385] snap_114 ... WRONG (predicted: compute_bound)
+[115/385] snap_115 ... WRONG (predicted: serialized_io)
+[116/385] snap_116 ... WRONG (predicted: serialized_io)
+[117/385] snap_117 ... WRONG (predicted: serialized_io)
+[118/385] snap_118 ... WRONG (predicted: serialized_io)
+[119/385] snap_119 ... WRONG (predicted: serialized_io)
+[120/385] snap_120 ... WRONG (predicted: checkpointing_overhead)
+[121/385] snap_121 ... WRONG (predicted: serialized_io)
+[122/385] snap_122 ... WRONG (predicted: compute_bound)
+[123/385] snap_123 ... WRONG (predicted: serialized_io)
+[124/385] snap_124 ... WRONG (predicted: serialized_io)
+[125/385] snap_125 ... WRONG (predicted: serialized_io)
+[126/385] snap_126 ... WRONG (predicted: checkpointing_overhead)
+[127/385] snap_127 ... WRONG (predicted: serialized_io)
+[128/385] snap_128 ... WRONG (predicted: serialized_io)
+[129/385] snap_129 ... WRONG (predicted: serialized_io)
+[130/385] snap_130 ... WRONG (predicted: checkpointing_overhead)
+[131/385] snap_131 ... correct
+[132/385] snap_132 ... correct
+[133/385] snap_133 ... correct
+[134/385] snap_134 ... correct
+[135/385] snap_135 ... correct
+[136/385] snap_136 ... correct
+[137/385] snap_137 ... correct
+[138/385] snap_138 ... correct
+[139/385] snap_139 ... correct
+[140/385] snap_140 ... WRONG (predicted: serialized_io)
+[141/385] snap_141 ... correct
+[142/385] snap_142 ... correct
+[143/385] snap_143 ... correct
+[144/385] snap_144 ... correct
+[145/385] snap_145 ... correct
+[146/385] snap_146 ... correct
+[147/385] snap_147 ... correct
+[148/385] snap_148 ... correct
+[149/385] snap_149 ... correct
+[150/385] snap_150 ... correct
+[151/385] snap_151 ... correct
+[152/385] snap_152 ... WRONG (predicted: checkpointing_overhead)
+[153/385] snap_153 ... correct
+[154/385] snap_154 ... correct
+[155/385] snap_155 ... correct
+[156/385] snap_156 ... correct
+[157/385] snap_157 ... correct
+[158/385] snap_158 ... correct
+[159/385] snap_159 ... correct
+[160/385] snap_160 ... correct
+[161/385] snap_161 ... correct
+[162/385] snap_162 ... correct
+[163/385] snap_163 ... correct
+[164/385] snap_164 ... correct
+[165/385] snap_165 ... correct
+[166/385] snap_166 ... correct
+[167/385] snap_167 ... correct
+[168/385] snap_168 ... correct
+[169/385] snap_169 ... correct
+[170/385] snap_170 ... WRONG (predicted: io_interference)
+[171/385] snap_171 ... WRONG (predicted: serialized_io)
+[172/385] snap_172 ... WRONG (predicted: compute_bound)
+[173/385] snap_173 ... WRONG (predicted: serialized_io)
+[174/385] snap_174 ... WRONG (predicted: checkpointing_overhead)
+[175/385] snap_175 ... WRONG (predicted: serialized_io)
+[176/385] snap_176 ... WRONG (predicted: serialized_io)
+[177/385] snap_177 ... WRONG (predicted: serialized_io)
+[178/385] snap_178 ... WRONG (predicted: serialized_io)
+[179/385] snap_179 ... WRONG (predicted: serialized_io)
+[180/385] snap_180 ... WRONG (predicted: checkpointing_overhead)
+[181/385] snap_181 ... WRONG (predicted: serialized_io)
+[182/385] snap_182 ... WRONG (predicted: serialized_io)
+[183/385] snap_183 ... WRONG (predicted: serialized_io)
+[184/385] snap_184 ... WRONG (predicted: serialized_io)
+[185/385] snap_185 ... WRONG (predicted: serialized_io)
+[186/385] snap_186 ... WRONG (predicted: serialized_io)
+[187/385] snap_187 ... WRONG (predicted: checkpointing_overhead)
+[188/385] snap_188 ... WRONG (predicted: serialized_io)
+[189/385] snap_189 ... WRONG (predicted: serialized_io)
+[190/385] snap_190 ... WRONG (predicted: serialized_io)
+[191/385] snap_191 ... WRONG (predicted: serialized_io)
+[192/385] snap_192 ... WRONG (predicted: serialized_io)
+[193/385] snap_193 ... WRONG (predicted: serialized_io)
+[194/385] snap_194 ... WRONG (predicted: serialized_io)
+[195/385] snap_195 ... WRONG (predicted: serialized_io)
+[196/385] snap_196 ... WRONG (predicted: checkpointing_overhead)
+[197/385] snap_197 ... WRONG (predicted: serialized_io)
+[198/385] snap_198 ... WRONG (predicted: serialized_io)
+[199/385] snap_199 ... WRONG (predicted: serialized_io)
+[200/385] snap_200 ... WRONG (predicted: serialized_io)
+[201/385] snap_201 ... WRONG (predicted: serialized_io)
+[202/385] snap_202 ... WRONG (predicted: compute_bound)
+[203/385] snap_203 ... WRONG (predicted: serialized_io)
+[204/385] snap_204 ... WRONG (predicted: serialized_io)
+[205/385] snap_205 ... WRONG (predicted: read_bandwidth_saturation)
+[206/385] snap_206 ... WRONG (predicted: serialized_io)
+[207/385] snap_207 ... WRONG (predicted: serialized_io)
+[208/385] snap_208 ... WRONG (predicted: serialized_io)
+[209/385] snap_209 ... WRONG (predicted: serialized_io)
+[210/385] snap_210 ... WRONG (predicted: serialized_io)
+[211/385] snap_211 ... correct
+[212/385] snap_212 ... correct
+[213/385] snap_213 ... correct
+[214/385] snap_214 ... correct
+[215/385] snap_215 ... correct
+[216/385] snap_216 ... WRONG (predicted: serialized_io)
+[217/385] snap_217 ... correct
+[218/385] snap_218 ... correct
+[219/385] snap_219 ... WRONG (predicted: serialized_io)
+[220/385] snap_220 ... WRONG (predicted: serialized_io)
+[221/385] snap_221 ... correct
+[222/385] snap_222 ... correct
+[223/385] snap_223 ... correct
+[224/385] snap_224 ... correct
+[225/385] snap_225 ... correct
+[226/385] snap_226 ... WRONG (predicted: serialized_io)
+[227/385] snap_227 ... correct
+[228/385] snap_228 ... correct
+[229/385] snap_229 ... WRONG (predicted: serialized_io)
+[230/385] snap_230 ... correct
+[231/385] snap_231 ... WRONG (predicted: serialized_io)
+[232/385] snap_232 ... WRONG (predicted: serialized_io)
+[233/385] snap_233 ... WRONG (predicted: checkpointing_overhead)
+[234/385] snap_234 ... correct
+[235/385] snap_235 ... correct
+[236/385] snap_236 ... correct
+[237/385] snap_237 ... correct
+[238/385] snap_238 ... WRONG (predicted: read_bandwidth_saturation)
+[239/385] snap_239 ... WRONG (predicted: serialized_io)
+[240/385] snap_240 ... WRONG (predicted: read_bandwidth_saturation)
+[241/385] snap_241 ... correct
+[242/385] snap_242 ... correct
+[243/385] snap_243 ... correct
+[244/385] snap_244 ... correct
+[245/385] snap_245 ... correct
+[246/385] snap_246 ... WRONG (predicted: read_bandwidth_saturation)
+[247/385] snap_247 ... correct
+[248/385] snap_248 ... correct
+[249/385] snap_249 ... WRONG (predicted: serialized_io)
+[250/385] snap_250 ... correct
+[251/385] snap_251 ... WRONG (predicted: serialized_io)
+[252/385] snap_252 ... WRONG (predicted: read_bandwidth_saturation)
+[253/385] snap_253 ... WRONG (predicted: serialized_io)
+[254/385] snap_254 ... correct
+[255/385] snap_255 ... correct
+[256/385] snap_256 ... correct
+[257/385] snap_257 ... correct
+[258/385] snap_258 ... WRONG (predicted: storage_bandwidth_saturation)
+[259/385] snap_259 ... correct
+[260/385] snap_260 ... WRONG (predicted: read_bandwidth_saturation)
+[261/385] snap_261 ... WRONG (predicted: read_bandwidth_saturation)
+[262/385] snap_262 ... correct
+[263/385] snap_263 ... correct
+[264/385] snap_264 ... correct
+[265/385] snap_265 ... correct
+[266/385] snap_266 ... correct
+[267/385] snap_267 ... correct
+[268/385] snap_268 ... correct
+[269/385] snap_269 ... correct
+[270/385] snap_270 ... correct
+[271/385] snap_271 ... correct
+[272/385] snap_272 ... correct
+[273/385] snap_273 ... correct
+[274/385] snap_274 ... correct
+[275/385] snap_275 ... correct
+[276/385] snap_276 ... correct
+[277/385] snap_277 ... correct
+[278/385] snap_278 ... correct
+[279/385] snap_279 ... correct
+[280/385] snap_280 ... correct
+[281/385] snap_281 ... correct
+[282/385] snap_282 ... correct
+[283/385] snap_283 ... correct
+[284/385] snap_284 ... correct
+[285/385] snap_285 ... correct
+[286/385] snap_286 ... WRONG (predicted: serialized_io)
+[287/385] snap_287 ... WRONG (predicted: serialized_io)
+[288/385] snap_288 ... WRONG (predicted: serialized_io)
+[289/385] snap_289 ... WRONG (predicted: serialized_io)
+[290/385] snap_290 ... WRONG (predicted: serialized_io)
+[291/385] snap_291 ... WRONG (predicted: serialized_io)
+[292/385] snap_292 ... WRONG (predicted: serialized_io)
+[293/385] snap_293 ... WRONG (predicted: serialized_io)
+[294/385] snap_294 ... WRONG (predicted: serialized_io)
+[295/385] snap_295 ... WRONG (predicted: serialized_io)
+[296/385] snap_296 ... WRONG (predicted: serialized_io)
+[297/385] snap_297 ... WRONG (predicted: serialized_io)
+[298/385] snap_298 ... WRONG (predicted: serialized_io)
+[299/385] snap_299 ... WRONG (predicted: serialized_io)
+[300/385] snap_300 ... WRONG (predicted: serialized_io)
+[301/385] snap_301 ... WRONG (predicted: serialized_io)
+[302/385] snap_302 ... WRONG (predicted: serialized_io)
+[303/385] snap_303 ... WRONG (predicted: serialized_io)
+[304/385] snap_304 ... WRONG (predicted: serialized_io)
+[305/385] snap_305 ... WRONG (predicted: serialized_io)
+[306/385] snap_306 ... WRONG (predicted: serialized_io)
+[307/385] snap_307 ... WRONG (predicted: serialized_io)
+[308/385] snap_308 ... WRONG (predicted: serialized_io)
+[309/385] snap_309 ... WRONG (predicted: serialized_io)
+[310/385] snap_310 ... WRONG (predicted: serialized_io)
+[311/385] snap_311 ... WRONG (predicted: compute_bound)
+[312/385] snap_312 ... correct
+[313/385] snap_313 ... WRONG (predicted: checkpointing_overhead)
+[314/385] snap_314 ... correct
+[315/385] snap_315 ... correct
+[316/385] snap_316 ... WRONG (predicted: checkpointing_overhead)
+[317/385] snap_317 ... correct
+[318/385] snap_318 ... correct
+[319/385] snap_319 ... correct
+[320/385] snap_320 ... correct
+[321/385] snap_321 ... correct
+[322/385] snap_322 ... correct
+[323/385] snap_323 ... correct
+[324/385] snap_324 ... correct
+[325/385] snap_325 ... correct
+[326/385] snap_326 ... correct
+[327/385] snap_327 ... correct
+[328/385] snap_328 ... correct
+[329/385] snap_329 ... correct
+[330/385] snap_330 ... correct
+[331/385] snap_331 ... correct
+[332/385] snap_332 ... correct
+[333/385] snap_333 ... correct
+[334/385] snap_334 ... correct
+[335/385] snap_335 ... correct
+[336/385] snap_336 ... WRONG (predicted: serialized_io)
+[337/385] snap_337 ... correct
+[338/385] snap_338 ... WRONG (predicted: storage_bandwidth_saturation)
+[339/385] snap_339 ... correct
+[340/385] snap_340 ... correct
+[341/385] snap_341 ... correct
+[342/385] snap_342 ... WRONG (predicted: storage_bandwidth_saturation)
+[343/385] snap_343 ... WRONG (predicted: storage_bandwidth_saturation)
+[344/385] snap_344 ... correct
+[345/385] snap_345 ... WRONG (predicted: storage_bandwidth_saturation)
+[346/385] snap_346 ... correct
+[347/385] snap_347 ... correct
+[348/385] snap_348 ... WRONG (predicted: serialized_io)
+[349/385] snap_349 ... correct
+[350/385] snap_350 ... correct
+[351/385] snap_351 ... correct
+[352/385] snap_352 ... correct
+[353/385] snap_353 ... correct
+[354/385] snap_354 ... correct
+[355/385] snap_355 ... correct
+[356/385] snap_356 ... correct
+[357/385] snap_357 ... correct
+[358/385] snap_358 ... correct
+[359/385] snap_359 ... correct
+[360/385] snap_360 ... correct
+[361/385] snap_361 ... WRONG (predicted: serialized_io)
+[362/385] snap_362 ... WRONG (predicted: serialized_io)
+[363/385] snap_363 ... WRONG (predicted: serialized_io)
+[364/385] snap_364 ... WRONG (predicted: serialized_io)
+[365/385] snap_365 ... WRONG (predicted: serialized_io)
+[366/385] snap_366 ... WRONG (predicted: serialized_io)
+[367/385] snap_367 ... WRONG (predicted: serialized_io)
+[368/385] snap_368 ... WRONG (predicted: checkpointing_overhead)
+[369/385] snap_369 ... WRONG (predicted: serialized_io)
+[370/385] snap_370 ... WRONG (predicted: serialized_io)
+[371/385] snap_371 ... WRONG (predicted: serialized_io)
+[372/385] snap_372 ... WRONG (predicted: serialized_io)
+[373/385] snap_373 ... WRONG (predicted: checkpointing_overhead)
+[374/385] snap_374 ... WRONG (predicted: serialized_io)
+[375/385] snap_375 ... WRONG (predicted: serialized_io)
+[376/385] snap_376 ... WRONG (predicted: serialized_io)
+[377/385] snap_377 ... WRONG (predicted: serialized_io)
+[378/385] snap_378 ... WRONG (predicted: serialized_io)
+[379/385] snap_379 ... WRONG (predicted: serialized_io)
+[380/385] snap_380 ... WRONG (predicted: serialized_io)
+[381/385] snap_381 ... WRONG (predicted: serialized_io)
+[382/385] snap_382 ... WRONG (predicted: serialized_io)
+[383/385] snap_383 ... WRONG (predicted: serialized_io)
+[384/385] snap_384 ... WRONG (predicted: serialized_io)
+[385/385] snap_385 ... WRONG (predicted: checkpointing_overhead)
+
+=== Summary ===
+Accuracy : 44.4%  (171/385)
+Macro F1 : 0.390
+
+Per-class F1:
+  storage_bandwidth_saturation        P=0.40  R=0.97  F1=0.57
+  metadata_contention                 P=0.00  R=0.00  F1=0.00
+  lock_contention                     P=1.00  R=0.03  F1=0.06
+  network_io_bottleneck               P=1.00  R=0.69  F1=0.81
+  serialized_io                       P=0.18  R=0.91  F1=0.30
+  checkpointing_overhead              P=0.58  R=0.78  F1=0.67
+  compute_bound                       P=0.83  R=0.73  F1=0.77
+  read_bandwidth_saturation           P=0.36  R=0.10  F1=0.15
+  io_interference                     P=0.00  R=0.00  F1=0.00
+  data_skew                           P=1.00  R=0.93  F1=0.96
+  staging_inefficiency                P=0.00  R=0.00  F1=0.00
+
+=== Timing ===
+  Wall-clock duration  : 1170.5 s
+  Total API time       : 1170.3 s
+  Start                : 2026-04-17T12:00:17.740415
+  End                  : 2026-04-17T12:19:48.243979
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 214,034
+  Total completion tokens  : 67,558
+  Total tokens             : 281,592
+  Avg prompt / snapshot    : 555.9
+  Avg completion / snapshot: 175.5
+  Avg total / snapshot     : 731.4
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  staging_inefficiency                  40      776.4       577.0      199.5       3.661s
+  checkpointing_overhead                32      756.4       580.2      176.2       3.186s
+  lock_contention                       32      740.9       558.4      182.5       2.862s
+  io_interference                       40      738.6       554.5      184.2       3.308s
+  metadata_contention                   32      735.9       546.0      189.9       3.014s
+  data_skew                             40      727.9       567.5      160.3       2.696s
+  network_io_bottleneck                 32      722.0       544.2      177.7       3.209s
+  serialized_io                         32      720.9       550.3      170.6       2.597s
+  storage_bandwidth_saturation          30      712.8       545.2      167.6       2.470s
+  read_bandwidth_saturation             42      708.4       542.8      165.6       3.264s
+  compute_bound                         33      700.1       545.2      154.9       2.932s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 0.2 %
+  Memory start (RSS)       : 64.3 MB
+  Memory end   (RSS)       : 71.2 MB
+  Memory peak  (RSS)       : 74.4 MB
+
+Results saved to: /home/alistair/school/iit/Spring26/CS546Parallel/llm-io-bottleneck-detection/data/results/gpt-4.1-mini_classify_only_20260417_121948.json
+
+=======================================================
+Strategy: gpt-4.1-mini / zero_shot
+=======================================================
+[ 1/385] snap_001 ... correct
+[ 2/385] snap_002 ... correct
+[ 3/385] snap_003 ... correct
+[ 4/385] snap_004 ... correct
+[ 5/385] snap_005 ... correct
+[ 6/385] snap_006 ... correct
+[ 7/385] snap_007 ... correct
+[ 8/385] snap_008 ... correct
+[ 9/385] snap_009 ... correct
+[10/385] snap_010 ... correct
+[11/385] snap_011 ... correct
+[12/385] snap_012 ... correct
+[13/385] snap_013 ... correct
+[14/385] snap_014 ... correct
+[15/385] snap_015 ... correct
+[16/385] snap_016 ... correct
+[17/385] snap_017 ... correct
+[18/385] snap_018 ... correct
+[19/385] snap_019 ... correct
+[20/385] snap_020 ... correct
+[21/385] snap_021 ... correct
+[22/385] snap_022 ... correct
+[23/385] snap_023 ... correct
+[24/385] snap_024 ... correct
+[25/385] snap_025 ... correct
+[26/385] snap_026 ... correct
+[27/385] snap_027 ... correct
+[28/385] snap_028 ... correct
+[29/385] snap_029 ... correct
+[30/385] snap_030 ... correct
+[31/385] snap_031 ... correct
+[32/385] snap_032 ... correct
+[33/385] snap_033 ... correct
+[34/385] snap_034 ... correct
+[35/385] snap_035 ... correct
+[36/385] snap_036 ... correct
+[37/385] snap_037 ... correct
+[38/385] snap_038 ... correct
+[39/385] snap_039 ... correct
+[40/385] snap_040 ... correct
+[41/385] snap_041 ... correct
+[42/385] snap_042 ... correct
+[43/385] snap_043 ... correct
+[44/385] snap_044 ... correct
+[45/385] snap_045 ... correct
+[46/385] snap_046 ... correct
+[47/385] snap_047 ... correct
+[48/385] snap_048 ... correct
+[49/385] snap_049 ... correct
+[50/385] snap_050 ... correct
+[51/385] snap_051 ... correct
+[52/385] snap_052 ... correct
+[53/385] snap_053 ... correct
+[54/385] snap_054 ... correct
+[55/385] snap_055 ... correct
+[56/385] snap_056 ... correct
+[57/385] snap_057 ... correct
+[58/385] snap_058 ... correct
+[59/385] snap_059 ... correct
+[60/385] snap_060 ... correct
+[61/385] snap_061 ... correct
+[62/385] snap_062 ... correct
+[63/385] snap_063 ... correct
+[64/385] snap_064 ... correct
+[65/385] snap_065 ... correct
+[66/385] snap_066 ... correct
+[67/385] snap_067 ... correct
+[68/385] snap_068 ... correct
+[69/385] snap_069 ... correct
+[70/385] snap_070 ... correct
+[71/385] snap_071 ... correct
+[72/385] snap_072 ... correct
+[73/385] snap_073 ... correct
+[74/385] snap_074 ... correct
+[75/385] snap_075 ... correct
+[76/385] snap_076 ... correct
+[77/385] snap_077 ... correct
+[78/385] snap_078 ... correct
+[79/385] snap_079 ... correct
+[80/385] snap_080 ... correct
+[81/385] snap_081 ... correct
+[82/385] snap_082 ... correct
+[83/385] snap_083 ... correct
+[84/385] snap_084 ... correct
+[85/385] snap_085 ... correct
+[86/385] snap_086 ... correct
+[87/385] snap_087 ... correct
+[88/385] snap_088 ... correct
+[89/385] snap_089 ... correct
+[90/385] snap_090 ... correct
+[91/385] snap_091 ... correct
+[92/385] snap_092 ... correct
+[93/385] snap_093 ... correct
+[94/385] snap_094 ... correct
+[95/385] snap_095 ... correct
+[96/385] snap_096 ... correct
+[97/385] snap_097 ... correct
+[98/385] snap_098 ... correct
+[99/385] snap_099 ... correct
+[100/385] snap_100 ... correct
+[101/385] snap_101 ... correct
+[102/385] snap_102 ... correct
+[103/385] snap_103 ... correct
+[104/385] snap_104 ... correct
+[105/385] snap_105 ... correct
+[106/385] snap_106 ... correct
+[107/385] snap_107 ... correct
+[108/385] snap_108 ... correct
+[109/385] snap_109 ... correct
+[110/385] snap_110 ... correct
+[111/385] snap_111 ... correct
+[112/385] snap_112 ... correct
+[113/385] snap_113 ... correct
+[114/385] snap_114 ... correct
+[115/385] snap_115 ... correct
+[116/385] snap_116 ... correct
+[117/385] snap_117 ... correct
+[118/385] snap_118 ... correct
+[119/385] snap_119 ... correct
+[120/385] snap_120 ... correct
+[121/385] snap_121 ... correct
+[122/385] snap_122 ... correct
+[123/385] snap_123 ... correct
+[124/385] snap_124 ... correct
+[125/385] snap_125 ... correct
+[126/385] snap_126 ... correct
+[127/385] snap_127 ... correct
+[128/385] snap_128 ... correct
+[129/385] snap_129 ... correct
+[130/385] snap_130 ... correct
+[131/385] snap_131 ... correct
+[132/385] snap_132 ... correct
+[133/385] snap_133 ... correct
+[134/385] snap_134 ... correct
+[135/385] snap_135 ... correct
+[136/385] snap_136 ... correct
+[137/385] snap_137 ... correct
+[138/385] snap_138 ... correct
+[139/385] snap_139 ... correct
+[140/385] snap_140 ... correct
+[141/385] snap_141 ... correct
+[142/385] snap_142 ... correct
+[143/385] snap_143 ... correct
+[144/385] snap_144 ... correct
+[145/385] snap_145 ... correct
+[146/385] snap_146 ... correct
+[147/385] snap_147 ... correct
+[148/385] snap_148 ... correct
+[149/385] snap_149 ... correct
+[150/385] snap_150 ... correct
+[151/385] snap_151 ... correct
+[152/385] snap_152 ... correct
+[153/385] snap_153 ... correct
+[154/385] snap_154 ... correct
+[155/385] snap_155 ... correct
+[156/385] snap_156 ... correct
+[157/385] snap_157 ... correct
+[158/385] snap_158 ... correct
+[159/385] snap_159 ... correct
+[160/385] snap_160 ... correct
+[161/385] snap_161 ... correct
+[162/385] snap_162 ... correct
+[163/385] snap_163 ... correct
+[164/385] snap_164 ... correct
+[165/385] snap_165 ... correct
+[166/385] snap_166 ... correct
+[167/385] snap_167 ... correct
+[168/385] snap_168 ... correct
+[169/385] snap_169 ... correct
+[170/385] snap_170 ... correct
+[171/385] snap_171 ... correct
+[172/385] snap_172 ... correct
+[173/385] snap_173 ... correct
+[174/385] snap_174 ... correct
+[175/385] snap_175 ... correct
+[176/385] snap_176 ... correct
+[177/385] snap_177 ... correct
+[178/385] snap_178 ... correct
+[179/385] snap_179 ... correct
+[180/385] snap_180 ... correct
+[181/385] snap_181 ... correct
+[182/385] snap_182 ... correct
+[183/385] snap_183 ... correct
+[184/385] snap_184 ... correct
+[185/385] snap_185 ... correct
+[186/385] snap_186 ... correct
+[187/385] snap_187 ... correct
+[188/385] snap_188 ... correct
+[189/385] snap_189 ... correct
+[190/385] snap_190 ... correct
+[191/385] snap_191 ... correct
+[192/385] snap_192 ... correct
+[193/385] snap_193 ... correct
+[194/385] snap_194 ... correct
+[195/385] snap_195 ... correct
+[196/385] snap_196 ... correct
+[197/385] snap_197 ... correct
+[198/385] snap_198 ... correct
+[199/385] snap_199 ... correct
+[200/385] snap_200 ... correct
+[201/385] snap_201 ... correct
+[202/385] snap_202 ... correct
+[203/385] snap_203 ... correct
+[204/385] snap_204 ... correct
+[205/385] snap_205 ... correct
+[206/385] snap_206 ... correct
+[207/385] snap_207 ... correct
+[208/385] snap_208 ... correct
+[209/385] snap_209 ... correct
+[210/385] snap_210 ... correct
+[211/385] snap_211 ... correct
+[212/385] snap_212 ... correct
+[213/385] snap_213 ... correct
+[214/385] snap_214 ... correct
+[215/385] snap_215 ... correct
+[216/385] snap_216 ... correct
+[217/385] snap_217 ... correct
+[218/385] snap_218 ... correct
+[219/385] snap_219 ... correct
+[220/385] snap_220 ... correct
+[221/385] snap_221 ... WRONG (predicted: staging_inefficiency)
+[222/385] snap_222 ... correct
+[223/385] snap_223 ... correct
+[224/385] snap_224 ... correct
+[225/385] snap_225 ... correct
+[226/385] snap_226 ... correct
+[227/385] snap_227 ... correct
+[228/385] snap_228 ... correct
+[229/385] snap_229 ... correct
+[230/385] snap_230 ... correct
+[231/385] snap_231 ... correct
+[232/385] snap_232 ... correct
+[233/385] snap_233 ... correct
+[234/385] snap_234 ... correct
+[235/385] snap_235 ... correct
+[236/385] snap_236 ... correct
+[237/385] snap_237 ... correct
+[238/385] snap_238 ... correct
+[239/385] snap_239 ... correct
+[240/385] snap_240 ... correct
+[241/385] snap_241 ... correct
+[242/385] snap_242 ... correct
+[243/385] snap_243 ... correct
+[244/385] snap_244 ... correct
+[245/385] snap_245 ... correct
+[246/385] snap_246 ... correct
+[247/385] snap_247 ... correct
+[248/385] snap_248 ... correct
+[249/385] snap_249 ... correct
+[250/385] snap_250 ... correct
+[251/385] snap_251 ... correct
+[252/385] snap_252 ... correct
+[253/385] snap_253 ... correct
+[254/385] snap_254 ... correct
+[255/385] snap_255 ... correct
+[256/385] snap_256 ... correct
+[257/385] snap_257 ... correct
+[258/385] snap_258 ... correct
+[259/385] snap_259 ... correct
+[260/385] snap_260 ... WRONG (predicted: staging_inefficiency)
+[261/385] snap_261 ... WRONG (predicted: read_bandwidth_saturation)
+[262/385] snap_262 ... correct
+[263/385] snap_263 ... WRONG (predicted: read_bandwidth_saturation)
+[264/385] snap_264 ... WRONG (predicted: read_bandwidth_saturation)
+[265/385] snap_265 ... correct
+[266/385] snap_266 ... correct
+[267/385] snap_267 ... WRONG (predicted: read_bandwidth_saturation)
+[268/385] snap_268 ... WRONG (predicted: read_bandwidth_saturation)
+[269/385] snap_269 ... correct
+[270/385] snap_270 ... WRONG (predicted: read_bandwidth_saturation)
+[271/385] snap_271 ... correct
+[272/385] snap_272 ... correct
+[273/385] snap_273 ... WRONG (predicted: read_bandwidth_saturation)
+[274/385] snap_274 ... correct
+[275/385] snap_275 ... WRONG (predicted: read_bandwidth_saturation)
+[276/385] snap_276 ... correct
+[277/385] snap_277 ... WRONG (predicted: read_bandwidth_saturation)
+[278/385] snap_278 ... correct
+[279/385] snap_279 ... WRONG (predicted: read_bandwidth_saturation)
+[280/385] snap_280 ... WRONG (predicted: read_bandwidth_saturation)
+[281/385] snap_281 ... correct
+[282/385] snap_282 ... WRONG (predicted: read_bandwidth_saturation)
+[283/385] snap_283 ... WRONG (predicted: read_bandwidth_saturation)
+[284/385] snap_284 ... correct
+[285/385] snap_285 ... correct
+[286/385] snap_286 ... correct
+[287/385] snap_287 ... correct
+[288/385] snap_288 ... correct
+[289/385] snap_289 ... correct
+[290/385] snap_290 ... correct
+[291/385] snap_291 ... correct
+[292/385] snap_292 ... correct
+[293/385] snap_293 ... correct
+[294/385] snap_294 ... correct
+[295/385] snap_295 ... correct
+[296/385] snap_296 ... correct
+[297/385] snap_297 ... correct
+[298/385] snap_298 ... correct
+[299/385] snap_299 ... correct
+[300/385] snap_300 ... correct
+[301/385] snap_301 ... correct
+[302/385] snap_302 ... correct
+[303/385] snap_303 ... correct
+[304/385] snap_304 ... correct
+[305/385] snap_305 ... correct
+[306/385] snap_306 ... correct
+[307/385] snap_307 ... correct
+[308/385] snap_308 ... correct
+[309/385] snap_309 ... correct
+[310/385] snap_310 ... correct
+[311/385] snap_311 ... correct
+[312/385] snap_312 ... correct
+[313/385] snap_313 ... correct
+[314/385] snap_314 ... correct
+[315/385] snap_315 ... correct
+[316/385] snap_316 ... correct
+[317/385] snap_317 ... correct
+[318/385] snap_318 ... correct
+[319/385] snap_319 ... correct
+[320/385] snap_320 ... correct
+[321/385] snap_321 ... correct
+[322/385] snap_322 ... correct
+[323/385] snap_323 ... correct
+[324/385] snap_324 ... correct
+[325/385] snap_325 ... correct
+[326/385] snap_326 ... correct
+[327/385] snap_327 ... correct
+[328/385] snap_328 ... correct
+[329/385] snap_329 ... correct
+[330/385] snap_330 ... correct
+[331/385] snap_331 ... correct
+[332/385] snap_332 ... correct
+[333/385] snap_333 ... correct
+[334/385] snap_334 ... correct
+[335/385] snap_335 ... correct
+[336/385] snap_336 ... correct
+[337/385] snap_337 ... correct
+[338/385] snap_338 ... correct
+[339/385] snap_339 ... correct
+[340/385] snap_340 ... correct
+[341/385] snap_341 ... correct
+[342/385] snap_342 ... correct
+[343/385] snap_343 ... correct
+[344/385] snap_344 ... correct
+[345/385] snap_345 ... correct
+[346/385] snap_346 ... correct
+[347/385] snap_347 ... correct
+[348/385] snap_348 ... correct
+[349/385] snap_349 ... correct
+[350/385] snap_350 ... correct
+[351/385] snap_351 ... correct
+[352/385] snap_352 ... correct
+[353/385] snap_353 ... correct
+[354/385] snap_354 ... correct
+[355/385] snap_355 ... correct
+[356/385] snap_356 ... correct
+[357/385] snap_357 ... correct
+[358/385] snap_358 ... correct
+[359/385] snap_359 ... correct
+[360/385] snap_360 ... correct
+[361/385] snap_361 ... correct
+[362/385] snap_362 ... correct
+[363/385] snap_363 ... correct
+[364/385] snap_364 ... correct
+[365/385] snap_365 ... correct
+[366/385] snap_366 ... correct
+[367/385] snap_367 ... correct
+[368/385] snap_368 ... correct
+[369/385] snap_369 ... correct
+[370/385] snap_370 ... correct
+[371/385] snap_371 ... correct
+[372/385] snap_372 ... correct
+[373/385] snap_373 ... correct
+[374/385] snap_374 ... correct
+[375/385] snap_375 ... correct
+[376/385] snap_376 ... correct
+[377/385] snap_377 ... correct
+[378/385] snap_378 ... correct
+[379/385] snap_379 ... correct
+[380/385] snap_380 ... correct
+[381/385] snap_381 ... correct
+[382/385] snap_382 ... correct
+[383/385] snap_383 ... correct
+[384/385] snap_384 ... correct
+[385/385] snap_385 ... correct
+
+=== Summary ===
+Accuracy : 96.1%  (370/385)
+Macro F1 : 0.958
+
+Per-class F1:
+  storage_bandwidth_saturation        P=1.00  R=0.57  F1=0.72
+  metadata_contention                 P=1.00  R=1.00  F1=1.00
+  lock_contention                     P=1.00  R=1.00  F1=1.00
+  network_io_bottleneck               P=1.00  R=0.97  F1=0.98
+  serialized_io                       P=1.00  R=1.00  F1=1.00
+  checkpointing_overhead              P=1.00  R=1.00  F1=1.00
+  compute_bound                       P=1.00  R=0.97  F1=0.98
+  read_bandwidth_saturation           P=0.76  R=1.00  F1=0.87
+  io_interference                     P=1.00  R=1.00  F1=1.00
+  data_skew                           P=1.00  R=1.00  F1=1.00
+  staging_inefficiency                P=0.95  R=1.00  F1=0.98
+
+=== Timing ===
+  Wall-clock duration  : 975.4 s
+  Total API time       : 975.2 s
+  Start                : 2026-04-17T12:19:48.329959
+  End                  : 2026-04-17T12:36:03.761665
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 338,774
+  Total completion tokens  : 66,537
+  Total tokens             : 405,311
+  Avg prompt / snapshot    : 879.9
+  Avg completion / snapshot: 172.8
+  Avg total / snapshot     : 1052.8
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  staging_inefficiency                  40     1086.3       901.0      185.4       2.527s
+  checkpointing_overhead                32     1077.0       904.2      172.8       2.507s
+  data_skew                             40     1061.8       891.5      170.2       2.588s
+  read_bandwidth_saturation             42     1050.1       866.8      183.4       2.719s
+  io_interference                       40     1048.3       878.5      169.8       2.726s
+  lock_contention                       32     1047.4       882.4      165.0       2.226s
+  network_io_bottleneck                 32     1046.8       868.2      178.5       2.633s
+  storage_bandwidth_saturation          30     1044.3       869.2      175.1       2.545s
+  metadata_contention                   32     1043.3       870.0      173.3       2.671s
+  compute_bound                         33     1034.5       869.2      165.4       2.230s
+  serialized_io                         32     1031.7       874.3      157.3       2.384s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 0.2 %
+  Memory start (RSS)       : 71.4 MB
+  Memory end   (RSS)       : 71.9 MB
+  Memory peak  (RSS)       : 74.4 MB
+
+Results saved to: /home/alistair/school/iit/Spring26/CS546Parallel/llm-io-bottleneck-detection/data/results/gpt-4.1-mini_zero_shot_20260417_123603.json
+
+=======================================================
+Strategy: gpt-4.1-mini / few_shot
+=======================================================
+  (few_shot: excluding 5 example snapshots from evaluation)
+[ 1/380] snap_001 ... correct
+[ 2/380] snap_002 ... correct
+[ 3/380] snap_004 ... correct
+[ 4/380] snap_005 ... correct
+[ 5/380] snap_006 ... correct
+[ 6/380] snap_007 ... correct
+[ 7/380] snap_009 ... correct
+[ 8/380] snap_010 ... correct
+[ 9/380] snap_011 ... correct
+[10/380] snap_012 ... correct
+[11/380] snap_013 ... correct
+[12/380] snap_014 ... correct
+[13/380] snap_016 ... correct
+[14/380] snap_017 ... correct
+[15/380] snap_018 ... correct
+[16/380] snap_019 ... correct
+[17/380] snap_020 ... correct
+[18/380] snap_021 ... correct
+[19/380] snap_022 ... correct
+[20/380] snap_023 ... correct
+[21/380] snap_024 ... correct
+[22/380] snap_025 ... correct
+[23/380] snap_026 ... correct
+[24/380] snap_027 ... correct
+[25/380] snap_028 ... correct
+[26/380] snap_029 ... correct
+[27/380] snap_030 ... correct
+[28/380] snap_031 ... correct
+[29/380] snap_032 ... correct
+[30/380] snap_033 ... correct
+[31/380] snap_034 ... correct
+[32/380] snap_035 ... correct
+[33/380] snap_036 ... correct
+[34/380] snap_037 ... correct
+[35/380] snap_038 ... correct
+[36/380] snap_039 ... correct
+[37/380] snap_040 ... correct
+[38/380] snap_041 ... correct
+[39/380] snap_042 ... correct
+[40/380] snap_043 ... correct
+[41/380] snap_044 ... correct
+[42/380] snap_045 ... correct
+[43/380] snap_046 ... correct
+[44/380] snap_047 ... correct
+[45/380] snap_048 ... correct
+[46/380] snap_049 ... correct
+[47/380] snap_050 ... correct
+[48/380] snap_051 ... correct
+[49/380] snap_052 ... correct
+[50/380] snap_053 ... correct
+[51/380] snap_054 ... correct
+[52/380] snap_055 ... correct
+[53/380] snap_056 ... correct
+[54/380] snap_057 ... correct
+[55/380] snap_058 ... correct
+[56/380] snap_059 ... correct
+[57/380] snap_060 ... correct
+[58/380] snap_061 ... correct
+[59/380] snap_062 ... correct
+[60/380] snap_063 ... correct
+[61/380] snap_064 ... correct
+[62/380] snap_065 ... correct
+[63/380] snap_066 ... correct
+[64/380] snap_067 ... correct
+[65/380] snap_068 ... correct
+[66/380] snap_069 ... correct
+[67/380] snap_070 ... correct
+[68/380] snap_071 ... correct
+[69/380] snap_072 ... correct
+[70/380] snap_073 ... correct
+[71/380] snap_074 ... correct
+[72/380] snap_075 ... correct
+[73/380] snap_076 ... correct
+[74/380] snap_077 ... correct
+[75/380] snap_078 ... correct
+[76/380] snap_079 ... correct
+[77/380] snap_080 ... correct
+[78/380] snap_081 ... correct
+[79/380] snap_082 ... correct
+[80/380] snap_083 ... correct
+[81/380] snap_084 ... correct
+[82/380] snap_085 ... correct
+[83/380] snap_086 ... correct
+[84/380] snap_087 ... correct
+[85/380] snap_088 ... correct
+[86/380] snap_089 ... correct
+[87/380] snap_090 ... correct
+[88/380] snap_092 ... correct
+[89/380] snap_093 ... correct
+[90/380] snap_094 ... correct
+[91/380] snap_095 ... correct
+[92/380] snap_096 ... correct
+[93/380] snap_097 ... correct
+[94/380] snap_098 ... correct
+[95/380] snap_099 ... correct
+[96/380] snap_100 ... correct
+[97/380] snap_101 ... correct
+[98/380] snap_102 ... correct
+[99/380] snap_103 ... correct
+[100/380] snap_104 ... correct
+[101/380] snap_105 ... correct
+[102/380] snap_106 ... correct
+[103/380] snap_107 ... correct
+[104/380] snap_108 ... correct
+[105/380] snap_109 ... correct
+[106/380] snap_110 ... correct
+[107/380] snap_111 ... correct
+[108/380] snap_112 ... correct
+[109/380] snap_113 ... correct
+[110/380] snap_114 ... correct
+[111/380] snap_115 ... correct
+[112/380] snap_116 ... correct
+[113/380] snap_117 ... correct
+[114/380] snap_118 ... correct
+[115/380] snap_119 ... correct
+[116/380] snap_120 ... correct
+[117/380] snap_121 ... correct
+[118/380] snap_122 ... correct
+[119/380] snap_123 ... correct
+[120/380] snap_124 ... correct
+[121/380] snap_125 ... correct
+[122/380] snap_126 ... correct
+[123/380] snap_127 ... correct
+[124/380] snap_128 ... correct
+[125/380] snap_129 ... correct
+[126/380] snap_130 ... correct
+[127/380] snap_131 ... correct
+[128/380] snap_132 ... correct
+[129/380] snap_133 ... correct
+[130/380] snap_134 ... correct
+[131/380] snap_135 ... correct
+[132/380] snap_136 ... correct
+[133/380] snap_137 ... correct
+[134/380] snap_138 ... correct
+[135/380] snap_139 ... correct
+[136/380] snap_140 ... correct
+[137/380] snap_141 ... correct
+[138/380] snap_142 ... correct
+[139/380] snap_143 ... correct
+[140/380] snap_144 ... correct
+[141/380] snap_145 ... correct
+[142/380] snap_146 ... correct
+[143/380] snap_147 ... correct
+[144/380] snap_148 ... correct
+[145/380] snap_149 ... correct
+[146/380] snap_150 ... correct
+[147/380] snap_151 ... correct
+[148/380] snap_152 ... correct
+[149/380] snap_153 ... correct
+[150/380] snap_154 ... correct
+[151/380] snap_155 ... correct
+[152/380] snap_156 ... correct
+[153/380] snap_157 ... correct
+[154/380] snap_158 ... correct
+[155/380] snap_159 ... correct
+[156/380] snap_160 ... correct
+[157/380] snap_161 ... correct
+[158/380] snap_162 ... correct
+[159/380] snap_163 ... correct
+[160/380] snap_164 ... correct
+[161/380] snap_165 ... correct
+[162/380] snap_166 ... correct
+[163/380] snap_167 ... correct
+[164/380] snap_168 ... correct
+[165/380] snap_169 ... correct
+[166/380] snap_170 ... correct
+[167/380] snap_172 ... correct
+[168/380] snap_173 ... correct
+[169/380] snap_174 ... WRONG (predicted: checkpointing_overhead)
+[170/380] snap_175 ... correct
+[171/380] snap_176 ... correct
+[172/380] snap_177 ... correct
+[173/380] snap_178 ... correct
+[174/380] snap_179 ... correct
+[175/380] snap_180 ... WRONG (predicted: checkpointing_overhead)
+[176/380] snap_181 ... correct
+[177/380] snap_182 ... correct
+[178/380] snap_183 ... correct
+[179/380] snap_184 ... correct
+[180/380] snap_185 ... correct
+[181/380] snap_186 ... correct
+[182/380] snap_187 ... WRONG (predicted: checkpointing_overhead)
+[183/380] snap_188 ... correct
+[184/380] snap_189 ... correct
+[185/380] snap_190 ... correct
+[186/380] snap_191 ... correct
+[187/380] snap_192 ... correct
+[188/380] snap_193 ... correct
+[189/380] snap_194 ... correct
+[190/380] snap_195 ... correct
+[191/380] snap_196 ... correct
+[192/380] snap_197 ... correct
+[193/380] snap_198 ... correct
+[194/380] snap_199 ... correct
+[195/380] snap_200 ... correct
+[196/380] snap_201 ... correct
+[197/380] snap_202 ... correct
+[198/380] snap_203 ... correct
+[199/380] snap_204 ... correct
+[200/380] snap_205 ... correct
+[201/380] snap_206 ... correct
+[202/380] snap_207 ... correct
+[203/380] snap_208 ... correct
+[204/380] snap_209 ... correct
+[205/380] snap_210 ... correct
+[206/380] snap_211 ... correct
+[207/380] snap_212 ... correct
+[208/380] snap_213 ... correct
+[209/380] snap_214 ... correct
+[210/380] snap_215 ... correct
+[211/380] snap_216 ... correct
+[212/380] snap_217 ... correct
+[213/380] snap_218 ... correct
+[214/380] snap_219 ... correct
+[215/380] snap_220 ... correct
+[216/380] snap_221 ... correct
+[217/380] snap_222 ... correct
+[218/380] snap_223 ... correct
+[219/380] snap_224 ... correct
+[220/380] snap_225 ... correct
+[221/380] snap_226 ... correct
+[222/380] snap_227 ... correct
+[223/380] snap_228 ... correct
+[224/380] snap_229 ... correct
+[225/380] snap_230 ... correct
+[226/380] snap_231 ... correct
+[227/380] snap_232 ... correct
+[228/380] snap_233 ... correct
+[229/380] snap_234 ... correct
+[230/380] snap_235 ... correct
+[231/380] snap_236 ... correct
+[232/380] snap_237 ... correct
+[233/380] snap_238 ... correct
+[234/380] snap_239 ... correct
+[235/380] snap_240 ... correct
+[236/380] snap_241 ... correct
+[237/380] snap_242 ... correct
+[238/380] snap_243 ... correct
+[239/380] snap_244 ... correct
+[240/380] snap_245 ... correct
+[241/380] snap_246 ... correct
+[242/380] snap_247 ... correct
+[243/380] snap_248 ... correct
+[244/380] snap_249 ... correct
+[245/380] snap_250 ... correct
+[246/380] snap_251 ... correct
+[247/380] snap_252 ... correct
+[248/380] snap_253 ... correct
+[249/380] snap_254 ... correct
+[250/380] snap_255 ... correct
+[251/380] snap_256 ... correct
+[252/380] snap_257 ... correct
+[253/380] snap_258 ... correct
+[254/380] snap_259 ... correct
+[255/380] snap_260 ... correct
+[256/380] snap_261 ... WRONG (predicted: read_bandwidth_saturation)
+[257/380] snap_262 ... correct
+[258/380] snap_263 ... WRONG (predicted: read_bandwidth_saturation)
+[259/380] snap_264 ... WRONG (predicted: read_bandwidth_saturation)
+[260/380] snap_265 ... correct
+[261/380] snap_266 ... correct
+[262/380] snap_267 ... WRONG (predicted: read_bandwidth_saturation)
+[263/380] snap_268 ... WRONG (predicted: read_bandwidth_saturation)
+[264/380] snap_269 ... correct
+[265/380] snap_270 ... WRONG (predicted: read_bandwidth_saturation)
+[266/380] snap_271 ... correct
+[267/380] snap_272 ... correct
+[268/380] snap_273 ... WRONG (predicted: read_bandwidth_saturation)
+[269/380] snap_274 ... correct
+[270/380] snap_275 ... WRONG (predicted: read_bandwidth_saturation)
+[271/380] snap_276 ... correct
+[272/380] snap_277 ... WRONG (predicted: read_bandwidth_saturation)
+[273/380] snap_278 ... correct
+[274/380] snap_279 ... WRONG (predicted: read_bandwidth_saturation)
+[275/380] snap_280 ... WRONG (predicted: read_bandwidth_saturation)
+[276/380] snap_281 ... correct
+[277/380] snap_282 ... WRONG (predicted: read_bandwidth_saturation)
+[278/380] snap_283 ... WRONG (predicted: read_bandwidth_saturation)
+[279/380] snap_284 ... WRONG (predicted: checkpointing_overhead)
+[280/380] snap_285 ... correct
+[281/380] snap_286 ... correct
+[282/380] snap_287 ... correct
+[283/380] snap_288 ... correct
+[284/380] snap_289 ... correct
+[285/380] snap_290 ... correct
+[286/380] snap_291 ... correct
+[287/380] snap_292 ... correct
+[288/380] snap_293 ... correct
+[289/380] snap_294 ... correct
+[290/380] snap_295 ... correct
+[291/380] snap_296 ... correct
+[292/380] snap_297 ... correct
+[293/380] snap_298 ... correct
+[294/380] snap_299 ... correct
+[295/380] snap_300 ... correct
+[296/380] snap_301 ... correct
+[297/380] snap_302 ... correct
+[298/380] snap_303 ... correct
+[299/380] snap_304 ... correct
+[300/380] snap_305 ... correct
+[301/380] snap_306 ... correct
+[302/380] snap_307 ... correct
+[303/380] snap_308 ... WRONG (predicted: checkpointing_overhead)
+[304/380] snap_309 ... correct
+[305/380] snap_310 ... correct
+[306/380] snap_311 ... correct
+[307/380] snap_312 ... correct
+[308/380] snap_313 ... correct
+[309/380] snap_314 ... correct
+[310/380] snap_315 ... correct
+[311/380] snap_316 ... correct
+[312/380] snap_317 ... correct
+[313/380] snap_318 ... correct
+[314/380] snap_319 ... correct
+[315/380] snap_320 ... correct
+[316/380] snap_321 ... correct
+[317/380] snap_322 ... correct
+[318/380] snap_323 ... correct
+[319/380] snap_324 ... correct
+[320/380] snap_325 ... correct
+[321/380] snap_326 ... correct
+[322/380] snap_327 ... correct
+[323/380] snap_328 ... correct
+[324/380] snap_329 ... correct
+[325/380] snap_330 ... correct
+[326/380] snap_331 ... correct
+[327/380] snap_332 ... correct
+[328/380] snap_333 ... correct
+[329/380] snap_334 ... correct
+[330/380] snap_335 ... correct
+[331/380] snap_336 ... correct
+[332/380] snap_337 ... correct
+[333/380] snap_338 ... WRONG (predicted: storage_bandwidth_saturation)
+[334/380] snap_339 ... correct
+[335/380] snap_340 ... correct
+[336/380] snap_341 ... correct
+[337/380] snap_342 ... WRONG (predicted: storage_bandwidth_saturation)
+[338/380] snap_343 ... correct
+[339/380] snap_344 ... WRONG (predicted: storage_bandwidth_saturation)
+[340/380] snap_345 ... WRONG (predicted: storage_bandwidth_saturation)
+[341/380] snap_346 ... correct
+[342/380] snap_347 ... correct
+[343/380] snap_348 ... correct
+[344/380] snap_349 ... correct
+[345/380] snap_350 ... correct
+[346/380] snap_351 ... correct
+[347/380] snap_352 ... correct
+[348/380] snap_353 ... correct
+[349/380] snap_354 ... correct
+[350/380] snap_355 ... correct
+[351/380] snap_356 ... correct
+[352/380] snap_357 ... correct
+[353/380] snap_358 ... correct
+[354/380] snap_359 ... correct
+[355/380] snap_360 ... correct
+[356/380] snap_361 ... correct
+[357/380] snap_362 ... correct
+[358/380] snap_363 ... correct
+[359/380] snap_364 ... correct
+[360/380] snap_365 ... correct
+[361/380] snap_366 ... correct
+[362/380] snap_367 ... correct
+[363/380] snap_368 ... correct
+[364/380] snap_369 ... correct
+[365/380] snap_370 ... correct
+[366/380] snap_371 ... WRONG (predicted: checkpointing_overhead)
+[367/380] snap_372 ... correct
+[368/380] snap_373 ... WRONG (predicted: checkpointing_overhead)
+[369/380] snap_374 ... correct
+[370/380] snap_375 ... correct
+[371/380] snap_376 ... correct
+[372/380] snap_377 ... correct
+[373/380] snap_378 ... correct
+[374/380] snap_379 ... correct
+[375/380] snap_380 ... correct
+[376/380] snap_381 ... correct
+[377/380] snap_382 ... correct
+[378/380] snap_383 ... correct
+[379/380] snap_384 ... correct
+[380/380] snap_385 ... correct
+
+=== Summary ===
+Accuracy : 93.7%  (356/380)
+Macro F1 : 0.932
+
+Per-class F1:
+  storage_bandwidth_saturation        P=0.80  R=0.53  F1=0.64
+  metadata_contention                 P=1.00  R=0.97  F1=0.98
+  lock_contention                     P=1.00  R=0.94  F1=0.97
+  network_io_bottleneck               P=1.00  R=1.00  F1=1.00
+  serialized_io                       P=1.00  R=1.00  F1=1.00
+  checkpointing_overhead              P=0.80  R=0.88  F1=0.84
+  compute_bound                       P=1.00  R=1.00  F1=1.00
+  read_bandwidth_saturation           P=0.76  R=1.00  F1=0.86
+  io_interference                     P=1.00  R=1.00  F1=1.00
+  data_skew                           P=1.00  R=1.00  F1=1.00
+  staging_inefficiency                P=1.00  R=0.92  F1=0.96
+
+=== Timing ===
+  Wall-clock duration  : 984.2 s
+  Total API time       : 983.6 s
+  Start                : 2026-04-17T12:36:03.850440
+  End                  : 2026-04-17T12:52:28.084101
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 1,329,966
+  Total completion tokens  : 65,411
+  Total tokens             : 1,395,377
+  Avg prompt / snapshot    : 3499.9
+  Avg completion / snapshot: 172.1
+  Avg total / snapshot     : 3672.0
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  checkpointing_overhead                32     3700.8      3524.2      176.6       2.753s
+  staging_inefficiency                  39     3696.4      3521.0      175.4       2.635s
+  data_skew                             40     3688.9      3511.6      177.4       2.476s
+  network_io_bottleneck                 32     3672.8      3488.2      184.6       2.782s
+  io_interference                       39     3672.3      3498.4      173.9       2.706s
+  lock_contention                       31     3671.3      3502.0      169.3       2.672s
+  storage_bandwidth_saturation          30     3665.3      3489.2      176.1       2.614s
+  metadata_contention                   31     3662.6      3490.2      172.5       2.512s
+  read_bandwidth_saturation             41     3658.5      3486.7      171.8       2.345s
+  serialized_io                         32     3655.3      3494.3      161.0       2.461s
+  compute_bound                         33     3642.6      3489.2      153.5       2.580s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 0.3 %
+  Memory start (RSS)       : 71.9 MB
+  Memory end   (RSS)       : 72.7 MB
+  Memory peak  (RSS)       : 74.4 MB
+
+Results saved to: /home/alistair/school/iit/Spring26/CS546Parallel/llm-io-bottleneck-detection/data/results/gpt-4.1-mini_few_shot_20260417_125228.json
+
+=======================================================
+Strategy: gpt-4.1-mini / chain_of_thought
+=======================================================
+[ 1/385] snap_001 ... correct
+[ 2/385] snap_002 ... correct
+[ 3/385] snap_003 ... correct
+[ 4/385] snap_004 ... correct
+[ 5/385] snap_005 ... correct
+[ 6/385] snap_006 ... correct
+[ 7/385] snap_007 ... correct
+[ 8/385] snap_008 ... correct
+[ 9/385] snap_009 ... correct
+[10/385] snap_010 ... correct
+[11/385] snap_011 ... correct
+[12/385] snap_012 ... correct
+[13/385] snap_013 ... correct
+[14/385] snap_014 ... correct
+[15/385] snap_015 ... correct
+[16/385] snap_016 ... correct
+[17/385] snap_017 ... correct
+[18/385] snap_018 ... correct
+[19/385] snap_019 ... correct
+[20/385] snap_020 ... correct
+[21/385] snap_021 ... correct
+[22/385] snap_022 ... correct
+[23/385] snap_023 ... correct
+[24/385] snap_024 ... correct
+[25/385] snap_025 ... correct
+[26/385] snap_026 ... correct
+[27/385] snap_027 ... correct
+[28/385] snap_028 ... correct
+[29/385] snap_029 ... correct
+[30/385] snap_030 ... correct
+[31/385] snap_031 ... correct
+[32/385] snap_032 ... correct
+[33/385] snap_033 ... correct
+[34/385] snap_034 ... correct
+[35/385] snap_035 ... correct
+[36/385] snap_036 ... correct
+[37/385] snap_037 ... correct
+[38/385] snap_038 ... correct
+[39/385] snap_039 ... correct
+[40/385] snap_040 ... correct
+[41/385] snap_041 ... correct
+[42/385] snap_042 ... correct
+[43/385] snap_043 ... correct
+[44/385] snap_044 ... correct
+[45/385] snap_045 ... correct
+[46/385] snap_046 ... correct
+[47/385] snap_047 ... correct
+[48/385] snap_048 ... correct
+[49/385] snap_049 ... correct
+[50/385] snap_050 ... correct
+[51/385] snap_051 ... correct
+[52/385] snap_052 ... correct
+[53/385] snap_053 ... correct
+[54/385] snap_054 ... correct
+[55/385] snap_055 ... correct
+[56/385] snap_056 ... correct
+[57/385] snap_057 ... correct
+[58/385] snap_058 ... correct
+[59/385] snap_059 ... correct
+[60/385] snap_060 ... correct
+[61/385] snap_061 ... correct
+[62/385] snap_062 ... correct
+[63/385] snap_063 ... correct
+[64/385] snap_064 ... correct
+[65/385] snap_065 ... correct
+[66/385] snap_066 ... correct
+[67/385] snap_067 ... correct
+[68/385] snap_068 ... correct
+[69/385] snap_069 ... correct
+[70/385] snap_070 ... correct
+[71/385] snap_071 ... correct
+[72/385] snap_072 ... correct
+[73/385] snap_073 ... correct
+[74/385] snap_074 ... correct
+[75/385] snap_075 ... correct
+[76/385] snap_076 ... correct
+[77/385] snap_077 ... correct
+[78/385] snap_078 ... correct
+[79/385] snap_079 ... correct
+[80/385] snap_080 ... correct
+[81/385] snap_081 ... correct
+[82/385] snap_082 ... correct
+[83/385] snap_083 ... correct
+[84/385] snap_084 ... correct
+[85/385] snap_085 ... correct
+[86/385] snap_086 ... correct
+[87/385] snap_087 ... correct
+[88/385] snap_088 ... correct
+[89/385] snap_089 ... correct
+[90/385] snap_090 ... correct
+[91/385] snap_091 ... correct
+[92/385] snap_092 ... correct
+[93/385] snap_093 ... correct
+[94/385] snap_094 ... correct
+[95/385] snap_095 ... correct
+[96/385] snap_096 ... correct
+[97/385] snap_097 ... correct
+[98/385] snap_098 ... correct
+[99/385] snap_099 ... correct
+[100/385] snap_100 ... correct
+[101/385] snap_101 ... correct
+[102/385] snap_102 ... correct
+[103/385] snap_103 ... correct
+[104/385] snap_104 ... correct
+[105/385] snap_105 ... correct
+[106/385] snap_106 ... correct
+[107/385] snap_107 ... correct
+[108/385] snap_108 ... correct
+[109/385] snap_109 ... correct
+[110/385] snap_110 ... correct
+[111/385] snap_111 ... correct
+[112/385] snap_112 ... correct
+[113/385] snap_113 ... correct
+[114/385] snap_114 ... correct
+[115/385] snap_115 ... correct
+[116/385] snap_116 ... correct
+[117/385] snap_117 ... correct
+[118/385] snap_118 ... correct
+[119/385] snap_119 ... correct
+[120/385] snap_120 ... correct
+[121/385] snap_121 ... correct
+[122/385] snap_122 ... correct
+[123/385] snap_123 ... correct
+[124/385] snap_124 ... correct
+[125/385] snap_125 ... correct
+[126/385] snap_126 ... correct
+[127/385] snap_127 ... correct
+[128/385] snap_128 ... correct
+[129/385] snap_129 ... correct
+[130/385] snap_130 ... correct
+[131/385] snap_131 ... correct
+[132/385] snap_132 ... correct
+[133/385] snap_133 ... correct
+[134/385] snap_134 ... correct
+[135/385] snap_135 ... correct
+[136/385] snap_136 ... correct
+[137/385] snap_137 ... correct
+[138/385] snap_138 ... correct
+[139/385] snap_139 ... correct
+[140/385] snap_140 ... correct
+[141/385] snap_141 ... correct
+[142/385] snap_142 ... correct
+[143/385] snap_143 ... correct
+[144/385] snap_144 ... correct
+[145/385] snap_145 ... correct
+[146/385] snap_146 ... correct
+[147/385] snap_147 ... correct
+[148/385] snap_148 ... correct
+[149/385] snap_149 ... correct
+[150/385] snap_150 ... correct
+[151/385] snap_151 ... correct
+[152/385] snap_152 ... correct
+[153/385] snap_153 ... correct
+[154/385] snap_154 ... correct
+[155/385] snap_155 ... correct
+[156/385] snap_156 ... correct
+[157/385] snap_157 ... correct
+[158/385] snap_158 ... correct
+[159/385] snap_159 ... correct
+[160/385] snap_160 ... correct
+[161/385] snap_161 ... correct
+[162/385] snap_162 ... correct
+[163/385] snap_163 ... correct
+[164/385] snap_164 ... correct
+[165/385] snap_165 ... correct
+[166/385] snap_166 ... correct
+[167/385] snap_167 ... correct
+[168/385] snap_168 ... correct
+[169/385] snap_169 ... correct
+[170/385] snap_170 ... correct
+[171/385] snap_171 ... correct
+[172/385] snap_172 ... correct
+[173/385] snap_173 ... correct
+[174/385] snap_174 ... correct
+[175/385] snap_175 ... correct
+[176/385] snap_176 ... correct
+[177/385] snap_177 ... correct
+[178/385] snap_178 ... correct
+[179/385] snap_179 ... correct
+[180/385] snap_180 ... correct
+[181/385] snap_181 ... correct
+[182/385] snap_182 ... correct
+[183/385] snap_183 ... correct
+[184/385] snap_184 ... correct
+[185/385] snap_185 ... correct
+[186/385] snap_186 ... correct
+[187/385] snap_187 ... correct
+[188/385] snap_188 ... correct
+[189/385] snap_189 ... correct
+[190/385] snap_190 ... correct
+[191/385] snap_191 ... correct
+[192/385] snap_192 ... correct
+[193/385] snap_193 ... correct
+[194/385] snap_194 ... correct
+[195/385] snap_195 ... correct
+[196/385] snap_196 ... correct
+[197/385] snap_197 ... correct
+[198/385] snap_198 ... correct
+[199/385] snap_199 ... correct
+[200/385] snap_200 ... correct
+[201/385] snap_201 ... correct
+[202/385] snap_202 ... correct
+[203/385] snap_203 ... correct
+[204/385] snap_204 ... correct
+[205/385] snap_205 ... correct
+[206/385] snap_206 ... correct
+[207/385] snap_207 ... correct
+[208/385] snap_208 ... correct
+[209/385] snap_209 ... correct
+[210/385] snap_210 ... correct
+[211/385] snap_211 ... correct
+[212/385] snap_212 ... correct
+[213/385] snap_213 ... correct
+[214/385] snap_214 ... correct
+[215/385] snap_215 ... correct
+[216/385] snap_216 ... correct
+[217/385] snap_217 ... correct
+[218/385] snap_218 ... correct
+[219/385] snap_219 ... correct
+[220/385] snap_220 ... correct
+[221/385] snap_221 ... correct
+[222/385] snap_222 ... correct
+[223/385] snap_223 ... correct
+[224/385] snap_224 ... correct
+[225/385] snap_225 ... correct
+[226/385] snap_226 ... correct
+[227/385] snap_227 ... correct
+[228/385] snap_228 ... correct
+[229/385] snap_229 ... correct
+[230/385] snap_230 ... correct
+[231/385] snap_231 ... correct
+[232/385] snap_232 ... correct
+[233/385] snap_233 ... correct
+[234/385] snap_234 ... correct
+[235/385] snap_235 ... correct
+[236/385] snap_236 ... correct
+[237/385] snap_237 ... correct
+[238/385] snap_238 ... correct
+[239/385] snap_239 ... WRONG (predicted: read_bandwidth_saturation)
+[240/385] snap_240 ... correct
+[241/385] snap_241 ... correct
+[242/385] snap_242 ... correct
+[243/385] snap_243 ... correct
+[244/385] snap_244 ... correct
+[245/385] snap_245 ... correct
+[246/385] snap_246 ... correct
+[247/385] snap_247 ... correct
+[248/385] snap_248 ... correct
+[249/385] snap_249 ... correct
+[250/385] snap_250 ... correct
+[251/385] snap_251 ... correct
+[252/385] snap_252 ... correct
+[253/385] snap_253 ... correct
+[254/385] snap_254 ... correct
+[255/385] snap_255 ... correct
+[256/385] snap_256 ... correct
+[257/385] snap_257 ... correct
+[258/385] snap_258 ... correct
+[259/385] snap_259 ... correct
+[260/385] snap_260 ... correct
+[261/385] snap_261 ... WRONG (predicted: read_bandwidth_saturation)
+[262/385] snap_262 ... correct
+[263/385] snap_263 ... WRONG (predicted: read_bandwidth_saturation)
+[264/385] snap_264 ... WRONG (predicted: read_bandwidth_saturation)
+[265/385] snap_265 ... correct
+[266/385] snap_266 ... correct
+[267/385] snap_267 ... WRONG (predicted: read_bandwidth_saturation)
+[268/385] snap_268 ... WRONG (predicted: read_bandwidth_saturation)
+[269/385] snap_269 ... correct
+[270/385] snap_270 ... WRONG (predicted: read_bandwidth_saturation)
+[271/385] snap_271 ... correct
+[272/385] snap_272 ... correct
+[273/385] snap_273 ... WRONG (predicted: read_bandwidth_saturation)
+[274/385] snap_274 ... correct
+[275/385] snap_275 ... WRONG (predicted: read_bandwidth_saturation)
+[276/385] snap_276 ... correct
+[277/385] snap_277 ... WRONG (predicted: read_bandwidth_saturation)
+[278/385] snap_278 ... correct
+[279/385] snap_279 ... WRONG (predicted: read_bandwidth_saturation)
+[280/385] snap_280 ... WRONG (predicted: read_bandwidth_saturation)
+[281/385] snap_281 ... correct
+[282/385] snap_282 ... WRONG (predicted: read_bandwidth_saturation)
+[283/385] snap_283 ... WRONG (predicted: read_bandwidth_saturation)
+[284/385] snap_284 ... correct
+[285/385] snap_285 ... correct
+[286/385] snap_286 ... correct
+[287/385] snap_287 ... correct
+[288/385] snap_288 ... correct
+[289/385] snap_289 ... correct
+[290/385] snap_290 ... correct
+[291/385] snap_291 ... correct
+[292/385] snap_292 ... correct
+[293/385] snap_293 ... correct
+[294/385] snap_294 ... correct
+[295/385] snap_295 ... correct
+[296/385] snap_296 ... correct
+[297/385] snap_297 ... correct
+[298/385] snap_298 ... correct
+[299/385] snap_299 ... correct
+[300/385] snap_300 ... correct
+[301/385] snap_301 ... correct
+[302/385] snap_302 ... correct
+[303/385] snap_303 ... correct
+[304/385] snap_304 ... correct
+[305/385] snap_305 ... correct
+[306/385] snap_306 ... correct
+[307/385] snap_307 ... correct
+[308/385] snap_308 ... correct
+[309/385] snap_309 ... correct
+[310/385] snap_310 ... correct
+[311/385] snap_311 ... correct
+[312/385] snap_312 ... correct
+[313/385] snap_313 ... correct
+[314/385] snap_314 ... correct
+[315/385] snap_315 ... correct
+[316/385] snap_316 ... correct
+[317/385] snap_317 ... correct
+[318/385] snap_318 ... correct
+[319/385] snap_319 ... correct
+[320/385] snap_320 ... correct
+[321/385] snap_321 ... correct
+[322/385] snap_322 ... correct
+[323/385] snap_323 ... correct
+[324/385] snap_324 ... correct
+[325/385] snap_325 ... correct
+[326/385] snap_326 ... correct
+[327/385] snap_327 ... correct
+[328/385] snap_328 ... correct
+[329/385] snap_329 ... correct
+[330/385] snap_330 ... correct
+[331/385] snap_331 ... correct
+[332/385] snap_332 ... correct
+[333/385] snap_333 ... correct
+[334/385] snap_334 ... correct
+[335/385] snap_335 ... correct
+[336/385] snap_336 ... correct
+[337/385] snap_337 ... correct
+[338/385] snap_338 ... correct
+[339/385] snap_339 ... correct
+[340/385] snap_340 ... correct
+[341/385] snap_341 ... correct
+[342/385] snap_342 ... correct
+[343/385] snap_343 ... correct
+[344/385] snap_344 ... correct
+[345/385] snap_345 ... correct
+[346/385] snap_346 ... correct
+[347/385] snap_347 ... correct
+[348/385] snap_348 ... correct
+[349/385] snap_349 ... correct
+[350/385] snap_350 ... correct
+[351/385] snap_351 ... correct
+[352/385] snap_352 ... correct
+[353/385] snap_353 ... correct
+[354/385] snap_354 ... correct
+[355/385] snap_355 ... correct
+[356/385] snap_356 ... correct
+[357/385] snap_357 ... correct
+[358/385] snap_358 ... correct
+[359/385] snap_359 ... correct
+[360/385] snap_360 ... correct
+[361/385] snap_361 ... correct
+[362/385] snap_362 ... correct
+[363/385] snap_363 ... correct
+[364/385] snap_364 ... correct
+[365/385] snap_365 ... correct
+[366/385] snap_366 ... correct
+[367/385] snap_367 ... correct
+[368/385] snap_368 ... correct
+[369/385] snap_369 ... correct
+[370/385] snap_370 ... correct
+[371/385] snap_371 ... WRONG (predicted: checkpointing_overhead)
+[372/385] snap_372 ... correct
+[373/385] snap_373 ... correct
+[374/385] snap_374 ... correct
+[375/385] snap_375 ... correct
+[376/385] snap_376 ... correct
+[377/385] snap_377 ... correct
+[378/385] snap_378 ... correct
+[379/385] snap_379 ... correct
+[380/385] snap_380 ... correct
+[381/385] snap_381 ... correct
+[382/385] snap_382 ... correct
+[383/385] snap_383 ... correct
+[384/385] snap_384 ... correct
+[385/385] snap_385 ... correct
+
+=== Summary ===
+Accuracy : 96.1%  (370/385)
+Macro F1 : 0.958
+
+Per-class F1:
+  storage_bandwidth_saturation        P=1.00  R=0.57  F1=0.72
+  metadata_contention                 P=1.00  R=1.00  F1=1.00
+  lock_contention                     P=1.00  R=0.97  F1=0.98
+  network_io_bottleneck               P=1.00  R=0.97  F1=0.98
+  serialized_io                       P=1.00  R=1.00  F1=1.00
+  checkpointing_overhead              P=0.97  R=1.00  F1=0.98
+  compute_bound                       P=1.00  R=1.00  F1=1.00
+  read_bandwidth_saturation           P=0.75  R=1.00  F1=0.86
+  io_interference                     P=1.00  R=1.00  F1=1.00
+  data_skew                           P=1.00  R=1.00  F1=1.00
+  staging_inefficiency                P=1.00  R=1.00  F1=1.00
+
+=== Timing ===
+  Wall-clock duration  : 1161.3 s
+  Total API time       : 1161.0 s
+  Start                : 2026-04-17T12:52:28.166195
+  End                  : 2026-04-17T13:11:49.422609
+
+=== Token Usage (overall) ===
+  Total prompt tokens      : 443,109
+  Total completion tokens  : 80,905
+  Total tokens             : 524,014
+  Avg prompt / snapshot    : 1150.9
+  Avg completion / snapshot: 210.1
+  Avg total / snapshot     : 1361.1
+
+=== Token Usage per Bottleneck Class ===
+  Class                                  N  Avg total  Avg prompt  Avg compl  Avg latency
+  ---------------------------------------------------------------------------------------
+  data_skew                             40     1419.0      1162.5      256.5       3.377s
+  checkpointing_overhead                32     1398.3      1175.2      223.1       2.928s
+  staging_inefficiency                  40     1389.8      1172.0      217.8       3.399s
+  io_interference                       40     1367.2      1149.5      217.7       2.985s
+  metadata_contention                   32     1353.8      1141.0      212.8       3.399s
+  network_io_bottleneck                 32     1351.9      1139.2      212.7       2.813s
+  storage_bandwidth_saturation          30     1348.7      1140.2      208.5       2.867s
+  read_bandwidth_saturation             42     1346.2      1137.8      208.4       2.828s
+  lock_contention                       32     1332.9      1153.4      179.6       2.878s
+  compute_bound                         33     1324.5      1140.2      184.4       2.871s
+  serialized_io                         32     1321.4      1145.3      176.1       2.703s
+
+=== Resource Usage ===
+  CPU (process, whole run) : 0.2 %
+  Memory start (RSS)       : 72.7 MB
+  Memory end   (RSS)       : 72.8 MB
+  Memory peak  (RSS)       : 74.4 MB
+
+Results saved to: /home/alistair/school/iit/Spring26/CS546Parallel/llm-io-bottleneck-detection/data/results/gpt-4.1-mini_chain_of_thought_20260417_131149.json
+

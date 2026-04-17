@@ -1,15 +1,18 @@
 import os
+import gc
 import json
 import glob
 import copy
+import time
+import resource
 import datetime
+import psutil
 from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-print(client)
 BOTTLENECK_CLASSES = [
     "storage_bandwidth_saturation",
     "metadata_contention",
@@ -215,13 +218,11 @@ Choose exactly one bottleneck class from this list:
 - data_skew
 - staging_inefficiency
 
-Respond with a JSON object only — no markdown, no extra text:
-{{"bottleneck": "<one class from the list above>"}}
+""" + RESPONSE_FORMAT + """
 
 Snapshot:
 {snapshot_json}
 """
-
 
 def strip_annotation(snapshot: dict) -> dict:
     """Remove ground-truth annotation before sending to the LLM."""
@@ -312,10 +313,14 @@ def rule_based_diagnose(snapshot: dict) -> dict:
 
 def diagnose(snapshot: dict, model: str = "gpt-4.1-mini", strategy: str = "zero_shot") -> dict:
     if strategy == "rule_based":
-        return rule_based_diagnose(snapshot)
+        result = rule_based_diagnose(snapshot)
+        result["duration_s"] = 0.0
+        result["token_usage"] = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+        return result
 
     prompt = build_prompt(snapshot, strategy=strategy)
 
+    t0 = time.time()
     response = client.chat.completions.create(
         model=model,
         messages=[
@@ -325,9 +330,17 @@ def diagnose(snapshot: dict, model: str = "gpt-4.1-mini", strategy: str = "zero_
         temperature=0,
         response_format={"type": "json_object"},
     )
+    duration_s = time.time() - t0
 
     raw = response.choices[0].message.content
-    return json.loads(raw)
+    result = json.loads(raw)
+    result["duration_s"] = round(duration_s, 3)
+    result["token_usage"] = {
+        "prompt_tokens": response.usage.prompt_tokens,
+        "completion_tokens": response.usage.completion_tokens,
+        "total_tokens": response.usage.total_tokens,
+    }
+    return result
 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -346,8 +359,22 @@ def load_snapshots(snapshots_dir: str = "data/snapshots") -> list[dict]:
 FEW_SHOT_IDS = {ex["id"] for ex, _ in FEW_SHOT_EXAMPLES}
 
 
+def _flush_and_snapshot() -> dict:
+    """Force GC, then capture baseline CPU/memory for the current process."""
+    gc.collect()
+    proc = psutil.Process()
+    proc.cpu_percent(interval=None)  # first call initialises the counter; returns 0.0
+    return {
+        "proc": proc,
+        "mem_start_mb": proc.memory_info().rss / 1024 / 1024,
+    }
+
+
 def evaluate(snapshots: list[dict], model: str = "gpt-4.1-mini", strategy: str = "zero_shot") -> dict:
     results = []
+
+    ctx = _flush_and_snapshot()
+    start_time = datetime.datetime.now()
 
     # Exclude few-shot examples from their own evaluation to avoid data leakage
     if strategy == "few_shot":
@@ -377,11 +404,36 @@ def evaluate(snapshots: list[dict], model: str = "gpt-4.1-mini", strategy: str =
             "gt_key_signals": gt.get("key_signals", []),
             "llm_key_signals": prediction.get("key_signals", []),
             "explanation": prediction.get("explanation", ""),
+            "duration_s": prediction.get("duration_s", 0.0),
+            "token_usage": prediction.get("token_usage", {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}),
         })
 
+    end_time = datetime.datetime.now()
+    total_duration_s = (end_time - start_time).total_seconds()
+
+    mem_end_mb = ctx["proc"].memory_info().rss / 1024 / 1024
+    mem_peak_mb = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024  # KB → MB on Linux
+    cpu_pct = ctx["proc"].cpu_percent(interval=None)
+
+    resource_usage = {
+        "cpu_pct": round(cpu_pct, 1),
+        "mem_start_mb": round(ctx["mem_start_mb"], 1),
+        "mem_end_mb": round(mem_end_mb, 1),
+        "mem_peak_mb": round(mem_peak_mb, 1),
+    }
+
     summary = _compute_summary(results)
-    return {"model": model, "strategy": strategy, "results": results, "summary": summary,
-            "num_evaluated": len(eval_snaps)}
+    return {
+        "model": model,
+        "strategy": strategy,
+        "start_time": start_time.isoformat(),
+        "end_time": end_time.isoformat(),
+        "duration_s": round(total_duration_s, 1),
+        "resource_usage": resource_usage,
+        "results": results,
+        "summary": summary,
+        "num_evaluated": len(eval_snaps),
+    }
 
 
 def _compute_summary(results: list[dict]) -> dict:
@@ -413,12 +465,51 @@ def _compute_summary(results: list[dict]) -> dict:
 
     macro_f1 = sum(v["f1"] for v in per_class.values()) / len(per_class)
 
+    n = len(results)
+    total_prompt  = sum(r["token_usage"]["prompt_tokens"]     for r in results)
+    total_compl   = sum(r["token_usage"]["completion_tokens"] for r in results)
+    total_tok     = sum(r["token_usage"]["total_tokens"]      for r in results)
+    total_dur     = sum(r["duration_s"]                       for r in results)
+
+    # Per-class token and timing aggregation (keyed by ground-truth class)
+    class_buckets: dict[str, list] = {c: [] for c in classes}
+    for r in results:
+        class_buckets[r["ground_truth"]].append(r)
+
+    per_class_tokens = {}
+    for c, bucket in class_buckets.items():
+        m = len(bucket)
+        if m == 0:
+            continue
+        c_prompt = sum(r["token_usage"]["prompt_tokens"]     for r in bucket)
+        c_compl  = sum(r["token_usage"]["completion_tokens"] for r in bucket)
+        c_tok    = sum(r["token_usage"]["total_tokens"]      for r in bucket)
+        c_dur    = sum(r["duration_s"]                       for r in bucket)
+        per_class_tokens[c] = {
+            "count":                      m,
+            "total_tokens":               c_tok,
+            "avg_prompt_tokens":          round(c_prompt / m, 1),
+            "avg_completion_tokens":      round(c_compl  / m, 1),
+            "avg_total_tokens":           round(c_tok    / m, 1),
+            "avg_duration_s":             round(c_dur    / m, 3),
+        }
+
     return {
         "total": total,
         "correct": correct,
         "accuracy": round(accuracy, 3),
         "macro_f1": round(macro_f1, 3),
         "per_class": per_class,
+        "tokens": {
+            "total_prompt":               total_prompt,
+            "total_completion":           total_compl,
+            "total":                      total_tok,
+            "avg_prompt_per_snapshot":    round(total_prompt / n, 1) if n else 0,
+            "avg_completion_per_snapshot":round(total_compl  / n, 1) if n else 0,
+            "avg_total_per_snapshot":     round(total_tok    / n, 1) if n else 0,
+        },
+        "per_class_tokens": per_class_tokens,
+        "total_api_time_s": round(total_dur, 1),
     }
 
 
@@ -433,13 +524,56 @@ def save_results(run: dict, results_dir: str = "data/results") -> str:
     return path
 
 
-def print_summary(summary: dict) -> None:
+def print_summary(run: dict) -> None:
+    summary = run["summary"]
+    res     = run.get("resource_usage", {})
+    tok     = summary.get("tokens", {})
+
     print("\n=== Summary ===")
     print(f"Accuracy : {summary['accuracy']:.1%}  ({summary['correct']}/{summary['total']})")
     print(f"Macro F1 : {summary['macro_f1']:.3f}")
+
     print("\nPer-class F1:")
     for cls, metrics in summary["per_class"].items():
         print(f"  {cls:<35} P={metrics['precision']:.2f}  R={metrics['recall']:.2f}  F1={metrics['f1']:.2f}")
+
+    print("\n=== Timing ===")
+    print(f"  Wall-clock duration  : {run.get('duration_s', 0):.1f} s")
+    print(f"  Total API time       : {summary.get('total_api_time_s', 0):.1f} s")
+    print(f"  Start                : {run.get('start_time', 'n/a')}")
+    print(f"  End                  : {run.get('end_time',   'n/a')}")
+
+    if tok:
+        print("\n=== Token Usage (overall) ===")
+        print(f"  Total prompt tokens      : {tok.get('total_prompt', 0):,}")
+        print(f"  Total completion tokens  : {tok.get('total_completion', 0):,}")
+        print(f"  Total tokens             : {tok.get('total', 0):,}")
+        print(f"  Avg prompt / snapshot    : {tok.get('avg_prompt_per_snapshot', 0):.1f}")
+        print(f"  Avg completion / snapshot: {tok.get('avg_completion_per_snapshot', 0):.1f}")
+        print(f"  Avg total / snapshot     : {tok.get('avg_total_per_snapshot', 0):.1f}")
+
+    pct = summary.get("per_class_tokens", {})
+    if pct:
+        print("\n=== Token Usage per Bottleneck Class ===")
+        header = f"  {'Class':<35} {'N':>4}  {'Avg total':>9}  {'Avg prompt':>10}  {'Avg compl':>9}  {'Avg latency':>11}"
+        print(header)
+        print("  " + "-" * (len(header) - 2))
+        # Sort by avg_total_tokens descending so the most expensive class is at the top
+        for c, m in sorted(pct.items(), key=lambda kv: kv[1]["avg_total_tokens"], reverse=True):
+            print(
+                f"  {c:<35} {m['count']:>4}  "
+                f"{m['avg_total_tokens']:>9.1f}  "
+                f"{m['avg_prompt_tokens']:>10.1f}  "
+                f"{m['avg_completion_tokens']:>9.1f}  "
+                f"{m['avg_duration_s']:>10.3f}s"
+            )
+
+    if res:
+        print("\n=== Resource Usage ===")
+        print(f"  CPU (process, whole run) : {res.get('cpu_pct', 0):.1f} %")
+        print(f"  Memory start (RSS)       : {res.get('mem_start_mb', 0):.1f} MB")
+        print(f"  Memory end   (RSS)       : {res.get('mem_end_mb', 0):.1f} MB")
+        print(f"  Memory peak  (RSS)       : {res.get('mem_peak_mb', 0):.1f} MB")
 
 
 class Tee:
@@ -469,7 +603,7 @@ if __name__ == "__main__":
     import sys
 
     MODEL = "gpt-4.1-mini"
-    STRATEGIES = ["few_shot"]  ##"rule_based", "classify_only", "zero_shot", "chain_of_thought", 
+    STRATEGIES = ["rule_based", "classify_only", "zero_shot", "few_shot", "chain_of_thought"] 
 
     os.makedirs(os.path.join(ROOT, "data/results"), exist_ok=True)
     ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -487,7 +621,7 @@ if __name__ == "__main__":
         print(f"Strategy: {label}")
         print(f"{'='*55}")
         run = evaluate(snapshots, model=MODEL, strategy=strategy)
-        print_summary(run["summary"])
+        print_summary(run)
         path = save_results(run)
         print(f"\nResults saved to: {path}\n")
 
