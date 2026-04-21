@@ -1,62 +1,62 @@
 {
   "id": "snap_362",
   "workflow": {
-    "name": "spark_etl",
-    "type": "etl",
-    "num_stages": 4
+    "name": "wrf",
+    "type": "climate",
+    "num_stages": 5
   },
   "stage": {
     "name": "output_results",
-    "order": 3,
+    "order": 5,
     "predecessors": [
-      "data_ingestion"
+      "scan_catalog"
     ],
     "operation": "write"
   },
   "execution": {
-    "num_nodes": 59,
-    "num_tasks": 1475,
-    "parallelism": 1475,
-    "total_time_s": 978,
-    "io_time_s": 812,
-    "compute_time_s": 166,
-    "io_time_ratio": 0.83,
-    "transfer_size_kb": 1024,
-    "aggregate_size_mb": 15875,
-    "op_count": 15875,
-    "num_shared_files": 10
+    "num_nodes": 86,
+    "num_tasks": 1892,
+    "parallelism": 1892,
+    "total_time_s": 1483,
+    "io_time_s": 1246,
+    "compute_time_s": 237,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 14418,
+    "op_count": 57672,
+    "num_shared_files": 7
   },
   "io_metrics": {
     "read_bw_mb_s": 0,
-    "write_bw_mb_s": 34.0,
-    "peak_storage_bw_mb_s": 200,
-    "bw_utilization_ratio": 0.17,
-    "iops": 34,
-    "avg_io_size_kb": 1024,
-    "sequential_ratio": 0.72
+    "write_bw_mb_s": 56.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.14,
+    "iops": 224,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.84
   },
   "resource_utilization": {
-    "cpu_util_pct": 18,
-    "memory_util_pct": 31,
-    "network_bw_mb_s": 30.3,
-    "network_peak_bw_mb_s": 5000,
-    "network_util_ratio": 0.006
+    "cpu_util_pct": 20,
+    "memory_util_pct": 47,
+    "network_bw_mb_s": 48.7,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.005
   },
   "storage": {
-    "type": "beegfs",
-    "stripe_count": 16,
+    "type": "wekafs",
+    "stripe_count": 8,
     "shared": true
   },
   "annotation": {
     "bottleneck": "lock_contention",
     "confidence": "high",
-    "explanation": "1475 tasks compete for write locks on 10 shared file(s) on the shared BEEGFS filesystem. Lock acquisition serializes access, resulting in only 34.0 MB/s effective bandwidth (17% of the 200 MB/s peak) despite full task parallelism. CPU utilization of 18% confirms tasks are stalled waiting for lock release rather than performing computation.",
+    "explanation": "1892 tasks compete for write locks on 7 shared file(s) on the shared WEKAFS filesystem. Lock acquisition serializes access, resulting in only 56.0 MB/s effective bandwidth (14% of the 400 MB/s peak) despite full task parallelism. CPU utilization of 20% confirms tasks are stalled waiting for lock release rather than performing computation.",
     "key_signals": [
-      "num_shared_files: 10",
-      "num_tasks: 1475",
-      "bw_utilization_ratio: 0.17",
-      "cpu_util_pct: 18",
-      "io_time_ratio: 0.83",
+      "num_shared_files: 7",
+      "num_tasks: 1892",
+      "bw_utilization_ratio: 0.14",
+      "cpu_util_pct: 20",
+      "io_time_ratio: 0.84",
       "storage.shared: true"
     ]
   }

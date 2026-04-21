@@ -1,0 +1,62 @@
+{
+  "id": "snap_451",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "merge_output",
+    "order": 2,
+    "predecessors": [
+      "transform"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 48,
+    "num_tasks": 480,
+    "parallelism": 480,
+    "total_time_s": 939,
+    "io_time_s": 704,
+    "compute_time_s": 235,
+    "io_time_ratio": 0.75,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 21.0,
+    "op_count": 21,
+    "serialization_factor": 15
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 30.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.15,
+    "iops": 32,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.93
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 12,
+    "memory_util_pct": 38,
+    "network_bw_mb_s": 28.5,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.006
+  },
+  "storage": {
+    "type": "nfs",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O operations are serialized with a factor of 15, meaning tasks queue behind a single I/O path instead of issuing requests in parallel. Despite 480 tasks, effective bandwidth is only 30.0 MB/s (15% of the 200 MB/s NFS peak). CPU utilization of 12% confirms tasks are idle waiting for serialized I/O to complete. The io_time_ratio of 0.75 confirms I/O dominates stage time.",
+    "key_signals": [
+      "serialization_factor: 15",
+      "bw_utilization_ratio: 0.15",
+      "cpu_util_pct: 12",
+      "io_time_ratio: 0.75",
+      "num_tasks: 480"
+    ]
+  }
+}

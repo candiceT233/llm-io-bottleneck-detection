@@ -17,10 +17,10 @@
     "num_nodes": 88,
     "num_tasks": 1408,
     "parallelism": 1408,
-    "total_time_s": 983,
-    "io_time_s": 187,
-    "compute_time_s": 796,
-    "io_time_ratio": 0.19,
+    "total_time_s": 1801,
+    "io_time_s": 396,
+    "compute_time_s": 1405,
+    "io_time_ratio": 0.22,
     "transfer_size_kb": 256,
     "aggregate_size_mb": 4733,
     "op_count": 18932
@@ -35,7 +35,7 @@
     "sequential_ratio": 0.86
   },
   "resource_utilization": {
-    "cpu_util_pct": 95,
+    "cpu_util_pct": 66,
     "memory_util_pct": 72,
     "network_bw_mb_s": 55.4,
     "network_peak_bw_mb_s": 5000,
@@ -48,11 +48,11 @@
   },
   "annotation": {
     "bottleneck": "compute_bound",
-    "confidence": "high",
-    "explanation": "CPU utilization of 95% confirms that computation is the dominant bottleneck. The io_time_ratio of 0.19 shows that I/O accounts for a small fraction of the total stage time. Bandwidth utilization of 12% leaves significant I/O headroom unused, indicating the system is not I/O-limited.",
+    "confidence": "medium",
+    "explanation": "CPU utilization of 66% confirms that computation is predominantly the dominant bottleneck. The io_time_ratio of 0.22 shows that I/O accounts for a small fraction of the total stage time. Bandwidth utilization of 12% leaves significant I/O headroom unused, indicating the system is not I/O-limited.",
     "key_signals": [
-      "cpu_util_pct: 95",
-      "io_time_ratio: 0.19",
+      "cpu_util_pct: 66",
+      "io_time_ratio: 0.22",
       "bw_utilization_ratio: 0.12"
     ]
   }

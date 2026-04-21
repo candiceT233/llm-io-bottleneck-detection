@@ -1,0 +1,63 @@
+{
+  "id": "snap_490",
+  "workflow": {
+    "name": "montage",
+    "type": "astronomy",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "checkpoint_write",
+    "order": 6,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 72,
+    "num_tasks": 720,
+    "parallelism": 720,
+    "total_time_s": 3176,
+    "io_time_s": 1715,
+    "compute_time_s": 1461,
+    "io_time_ratio": 0.54,
+    "transfer_size_kb": 3072,
+    "aggregate_size_mb": 662.0,
+    "op_count": 662,
+    "checkpoint_interval_s": 120,
+    "checkpoint_size_gb": 220
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 395.0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.79,
+    "iops": 397,
+    "avg_io_size_kb": 3072,
+    "sequential_ratio": 0.83
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 38,
+    "memory_util_pct": 72,
+    "network_bw_mb_s": 379.2,
+    "network_peak_bw_mb_s": 15000,
+    "network_util_ratio": 0.025
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 9,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Checkpointing every 120s flushes 220 GB of state to WEKAFS, consuming 395.0 MB/s (79% of peak) and accounting for 54% of total stage time. These periodic write bursts stall all tasks during checkpoint intervals, reducing effective compute utilization. The checkpoint frequency is too high relative to the checkpoint size and storage bandwidth available.",
+    "key_signals": [
+      "checkpoint_interval_s: 120",
+      "checkpoint_size_gb: 220",
+      "io_time_ratio: 0.54",
+      "bw_utilization_ratio: 0.79",
+      "write_bw_mb_s: 395.0"
+    ]
+  }
+}

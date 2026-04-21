@@ -1,0 +1,63 @@
+{
+  "id": "snap_495",
+  "workflow": {
+    "name": "montage",
+    "type": "astronomy",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "checkpoint_write",
+    "order": 6,
+    "predecessors": [
+      "load_reference"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 58,
+    "num_tasks": 928,
+    "parallelism": 928,
+    "total_time_s": 9316,
+    "io_time_s": 5031,
+    "compute_time_s": 4285,
+    "io_time_ratio": 0.54,
+    "transfer_size_kb": 1536,
+    "aggregate_size_mb": 2039.0,
+    "op_count": 2039,
+    "checkpoint_interval_s": 240,
+    "checkpoint_size_gb": 100
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 415.0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.83,
+    "iops": 415,
+    "avg_io_size_kb": 1536,
+    "sequential_ratio": 0.9
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 34,
+    "memory_util_pct": 70,
+    "network_bw_mb_s": 431.6,
+    "network_peak_bw_mb_s": 25000,
+    "network_util_ratio": 0.017
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 12,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Checkpointing every 240s flushes 100 GB of state to GPFS, consuming 415.0 MB/s (83% of peak) and accounting for 54% of total stage time. These periodic write bursts stall all tasks during checkpoint intervals, reducing effective compute utilization. The checkpoint frequency is too high relative to the checkpoint size and storage bandwidth available.",
+    "key_signals": [
+      "checkpoint_interval_s: 240",
+      "checkpoint_size_gb: 100",
+      "io_time_ratio: 0.54",
+      "bw_utilization_ratio: 0.83",
+      "write_bw_mb_s: 415.0"
+    ]
+  }
+}

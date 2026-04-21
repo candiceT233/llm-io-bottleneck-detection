@@ -1,0 +1,60 @@
+{
+  "id": "snap_443",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "write_results",
+    "order": 4,
+    "predecessors": [
+      "merge_output"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 52,
+    "num_tasks": 468,
+    "parallelism": 468,
+    "total_time_s": 3418,
+    "io_time_s": 581,
+    "compute_time_s": 2837,
+    "io_time_ratio": 0.17,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 65.0,
+    "op_count": 65
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 114.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.19,
+    "iops": 133,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.86
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 90,
+    "memory_util_pct": 58,
+    "network_bw_mb_s": 123.1,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.025
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 90% across 468 tasks indicates that the stage is compute-dominated. io_time_ratio of 0.17 shows I/O accounts for only 17% of stage time. LUSTRE bandwidth utilization of 0.19 confirms ample storage capacity remains. The iterative computation is the primary bottleneck.",
+    "key_signals": [
+      "cpu_util_pct: 90",
+      "io_time_ratio: 0.17",
+      "bw_utilization_ratio: 0.19",
+      "compute_time_s: 2837"
+    ]
+  }
+}

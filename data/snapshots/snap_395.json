@@ -1,0 +1,60 @@
+{
+  "id": "snap_395",
+  "workflow": {
+    "name": "flood_model",
+    "type": "hydrology",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "scatter_data",
+    "order": 1,
+    "predecessors": [
+      "merge_output"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 29,
+    "num_tasks": 319,
+    "parallelism": 319,
+    "total_time_s": 662,
+    "io_time_s": 583,
+    "compute_time_s": 79,
+    "io_time_ratio": 0.88,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 135.0,
+    "op_count": 135
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 237.5,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 250,
+    "bw_utilization_ratio": 0.95,
+    "iops": 205,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.77
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 11,
+    "memory_util_pct": 32,
+    "network_bw_mb_s": 242.2,
+    "network_peak_bw_mb_s": 25000,
+    "network_util_ratio": 0.01
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 237.5 MB/s reaches 95% of the BEEGFS storage peak (250 MB/s), saturating the filesystem. CPU utilization of only 11% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.88 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.95",
+      "cpu_util_pct: 11",
+      "io_time_ratio: 0.88",
+      "avg_io_size_kb: 1024"
+    ]
+  }
+}

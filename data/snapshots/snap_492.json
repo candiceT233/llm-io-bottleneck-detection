@@ -1,0 +1,63 @@
+{
+  "id": "snap_492",
+  "workflow": {
+    "name": "seismic_imaging",
+    "type": "geophysics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "checkpoint_write",
+    "order": 6,
+    "predecessors": [
+      "scatter_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 55,
+    "num_tasks": 605,
+    "parallelism": 605,
+    "total_time_s": 9919,
+    "io_time_s": 4860,
+    "compute_time_s": 5059,
+    "io_time_ratio": 0.49,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 522.0,
+    "op_count": 522,
+    "checkpoint_interval_s": 210,
+    "checkpoint_size_gb": 330
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 110.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.55,
+    "iops": 101,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.95
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 33,
+    "memory_util_pct": 72,
+    "network_bw_mb_s": 102.3,
+    "network_peak_bw_mb_s": 15000,
+    "network_util_ratio": 0.007
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Checkpointing every 210s flushes 330 GB of state to LUSTRE, consuming 110.0 MB/s (55% of peak) and accounting for 49% of total stage time. These periodic write bursts stall all tasks during checkpoint intervals, reducing effective compute utilization. The checkpoint frequency is too high relative to the checkpoint size and storage bandwidth available.",
+    "key_signals": [
+      "checkpoint_interval_s: 210",
+      "checkpoint_size_gb: 330",
+      "io_time_ratio: 0.49",
+      "bw_utilization_ratio: 0.55",
+      "write_bw_mb_s: 110.0"
+    ]
+  }
+}

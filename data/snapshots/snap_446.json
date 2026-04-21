@@ -1,0 +1,60 @@
+{
+  "id": "snap_446",
+  "workflow": {
+    "name": "md_simulation",
+    "type": "molecular_dynamics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "preprocess",
+    "order": 3,
+    "predecessors": [
+      "scatter_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 20,
+    "num_tasks": 120,
+    "parallelism": 120,
+    "total_time_s": 4255,
+    "io_time_s": 808,
+    "compute_time_s": 3447,
+    "io_time_ratio": 0.19,
+    "transfer_size_kb": 3072,
+    "aggregate_size_mb": 107.0,
+    "op_count": 107
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 136.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 800,
+    "bw_utilization_ratio": 0.17,
+    "iops": 113,
+    "avg_io_size_kb": 3072,
+    "sequential_ratio": 0.81
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 90,
+    "memory_util_pct": 50,
+    "network_bw_mb_s": 145.5,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.029
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 7,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 90% across 120 tasks indicates that the stage is compute-dominated. io_time_ratio of 0.19 shows I/O accounts for only 19% of stage time. BEEGFS bandwidth utilization of 0.17 confirms ample storage capacity remains. The iterative computation is the primary bottleneck.",
+    "key_signals": [
+      "cpu_util_pct: 90",
+      "io_time_ratio: 0.19",
+      "bw_utilization_ratio: 0.17",
+      "compute_time_s: 3447"
+    ]
+  }
+}

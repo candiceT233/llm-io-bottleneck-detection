@@ -1,59 +1,59 @@
 {
   "id": "snap_223",
   "workflow": {
-    "name": "namd",
-    "type": "molecular_dynamics",
-    "num_stages": 6
+    "name": "pegasus_wms",
+    "type": "data_processing",
+    "num_stages": 7
   },
   "stage": {
-    "name": "fetch_input",
-    "order": 6,
+    "name": "archive_data",
+    "order": 3,
     "predecessors": [
-      "data_ingestion"
+      "fetch_input"
     ],
-    "operation": "read"
+    "operation": "write"
   },
   "execution": {
     "num_nodes": 45,
     "num_tasks": 630,
     "parallelism": 630,
-    "total_time_s": 608,
-    "io_time_s": 91,
-    "compute_time_s": 517,
-    "io_time_ratio": 0.15,
-    "transfer_size_kb": 256,
-    "aggregate_size_mb": 771,
-    "op_count": 3084
+    "total_time_s": 252,
+    "io_time_s": 20,
+    "compute_time_s": 232,
+    "io_time_ratio": 0.08,
+    "transfer_size_kb": 64,
+    "aggregate_size_mb": 3979,
+    "op_count": 63664
   },
   "io_metrics": {
-    "read_bw_mb_s": 12.0,
-    "write_bw_mb_s": 0,
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 16.0,
     "peak_storage_bw_mb_s": 200,
-    "bw_utilization_ratio": 0.06,
-    "iops": 48,
-    "avg_io_size_kb": 256,
-    "sequential_ratio": 0.76
+    "bw_utilization_ratio": 0.08,
+    "iops": 256,
+    "avg_io_size_kb": 64,
+    "sequential_ratio": 0.57
   },
   "resource_utilization": {
-    "cpu_util_pct": 98,
-    "memory_util_pct": 70,
-    "network_bw_mb_s": 8.6,
-    "network_peak_bw_mb_s": 1000,
-    "network_util_ratio": 0.009
+    "cpu_util_pct": 95,
+    "memory_util_pct": 47,
+    "network_bw_mb_s": 16.8,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.003
   },
   "storage": {
-    "type": "s3",
+    "type": "nfs",
     "stripe_count": 8,
     "shared": false
   },
   "annotation": {
     "bottleneck": "compute_bound",
     "confidence": "high",
-    "explanation": "CPU utilization of 98% confirms that computation is the dominant bottleneck. The io_time_ratio of 0.15 shows that I/O accounts for a small fraction of the total stage time. Bandwidth utilization of 6% leaves significant I/O headroom unused, indicating the system is not I/O-limited.",
+    "explanation": "CPU utilization of 95% confirms that computation is clearly the dominant bottleneck. The io_time_ratio of 0.08 shows that I/O accounts for a small fraction of the total stage time. Bandwidth utilization of 8% leaves significant I/O headroom unused, indicating the system is not I/O-limited.",
     "key_signals": [
-      "cpu_util_pct: 98",
-      "io_time_ratio: 0.15",
-      "bw_utilization_ratio: 0.06"
+      "cpu_util_pct: 95",
+      "io_time_ratio: 0.08",
+      "bw_utilization_ratio: 0.08"
     ]
   }
 }

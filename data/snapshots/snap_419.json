@@ -1,0 +1,62 @@
+{
+  "id": "snap_419",
+  "workflow": {
+    "name": "montage",
+    "type": "astronomy",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "fetch_input",
+    "order": 5,
+    "predecessors": [
+      "preprocess"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 20,
+    "num_tasks": 360,
+    "parallelism": 360,
+    "total_time_s": 1269,
+    "io_time_s": 1003,
+    "compute_time_s": 266,
+    "io_time_ratio": 0.79,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 94.0,
+    "op_count": 94,
+    "competing_jobs": 5
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 96.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.32,
+    "iops": 103,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.8
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 21,
+    "memory_util_pct": 49,
+    "network_bw_mb_s": 101.8,
+    "network_peak_bw_mb_s": 3000,
+    "network_util_ratio": 0.034
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 7,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 300 MB/s, the workflow only observes 96.0 MB/s (32% apparent utilization) due to 5 competing jobs concurrently saturating the shared GPFS filesystem. CPU utilization of 21% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 5",
+      "bw_utilization_ratio: 0.32",
+      "observed_bw_mb_s: 96.0",
+      "peak_storage_bw_mb_s: 300",
+      "cpu_util_pct: 21"
+    ]
+  }
+}

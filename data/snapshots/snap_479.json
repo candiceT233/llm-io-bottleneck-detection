@@ -1,0 +1,61 @@
+{
+  "id": "snap_479",
+  "workflow": {
+    "name": "flood_model",
+    "type": "hydrology",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "distribute_data",
+    "order": 4,
+    "predecessors": [
+      "validate_output"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 89,
+    "num_tasks": 2047,
+    "parallelism": 2047,
+    "total_time_s": 1759,
+    "io_time_s": 1390,
+    "compute_time_s": 369,
+    "io_time_ratio": 0.79,
+    "transfer_size_kb": 28,
+    "aggregate_size_mb": 114.0,
+    "op_count": 7800000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 84.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.21,
+    "iops": 1865,
+    "avg_io_size_kb": 28,
+    "sequential_ratio": 0.35
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 18,
+    "memory_util_pct": 28,
+    "network_bw_mb_s": 86.5,
+    "network_peak_bw_mb_s": 8000,
+    "network_util_ratio": 0.011
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 3,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "The stage issues 1865 IOPS with an average I/O size of only 28 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count (7,800,000), bandwidth utilization is only 21% (84.0 MB/s of 400 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.79 confirms I/O dominates stage time.",
+    "key_signals": [
+      "iops: 1865",
+      "avg_io_size_kb: 28",
+      "bw_utilization_ratio: 0.21",
+      "io_time_ratio: 0.79",
+      "op_count: 7800000"
+    ]
+  }
+}

@@ -6,10 +6,10 @@
     "num_stages": 5
   },
   "stage": {
-    "name": "commit_results",
+    "name": "store_results",
     "order": 3,
     "predecessors": [
-      "preprocess"
+      "data_ingestion"
     ],
     "operation": "write"
   },
@@ -17,45 +17,45 @@
     "num_nodes": 28,
     "num_tasks": 560,
     "parallelism": 560,
-    "total_time_s": 513,
-    "io_time_s": 446,
-    "compute_time_s": 67,
-    "io_time_ratio": 0.87,
-    "transfer_size_kb": 1024,
-    "aggregate_size_mb": 59516,
-    "op_count": 59516
+    "total_time_s": 656,
+    "io_time_s": 531,
+    "compute_time_s": 125,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 71209,
+    "op_count": 142418
   },
   "io_metrics": {
     "read_bw_mb_s": 0,
-    "write_bw_mb_s": 148.5,
+    "write_bw_mb_s": 147.0,
     "peak_storage_bw_mb_s": 150,
-    "bw_utilization_ratio": 0.99,
-    "iops": 148,
-    "avg_io_size_kb": 1024,
-    "sequential_ratio": 0.98
+    "bw_utilization_ratio": 0.98,
+    "iops": 294,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.97
   },
   "resource_utilization": {
-    "cpu_util_pct": 6,
-    "memory_util_pct": 41,
-    "network_bw_mb_s": 153.0,
+    "cpu_util_pct": 13,
+    "memory_util_pct": 42,
+    "network_bw_mb_s": 135.2,
     "network_peak_bw_mb_s": 1000,
-    "network_util_ratio": 0.153
+    "network_util_ratio": 0.135
   },
   "storage": {
-    "type": "gpfs",
+    "type": "lustre",
     "stripe_count": 16,
     "shared": true
   },
   "annotation": {
     "bottleneck": "storage_bandwidth_saturation",
     "confidence": "high",
-    "explanation": "Write bandwidth of 148.5 MB/s reaches 99% of the GPFS storage peak (150 MB/s), saturating the filesystem. CPU utilization of only 6% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.87 further shows that I/O dominates the stage duration.",
+    "explanation": "Write bandwidth of 147.0 MB/s reaches 98% of the LUSTRE storage peak (150 MB/s), saturating the filesystem on the write path. CPU utilization of only 13% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.81 further shows that I/O dominates the stage duration.",
     "key_signals": [
-      "bw_utilization_ratio: 0.99",
-      "write_bw_mb_s: 148.5",
+      "bw_utilization_ratio: 0.98",
+      "write_bw_mb_s: 147.0",
       "peak_storage_bw_mb_s: 150",
-      "cpu_util_pct: 6",
-      "io_time_ratio: 0.87"
+      "cpu_util_pct: 13",
+      "io_time_ratio: 0.81"
     ]
   }
 }

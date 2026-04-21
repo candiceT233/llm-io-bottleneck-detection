@@ -21,7 +21,9 @@
   "annotation": {
     "bottleneck": "storage_bandwidth_saturation",
     "confidence": "high",
-    "explanation": "Write bandwidth of 210 MB/s reaches 95% of the BeeGFS storage peak (220 MB/s), saturating the filesystem. CPU utilization of only 14% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.87 further shows that I/O dominates the stage duration.",
+    "explanation": "Write bandwidth of 210 MB/s reaches 95% of the BeeGFS storage peak (220 MB/s),
+    saturating the filesystem. CPU utilization of only 14% confirms compute cores are idle waiting 
+     on I/O. The io_time_ratio of 0.87 further shows that I/O dominates the stage duration.",
     "key_signals": ["bw_utilization_ratio: 0.95", "cpu_util_pct: 14", "io_time_ratio: 0.87", "avg_io_size_kb: 1024"]
   }
 }

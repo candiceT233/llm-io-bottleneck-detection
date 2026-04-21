@@ -1,0 +1,60 @@
+{
+  "id": "snap_445",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "restore_state",
+    "order": 3,
+    "predecessors": [
+      "checkpoint_write"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 34,
+    "num_tasks": 306,
+    "parallelism": 306,
+    "total_time_s": 2644,
+    "io_time_s": 212,
+    "compute_time_s": 2432,
+    "io_time_ratio": 0.08,
+    "transfer_size_kb": 1280,
+    "aggregate_size_mb": 33.0,
+    "op_count": 33
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 161.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 700,
+    "bw_utilization_ratio": 0.23,
+    "iops": 174,
+    "avg_io_size_kb": 1280,
+    "sequential_ratio": 0.83
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 94,
+    "memory_util_pct": 66,
+    "network_bw_mb_s": 152.9,
+    "network_peak_bw_mb_s": 15000,
+    "network_util_ratio": 0.01
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 94% across 306 tasks indicates that the stage is compute-dominated. io_time_ratio of 0.08 shows I/O accounts for only 8% of stage time. BEEGFS bandwidth utilization of 0.23 confirms ample storage capacity remains. The iterative computation is the primary bottleneck.",
+    "key_signals": [
+      "cpu_util_pct: 94",
+      "io_time_ratio: 0.08",
+      "bw_utilization_ratio: 0.23",
+      "compute_time_s: 2432"
+    ]
+  }
+}

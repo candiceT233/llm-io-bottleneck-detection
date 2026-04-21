@@ -26,20 +26,20 @@
     "op_count": 560
   },
   "io_metrics": {
-    "read_bw_mb_s": 455.0,
+    "read_bw_mb_s": 425.0,
     "write_bw_mb_s": 0,
     "peak_storage_bw_mb_s": 500,
-    "bw_utilization_ratio": 0.91,
-    "iops": 455,
+    "bw_utilization_ratio": 0.85,
+    "iops": 425,
     "avg_io_size_kb": 1024,
     "sequential_ratio": 0.75
   },
   "resource_utilization": {
     "cpu_util_pct": 19,
     "memory_util_pct": 27,
-    "network_bw_mb_s": 391.3,
+    "network_bw_mb_s": 365.5,
     "network_peak_bw_mb_s": 5000,
-    "network_util_ratio": 0.078
+    "network_util_ratio": 0.073
   },
   "storage": {
     "type": "gpfs",
@@ -48,11 +48,11 @@
   },
   "annotation": {
     "bottleneck": "read_bandwidth_saturation",
-    "confidence": "high",
-    "explanation": "Read bandwidth of 455.0 MB/s reaches 91% of the GPFS storage peak (500 MB/s), saturating the filesystem on the read path. CPU utilization of only 19% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.82 confirms that I/O dominates the stage duration.",
+    "confidence": "medium",
+    "explanation": "Read bandwidth of 425.0 MB/s reaches 85% of the GPFS storage peak (500 MB/s), approaching saturation of the filesystem on the read path. CPU utilization of only 19% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.82 confirms that I/O dominates the stage duration.",
     "key_signals": [
-      "bw_utilization_ratio: 0.91",
-      "read_bw_mb_s: 455.0",
+      "bw_utilization_ratio: 0.85",
+      "read_bw_mb_s: 425.0",
       "peak_storage_bw_mb_s: 500",
       "cpu_util_pct: 19",
       "io_time_ratio: 0.82"

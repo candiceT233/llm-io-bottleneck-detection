@@ -1,61 +1,61 @@
 {
   "id": "snap_334",
   "workflow": {
-    "name": "blast",
-    "type": "genomics",
-    "num_stages": 3
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
   },
   "stage": {
-    "name": "archive_data",
-    "order": 1,
+    "name": "preprocess",
+    "order": 2,
     "predecessors": [
-      "initial_data"
+      "preprocess"
     ],
-    "operation": "write"
+    "operation": "read"
   },
   "execution": {
-    "num_nodes": 17,
-    "num_tasks": 204,
+    "num_nodes": 68,
+    "num_tasks": 1156,
     "parallelism": 1,
-    "total_time_s": 1199,
-    "io_time_s": 971,
-    "compute_time_s": 228,
+    "total_time_s": 569,
+    "io_time_s": 461,
+    "compute_time_s": 108,
     "io_time_ratio": 0.81,
     "transfer_size_kb": 512,
-    "aggregate_size_mb": 3167,
-    "op_count": 6334
+    "aggregate_size_mb": 26529,
+    "op_count": 53058
   },
   "io_metrics": {
-    "read_bw_mb_s": 0,
-    "write_bw_mb_s": 48.0,
+    "read_bw_mb_s": 68.0,
+    "write_bw_mb_s": 0,
     "peak_storage_bw_mb_s": 400,
-    "bw_utilization_ratio": 0.12,
-    "iops": 96,
+    "bw_utilization_ratio": 0.17,
+    "iops": 136,
     "avg_io_size_kb": 512,
     "sequential_ratio": 0.94
   },
   "resource_utilization": {
-    "cpu_util_pct": 20,
-    "memory_util_pct": 37,
-    "network_bw_mb_s": 51.4,
-    "network_peak_bw_mb_s": 5000,
-    "network_util_ratio": 0.01
+    "cpu_util_pct": 10,
+    "memory_util_pct": 15,
+    "network_bw_mb_s": 69.4,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.007
   },
   "storage": {
-    "type": "lustre",
-    "stripe_count": 8,
+    "type": "wekafs",
+    "stripe_count": 16,
     "shared": true
   },
   "annotation": {
     "bottleneck": "serialized_io",
     "confidence": "high",
-    "explanation": "I/O parallelism is forced to 1 \u2014 only a single writer operates at a time despite 204 tasks available. This limits effective bandwidth to 48.0 MB/s (12% of the 400 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 203 tasks wait idle while serialized I/O completes.",
+    "explanation": "I/O parallelism is forced to 1 \u2014 only a single reader operates at a time despite 1156 tasks available. This limits effective bandwidth to 68.0 MB/s (17% of the 400 MB/s storage peak) since parallel filesystem capacity goes unused. The remaining 1155 tasks wait idle while serialized I/O completes.",
     "key_signals": [
       "parallelism: 1",
-      "num_tasks: 204",
-      "bw_utilization_ratio: 0.12",
+      "num_tasks: 1156",
+      "bw_utilization_ratio: 0.17",
       "io_time_ratio: 0.81",
-      "write_bw_mb_s: 48.0"
+      "read_bw_mb_s: 68.0"
     ]
   }
 }

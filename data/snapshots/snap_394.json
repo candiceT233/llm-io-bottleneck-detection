@@ -1,0 +1,60 @@
+{
+  "id": "snap_394",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "postprocess",
+    "order": 2,
+    "predecessors": [
+      "checkpoint_write"
+    ],
+    "operation": "mixed"
+  },
+  "execution": {
+    "num_nodes": 35,
+    "num_tasks": 420,
+    "parallelism": 420,
+    "total_time_s": 287,
+    "io_time_s": 232,
+    "compute_time_s": 55,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 31.0,
+    "op_count": 31
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 21.0,
+    "write_bw_mb_s": 136.5,
+    "peak_storage_bw_mb_s": 150,
+    "bw_utilization_ratio": 0.91,
+    "iops": 155,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.83
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 9,
+    "memory_util_pct": 54,
+    "network_bw_mb_s": 135.1,
+    "network_peak_bw_mb_s": 20000,
+    "network_util_ratio": 0.007
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 136.5 MB/s reaches 91% of the BEEGFS storage peak (150 MB/s), saturating the filesystem. CPU utilization of only 9% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.81 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.91",
+      "cpu_util_pct: 9",
+      "io_time_ratio: 0.81",
+      "avg_io_size_kb: 2048"
+    ]
+  }
+}

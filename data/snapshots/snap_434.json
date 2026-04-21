@@ -1,0 +1,64 @@
+{
+  "id": "snap_434",
+  "workflow": {
+    "name": "protein_folding",
+    "type": "structural_biology",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "load_reference",
+    "order": 2,
+    "predecessors": [
+      "preprocess"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 62,
+    "num_tasks": 1240,
+    "parallelism": 1240,
+    "total_time_s": 2749,
+    "io_time_s": 2007,
+    "compute_time_s": 742,
+    "io_time_ratio": 0.73,
+    "transfer_size_kb": 768,
+    "aggregate_size_mb": 102.0,
+    "op_count": 102,
+    "max_task_time_s": 1680,
+    "avg_task_time_s": 571,
+    "skew_factor": 2.94
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 52.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.26,
+    "iops": 50,
+    "avg_io_size_kb": 768,
+    "sequential_ratio": 0.5
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 39,
+    "memory_util_pct": 71,
+    "network_bw_mb_s": 46.8,
+    "network_peak_bw_mb_s": 12000,
+    "network_util_ratio": 0.004
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "data_skew",
+    "confidence": "high",
+    "explanation": "A skew factor of 2.94x is observed: the slowest task takes 1680s while the average is 571s. This imbalance causes most workers to idle while a few straggler tasks process disproportionately large data partitions, resulting in poor aggregate bandwidth (26% of peak). CPU utilization of 39% is moderate but unevenly distributed across workers.",
+    "key_signals": [
+      "skew_factor: 2.94",
+      "max_task_time_s: 1680",
+      "avg_task_time_s: 571",
+      "bw_utilization_ratio: 0.26",
+      "cpu_util_pct: 39"
+    ]
+  }
+}

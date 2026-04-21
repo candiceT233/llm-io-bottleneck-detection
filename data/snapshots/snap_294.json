@@ -1,61 +1,61 @@
 {
   "id": "snap_294",
   "workflow": {
-    "name": "ligo",
-    "type": "gravitational_waves",
-    "num_stages": 5
+    "name": "namd",
+    "type": "molecular_dynamics",
+    "num_stages": 6
   },
   "stage": {
-    "name": "archive_data",
-    "order": 2,
+    "name": "scan_catalog",
+    "order": 5,
     "predecessors": [
-      "restore_state"
+      "load_data"
     ],
-    "operation": "write"
+    "operation": "read"
   },
   "execution": {
-    "num_nodes": 17,
-    "num_tasks": 493,
-    "parallelism": 493,
-    "total_time_s": 1454,
-    "io_time_s": 1149,
-    "compute_time_s": 305,
-    "io_time_ratio": 0.79,
-    "transfer_size_kb": 2,
-    "aggregate_size_mb": 107,
-    "op_count": 4104900
+    "num_nodes": 56,
+    "num_tasks": 1288,
+    "parallelism": 1288,
+    "total_time_s": 1246,
+    "io_time_s": 1146,
+    "compute_time_s": 100,
+    "io_time_ratio": 0.92,
+    "transfer_size_kb": 16,
+    "aggregate_size_mb": 641,
+    "op_count": 3936864
   },
   "io_metrics": {
-    "read_bw_mb_s": 0,
-    "write_bw_mb_s": 108.0,
-    "peak_storage_bw_mb_s": 600,
-    "bw_utilization_ratio": 0.18,
-    "iops": 54732,
-    "avg_io_size_kb": 2,
-    "sequential_ratio": 0.16
+    "read_bw_mb_s": 152.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.38,
+    "iops": 41009,
+    "avg_io_size_kb": 16,
+    "sequential_ratio": 0.22
   },
   "resource_utilization": {
     "cpu_util_pct": 23,
-    "memory_util_pct": 30,
-    "network_bw_mb_s": 87.5,
-    "network_peak_bw_mb_s": 10000,
-    "network_util_ratio": 0.009
+    "memory_util_pct": 37,
+    "network_bw_mb_s": 152.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.152
   },
   "storage": {
-    "type": "pvfs2",
-    "stripe_count": 3,
+    "type": "beegfs",
+    "stripe_count": 4,
     "shared": true
   },
   "annotation": {
     "bottleneck": "metadata_contention",
     "confidence": "high",
-    "explanation": "The stage issues 54732 IOPS with an average I/O size of only 2 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count, bandwidth utilization is only 18% (108.0 MB/s of 600 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.79 confirms I/O dominates stage time.",
+    "explanation": "The stage issues 41009 IOPS with an average I/O size of only 16 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count, bandwidth utilization is only 38% (152.0 MB/s of 400 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.92 confirms I/O dominates stage time.",
     "key_signals": [
-      "iops: 54732",
-      "avg_io_size_kb: 2",
-      "bw_utilization_ratio: 0.18",
-      "io_time_ratio: 0.79",
-      "op_count: 4104900"
+      "iops: 41009",
+      "avg_io_size_kb: 16",
+      "bw_utilization_ratio: 0.38",
+      "io_time_ratio: 0.92",
+      "op_count: 3936864"
     ]
   }
 }

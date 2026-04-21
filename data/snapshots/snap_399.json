@@ -1,0 +1,61 @@
+{
+  "id": "snap_399",
+  "workflow": {
+    "name": "galaxy_sim",
+    "type": "astrophysics",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "postprocess",
+    "order": 2,
+    "predecessors": [
+      "validate_output"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 67,
+    "num_tasks": 1206,
+    "parallelism": 1206,
+    "total_time_s": 152,
+    "io_time_s": 137,
+    "compute_time_s": 15,
+    "io_time_ratio": 0.9,
+    "transfer_size_kb": 3584,
+    "aggregate_size_mb": 24.0,
+    "op_count": 24
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 178.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.89,
+    "iops": 176,
+    "avg_io_size_kb": 3584,
+    "sequential_ratio": 0.89
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 18,
+    "memory_util_pct": 64,
+    "network_bw_mb_s": 188.7,
+    "network_peak_bw_mb_s": 20000,
+    "network_util_ratio": 0.009
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 178.0 MB/s reaches 89% of the WEKAFS storage peak (200 MB/s), saturating the read path. CPU utilization of only 18% confirms compute cores are starved waiting for data. The io_time_ratio of 0.9 confirms I/O is the dominant bottleneck of this stage.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.89",
+      "cpu_util_pct: 18",
+      "io_time_ratio: 0.9",
+      "read_bw_mb_s: 178.0",
+      "peak_storage_bw_mb_s: 200"
+    ]
+  }
+}

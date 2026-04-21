@@ -1,0 +1,65 @@
+{
+  "id": "snap_407",
+  "workflow": {
+    "name": "galaxy_sim",
+    "type": "astrophysics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "write_results",
+    "order": 5,
+    "predecessors": [
+      "preprocess"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 37,
+    "num_tasks": 333,
+    "parallelism": 333,
+    "total_time_s": 348,
+    "io_time_s": 282,
+    "compute_time_s": 66,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 28.0,
+    "op_count": 28,
+    "data_staged": false,
+    "intended_staging_tier": "burst_buffer",
+    "remote_access_latency_ms": 433
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 102.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.51,
+    "iops": 106,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.65
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 10,
+    "memory_util_pct": 28,
+    "network_bw_mb_s": 103.0,
+    "network_peak_bw_mb_s": 9000,
+    "network_util_ratio": 0.011
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (burst_buffer) before execution began. Tasks access PVFS2 directly, which carries a remote latency of 433 ms, yielding only 102.0 MB/s effective bandwidth (51% of the 200 MB/s peak). CPU utilization of 10% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 433",
+      "bw_utilization_ratio: 0.51",
+      "storage_type: pvfs2",
+      "cpu_util_pct: 10",
+      "io_time_ratio: 0.81"
+    ]
+  }
+}

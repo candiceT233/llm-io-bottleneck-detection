@@ -1,0 +1,62 @@
+{
+  "id": "snap_418",
+  "workflow": {
+    "name": "cfd_solver",
+    "type": "hpc_simulation",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "distribute_data",
+    "order": 2,
+    "predecessors": [
+      "restore_state"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 21,
+    "num_tasks": 252,
+    "parallelism": 252,
+    "total_time_s": 869,
+    "io_time_s": 756,
+    "compute_time_s": 113,
+    "io_time_ratio": 0.87,
+    "transfer_size_kb": 3584,
+    "aggregate_size_mb": 181.0,
+    "op_count": 181,
+    "competing_jobs": 8
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 245.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.49,
+    "iops": 235,
+    "avg_io_size_kb": 3584,
+    "sequential_ratio": 0.7
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 17,
+    "memory_util_pct": 50,
+    "network_bw_mb_s": 274.4,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.274
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "io_interference",
+    "confidence": "high",
+    "explanation": "Despite the storage system having a peak of 500 MB/s, the workflow only observes 245.0 MB/s (49% apparent utilization) due to 8 competing jobs concurrently saturating the shared PVFS2 filesystem. CPU utilization of 17% confirms tasks are stalled on I/O rather than being compute-limited. The degradation is caused by external interference, not the workflow's own I/O pattern.",
+    "key_signals": [
+      "competing_jobs: 8",
+      "bw_utilization_ratio: 0.49",
+      "observed_bw_mb_s: 245.0",
+      "peak_storage_bw_mb_s: 500",
+      "cpu_util_pct: 17"
+    ]
+  }
+}

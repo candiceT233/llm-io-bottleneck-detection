@@ -1,0 +1,65 @@
+{
+  "id": "snap_408",
+  "workflow": {
+    "name": "1000_genomes",
+    "type": "genomics",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "preprocess",
+    "order": 4,
+    "predecessors": [
+      "checkpoint_write"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 24,
+    "num_tasks": 144,
+    "parallelism": 144,
+    "total_time_s": 522,
+    "io_time_s": 407,
+    "compute_time_s": 115,
+    "io_time_ratio": 0.78,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 66.0,
+    "op_count": 66,
+    "data_staged": false,
+    "intended_staging_tier": "ram_disk",
+    "remote_access_latency_ms": 471
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 165.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.55,
+    "iops": 176,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.73
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 16,
+    "memory_util_pct": 45,
+    "network_bw_mb_s": 179.8,
+    "network_peak_bw_mb_s": 9000,
+    "network_util_ratio": 0.02
+  },
+  "storage": {
+    "type": "hdfs",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (ram_disk) before execution began. Tasks access HDFS directly, which carries a remote latency of 471 ms, yielding only 165.0 MB/s effective bandwidth (55% of the 300 MB/s peak). CPU utilization of 16% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 471",
+      "bw_utilization_ratio: 0.55",
+      "storage_type: hdfs",
+      "cpu_util_pct: 16",
+      "io_time_ratio: 0.78"
+    ]
+  }
+}

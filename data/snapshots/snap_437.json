@@ -1,0 +1,60 @@
+{
+  "id": "snap_437",
+  "workflow": {
+    "name": "fmri_analysis",
+    "type": "neuroscience",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "checkpoint_write",
+    "order": 4,
+    "predecessors": [
+      "merge_output"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 45,
+    "num_tasks": 405,
+    "parallelism": 405,
+    "total_time_s": 2956,
+    "io_time_s": 503,
+    "compute_time_s": 2453,
+    "io_time_ratio": 0.17,
+    "transfer_size_kb": 3328,
+    "aggregate_size_mb": 63.0,
+    "op_count": 63
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 128.0,
+    "peak_storage_bw_mb_s": 800,
+    "bw_utilization_ratio": 0.16,
+    "iops": 116,
+    "avg_io_size_kb": 3328,
+    "sequential_ratio": 0.81
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 91,
+    "memory_util_pct": 51,
+    "network_bw_mb_s": 144.6,
+    "network_peak_bw_mb_s": 20000,
+    "network_util_ratio": 0.007
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 91% across 405 tasks indicates that the stage is compute-dominated. io_time_ratio of 0.17 shows I/O accounts for only 17% of stage time. BEEGFS bandwidth utilization of 0.16 confirms ample storage capacity remains. The iterative computation is the primary bottleneck.",
+    "key_signals": [
+      "cpu_util_pct: 91",
+      "io_time_ratio: 0.17",
+      "bw_utilization_ratio: 0.16",
+      "compute_time_s: 2453"
+    ]
+  }
+}

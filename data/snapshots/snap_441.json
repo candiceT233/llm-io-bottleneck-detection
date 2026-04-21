@@ -1,0 +1,60 @@
+{
+  "id": "snap_441",
+  "workflow": {
+    "name": "flood_model",
+    "type": "hydrology",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "validate_output",
+    "order": 4,
+    "predecessors": [
+      "filter"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 59,
+    "num_tasks": 944,
+    "parallelism": 944,
+    "total_time_s": 1646,
+    "io_time_s": 132,
+    "compute_time_s": 1514,
+    "io_time_ratio": 0.08,
+    "transfer_size_kb": 3328,
+    "aggregate_size_mb": 6.0,
+    "op_count": 6
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 45.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.15,
+    "iops": 43,
+    "avg_io_size_kb": 3328,
+    "sequential_ratio": 0.68
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 93,
+    "memory_util_pct": 79,
+    "network_bw_mb_s": 43.6,
+    "network_peak_bw_mb_s": 20000,
+    "network_util_ratio": 0.002
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 7,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 93% across 944 tasks indicates that the stage is compute-dominated. io_time_ratio of 0.08 shows I/O accounts for only 8% of stage time. GPFS bandwidth utilization of 0.15 confirms ample storage capacity remains. The iterative computation is the primary bottleneck.",
+    "key_signals": [
+      "cpu_util_pct: 93",
+      "io_time_ratio: 0.08",
+      "bw_utilization_ratio: 0.15",
+      "compute_time_s: 1514"
+    ]
+  }
+}

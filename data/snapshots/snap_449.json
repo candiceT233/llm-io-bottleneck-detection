@@ -1,0 +1,62 @@
+{
+  "id": "snap_449",
+  "workflow": {
+    "name": "cfd_solver",
+    "type": "hpc_simulation",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "load_reference",
+    "order": 1,
+    "predecessors": [
+      "dump_state"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 63,
+    "num_tasks": 693,
+    "parallelism": 693,
+    "total_time_s": 1885,
+    "io_time_s": 1546,
+    "compute_time_s": 339,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 91.0,
+    "op_count": 91,
+    "serialization_factor": 16
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 60.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.12,
+    "iops": 65,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.94
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 22,
+    "memory_util_pct": 48,
+    "network_bw_mb_s": 61.2,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.012
+  },
+  "storage": {
+    "type": "nfs",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O operations are serialized with a factor of 16, meaning tasks queue behind a single I/O path instead of issuing requests in parallel. Despite 693 tasks, effective bandwidth is only 60.0 MB/s (12% of the 500 MB/s NFS peak). CPU utilization of 22% confirms tasks are idle waiting for serialized I/O to complete. The io_time_ratio of 0.82 confirms I/O dominates stage time.",
+    "key_signals": [
+      "serialization_factor: 16",
+      "bw_utilization_ratio: 0.12",
+      "cpu_util_pct: 22",
+      "io_time_ratio: 0.82",
+      "num_tasks: 693"
+    ]
+  }
+}

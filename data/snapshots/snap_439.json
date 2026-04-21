@@ -1,0 +1,60 @@
+{
+  "id": "snap_439",
+  "workflow": {
+    "name": "cfd_solver",
+    "type": "hpc_simulation",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "index_build",
+    "order": 3,
+    "predecessors": [
+      "filter"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 60,
+    "num_tasks": 600,
+    "parallelism": 600,
+    "total_time_s": 3691,
+    "io_time_s": 701,
+    "compute_time_s": 2990,
+    "io_time_ratio": 0.19,
+    "transfer_size_kb": 3328,
+    "aggregate_size_mb": 58.0,
+    "op_count": 58
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 84.0,
+    "peak_storage_bw_mb_s": 700,
+    "bw_utilization_ratio": 0.12,
+    "iops": 87,
+    "avg_io_size_kb": 3328,
+    "sequential_ratio": 0.67
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 93,
+    "memory_util_pct": 77,
+    "network_bw_mb_s": 91.6,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.018
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 7,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 93% across 600 tasks indicates that the stage is compute-dominated. io_time_ratio of 0.19 shows I/O accounts for only 19% of stage time. LUSTRE bandwidth utilization of 0.12 confirms ample storage capacity remains. The iterative computation is the primary bottleneck.",
+    "key_signals": [
+      "cpu_util_pct: 93",
+      "io_time_ratio: 0.19",
+      "bw_utilization_ratio: 0.12",
+      "compute_time_s: 2990"
+    ]
+  }
+}

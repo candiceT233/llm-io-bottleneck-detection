@@ -1,0 +1,60 @@
+{
+  "id": "snap_438",
+  "workflow": {
+    "name": "sipht",
+    "type": "bioinformatics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "transform",
+    "order": 2,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "mixed"
+  },
+  "execution": {
+    "num_nodes": 24,
+    "num_tasks": 288,
+    "parallelism": 288,
+    "total_time_s": 1822,
+    "io_time_s": 346,
+    "compute_time_s": 1476,
+    "io_time_ratio": 0.19,
+    "transfer_size_kb": 3840,
+    "aggregate_size_mb": 41.0,
+    "op_count": 41
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 72.0,
+    "write_bw_mb_s": 48.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.2,
+    "iops": 102,
+    "avg_io_size_kb": 3840,
+    "sequential_ratio": 0.62
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 94,
+    "memory_util_pct": 79,
+    "network_bw_mb_s": 108.0,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.011
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 5,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 94% across 288 tasks indicates that the stage is compute-dominated. io_time_ratio of 0.19 shows I/O accounts for only 19% of stage time. WEKAFS bandwidth utilization of 0.2 confirms ample storage capacity remains. The iterative computation is the primary bottleneck.",
+    "key_signals": [
+      "cpu_util_pct: 94",
+      "io_time_ratio: 0.19",
+      "bw_utilization_ratio: 0.2",
+      "compute_time_s: 1476"
+    ]
+  }
+}

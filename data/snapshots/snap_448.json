@@ -1,0 +1,62 @@
+{
+  "id": "snap_448",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "merge_output",
+    "order": 5,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 20,
+    "num_tasks": 280,
+    "parallelism": 280,
+    "total_time_s": 1361,
+    "io_time_s": 1062,
+    "compute_time_s": 299,
+    "io_time_ratio": 0.78,
+    "transfer_size_kb": 768,
+    "aggregate_size_mb": 31.0,
+    "op_count": 31,
+    "serialization_factor": 18
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 30.0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.06,
+    "iops": 33,
+    "avg_io_size_kb": 768,
+    "sequential_ratio": 0.93
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 19,
+    "memory_util_pct": 31,
+    "network_bw_mb_s": 30.9,
+    "network_peak_bw_mb_s": 2000,
+    "network_util_ratio": 0.015
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O operations are serialized with a factor of 18, meaning tasks queue behind a single I/O path instead of issuing requests in parallel. Despite 280 tasks, effective bandwidth is only 30.0 MB/s (6% of the 500 MB/s GPFS peak). CPU utilization of 19% confirms tasks are idle waiting for serialized I/O to complete. The io_time_ratio of 0.78 confirms I/O dominates stage time.",
+    "key_signals": [
+      "serialization_factor: 18",
+      "bw_utilization_ratio: 0.06",
+      "cpu_util_pct: 19",
+      "io_time_ratio: 0.78",
+      "num_tasks: 280"
+    ]
+  }
+}

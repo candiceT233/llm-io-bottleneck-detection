@@ -1,0 +1,61 @@
+{
+  "id": "snap_468",
+  "workflow": {
+    "name": "cosmology_sim",
+    "type": "astrophysics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "load_reference",
+    "order": 3,
+    "predecessors": [
+      "join_tables"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 58,
+    "num_tasks": 348,
+    "parallelism": 348,
+    "total_time_s": 881,
+    "io_time_s": 740,
+    "compute_time_s": 141,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 1280,
+    "aggregate_size_mb": 133.0,
+    "op_count": 133
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 184.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.46,
+    "iops": 166,
+    "avg_io_size_kb": 1280,
+    "sequential_ratio": 0.85
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 20,
+    "memory_util_pct": 32,
+    "network_bw_mb_s": 1395.0,
+    "network_peak_bw_mb_s": 1500,
+    "network_util_ratio": 0.93
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 7,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 1395.0 MB/s is at 93% of the 1500 MB/s interconnect capacity, saturating the network fabric. Although GPFS storage could sustain 400 MB/s, data transfer is throttled by the network link. CPU utilization of 20% confirms tasks are stalled waiting for data to traverse the network. The io_time_ratio of 0.84 shows I/O dominates stage time.",
+    "key_signals": [
+      "network_util_ratio: 0.93",
+      "network_bw_mb_s: 1395.0",
+      "network_peak_bw_mb_s: 1500",
+      "cpu_util_pct: 20",
+      "io_time_ratio: 0.84"
+    ]
+  }
+}

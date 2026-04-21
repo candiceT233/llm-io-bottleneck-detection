@@ -1,45 +1,45 @@
 {
   "id": "snap_253",
   "workflow": {
-    "name": "cybershake",
-    "type": "seismology",
+    "name": "spark_etl",
+    "type": "etl",
     "num_stages": 4
   },
   "stage": {
-    "name": "store_results",
-    "order": 5,
+    "name": "load_reference",
+    "order": 3,
     "predecessors": [
-      "preprocess"
+      "fetch_input"
     ],
-    "operation": "write"
+    "operation": "read"
   },
   "execution": {
-    "num_nodes": 15,
-    "num_tasks": 75,
-    "parallelism": 75,
-    "total_time_s": 536,
-    "io_time_s": 397,
-    "compute_time_s": 139,
-    "io_time_ratio": 0.74,
+    "num_nodes": 18,
+    "num_tasks": 198,
+    "parallelism": 198,
+    "total_time_s": 447,
+    "io_time_s": 340,
+    "compute_time_s": 107,
+    "io_time_ratio": 0.76,
     "transfer_size_kb": 2048,
-    "aggregate_size_mb": 97025,
-    "op_count": 48512
+    "aggregate_size_mb": 85065,
+    "op_count": 42532
   },
   "io_metrics": {
-    "read_bw_mb_s": 0,
-    "write_bw_mb_s": 488.0,
-    "peak_storage_bw_mb_s": 800,
-    "bw_utilization_ratio": 0.61,
-    "iops": 244,
+    "read_bw_mb_s": 720.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 1000,
+    "bw_utilization_ratio": 0.72,
+    "iops": 360,
     "avg_io_size_kb": 2048,
-    "sequential_ratio": 0.64
+    "sequential_ratio": 0.61
   },
   "resource_utilization": {
-    "cpu_util_pct": 23,
-    "memory_util_pct": 29,
-    "network_bw_mb_s": 4400.0,
-    "network_peak_bw_mb_s": 5000,
-    "network_util_ratio": 0.88
+    "cpu_util_pct": 20,
+    "memory_util_pct": 31,
+    "network_bw_mb_s": 970.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.97
   },
   "storage": {
     "type": "ceph",
@@ -49,13 +49,13 @@
   "annotation": {
     "bottleneck": "network_io_bottleneck",
     "confidence": "high",
-    "explanation": "Network bandwidth of 4400.0 MB/s reaches 88% of the network peak (5000 MB/s), making the interconnect the primary bottleneck. Data is accessed from CEPH, requiring all transfers to traverse the network. CPU utilization of 23% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "explanation": "Network bandwidth of 970.0 MB/s reaches 97% of the network peak (1000 MB/s), making the interconnect the primary bottleneck. Data is accessed from CEPH, requiring all transfers to traverse the network. CPU utilization of 20% confirms tasks are stalled waiting on data transfer rather than performing computation.",
     "key_signals": [
-      "network_util_ratio: 0.88",
-      "network_bw_mb_s: 4400.0",
-      "network_peak_bw_mb_s: 5000",
-      "cpu_util_pct: 23",
-      "io_time_ratio: 0.74",
+      "network_util_ratio: 0.97",
+      "network_bw_mb_s: 970.0",
+      "network_peak_bw_mb_s: 1000",
+      "cpu_util_pct: 20",
+      "io_time_ratio: 0.76",
       "storage_type: ceph"
     ]
   }

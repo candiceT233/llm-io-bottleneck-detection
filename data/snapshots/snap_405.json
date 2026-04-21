@@ -1,0 +1,61 @@
+{
+  "id": "snap_405",
+  "workflow": {
+    "name": "cybershake",
+    "type": "seismology",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "sort_merge",
+    "order": 3,
+    "predecessors": [
+      "transform"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 20,
+    "num_tasks": 340,
+    "parallelism": 340,
+    "total_time_s": 590,
+    "io_time_s": 484,
+    "compute_time_s": 106,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 1536,
+    "aggregate_size_mb": 136.0,
+    "op_count": 136
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 288.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.96,
+    "iops": 261,
+    "avg_io_size_kb": 1536,
+    "sequential_ratio": 0.97
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 10,
+    "memory_util_pct": 58,
+    "network_bw_mb_s": 282.2,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.028
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 288.0 MB/s reaches 96% of the GPFS storage peak (300 MB/s), saturating the read path. CPU utilization of only 10% confirms compute cores are starved waiting for data. The io_time_ratio of 0.82 confirms I/O is the dominant bottleneck of this stage.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.96",
+      "cpu_util_pct: 10",
+      "io_time_ratio: 0.82",
+      "read_bw_mb_s: 288.0",
+      "peak_storage_bw_mb_s: 300"
+    ]
+  }
+}

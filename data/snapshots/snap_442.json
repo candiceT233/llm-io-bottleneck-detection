@@ -1,0 +1,60 @@
+{
+  "id": "snap_442",
+  "workflow": {
+    "name": "1000_genomes",
+    "type": "genomics",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "aggregate",
+    "order": 4,
+    "predecessors": [
+      "checkpoint_write"
+    ],
+    "operation": "mixed"
+  },
+  "execution": {
+    "num_nodes": 34,
+    "num_tasks": 476,
+    "parallelism": 476,
+    "total_time_s": 4618,
+    "io_time_s": 323,
+    "compute_time_s": 4295,
+    "io_time_ratio": 0.07,
+    "transfer_size_kb": 3072,
+    "aggregate_size_mb": 28.0,
+    "op_count": 28
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 54.0,
+    "write_bw_mb_s": 36.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.15,
+    "iops": 91,
+    "avg_io_size_kb": 3072,
+    "sequential_ratio": 0.87
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 91,
+    "memory_util_pct": 72,
+    "network_bw_mb_s": 93.6,
+    "network_peak_bw_mb_s": 15000,
+    "network_util_ratio": 0.006
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 5,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "compute_bound",
+    "confidence": "high",
+    "explanation": "CPU utilization of 91% across 476 tasks indicates that the stage is compute-dominated. io_time_ratio of 0.07 shows I/O accounts for only 7% of stage time. BEEGFS bandwidth utilization of 0.15 confirms ample storage capacity remains. The iterative computation is the primary bottleneck.",
+    "key_signals": [
+      "cpu_util_pct: 91",
+      "io_time_ratio: 0.07",
+      "bw_utilization_ratio: 0.15",
+      "compute_time_s: 4295"
+    ]
+  }
+}

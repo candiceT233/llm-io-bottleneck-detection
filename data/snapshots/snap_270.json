@@ -1,61 +1,61 @@
 {
   "id": "snap_270",
   "workflow": {
-    "name": "namd",
-    "type": "molecular_dynamics",
+    "name": "epigenomics",
+    "type": "genomics",
     "num_stages": 6
   },
   "stage": {
-    "name": "data_ingestion",
-    "order": 4,
+    "name": "write_checkpoint",
+    "order": 6,
     "predecessors": [
-      "scan_catalog"
+      "preprocess"
     ],
-    "operation": "read"
+    "operation": "write"
   },
   "execution": {
-    "num_nodes": 24,
-    "num_tasks": 168,
-    "parallelism": 168,
-    "total_time_s": 771,
-    "io_time_s": 617,
-    "compute_time_s": 154,
-    "io_time_ratio": 0.8,
-    "transfer_size_kb": 2048,
-    "aggregate_size_mb": 51810,
-    "op_count": 25905
+    "num_nodes": 50,
+    "num_tasks": 250,
+    "parallelism": 250,
+    "total_time_s": 356,
+    "io_time_s": 317,
+    "compute_time_s": 39,
+    "io_time_ratio": 0.89,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 43096,
+    "op_count": 86192
   },
   "io_metrics": {
-    "read_bw_mb_s": 144.0,
-    "write_bw_mb_s": 0,
-    "peak_storage_bw_mb_s": 150,
-    "bw_utilization_ratio": 0.96,
-    "iops": 72,
-    "avg_io_size_kb": 2048,
-    "sequential_ratio": 0.91
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 352.0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.88,
+    "iops": 704,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.82
   },
   "resource_utilization": {
-    "cpu_util_pct": 8,
-    "memory_util_pct": 33,
-    "network_bw_mb_s": 139.7,
-    "network_peak_bw_mb_s": 5000,
-    "network_util_ratio": 0.028
+    "cpu_util_pct": 6,
+    "memory_util_pct": 36,
+    "network_bw_mb_s": 341.4,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.034
   },
   "storage": {
-    "type": "lustre",
+    "type": "gpfs",
     "stripe_count": 16,
     "shared": true
   },
   "annotation": {
     "bottleneck": "storage_bandwidth_saturation",
     "confidence": "high",
-    "explanation": "Read bandwidth of 144.0 MB/s reaches 96% of the LUSTRE storage peak (150 MB/s), saturating the filesystem. CPU utilization of only 8% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.8 further shows that I/O dominates the stage duration.",
+    "explanation": "Write bandwidth of 352.0 MB/s reaches 88% of the GPFS storage peak (400 MB/s), saturating the filesystem on the write path. CPU utilization of only 6% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.89 further shows that I/O dominates the stage duration.",
     "key_signals": [
-      "bw_utilization_ratio: 0.96",
-      "read_bw_mb_s: 144.0",
-      "peak_storage_bw_mb_s: 150",
-      "cpu_util_pct: 8",
-      "io_time_ratio: 0.8"
+      "bw_utilization_ratio: 0.88",
+      "write_bw_mb_s: 352.0",
+      "peak_storage_bw_mb_s: 400",
+      "cpu_util_pct: 6",
+      "io_time_ratio: 0.89"
     ]
   }
 }

@@ -35,7 +35,7 @@
     "sequential_ratio": 0.62
   },
   "resource_utilization": {
-    "cpu_util_pct": 83,
+    "cpu_util_pct": 75,
     "memory_util_pct": 76,
     "network_bw_mb_s": 49.4,
     "network_peak_bw_mb_s": 10000,
@@ -48,10 +48,10 @@
   },
   "annotation": {
     "bottleneck": "compute_bound",
-    "confidence": "high",
-    "explanation": "CPU utilization of 83% confirms that computation is the dominant bottleneck. The io_time_ratio of 0.2 shows that I/O accounts for a small fraction of the total stage time. Bandwidth utilization of 12% leaves significant I/O headroom unused, indicating the system is not I/O-limited.",
+    "confidence": "medium",
+    "explanation": "CPU utilization of 75% confirms that computation is predominantly the dominant bottleneck. The io_time_ratio of 0.2 shows that I/O accounts for a small fraction of the total stage time. Bandwidth utilization of 12% leaves significant I/O headroom unused, indicating the system is not I/O-limited.",
     "key_signals": [
-      "cpu_util_pct: 83",
+      "cpu_util_pct: 75",
       "io_time_ratio: 0.2",
       "bw_utilization_ratio: 0.12"
     ]

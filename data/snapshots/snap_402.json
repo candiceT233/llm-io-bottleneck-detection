@@ -1,0 +1,61 @@
+{
+  "id": "snap_402",
+  "workflow": {
+    "name": "cybershake",
+    "type": "seismology",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "fetch_input",
+    "order": 5,
+    "predecessors": [
+      "scatter_data"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 28,
+    "num_tasks": 140,
+    "parallelism": 140,
+    "total_time_s": 285,
+    "io_time_s": 245,
+    "compute_time_s": 40,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 3072,
+    "aggregate_size_mb": 86.0,
+    "op_count": 86
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 360.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.9,
+    "iops": 332,
+    "avg_io_size_kb": 3072,
+    "sequential_ratio": 0.8
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 9,
+    "memory_util_pct": 58,
+    "network_bw_mb_s": 367.2,
+    "network_peak_bw_mb_s": 15000,
+    "network_util_ratio": 0.024
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 360.0 MB/s reaches 90% of the BEEGFS storage peak (400 MB/s), saturating the read path. CPU utilization of only 9% confirms compute cores are starved waiting for data. The io_time_ratio of 0.86 confirms I/O is the dominant bottleneck of this stage.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.9",
+      "cpu_util_pct: 9",
+      "io_time_ratio: 0.86",
+      "read_bw_mb_s: 360.0",
+      "peak_storage_bw_mb_s: 400"
+    ]
+  }
+}

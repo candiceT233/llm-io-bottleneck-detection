@@ -1,61 +1,61 @@
 {
   "id": "snap_280",
   "workflow": {
-    "name": "montage",
-    "type": "astronomy",
-    "num_stages": 7
+    "name": "swift_t",
+    "type": "data_analysis",
+    "num_stages": 9
   },
   "stage": {
-    "name": "load_data",
-    "order": 4,
+    "name": "save_output",
+    "order": 2,
     "predecessors": [
-      "read_checkpoint"
+      "data_ingestion"
     ],
-    "operation": "read"
+    "operation": "write"
   },
   "execution": {
-    "num_nodes": 16,
-    "num_tasks": 112,
-    "parallelism": 112,
-    "total_time_s": 587,
-    "io_time_s": 470,
-    "compute_time_s": 117,
-    "io_time_ratio": 0.8,
-    "transfer_size_kb": 1024,
-    "aggregate_size_mb": 84365,
-    "op_count": 84365
+    "num_nodes": 44,
+    "num_tasks": 176,
+    "parallelism": 176,
+    "total_time_s": 721,
+    "io_time_s": 591,
+    "compute_time_s": 130,
+    "io_time_ratio": 0.82,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 16239,
+    "op_count": 8120
   },
   "io_metrics": {
-    "read_bw_mb_s": 90.0,
-    "write_bw_mb_s": 0,
-    "peak_storage_bw_mb_s": 100,
-    "bw_utilization_ratio": 0.9,
-    "iops": 90,
-    "avg_io_size_kb": 1024,
-    "sequential_ratio": 0.96
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 465.0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.93,
+    "iops": 232,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.92
   },
   "resource_utilization": {
-    "cpu_util_pct": 14,
-    "memory_util_pct": 49,
-    "network_bw_mb_s": 92.7,
-    "network_peak_bw_mb_s": 1000,
-    "network_util_ratio": 0.093
+    "cpu_util_pct": 12,
+    "memory_util_pct": 57,
+    "network_bw_mb_s": 409.2,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.082
   },
   "storage": {
-    "type": "wekafs",
-    "stripe_count": 4,
+    "type": "pvfs2",
+    "stripe_count": 8,
     "shared": true
   },
   "annotation": {
     "bottleneck": "storage_bandwidth_saturation",
     "confidence": "high",
-    "explanation": "Read bandwidth of 90.0 MB/s reaches 90% of the WEKAFS storage peak (100 MB/s), saturating the filesystem. CPU utilization of only 14% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.8 further shows that I/O dominates the stage duration.",
+    "explanation": "Write bandwidth of 465.0 MB/s reaches 93% of the PVFS2 storage peak (500 MB/s), saturating the filesystem on the write path. CPU utilization of only 12% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.82 further shows that I/O dominates the stage duration.",
     "key_signals": [
-      "bw_utilization_ratio: 0.9",
-      "read_bw_mb_s: 90.0",
-      "peak_storage_bw_mb_s: 100",
-      "cpu_util_pct: 14",
-      "io_time_ratio: 0.8"
+      "bw_utilization_ratio: 0.93",
+      "write_bw_mb_s: 465.0",
+      "peak_storage_bw_mb_s: 500",
+      "cpu_util_pct: 12",
+      "io_time_ratio: 0.82"
     ]
   }
 }

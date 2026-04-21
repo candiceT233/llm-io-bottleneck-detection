@@ -24,7 +24,7 @@
     "transfer_size_kb": 256,
     "aggregate_size_mb": 16167,
     "op_count": 64668,
-    "io_imbalance_ratio": 6.7,
+    "io_imbalance_ratio": 6.2,
     "hot_node_count": 2
   },
   "io_metrics": {
@@ -51,9 +51,9 @@
   "annotation": {
     "bottleneck": "data_skew",
     "confidence": "high",
-    "explanation": "I/O load is highly skewed: 2 of 85 nodes (2.4% of the cluster) handle a disproportionate share of I/O, with an imbalance ratio of 6.7x. These hot nodes saturate their local I/O paths while the rest sit largely idle, pulling aggregate bandwidth (106.0 MB/s) well below the system peak (200 MB/s). The bottleneck is structural: data partitioning assigns unequal volumes across nodes.",
+    "explanation": "I/O load is highly skewed: 2 of 85 nodes (2.4% of the cluster) handle a disproportionate share of I/O, with an imbalance ratio of 6.2x. These hot nodes saturate their local I/O paths while the rest sit largely idle, pulling aggregate bandwidth (106.0 MB/s) well below the system peak (200 MB/s). The bottleneck is structural: data partitioning assigns unequal volumes across nodes.",
     "key_signals": [
-      "io_imbalance_ratio: 6.7",
+      "io_imbalance_ratio: 6.2",
       "hot_node_count: 2",
       "hot_node_pct: 2.4%",
       "bw_utilization_ratio: 0.53",

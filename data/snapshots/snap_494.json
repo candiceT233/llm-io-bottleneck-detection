@@ -1,0 +1,63 @@
+{
+  "id": "snap_494",
+  "workflow": {
+    "name": "seismic_imaging",
+    "type": "geophysics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "checkpoint_write",
+    "order": 6,
+    "predecessors": [
+      "join_tables"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 86,
+    "num_tasks": 688,
+    "parallelism": 688,
+    "total_time_s": 5057,
+    "io_time_s": 2377,
+    "compute_time_s": 2680,
+    "io_time_ratio": 0.47,
+    "transfer_size_kb": 3072,
+    "aggregate_size_mb": 794.0,
+    "op_count": 794,
+    "checkpoint_interval_s": 90,
+    "checkpoint_size_gb": 70
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 342.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.57,
+    "iops": 366,
+    "avg_io_size_kb": 3072,
+    "sequential_ratio": 0.81
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 39,
+    "memory_util_pct": 59,
+    "network_bw_mb_s": 379.6,
+    "network_peak_bw_mb_s": 25000,
+    "network_util_ratio": 0.015
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Checkpointing every 90s flushes 70 GB of state to GPFS, consuming 342.0 MB/s (56% of peak) and accounting for 47% of total stage time. These periodic write bursts stall all tasks during checkpoint intervals, reducing effective compute utilization. The checkpoint frequency is too high relative to the checkpoint size and storage bandwidth available.",
+    "key_signals": [
+      "checkpoint_interval_s: 90",
+      "checkpoint_size_gb: 70",
+      "io_time_ratio: 0.47",
+      "bw_utilization_ratio: 0.57",
+      "write_bw_mb_s: 342.0"
+    ]
+  }
+}

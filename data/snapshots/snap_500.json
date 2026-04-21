@@ -1,0 +1,63 @@
+{
+  "id": "snap_500",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "checkpoint_write",
+    "order": 4,
+    "predecessors": [
+      "filter"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 85,
+    "num_tasks": 850,
+    "parallelism": 850,
+    "total_time_s": 4356,
+    "io_time_s": 1568,
+    "compute_time_s": 2788,
+    "io_time_ratio": 0.36,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 551.0,
+    "op_count": 551,
+    "checkpoint_interval_s": 90,
+    "checkpoint_size_gb": 190
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 360.0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.72,
+    "iops": 376,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.97
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 29,
+    "memory_util_pct": 66,
+    "network_bw_mb_s": 352.8,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.035
+  },
+  "storage": {
+    "type": "wekafs",
+    "stripe_count": 15,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Checkpointing every 90s flushes 190 GB of state to WEKAFS, consuming 360.0 MB/s (72% of peak) and accounting for 36% of total stage time. These periodic write bursts stall all tasks during checkpoint intervals, reducing effective compute utilization. The checkpoint frequency is too high relative to the checkpoint size and storage bandwidth available.",
+    "key_signals": [
+      "checkpoint_interval_s: 90",
+      "checkpoint_size_gb: 190",
+      "io_time_ratio: 0.36",
+      "bw_utilization_ratio: 0.72",
+      "write_bw_mb_s: 360.0"
+    ]
+  }
+}

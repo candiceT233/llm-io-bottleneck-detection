@@ -1,62 +1,62 @@
 {
   "id": "snap_238",
   "workflow": {
-    "name": "epigenomics",
-    "type": "genomics",
+    "name": "namd",
+    "type": "molecular_dynamics",
     "num_stages": 6
   },
   "stage": {
-    "name": "restore_state",
-    "order": 1,
+    "name": "read_checkpoint",
+    "order": 3,
     "predecessors": [
-      "initial_data"
+      "preprocess"
     ],
     "operation": "read"
   },
   "execution": {
-    "num_nodes": 40,
-    "num_tasks": 200,
-    "parallelism": 200,
-    "total_time_s": 1366,
-    "io_time_s": 1079,
-    "compute_time_s": 287,
-    "io_time_ratio": 0.79,
-    "transfer_size_kb": 1024,
-    "aggregate_size_mb": 31253,
-    "op_count": 31253
+    "num_nodes": 44,
+    "num_tasks": 484,
+    "parallelism": 484,
+    "total_time_s": 562,
+    "io_time_s": 478,
+    "compute_time_s": 84,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 4096,
+    "aggregate_size_mb": 48598,
+    "op_count": 12150
   },
   "io_metrics": {
-    "read_bw_mb_s": 496.0,
+    "read_bw_mb_s": 550.0,
     "write_bw_mb_s": 0,
-    "peak_storage_bw_mb_s": 800,
-    "bw_utilization_ratio": 0.62,
-    "iops": 496,
-    "avg_io_size_kb": 1024,
-    "sequential_ratio": 0.7
+    "peak_storage_bw_mb_s": 1000,
+    "bw_utilization_ratio": 0.55,
+    "iops": 138,
+    "avg_io_size_kb": 4096,
+    "sequential_ratio": 0.77
   },
   "resource_utilization": {
-    "cpu_util_pct": 22,
-    "memory_util_pct": 29,
-    "network_bw_mb_s": 4500.0,
-    "network_peak_bw_mb_s": 5000,
-    "network_util_ratio": 0.9
+    "cpu_util_pct": 18,
+    "memory_util_pct": 45,
+    "network_bw_mb_s": 890.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.89
   },
   "storage": {
-    "type": "nfs",
-    "stripe_count": 4,
+    "type": "hdfs",
+    "stripe_count": 1,
     "shared": true
   },
   "annotation": {
     "bottleneck": "network_io_bottleneck",
     "confidence": "high",
-    "explanation": "Network bandwidth of 4500.0 MB/s reaches 90% of the network peak (5000 MB/s), making the interconnect the primary bottleneck. Data is accessed from NFS, requiring all transfers to traverse the network. CPU utilization of 22% confirms tasks are stalled waiting on data transfer rather than performing computation.",
+    "explanation": "Network bandwidth of 890.0 MB/s reaches 89% of the network peak (1000 MB/s), making the interconnect the primary bottleneck. Data is accessed from HDFS, requiring all transfers to traverse the network. CPU utilization of 18% confirms tasks are stalled waiting on data transfer rather than performing computation.",
     "key_signals": [
-      "network_util_ratio: 0.9",
-      "network_bw_mb_s: 4500.0",
-      "network_peak_bw_mb_s: 5000",
-      "cpu_util_pct: 22",
-      "io_time_ratio: 0.79",
-      "storage_type: nfs"
+      "network_util_ratio: 0.89",
+      "network_bw_mb_s: 890.0",
+      "network_peak_bw_mb_s: 1000",
+      "cpu_util_pct: 18",
+      "io_time_ratio: 0.85",
+      "storage_type: hdfs"
     ]
   }
 }

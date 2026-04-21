@@ -1,0 +1,61 @@
+{
+  "id": "snap_473",
+  "workflow": {
+    "name": "epigenomics",
+    "type": "bioinformatics",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "sort_merge",
+    "order": 3,
+    "predecessors": [
+      "scatter_data"
+    ],
+    "operation": "mixed"
+  },
+  "execution": {
+    "num_nodes": 85,
+    "num_tasks": 1020,
+    "parallelism": 1020,
+    "total_time_s": 2099,
+    "io_time_s": 1637,
+    "compute_time_s": 462,
+    "io_time_ratio": 0.78,
+    "transfer_size_kb": 32,
+    "aggregate_size_mb": 176.0,
+    "op_count": 12000000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 55.0,
+    "write_bw_mb_s": 55.0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.22,
+    "iops": 2433,
+    "avg_io_size_kb": 32,
+    "sequential_ratio": 0.32
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 11,
+    "memory_util_pct": 37,
+    "network_bw_mb_s": 106.7,
+    "network_peak_bw_mb_s": 8000,
+    "network_util_ratio": 0.013
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "The stage issues 2433 IOPS with an average I/O size of only 32 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count (12,000,000), bandwidth utilization is only 22% (110.0 MB/s of 500 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.78 confirms I/O dominates stage time.",
+    "key_signals": [
+      "iops: 2433",
+      "avg_io_size_kb: 32",
+      "bw_utilization_ratio: 0.22",
+      "io_time_ratio: 0.78",
+      "op_count: 12000000"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "snap_493",
+  "workflow": {
+    "name": "fmri_analysis",
+    "type": "neuroscience",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "checkpoint_write",
+    "order": 2,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 29,
+    "num_tasks": 290,
+    "parallelism": 290,
+    "total_time_s": 4997,
+    "io_time_s": 2349,
+    "compute_time_s": 2648,
+    "io_time_ratio": 0.47,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 454.0,
+    "op_count": 454,
+    "checkpoint_interval_s": 180,
+    "checkpoint_size_gb": 490
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 198.0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.66,
+    "iops": 209,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.92
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 16,
+    "memory_util_pct": 85,
+    "network_bw_mb_s": 203.9,
+    "network_peak_bw_mb_s": 25000,
+    "network_util_ratio": 0.008
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 12,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Checkpointing every 180s flushes 490 GB of state to GPFS, consuming 198.0 MB/s (66% of peak) and accounting for 47% of total stage time. These periodic write bursts stall all tasks during checkpoint intervals, reducing effective compute utilization. The checkpoint frequency is too high relative to the checkpoint size and storage bandwidth available.",
+    "key_signals": [
+      "checkpoint_interval_s: 180",
+      "checkpoint_size_gb: 490",
+      "io_time_ratio: 0.47",
+      "bw_utilization_ratio: 0.66",
+      "write_bw_mb_s: 198.0"
+    ]
+  }
+}

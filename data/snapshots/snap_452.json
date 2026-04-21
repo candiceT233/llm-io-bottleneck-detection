@@ -1,0 +1,62 @@
+{
+  "id": "snap_452",
+  "workflow": {
+    "name": "flood_model",
+    "type": "hydrology",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "preprocess",
+    "order": 4,
+    "predecessors": [
+      "dump_state"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 24,
+    "num_tasks": 480,
+    "parallelism": 480,
+    "total_time_s": 846,
+    "io_time_s": 728,
+    "compute_time_s": 118,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 60.0,
+    "op_count": 60,
+    "serialization_factor": 6
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 85.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.17,
+    "iops": 91,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.92
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 12,
+    "memory_util_pct": 50,
+    "network_bw_mb_s": 88.4,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.088
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O operations are serialized with a factor of 6, meaning tasks queue behind a single I/O path instead of issuing requests in parallel. Despite 480 tasks, effective bandwidth is only 85.0 MB/s (17% of the 500 MB/s LUSTRE peak). CPU utilization of 12% confirms tasks are idle waiting for serialized I/O to complete. The io_time_ratio of 0.86 confirms I/O dominates stage time.",
+    "key_signals": [
+      "serialization_factor: 6",
+      "bw_utilization_ratio: 0.17",
+      "cpu_util_pct: 12",
+      "io_time_ratio: 0.86",
+      "num_tasks: 480"
+    ]
+  }
+}

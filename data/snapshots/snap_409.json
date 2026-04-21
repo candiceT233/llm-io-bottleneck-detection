@@ -1,0 +1,65 @@
+{
+  "id": "snap_409",
+  "workflow": {
+    "name": "blast",
+    "type": "bioinformatics",
+    "num_stages": 8
+  },
+  "stage": {
+    "name": "sort_merge",
+    "order": 3,
+    "predecessors": [
+      "initial_data"
+    ],
+    "operation": "mixed"
+  },
+  "execution": {
+    "num_nodes": 35,
+    "num_tasks": 140,
+    "parallelism": 140,
+    "total_time_s": 1773,
+    "io_time_s": 1560,
+    "compute_time_s": 213,
+    "io_time_ratio": 0.88,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 247.0,
+    "op_count": 247,
+    "data_staged": false,
+    "intended_staging_tier": "ram_disk",
+    "remote_access_latency_ms": 751
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 97.2,
+    "write_bw_mb_s": 64.8,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.54,
+    "iops": 175,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.76
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 11,
+    "memory_util_pct": 22,
+    "network_bw_mb_s": 150.7,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.03
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "staging_inefficiency",
+    "confidence": "high",
+    "explanation": "Data was not pre-staged to a fast local storage tier (ram_disk) before execution began. Tasks access PVFS2 directly, which carries a remote latency of 751 ms, yielding only 162.0 MB/s effective bandwidth (54% of the 300 MB/s peak). CPU utilization of 11% confirms tasks spend most time waiting on remote I/O rather than performing useful computation.",
+    "key_signals": [
+      "data_staged: false",
+      "remote_access_latency_ms: 751",
+      "bw_utilization_ratio: 0.54",
+      "storage_type: pvfs2",
+      "cpu_util_pct: 11",
+      "io_time_ratio: 0.88"
+    ]
+  }
+}

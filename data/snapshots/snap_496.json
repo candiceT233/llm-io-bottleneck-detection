@@ -1,0 +1,63 @@
+{
+  "id": "snap_496",
+  "workflow": {
+    "name": "flood_model",
+    "type": "hydrology",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "checkpoint_write",
+    "order": 6,
+    "predecessors": [
+      "transform"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 78,
+    "num_tasks": 1170,
+    "parallelism": 1170,
+    "total_time_s": 4713,
+    "io_time_s": 2168,
+    "compute_time_s": 2545,
+    "io_time_ratio": 0.46,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 877.0,
+    "op_count": 877,
+    "checkpoint_interval_s": 240,
+    "checkpoint_size_gb": 20
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 414.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.69,
+    "iops": 437,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.98
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 33,
+    "memory_util_pct": 69,
+    "network_bw_mb_s": 459.5,
+    "network_peak_bw_mb_s": 20000,
+    "network_util_ratio": 0.023
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 7,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Checkpointing every 240s flushes 20 GB of state to LUSTRE, consuming 414.0 MB/s (69% of peak) and accounting for 46% of total stage time. These periodic write bursts stall all tasks during checkpoint intervals, reducing effective compute utilization. The checkpoint frequency is too high relative to the checkpoint size and storage bandwidth available.",
+    "key_signals": [
+      "checkpoint_interval_s: 240",
+      "checkpoint_size_gb: 20",
+      "io_time_ratio: 0.46",
+      "bw_utilization_ratio: 0.69",
+      "write_bw_mb_s: 414.0"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "snap_469",
+  "workflow": {
+    "name": "variant_calling",
+    "type": "genomics",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "merge_output",
+    "order": 3,
+    "predecessors": [
+      "filter"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 30,
+    "num_tasks": 510,
+    "parallelism": 510,
+    "total_time_s": 2134,
+    "io_time_s": 1707,
+    "compute_time_s": 427,
+    "io_time_ratio": 0.8,
+    "transfer_size_kb": 44,
+    "aggregate_size_mb": 320.0,
+    "op_count": 3700000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 192.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.32,
+    "iops": 3259,
+    "avg_io_size_kb": 44,
+    "sequential_ratio": 0.55
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 21,
+    "memory_util_pct": 25,
+    "network_bw_mb_s": 190.1,
+    "network_peak_bw_mb_s": 4000,
+    "network_util_ratio": 0.048
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "The stage issues 3259 IOPS with an average I/O size of only 44 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count (3,700,000), bandwidth utilization is only 32% (192.0 MB/s of 600 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.8 confirms I/O dominates stage time.",
+    "key_signals": [
+      "iops: 3259",
+      "avg_io_size_kb: 44",
+      "bw_utilization_ratio: 0.32",
+      "io_time_ratio: 0.8",
+      "op_count: 3700000"
+    ]
+  }
+}

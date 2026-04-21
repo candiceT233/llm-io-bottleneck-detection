@@ -1,0 +1,61 @@
+{
+  "id": "snap_397",
+  "workflow": {
+    "name": "ligo",
+    "type": "gravitational_waves",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "preprocess",
+    "order": 2,
+    "predecessors": [
+      "sort_merge"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 71,
+    "num_tasks": 639,
+    "parallelism": 639,
+    "total_time_s": 896,
+    "io_time_s": 824,
+    "compute_time_s": 72,
+    "io_time_ratio": 0.92,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 262.0,
+    "op_count": 262
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 325.5,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 350,
+    "bw_utilization_ratio": 0.93,
+    "iops": 304,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.86
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 6,
+    "memory_util_pct": 60,
+    "network_bw_mb_s": 348.3,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.07
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 16,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "read_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Read bandwidth of 325.5 MB/s reaches 93% of the GPFS storage peak (350 MB/s), saturating the read path. CPU utilization of only 6% confirms compute cores are starved waiting for data. The io_time_ratio of 0.92 confirms I/O is the dominant bottleneck of this stage.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.93",
+      "cpu_util_pct: 6",
+      "io_time_ratio: 0.92",
+      "read_bw_mb_s: 325.5",
+      "peak_storage_bw_mb_s: 350"
+    ]
+  }
+}

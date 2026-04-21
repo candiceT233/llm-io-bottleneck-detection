@@ -1,0 +1,62 @@
+{
+  "id": "snap_453",
+  "workflow": {
+    "name": "protein_folding",
+    "type": "structural_biology",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "individuals",
+    "order": 4,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 78,
+    "num_tasks": 1482,
+    "parallelism": 1482,
+    "total_time_s": 1007,
+    "io_time_s": 856,
+    "compute_time_s": 151,
+    "io_time_ratio": 0.85,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 10.0,
+    "op_count": 10,
+    "serialization_factor": 15
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 12.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.06,
+    "iops": 10,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.96
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 13,
+    "memory_util_pct": 39,
+    "network_bw_mb_s": 13.1,
+    "network_peak_bw_mb_s": 9000,
+    "network_util_ratio": 0.001
+  },
+  "storage": {
+    "type": "cephfs",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O operations are serialized with a factor of 15, meaning tasks queue behind a single I/O path instead of issuing requests in parallel. Despite 1482 tasks, effective bandwidth is only 12.0 MB/s (6% of the 200 MB/s CEPHFS peak). CPU utilization of 13% confirms tasks are idle waiting for serialized I/O to complete. The io_time_ratio of 0.85 confirms I/O dominates stage time.",
+    "key_signals": [
+      "serialization_factor: 15",
+      "bw_utilization_ratio: 0.06",
+      "cpu_util_pct: 13",
+      "io_time_ratio: 0.85",
+      "num_tasks: 1482"
+    ]
+  }
+}

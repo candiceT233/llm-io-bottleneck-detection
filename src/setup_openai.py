@@ -36,14 +36,18 @@ Choose exactly one bottleneck class from this list:
 - storage_bandwidth_saturation: write bandwidth saturates the storage device (bw_utilization_ratio near 1.0 on writes, low cpu_util)
 - read_bandwidth_saturation: read bandwidth saturates the storage device (bw_utilization_ratio near 1.0 on reads, read_bw_mb_s close to peak, low cpu_util)
 - metadata_contention: too many small file operations overwhelming the metadata server (high iops, tiny avg_io_size_kb, low bw_utilization_ratio)
-- lock_contention: multiple tasks competing for write locks on shared files (shared storage, many writers, very low bw_utilization_ratio despite high parallelism)
+- lock_contention: multiple tasks competing for write locks on shared files (shared storage, many writers, very low bw_utilization_ratio despite high 
+parallelism)
 - network_io_bottleneck: data movement over the network is the limiting factor (network_util_ratio near 1.0, remote/object storage such as s3, hdfs, nfs)
 - serialized_io: I/O is forced through a single writer/reader, preventing parallelism (parallelism=1 in execution, low bw_utilization_ratio)
 - checkpointing_overhead: periodic checkpointing dominates stage time (checkpoint_size_mb and num_checkpoints present, large aggregate_size_mb)
 - compute_bound: CPU computation is the bottleneck, I/O is not a significant factor (high cpu_util_pct, low io_time_ratio)
-- io_interference: external competing jobs degrade observed bandwidth below the workflow's fair share (competing_jobs field present, bw_utilization_ratio low despite shared filesystem being the storage)
-- data_skew: I/O load is unevenly distributed across nodes, creating hot spots (io_imbalance_ratio and hot_node_count fields present, bw_utilization_ratio moderately low)
-- staging_inefficiency: data was not pre-staged to a fast local tier before execution (data_staged=false, remote storage type such as s3/nfs/hdfs, high remote_access_latency_ms, low bw_utilization_ratio)
+- io_interference: external competing jobs degrade observed bandwidth below the workflow's fair share (competing_jobs field present, bw_utilization_ratio low 
+despite shared filesystem being the storage)
+- data_skew: I/O load is unevenly distributed across nodes, creating hot spots (io_imbalance_ratio and hot_node_count fields present, bw_utilization_ratio 
+moderately low)
+- staging_inefficiency: data was not pre-staged to a fast local tier before execution (data_staged=false, remote storage type such as s3/nfs/hdfs, 
+high remote_access_latency_ms, low bw_utilization_ratio)
 """
 
 RESPONSE_FORMAT = """\
@@ -218,7 +222,8 @@ Choose exactly one bottleneck class from this list:
 - data_skew
 - staging_inefficiency
 
-""" + RESPONSE_FORMAT + """
+Respond with a JSON object containing only the bottleneck field — no other fields:
+{{"bottleneck": "<one class from the list above>"}}
 
 Snapshot:
 {snapshot_json}
@@ -320,16 +325,44 @@ def diagnose(snapshot: dict, model: str = "gpt-4.1-mini", strategy: str = "zero_
 
     prompt = build_prompt(snapshot, strategy=strategy)
 
+    # classify_only: strict schema prevents the model from emitting extra fields.
+    # All other strategies use json_object (they intentionally return 4 fields).
+    if strategy == "classify_only":
+        resp_fmt = {
+            "type": "json_schema",
+            "json_schema": {
+                "name": "bottleneck_only",
+                "strict": True,
+                "schema": {
+                    "type": "object",
+                    "properties": {"bottleneck": {"type": "string"}},
+                    "required": ["bottleneck"],
+                    "additionalProperties": False,
+                },
+            },
+        }
+    else:
+        resp_fmt = {"type": "json_object"}
+
     t0 = time.time()
-    response = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": prompt},
-        ],
-        temperature=0,
-        response_format={"type": "json_object"},
-    )
+    for attempt in range(2):
+        try:
+            response = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": prompt},
+                ],
+                temperature=0,
+                response_format=resp_fmt,
+                timeout=60,
+            )
+            break
+        except Exception as e:
+            if attempt == 1:
+                raise
+            print(f"[retry] {e}")
+            time.sleep(3)
     duration_s = time.time() - t0
 
     raw = response.choices[0].message.content

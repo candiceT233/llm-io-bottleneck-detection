@@ -1,0 +1,61 @@
+{
+  "id": "snap_459",
+  "workflow": {
+    "name": "seismic_imaging",
+    "type": "geophysics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "validate_output",
+    "order": 5,
+    "predecessors": [
+      "navier_stokes_solve"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 43,
+    "num_tasks": 731,
+    "parallelism": 731,
+    "total_time_s": 880,
+    "io_time_s": 660,
+    "compute_time_s": 220,
+    "io_time_ratio": 0.75,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 147.0,
+    "op_count": 147
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 228.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.38,
+    "iops": 249,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.56
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 19,
+    "memory_util_pct": 31,
+    "network_bw_mb_s": 1350.0,
+    "network_peak_bw_mb_s": 1500,
+    "network_util_ratio": 0.9
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 1350.0 MB/s is at 90% of the 1500 MB/s interconnect capacity, saturating the network fabric. Although GPFS storage could sustain 600 MB/s, data transfer is throttled by the network link. CPU utilization of 19% confirms tasks are stalled waiting for data to traverse the network. The io_time_ratio of 0.75 shows I/O dominates stage time.",
+    "key_signals": [
+      "network_util_ratio: 0.9",
+      "network_bw_mb_s: 1350.0",
+      "network_peak_bw_mb_s: 1500",
+      "cpu_util_pct: 19",
+      "io_time_ratio: 0.75"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "snap_455",
+  "workflow": {
+    "name": "galaxy_sim",
+    "type": "astrophysics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "restore_state",
+    "order": 1,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 26,
+    "num_tasks": 182,
+    "parallelism": 182,
+    "total_time_s": 932,
+    "io_time_s": 802,
+    "compute_time_s": 130,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 256,
+    "aggregate_size_mb": 23.0,
+    "op_count": 23,
+    "serialization_factor": 15
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 30.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 500,
+    "bw_utilization_ratio": 0.06,
+    "iops": 39,
+    "avg_io_size_kb": 256,
+    "sequential_ratio": 0.89
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 22,
+    "memory_util_pct": 37,
+    "network_bw_mb_s": 30.9,
+    "network_peak_bw_mb_s": 6000,
+    "network_util_ratio": 0.005
+  },
+  "storage": {
+    "type": "nfs",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O operations are serialized with a factor of 15, meaning tasks queue behind a single I/O path instead of issuing requests in parallel. Despite 182 tasks, effective bandwidth is only 30.0 MB/s (6% of the 500 MB/s NFS peak). CPU utilization of 22% confirms tasks are idle waiting for serialized I/O to complete. The io_time_ratio of 0.86 confirms I/O dominates stage time.",
+    "key_signals": [
+      "serialization_factor: 15",
+      "bw_utilization_ratio: 0.06",
+      "cpu_util_pct: 22",
+      "io_time_ratio: 0.86",
+      "num_tasks: 182"
+    ]
+  }
+}

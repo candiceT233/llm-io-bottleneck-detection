@@ -1,0 +1,63 @@
+{
+  "id": "snap_497",
+  "workflow": {
+    "name": "montage",
+    "type": "astronomy",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "checkpoint_write",
+    "order": 3,
+    "predecessors": [
+      "filter"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 77,
+    "num_tasks": 462,
+    "parallelism": 462,
+    "total_time_s": 2258,
+    "io_time_s": 948,
+    "compute_time_s": 1310,
+    "io_time_ratio": 0.42,
+    "transfer_size_kb": 1024,
+    "aggregate_size_mb": 411.0,
+    "op_count": 411,
+    "checkpoint_interval_s": 90,
+    "checkpoint_size_gb": 440
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 444.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.74,
+    "iops": 403,
+    "avg_io_size_kb": 1024,
+    "sequential_ratio": 0.93
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 15,
+    "memory_util_pct": 78,
+    "network_bw_mb_s": 466.2,
+    "network_peak_bw_mb_s": 10000,
+    "network_util_ratio": 0.047
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 12,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "checkpointing_overhead",
+    "confidence": "high",
+    "explanation": "Checkpointing every 90s flushes 440 GB of state to BEEGFS, consuming 444.0 MB/s (74% of peak) and accounting for 42% of total stage time. These periodic write bursts stall all tasks during checkpoint intervals, reducing effective compute utilization. The checkpoint frequency is too high relative to the checkpoint size and storage bandwidth available.",
+    "key_signals": [
+      "checkpoint_interval_s: 90",
+      "checkpoint_size_gb: 440",
+      "io_time_ratio: 0.42",
+      "bw_utilization_ratio: 0.74",
+      "write_bw_mb_s: 444.0"
+    ]
+  }
+}

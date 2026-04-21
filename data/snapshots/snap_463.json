@@ -1,0 +1,61 @@
+{
+  "id": "snap_463",
+  "workflow": {
+    "name": "spark_etl",
+    "type": "etl",
+    "num_stages": 5
+  },
+  "stage": {
+    "name": "index_build",
+    "order": 1,
+    "predecessors": [
+      "join_tables"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 37,
+    "num_tasks": 222,
+    "parallelism": 222,
+    "total_time_s": 1889,
+    "io_time_s": 1473,
+    "compute_time_s": 416,
+    "io_time_ratio": 0.78,
+    "transfer_size_kb": 1536,
+    "aggregate_size_mb": 354.0,
+    "op_count": 354
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 246.0,
+    "peak_storage_bw_mb_s": 600,
+    "bw_utilization_ratio": 0.41,
+    "iops": 240,
+    "avg_io_size_kb": 1536,
+    "sequential_ratio": 0.59
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 30,
+    "memory_util_pct": 56,
+    "network_bw_mb_s": 1395.0,
+    "network_peak_bw_mb_s": 1500,
+    "network_util_ratio": 0.93
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 1395.0 MB/s is at 93% of the 1500 MB/s interconnect capacity, saturating the network fabric. Although GPFS storage could sustain 600 MB/s, data transfer is throttled by the network link. CPU utilization of 30% confirms tasks are stalled waiting for data to traverse the network. The io_time_ratio of 0.78 shows I/O dominates stage time.",
+    "key_signals": [
+      "network_util_ratio: 0.93",
+      "network_bw_mb_s: 1395.0",
+      "network_peak_bw_mb_s: 1500",
+      "cpu_util_pct: 30",
+      "io_time_ratio: 0.78"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "snap_457",
+  "workflow": {
+    "name": "cosmology_sim",
+    "type": "astrophysics",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "individuals",
+    "order": 1,
+    "predecessors": [
+      "sort_merge"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 19,
+    "num_tasks": 247,
+    "parallelism": 247,
+    "total_time_s": 1665,
+    "io_time_s": 1382,
+    "compute_time_s": 283,
+    "io_time_ratio": 0.83,
+    "transfer_size_kb": 1536,
+    "aggregate_size_mb": 19.0,
+    "op_count": 19,
+    "serialization_factor": 9
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 14.0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.07,
+    "iops": 14,
+    "avg_io_size_kb": 1536,
+    "sequential_ratio": 0.96
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 5,
+    "memory_util_pct": 25,
+    "network_bw_mb_s": 12.9,
+    "network_peak_bw_mb_s": 3000,
+    "network_util_ratio": 0.004
+  },
+  "storage": {
+    "type": "cephfs",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O operations are serialized with a factor of 9, meaning tasks queue behind a single I/O path instead of issuing requests in parallel. Despite 247 tasks, effective bandwidth is only 14.0 MB/s (7% of the 200 MB/s CEPHFS peak). CPU utilization of 5% confirms tasks are idle waiting for serialized I/O to complete. The io_time_ratio of 0.83 confirms I/O dominates stage time.",
+    "key_signals": [
+      "serialization_factor: 9",
+      "bw_utilization_ratio: 0.07",
+      "cpu_util_pct: 5",
+      "io_time_ratio: 0.83",
+      "num_tasks: 247"
+    ]
+  }
+}

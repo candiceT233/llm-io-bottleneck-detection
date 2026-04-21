@@ -26,20 +26,20 @@
     "op_count": 196
   },
   "io_metrics": {
-    "read_bw_mb_s": 470.0,
+    "read_bw_mb_s": 445.0,
     "write_bw_mb_s": 0,
     "peak_storage_bw_mb_s": 500,
-    "bw_utilization_ratio": 0.94,
-    "iops": 940,
+    "bw_utilization_ratio": 0.89,
+    "iops": 890,
     "avg_io_size_kb": 512,
     "sequential_ratio": 0.75
   },
   "resource_utilization": {
     "cpu_util_pct": 13,
     "memory_util_pct": 53,
-    "network_bw_mb_s": 493.5,
+    "network_bw_mb_s": 467.2,
     "network_peak_bw_mb_s": 10000,
-    "network_util_ratio": 0.049
+    "network_util_ratio": 0.047
   },
   "storage": {
     "type": "lustre",
@@ -49,10 +49,10 @@
   "annotation": {
     "bottleneck": "read_bandwidth_saturation",
     "confidence": "high",
-    "explanation": "Read bandwidth of 470.0 MB/s reaches 94% of the LUSTRE storage peak (500 MB/s), saturating the filesystem on the read path. CPU utilization of only 13% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.78 confirms that I/O dominates the stage duration.",
+    "explanation": "Read bandwidth of 445.0 MB/s reaches 89% of the LUSTRE storage peak (500 MB/s), saturating the filesystem on the read path. CPU utilization of only 13% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.78 confirms that I/O dominates the stage duration.",
     "key_signals": [
-      "bw_utilization_ratio: 0.94",
-      "read_bw_mb_s: 470.0",
+      "bw_utilization_ratio: 0.89",
+      "read_bw_mb_s: 445.0",
       "peak_storage_bw_mb_s: 500",
       "cpu_util_pct: 13",
       "io_time_ratio: 0.78"

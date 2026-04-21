@@ -1,0 +1,62 @@
+{
+  "id": "snap_458",
+  "workflow": {
+    "name": "blast",
+    "type": "bioinformatics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "distribute_data",
+    "order": 4,
+    "predecessors": [
+      "merge_output"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 74,
+    "num_tasks": 1110,
+    "parallelism": 1110,
+    "total_time_s": 1728,
+    "io_time_s": 1452,
+    "compute_time_s": 276,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 512,
+    "aggregate_size_mb": 43.0,
+    "op_count": 43,
+    "serialization_factor": 6
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 30.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.1,
+    "iops": 22,
+    "avg_io_size_kb": 512,
+    "sequential_ratio": 0.99
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 9,
+    "memory_util_pct": 25,
+    "network_bw_mb_s": 29.4,
+    "network_peak_bw_mb_s": 8000,
+    "network_util_ratio": 0.004
+  },
+  "storage": {
+    "type": "nfs",
+    "stripe_count": 1,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "serialized_io",
+    "confidence": "high",
+    "explanation": "I/O operations are serialized with a factor of 6, meaning tasks queue behind a single I/O path instead of issuing requests in parallel. Despite 1110 tasks, effective bandwidth is only 30.0 MB/s (10% of the 300 MB/s NFS peak). CPU utilization of 9% confirms tasks are idle waiting for serialized I/O to complete. The io_time_ratio of 0.84 confirms I/O dominates stage time.",
+    "key_signals": [
+      "serialization_factor: 6",
+      "bw_utilization_ratio: 0.1",
+      "cpu_util_pct: 9",
+      "io_time_ratio: 0.84",
+      "num_tasks: 1110"
+    ]
+  }
+}

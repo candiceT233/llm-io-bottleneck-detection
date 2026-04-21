@@ -59,7 +59,7 @@ def gen_read_bandwidth_saturation(snap_id):
     num_nodes  = ri(8, 64)
     num_tasks  = num_nodes * ri(4, 20)
     peak_bw    = pick([100, 150, 200, 300, 400, 500])
-    bw_util    = rf(0.88, 0.99)
+    bw_util    = rf(0.78, 0.99)   # extended lower bound to straddle the 0.85 rule threshold
     read_bw    = round(peak_bw * bw_util, 1)
     avg_io_kb  = pick([256, 512, 1024, 2048, 4096])
     iops       = max(1, round(read_bw * 1024 / avg_io_kb))
@@ -76,9 +76,11 @@ def gen_read_bandwidth_saturation(snap_id):
     stor       = pick(LOCAL_STORAGE)
     stripes    = pick([4, 8, 16, 32])
 
+    confidence = "high" if bw_util >= 0.88 else "medium"
+    sat_phrase = "saturating" if bw_util >= 0.88 else "approaching saturation of"
     expl = (
         f"Read bandwidth of {read_bw} MB/s reaches {round(bw_util*100)}% of the {stor.upper()} "
-        f"storage peak ({peak_bw} MB/s), saturating the filesystem on the read path. "
+        f"storage peak ({peak_bw} MB/s), {sat_phrase} the filesystem on the read path. "
         f"CPU utilization of only {cpu}% confirms compute cores are stalled waiting on data. "
         f"The io_time_ratio of {io_ratio} confirms that I/O dominates the stage duration."
     )
@@ -104,7 +106,7 @@ def gen_read_bandwidth_saturation(snap_id):
         },
         "storage": {"type": stor, "stripe_count": stripes, "shared": True},
         "annotation": {
-            "bottleneck": "read_bandwidth_saturation", "confidence": "high",
+            "bottleneck": "read_bandwidth_saturation", "confidence": confidence,
             "explanation": expl,
             "key_signals": [
                 f"bw_utilization_ratio: {round(bw_util, 2)}",
@@ -189,7 +191,7 @@ def gen_io_interference(snap_id):
 def gen_data_skew(snap_id):
     num_nodes      = ri(16, 128)
     num_tasks      = num_nodes * ri(4, 20)
-    imbalance_r    = rf(3.0, 10.0, 1)
+    imbalance_r    = rf(2.0, 10.0, 1)   # extended lower bound to straddle the 2.5 rule threshold
     hot_nodes      = ri(1, max(1, num_nodes // 10))
     hot_pct        = round(hot_nodes / num_nodes * 100, 1)
     peak_bw        = pick([200, 400, 600, 800])
@@ -243,7 +245,7 @@ def gen_data_skew(snap_id):
         },
         "storage": {"type": stor, "stripe_count": stripes, "shared": True},
         "annotation": {
-            "bottleneck": "data_skew", "confidence": "high",
+            "bottleneck": "data_skew", "confidence": "high" if imbalance_r >= 3.0 else "medium",
             "explanation": expl,
             "key_signals": [
                 f"io_imbalance_ratio: {imbalance_r}",
@@ -333,7 +335,7 @@ def gen_staging_inefficiency(snap_id):
 def gen_compute_bound(snap_id):
     num_nodes  = ri(8, 128)
     num_tasks  = num_nodes * ri(4, 16)
-    cpu        = ri(78, 98)
+    cpu        = ri(65, 98)   # extended lower bound to straddle the 70 rule threshold
     io_ratio   = rf(0.05, 0.22)
     total_t    = ri(200, 2000)
     io_t       = round(total_t * io_ratio)
@@ -354,8 +356,10 @@ def gen_compute_bound(snap_id):
     read_bw    = eff_bw if op == "read" else 0
     write_bw   = eff_bw if op == "write" else 0
 
+    confidence = "high" if cpu >= 78 else "medium"
+    cpu_phrase = "clearly" if cpu >= 78 else "predominantly"
     expl = (
-        f"CPU utilization of {cpu}% confirms that computation is the dominant bottleneck. "
+        f"CPU utilization of {cpu}% confirms that computation is {cpu_phrase} the dominant bottleneck. "
         f"The io_time_ratio of {io_ratio} shows that I/O accounts for a small fraction of the total stage time. "
         f"Bandwidth utilization of {round(bw_util*100)}% leaves significant I/O headroom unused, "
         f"indicating the system is not I/O-limited."
@@ -382,7 +386,7 @@ def gen_compute_bound(snap_id):
         },
         "storage": {"type": stor, "stripe_count": stripes, "shared": pick([True, False])},
         "annotation": {
-            "bottleneck": "compute_bound", "confidence": "high",
+            "bottleneck": "compute_bound", "confidence": confidence,
             "explanation": expl,
             "key_signals": [
                 f"cpu_util_pct: {cpu}",
@@ -464,9 +468,10 @@ def gen_storage_bandwidth_saturation(snap_id):
     num_nodes  = ri(8, 64)
     num_tasks  = num_nodes * ri(4, 20)
     peak_bw    = pick([100, 150, 200, 300, 400, 500])
-    bw_util    = rf(0.88, 0.99)
+    bw_util    = rf(0.78, 0.99)   # extended lower bound to straddle the 0.85 rule threshold
     eff_bw     = round(peak_bw * bw_util, 1)
-    op         = pick(["write", "read"])
+    # Always write: storage_bandwidth_saturation is write saturation by definition.
+    # Read saturation belongs exclusively to read_bandwidth_saturation.
     avg_io_kb  = pick([512, 1024, 2048, 4096])
     iops       = max(1, round(eff_bw * 1024 / avg_io_kb))
     agg_mb     = ri(5000, 100000)
@@ -481,20 +486,20 @@ def gen_storage_bandwidth_saturation(snap_id):
     net_util   = round(net_bw / net_peak, 3)
     stor       = pick(LOCAL_STORAGE)
     stripes    = pick([4, 8, 16, 32])
-    read_bw    = eff_bw if op == "read" else 0
-    write_bw   = eff_bw if op == "write" else 0
 
+    confidence = "high" if bw_util >= 0.88 else "medium"
+    sat_phrase = "saturating" if bw_util >= 0.88 else "approaching saturation of"
     expl = (
-        f"{'Write' if op == 'write' else 'Read'} bandwidth of {eff_bw} MB/s reaches "
+        f"Write bandwidth of {eff_bw} MB/s reaches "
         f"{round(bw_util*100)}% of the {stor.upper()} storage peak ({peak_bw} MB/s), "
-        f"saturating the filesystem. CPU utilization of only {cpu}% confirms compute cores are "
-        f"idle waiting on I/O. The io_time_ratio of {io_ratio} further shows that I/O dominates "
-        f"the stage duration."
+        f"{sat_phrase} the filesystem on the write path. CPU utilization of only {cpu}% confirms "
+        f"compute cores are idle waiting on I/O. The io_time_ratio of {io_ratio} further shows "
+        f"that I/O dominates the stage duration."
     )
     return {
         "id": snap_id,
         "workflow": make_workflow(),
-        "stage": make_stage(op),
+        "stage": make_stage("write"),
         "execution": {
             "num_nodes": num_nodes, "num_tasks": num_tasks, "parallelism": num_tasks,
             "total_time_s": total_t, "io_time_s": io_t, "compute_time_s": total_t - io_t,
@@ -502,7 +507,7 @@ def gen_storage_bandwidth_saturation(snap_id):
             "aggregate_size_mb": agg_mb, "op_count": op_count,
         },
         "io_metrics": {
-            "read_bw_mb_s": read_bw, "write_bw_mb_s": write_bw,
+            "read_bw_mb_s": 0, "write_bw_mb_s": eff_bw,
             "peak_storage_bw_mb_s": peak_bw, "bw_utilization_ratio": round(bw_util, 2),
             "iops": iops, "avg_io_size_kb": avg_io_kb, "sequential_ratio": rf(0.75, 0.98),
         },
@@ -513,11 +518,11 @@ def gen_storage_bandwidth_saturation(snap_id):
         },
         "storage": {"type": stor, "stripe_count": stripes, "shared": True},
         "annotation": {
-            "bottleneck": "storage_bandwidth_saturation", "confidence": "high",
+            "bottleneck": "storage_bandwidth_saturation", "confidence": confidence,
             "explanation": expl,
             "key_signals": [
                 f"bw_utilization_ratio: {round(bw_util, 2)}",
-                f"{'write' if op == 'write' else 'read'}_bw_mb_s: {eff_bw}",
+                f"write_bw_mb_s: {eff_bw}",
                 f"peak_storage_bw_mb_s: {peak_bw}",
                 f"cpu_util_pct: {cpu}",
                 f"io_time_ratio: {io_ratio}",

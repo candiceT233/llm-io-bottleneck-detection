@@ -1,0 +1,64 @@
+{
+  "id": "snap_429",
+  "workflow": {
+    "name": "drug_screening",
+    "type": "bioinformatics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "validate_output",
+    "order": 4,
+    "predecessors": [
+      "navier_stokes_solve"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 23,
+    "num_tasks": 184,
+    "parallelism": 184,
+    "total_time_s": 832,
+    "io_time_s": 716,
+    "compute_time_s": 116,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 768,
+    "aggregate_size_mb": 59.0,
+    "op_count": 59,
+    "max_task_time_s": 1962,
+    "avg_task_time_s": 510,
+    "skew_factor": 3.85
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 84.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.28,
+    "iops": 82,
+    "avg_io_size_kb": 768,
+    "sequential_ratio": 0.7
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 30,
+    "memory_util_pct": 75,
+    "network_bw_mb_s": 79.8,
+    "network_peak_bw_mb_s": 2000,
+    "network_util_ratio": 0.04
+  },
+  "storage": {
+    "type": "lustre",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "data_skew",
+    "confidence": "high",
+    "explanation": "A skew factor of 3.85x is observed: the slowest task takes 1962s while the average is 510s. This imbalance causes most workers to idle while a few straggler tasks process disproportionately large data partitions, resulting in poor aggregate bandwidth (28% of peak). CPU utilization of 30% is moderate but unevenly distributed across workers.",
+    "key_signals": [
+      "skew_factor: 3.85",
+      "max_task_time_s: 1962",
+      "avg_task_time_s: 510",
+      "bw_utilization_ratio: 0.28",
+      "cpu_util_pct: 30"
+    ]
+  }
+}

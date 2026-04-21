@@ -1,0 +1,60 @@
+{
+  "id": "snap_391",
+  "workflow": {
+    "name": "seismic_imaging",
+    "type": "geophysics",
+    "num_stages": 4
+  },
+  "stage": {
+    "name": "merge_output",
+    "order": 1,
+    "predecessors": [
+      "navier_stokes_solve"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 24,
+    "num_tasks": 288,
+    "parallelism": 288,
+    "total_time_s": 798,
+    "io_time_s": 670,
+    "compute_time_s": 128,
+    "io_time_ratio": 0.84,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 220.0,
+    "op_count": 220
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 336.0,
+    "peak_storage_bw_mb_s": 350,
+    "bw_utilization_ratio": 0.96,
+    "iops": 377,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.79
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 13,
+    "memory_util_pct": 37,
+    "network_bw_mb_s": 369.6,
+    "network_peak_bw_mb_s": 5000,
+    "network_util_ratio": 0.074
+  },
+  "storage": {
+    "type": "gpfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "storage_bandwidth_saturation",
+    "confidence": "high",
+    "explanation": "Write bandwidth of 336.0 MB/s reaches 96% of the GPFS storage peak (350 MB/s), saturating the filesystem. CPU utilization of only 13% confirms compute cores are idle waiting on I/O. The io_time_ratio of 0.84 further shows that I/O dominates the stage duration.",
+    "key_signals": [
+      "bw_utilization_ratio: 0.96",
+      "cpu_util_pct: 13",
+      "io_time_ratio: 0.84",
+      "avg_io_size_kb: 2048"
+    ]
+  }
+}

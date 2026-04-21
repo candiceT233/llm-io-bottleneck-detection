@@ -1,0 +1,61 @@
+{
+  "id": "snap_464",
+  "workflow": {
+    "name": "blast",
+    "type": "bioinformatics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "dump_state",
+    "order": 2,
+    "predecessors": [
+      "filter"
+    ],
+    "operation": "write"
+  },
+  "execution": {
+    "num_nodes": 35,
+    "num_tasks": 595,
+    "parallelism": 595,
+    "total_time_s": 1250,
+    "io_time_s": 1088,
+    "compute_time_s": 162,
+    "io_time_ratio": 0.87,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 468.0,
+    "op_count": 468
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 0,
+    "write_bw_mb_s": 440.0,
+    "peak_storage_bw_mb_s": 800,
+    "bw_utilization_ratio": 0.55,
+    "iops": 526,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.69
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 28,
+    "memory_util_pct": 50,
+    "network_bw_mb_s": 1305.0,
+    "network_peak_bw_mb_s": 1500,
+    "network_util_ratio": 0.87
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 1305.0 MB/s is at 87% of the 1500 MB/s interconnect capacity, saturating the network fabric. Although BEEGFS storage could sustain 800 MB/s, data transfer is throttled by the network link. CPU utilization of 28% confirms tasks are stalled waiting for data to traverse the network. The io_time_ratio of 0.87 shows I/O dominates stage time.",
+    "key_signals": [
+      "network_util_ratio: 0.87",
+      "network_bw_mb_s: 1305.0",
+      "network_peak_bw_mb_s: 1500",
+      "cpu_util_pct: 28",
+      "io_time_ratio: 0.87"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "snap_467",
+  "workflow": {
+    "name": "md_simulation",
+    "type": "molecular_dynamics",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "navier_stokes_solve",
+    "order": 4,
+    "predecessors": [
+      "fetch_input"
+    ],
+    "operation": "mixed"
+  },
+  "execution": {
+    "num_nodes": 80,
+    "num_tasks": 1200,
+    "parallelism": 1200,
+    "total_time_s": 1199,
+    "io_time_s": 1031,
+    "compute_time_s": 168,
+    "io_time_ratio": 0.86,
+    "transfer_size_kb": 768,
+    "aggregate_size_mb": 142.0,
+    "op_count": 142
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 77.6,
+    "write_bw_mb_s": 63.5,
+    "peak_storage_bw_mb_s": 300,
+    "bw_utilization_ratio": 0.47,
+    "iops": 135,
+    "avg_io_size_kb": 768,
+    "sequential_ratio": 0.79
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 21,
+    "memory_util_pct": 59,
+    "network_bw_mb_s": 880.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.88
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 4,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 880.0 MB/s is at 88% of the 1000 MB/s interconnect capacity, saturating the network fabric. Although BEEGFS storage could sustain 300 MB/s, data transfer is throttled by the network link. CPU utilization of 21% confirms tasks are stalled waiting for data to traverse the network. The io_time_ratio of 0.86 shows I/O dominates stage time.",
+    "key_signals": [
+      "network_util_ratio: 0.88",
+      "network_bw_mb_s: 880.0",
+      "network_peak_bw_mb_s: 1000",
+      "cpu_util_pct: 21",
+      "io_time_ratio: 0.86"
+    ]
+  }
+}

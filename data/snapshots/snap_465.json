@@ -1,0 +1,61 @@
+{
+  "id": "snap_465",
+  "workflow": {
+    "name": "galaxy_sim",
+    "type": "astrophysics",
+    "num_stages": 6
+  },
+  "stage": {
+    "name": "aggregate",
+    "order": 1,
+    "predecessors": [
+      "sort_merge"
+    ],
+    "operation": "mixed"
+  },
+  "execution": {
+    "num_nodes": 54,
+    "num_tasks": 918,
+    "parallelism": 918,
+    "total_time_s": 935,
+    "io_time_s": 692,
+    "compute_time_s": 243,
+    "io_time_ratio": 0.74,
+    "transfer_size_kb": 2048,
+    "aggregate_size_mb": 111.0,
+    "op_count": 111
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 90.2,
+    "write_bw_mb_s": 73.8,
+    "peak_storage_bw_mb_s": 400,
+    "bw_utilization_ratio": 0.41,
+    "iops": 188,
+    "avg_io_size_kb": 2048,
+    "sequential_ratio": 0.75
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 11,
+    "memory_util_pct": 31,
+    "network_bw_mb_s": 900.0,
+    "network_peak_bw_mb_s": 1000,
+    "network_util_ratio": 0.9
+  },
+  "storage": {
+    "type": "beegfs",
+    "stripe_count": 8,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "network_io_bottleneck",
+    "confidence": "high",
+    "explanation": "Network bandwidth of 900.0 MB/s is at 90% of the 1000 MB/s interconnect capacity, saturating the network fabric. Although BEEGFS storage could sustain 400 MB/s, data transfer is throttled by the network link. CPU utilization of 11% confirms tasks are stalled waiting for data to traverse the network. The io_time_ratio of 0.74 shows I/O dominates stage time.",
+    "key_signals": [
+      "network_util_ratio: 0.9",
+      "network_bw_mb_s: 900.0",
+      "network_peak_bw_mb_s: 1000",
+      "cpu_util_pct: 11",
+      "io_time_ratio: 0.74"
+    ]
+  }
+}

@@ -26,20 +26,20 @@
     "op_count": 228
   },
   "io_metrics": {
-    "read_bw_mb_s": 279.0,
+    "read_bw_mb_s": 261.0,
     "write_bw_mb_s": 0,
     "peak_storage_bw_mb_s": 300,
-    "bw_utilization_ratio": 0.93,
-    "iops": 70,
+    "bw_utilization_ratio": 0.87,
+    "iops": 65,
     "avg_io_size_kb": 4096,
     "sequential_ratio": 0.76
   },
   "resource_utilization": {
     "cpu_util_pct": 20,
     "memory_util_pct": 45,
-    "network_bw_mb_s": 234.4,
+    "network_bw_mb_s": 219.2,
     "network_peak_bw_mb_s": 5000,
-    "network_util_ratio": 0.047
+    "network_util_ratio": 0.044
   },
   "storage": {
     "type": "beegfs",
@@ -48,11 +48,11 @@
   },
   "annotation": {
     "bottleneck": "read_bandwidth_saturation",
-    "confidence": "high",
-    "explanation": "Read bandwidth of 279.0 MB/s reaches 93% of the BEEGFS storage peak (300 MB/s), saturating the filesystem on the read path. CPU utilization of only 20% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.78 confirms that I/O dominates the stage duration.",
+    "confidence": "medium",
+    "explanation": "Read bandwidth of 261.0 MB/s reaches 87% of the BEEGFS storage peak (300 MB/s), approaching saturation of the filesystem on the read path. CPU utilization of only 20% confirms compute cores are stalled waiting on data. The io_time_ratio of 0.78 confirms that I/O dominates the stage duration.",
     "key_signals": [
-      "bw_utilization_ratio: 0.93",
-      "read_bw_mb_s: 279.0",
+      "bw_utilization_ratio: 0.87",
+      "read_bw_mb_s: 261.0",
       "peak_storage_bw_mb_s: 300",
       "cpu_util_pct: 20",
       "io_time_ratio: 0.78"

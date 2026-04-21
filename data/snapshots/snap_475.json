@@ -1,0 +1,61 @@
+{
+  "id": "snap_475",
+  "workflow": {
+    "name": "fmri_analysis",
+    "type": "neuroscience",
+    "num_stages": 7
+  },
+  "stage": {
+    "name": "analyze_output",
+    "order": 5,
+    "predecessors": [
+      "filter"
+    ],
+    "operation": "read"
+  },
+  "execution": {
+    "num_nodes": 87,
+    "num_tasks": 1827,
+    "parallelism": 1827,
+    "total_time_s": 595,
+    "io_time_s": 482,
+    "compute_time_s": 113,
+    "io_time_ratio": 0.81,
+    "transfer_size_kb": 40,
+    "aggregate_size_mb": 41.0,
+    "op_count": 6500000
+  },
+  "io_metrics": {
+    "read_bw_mb_s": 88.0,
+    "write_bw_mb_s": 0,
+    "peak_storage_bw_mb_s": 200,
+    "bw_utilization_ratio": 0.44,
+    "iops": 1408,
+    "avg_io_size_kb": 40,
+    "sequential_ratio": 0.42
+  },
+  "resource_utilization": {
+    "cpu_util_pct": 17,
+    "memory_util_pct": 38,
+    "network_bw_mb_s": 81.0,
+    "network_peak_bw_mb_s": 2000,
+    "network_util_ratio": 0.041
+  },
+  "storage": {
+    "type": "pvfs2",
+    "stripe_count": 2,
+    "shared": true
+  },
+  "annotation": {
+    "bottleneck": "metadata_contention",
+    "confidence": "high",
+    "explanation": "The stage issues 1408 IOPS with an average I/O size of only 40 KB, overwhelming the metadata server with open/close/stat operations. Despite the high operation count (6,500,000), bandwidth utilization is only 44% (88.0 MB/s of 200 MB/s peak) because data transfer is not the bottleneck \u2014 the metadata server queue is. The io_time_ratio of 0.81 confirms I/O dominates stage time.",
+    "key_signals": [
+      "iops: 1408",
+      "avg_io_size_kb: 40",
+      "bw_utilization_ratio: 0.44",
+      "io_time_ratio: 0.81",
+      "op_count: 6500000"
+    ]
+  }
+}
