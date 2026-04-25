@@ -138,15 +138,11 @@ def plot_cost_accuracy_pareto(datasets):
         marker = MODEL_MARKERS.get(model, "^")
         model_label = MODEL_LABELS.get(model, model)
 
-        # one legend entry per model (shape legend)
         legend_entry = model_label if model not in legend_models else None
         legend_models.add(model)
 
         ax.scatter(tokens, f1, s=130, color=color, marker=marker,
                    label=legend_entry, zorder=5)
-        ax.annotate(f"{STRATEGY_LABELS.get(strategy, strategy)}\n({model_label})",
-                    (tokens, f1), textcoords="offset points",
-                    xytext=(8, 4), fontsize=7.5, color=color)
 
     # strategy colour legend
     strategy_handles = [
