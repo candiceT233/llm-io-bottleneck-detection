@@ -98,7 +98,8 @@ def main() -> None:
         plot_confusion_matrix(cm, f"{model} — {strategy.replace('_', ' ').title()}", ax)
         fig.tight_layout()
 
-        out = os.path.join(PLOTS_DIR, f"confusion_matrix_{strategy}.png")
+        safe_model = model.replace("/", "-")
+        out = os.path.join(PLOTS_DIR, f"confusion_matrix_{safe_model}_{strategy}.png")
         fig.savefig(out, dpi=150, bbox_inches="tight")
         plt.close(fig)
         print(f"Saved → {out}")
