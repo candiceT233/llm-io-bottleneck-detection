@@ -2,4 +2,4 @@
 venv/
 .claude
 .vscode/
-src/__pycache__
+src/__pycache__/
