@@ -60,7 +60,7 @@ def models_in(datasets):
 
 # ── Plot 2: Accuracy by gt_confidence — one chart per model ───────────────────
 
-def plot_accuracy_by_gt_confidence(datasets):
+def plot_accuracy_by_confidence(datasets):
     tiers = ["high", "medium", "low"]
     strategies = list(STRATEGY_LABELS.keys())
 
@@ -92,17 +92,17 @@ def plot_accuracy_by_gt_confidence(datasets):
 
         ax.set_xticks(x)
         ax.set_xticklabels([t.capitalize() for t in tiers])
-        ax.set_xlabel("Ground Truth Confidence Tier")
+        ax.set_xlabel("LLM Confidence Tier")
         ax.set_ylabel("Accuracy (%)")
         ax.set_ylim(0, 115)
-        ax.set_title(f"Accuracy by GT Confidence Tier — {MODEL_LABELS.get(model, model)}",
+        ax.set_title(f"Accuracy by LLM Confidence Tier — {MODEL_LABELS.get(model, model)}",
                      fontsize=13, fontweight="bold")
         ax.legend(loc="lower left")
         ax.axhline(100, color="gray", linestyle="--", linewidth=0.8, alpha=0.5)
         plt.tight_layout()
 
         safe_model = model.replace("/", "-")
-        out = os.path.join(PLOTS_DIR, f"02_accuracy_by_gt_confidence_{safe_model}.pdf")
+        out = os.path.join(PLOTS_DIR, f"02_accuracy_by_confidence_{safe_model}.pdf")
         plt.savefig(out)
         plt.close()
         print(f"Saved {out}")
@@ -181,7 +181,7 @@ if __name__ == "__main__":
     models = models_in(datasets)
     print(f"Loaded {len(datasets)} result files across models: {models}")
 
-    plot_accuracy_by_gt_confidence(datasets)
+    plot_accuracy_by_confidence(datasets)
     plot_cost_accuracy_pareto(datasets)
 
     print(f"\nAll plots saved to {PLOTS_DIR}")

@@ -1,8 +1,7 @@
-adjustText==1.3.0
 anthropic==0.97.0
 matplotlib==3.5.2
 numpy==1.24.2
-openai==2.32.0
+openai==2.33.0
 psutil==7.0.0
 psutil==5.9.4
 python-dotenv==1.2.2

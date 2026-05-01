@@ -1,6 +1,6 @@
 """
 Boxplot of latency per class for each strategy.
-Both models (GPT-4.1-mini and Claude Haiku 4.5) are superposed within each strategy plot,
+Both models (GPT-4.1-mini & Claude Haiku 4.5) are superposed within each strategy plot,
 with the two models shown side-by-side for every class.
 """
 
@@ -74,29 +74,36 @@ def load_results():
     return data
 
 
-def _draw_boxes(ax, positions, data_by_class, color, width=0.3):
+def _draw_boxes(ax, positions, data_by_class, color, width=0.32):
     bp = ax.boxplot(
         data_by_class,
         positions=positions,
         widths=width,
         patch_artist=True,
-        medianprops=dict(color="black", linewidth=1.5),
-        flierprops=dict(marker="o", markersize=3, alpha=0.4, markeredgewidth=0),
+        medianprops=dict(color="white", linewidth=2.0),
+        whiskerprops=dict(color=color, linewidth=1.2, linestyle="--"),
+        capprops=dict(color=color, linewidth=1.5),
+        flierprops=dict(marker="o", markersize=3, alpha=0.3,
+                        markerfacecolor=color, markeredgewidth=0),
+        boxprops=dict(linewidth=0),
         manage_ticks=False,
     )
     for patch in bp["boxes"]:
         patch.set_facecolor(color)
-        patch.set_alpha(0.7)
-    return bp
+        patch.set_alpha(0.75)
 
 
 def plot_strategy(strategy, all_results):
     n_classes = len(CLASSES)
-    # base x positions for each class (1-indexed, spread by 2 so models don't overlap)
-    base = np.arange(1, n_classes + 1) * 2.0
-    gap = 0.35   # half-distance between the two model boxes
+    base = np.arange(1, n_classes + 1) * 2.5   # wider spacing between class groups
+    gap = 0.38
 
-    fig, ax = plt.subplots(figsize=(22, 8))
+    available = plt.style.available
+    style = "seaborn-v0_8-whitegrid" if "seaborn-v0_8-whitegrid" in available else "seaborn-whitegrid"
+    plt.style.use(style)
+    fig, ax = plt.subplots(figsize=(24, 8))
+    fig.patch.set_facecolor("white")
+    ax.set_facecolor("white")
 
     models_present = [m for m in MODEL_ORDER if (m, strategy) in all_results]
 
@@ -115,26 +122,38 @@ def plot_strategy(strategy, all_results):
         _draw_boxes(ax, positions, data_by_class, color)
         all_vals.extend(v for group in data_by_class for v in group)
         legend_handles.append(
-            plt.Line2D([0], [0], color=color, linewidth=6, alpha=0.7,
-                       label=MODEL_LABELS.get(model, model))
+            plt.Line2D([0], [0], color=color, linewidth=8, alpha=0.75,
+                       solid_capstyle="round", label=MODEL_LABELS.get(model, model))
         )
 
-    # y-axis zoom to 5th–95th percentile so outliers don't squish the boxes
+    # y-axis: zoom to 5th–95th percentile
     if all_vals:
         q05, q95 = np.percentile(all_vals, 5), np.percentile(all_vals, 95)
         margin = (q95 - q05) * 0.3 or 0.05
         ax.set_ylim(max(0, q05 - margin), q95 + margin + 0.35)
 
+    # vertical separator lines between class groups
+    for pos in (base[:-1] + base[1:]) / 2:
+        ax.axvline(pos, color="#cccccc", linewidth=0.8, zorder=0)
+
     ax.set_xticks(base)
-    ax.set_xticklabels([CLASS_ABBREV[c] for c in CLASSES], rotation=30, ha="right", fontsize=9)
-    ax.set_ylabel("Latency (s)", fontsize=11)
-    ax.set_title(f"Latency per Class — {STRATEGY_LABELS[strategy]}", fontsize=13, fontweight="bold")
-    ax.grid(axis="y", linestyle="--", alpha=0.5)
-    ax.legend(handles=legend_handles, loc="upper right", fontsize=10)
+    ax.set_xticklabels([CLASS_ABBREV[c] for c in CLASSES],
+                       rotation=0, ha="center", fontsize=15, fontweight="medium")
+    ax.set_ylabel("Latency (s)", fontsize=16)
+    ax.set_title(f"Latency per Class — {STRATEGY_LABELS[strategy]}",
+                 fontsize=19, fontweight="bold", pad=14)
+    ax.tick_params(axis="y", labelsize=14)
+    ax.grid(axis="y", linestyle="--", alpha=0.4, color="#aaaaaa")
+    ax.set_axisbelow(True)
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+
+    ax.legend(handles=legend_handles, loc="upper right", fontsize=14,
+              framealpha=0.9, edgecolor="#dddddd")
 
     plt.tight_layout()
     fname = f"05_latency_boxplot_{strategy}.pdf"
-    fig.savefig(os.path.join(PLOTS_DIR, fname))
+    fig.savefig(os.path.join(PLOTS_DIR, fname), facecolor="white")
     plt.close(fig)
     print(f"Saved {fname}")
 
